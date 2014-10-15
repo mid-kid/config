@@ -1,0 +1,16 @@
+" Syntax highlighting
+filetype plugin indent on
+syntax on
+
+" Whitespace
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set autoindent
+
+" Display
+set number
+set hlsearch
+
+" Infect VIM with pathogen
+execute pathogen#infect()

@@ -1,0 +1,8 @@
+[user]
+        email = esteve.varela@gmail.com
+        name = mid-kid
+[push]
+        default = simple
+[core]
+        eol = lf
+        autocrlf = input

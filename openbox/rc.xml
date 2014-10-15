@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openbox_config xmlns="http://openbox.org/3.4/rc"
+		xmlns:xi="http://www.w3.org/2001/XInclude">
+
+<placement>
+  <monitor>Mouse</monitor>
+  <primaryMonitor>Mouse</primaryMonitor>
+</placement>
+
+<theme>
+  <!-- This theme combines so well with SimpliX - it's orgasmic -->
+  <name>OrangeBlue</name>
+  <!-- Necessary for fullscreen without decor -->
+  <keepBorder>yes</keepBorder>
+  <!-- No, thanx, I don't want that old-school crapimation -->
+  <animateIconify>no</animateIconify>
+
+  <!-- Default font config, because I'm lazy as fuck -->
+  <font place="ActiveWindow">
+    <name>sans</name>
+    <size>8</size>
+    <!-- font size in points -->
+    <weight>bold</weight>
+    <!-- 'bold' or 'normal' -->
+    <slant>normal</slant>
+    <!-- 'italic' or 'normal' -->
+  </font>
+  <font place="InactiveWindow">
+    <name>sans</name>
+    <size>8</size>
+    <!-- font size in points -->
+    <weight>bold</weight>
+    <!-- 'bold' or 'normal' -->
+    <slant>normal</slant>
+    <!-- 'italic' or 'normal' -->
+  </font>
+  <font place="MenuHeader">
+    <name>sans</name>
+    <size>9</size>
+    <!-- font size in points -->
+    <weight>normal</weight>
+    <!-- 'bold' or 'normal' -->
+    <slant>normal</slant>
+    <!-- 'italic' or 'normal' -->
+  </font>
+  <font place="MenuItem">
+    <name>sans</name>
+    <size>9</size>
+    <!-- font size in points -->
+    <weight>normal</weight>
+    <!-- 'bold' or 'normal' -->
+    <slant>normal</slant>
+    <!-- 'italic' or 'normal' -->
+  </font>
+  <font place="ActiveOnScreenDisplay">
+    <name>sans</name>
+    <size>9</size>
+    <!-- font size in points -->
+    <weight>bold</weight>
+    <!-- 'bold' or 'normal' -->
+    <slant>normal</slant>
+    <!-- 'italic' or 'normal' -->
+  </font>
+  <font place="InactiveOnScreenDisplay">
+    <name>sans</name>
+    <size>9</size>
+    <!-- font size in points -->
+    <weight>bold</weight>
+    <!-- 'bold' or 'normal' -->
+    <slant>normal</slant>
+    <!-- 'italic' or 'normal' -->
+  </font>
+</theme>
+
+<resize>
+  <popupShow>Never</popupShow>
+</resize>
+
+<keyboard>
+  <!-- Some people like to abuse this, and I don't use it anyway -->
+  <keybind key="A-F4"><action name="Execute"><command>zenity --error --text="No, fuck you"</command></action></keybind>
+  <!-- I don't have kfmclient -->
+  <keybind key="W-e"></keybind>
+
+  <!-- Oh, lazy me. Here go defaults: -->
+  <chainQuitKey>C-g</chainQuitKey>
+
+  <!-- Keybindings for desktop switching -->
+  <keybind key="C-A-Left">
+    <action name="GoToDesktop"><to>left</to><wrap>no</wrap></action>
+  </keybind>
+  <keybind key="C-A-Right">
+    <action name="GoToDesktop"><to>right</to><wrap>no</wrap></action>
+  </keybind>
+  <keybind key="C-A-Up">
+    <action name="GoToDesktop"><to>up</to><wrap>no</wrap></action>
+  </keybind>
+  <keybind key="C-A-Down">
+    <action name="GoToDesktop"><to>down</to><wrap>no</wrap></action>
+  </keybind>
+  <keybind key="S-A-Left">
+    <action name="SendToDesktop"><to>left</to><wrap>no</wrap></action>
+  </keybind>
+  <keybind key="S-A-Right">
+    <action name="SendToDesktop"><to>right</to><wrap>no</wrap></action>
+  </keybind>
+  <keybind key="S-A-Up">
+    <action name="SendToDesktop"><to>up</to><wrap>no</wrap></action>
+  </keybind>
+  <keybind key="S-A-Down">
+    <action name="SendToDesktop"><to>down</to><wrap>no</wrap></action>
+  </keybind>
+  <keybind key="W-F1">
+    <action name="GoToDesktop"><to>1</to></action>
+  </keybind>
+  <keybind key="W-F2">
+    <action name="GoToDesktop"><to>2</to></action>
+  </keybind>
+  <keybind key="W-F3">
+    <action name="GoToDesktop"><to>3</to></action>
+  </keybind>
+  <keybind key="W-F4">
+    <action name="GoToDesktop"><to>4</to></action>
+  </keybind>
+  <keybind key="W-d">
+    <action name="ToggleShowDesktop"/>
+  </keybind>
+
+  <!-- Keybindings for windows -->
+  <keybind key="A-Escape">
+    <action name="Lower"/>
+    <action name="FocusToBottom"/>
+    <action name="Unfocus"/>
+  </keybind>
+  <keybind key="A-space">
+    <action name="ShowMenu"><menu>client-menu</menu></action>
+  </keybind>
+
+  <!-- Keybindings for window switching -->
+  <keybind key="A-Tab">
+    <action name="NextWindow">
+      <finalactions>
+        <action name="Focus"/>
+        <action name="Raise"/>
+        <action name="Unshade"/>
+      </finalactions>
+    </action>
+  </keybind>
+  <keybind key="A-S-Tab">
+    <action name="PreviousWindow">
+      <finalactions>
+        <action name="Focus"/>
+        <action name="Raise"/>
+        <action name="Unshade"/>
+      </finalactions>
+    </action>
+  </keybind>
+  <keybind key="C-A-Tab">
+    <action name="NextWindow">
+      <panels>yes</panels><desktop>yes</desktop>
+      <finalactions>
+        <action name="Focus"/>
+        <action name="Raise"/>
+        <action name="Unshade"/>
+      </finalactions>
+    </action>
+  </keybind>
+
+  <!-- Keybindings for window switching with the arrow keys -->
+  <keybind key="W-S-Right">
+    <action name="DirectionalCycleWindows">
+      <direction>right</direction>
+    </action>
+  </keybind>
+  <keybind key="W-S-Left">
+    <action name="DirectionalCycleWindows">
+      <direction>left</direction>
+    </action>
+  </keybind>
+  <keybind key="W-S-Up">
+    <action name="DirectionalCycleWindows">
+      <direction>up</direction>
+    </action>
+  </keybind>
+  <keybind key="W-S-Down">
+    <action name="DirectionalCycleWindows">
+      <direction>down</direction>
+    </action>
+  </keybind>
+</keyboard>
+
+
+<mouse>
+  <!-- Who's idea was this? -->
+  <screenEdgeWarpTime>0</screenEdgeWarpTime>
+
+  <!-- This can be really irritating when scrolling with a touchpad -->
+  <context name="Desktop">
+    <mousebind button="Up" action="Click"></mousebind>
+    <mousebind button="Down" action="Click"></mousebind>
+  </context>
+
+  <!-- I found this somewhere, it's a really nice touch -->
+  <context name="Titlebar">
+    <mousebind button="Left" action="DoubleClick">
+      <action name="If"><maximized>yes</maximized><then>
+        <action name="Unmaximize" />
+        <action name="Decorate" />
+      </then><else>
+        <action name="Maximize" />
+        <action name="Undecorate" />
+      </else></action>
+    </mousebind>
+    <!-- Need a way to quickly close without unmaximizing -->
+    <mousebind button="Right" action="Press">
+      <action name="If"><maximized>yes</maximized><then>
+        <action name="Close" />
+      </then><else>
+        <action name="Focus" />
+        <action name="Raise" />
+        <action name="ShowMenu"><menu>client-menu</menu></action>
+      </else></action>
+    </mousebind>
+  </context>
+  <!-- Ohmygod the copy-pasta -->
+  <context name="Maximize">
+    <mousebind button="Left" action="Click">
+      <action name="If"><maximized>yes</maximized><then>
+        <action name="Unmaximize" />
+        <action name="Decorate" />
+      </then><else>
+        <action name="Maximize" />
+        <action name="Undecorate" />
+      </else></action>
+    </mousebind>
+    <mousebind button="Middle" action="Click">
+      <action name="If"><maximized>yes</maximized><then>
+        <action name="Unmaximize" />
+        <action name="Decorate" />
+      </then><else>
+        <action name="Maximize"><direction>vertical</direction></action>
+        <action name="Undecorate" />
+      </else></action>
+    </mousebind>
+  </context>
+
+  <!-- When using multiple monitors on top of one-another, it can be very hard to reach the 1px titlebar -->
+  <context name="Frame">
+    <mousebind button="A-Left" action="DoubleClick">
+      <!-- Muh copy-pasta -->
+      <action name="If"><maximized>yes</maximized><then>
+        <action name="Unmaximize" />
+        <action name="Decorate" />
+      </then><else>
+        <action name="Maximize" />
+        <action name="Undecorate" />
+      </else></action>
+    </mousebind>
+  </context>
+
+  <!-- Have some moar defaults -->
+  <context name="Frame">
+    <mousebind button="A-Left" action="Press">
+      <action name="Focus"/>
+      <action name="Raise"/>
+    </mousebind>
+    <mousebind button="A-Left" action="Click">
+      <action name="Unshade"/>
+    </mousebind>
+    <mousebind button="A-Left" action="Drag">
+      <action name="Move"/>
+    </mousebind>
+
+    <mousebind button="A-Right" action="Press">
+      <action name="Focus"/>
+      <action name="Raise"/>
+      <action name="Unshade"/>
+    </mousebind>
+    <mousebind button="A-Right" action="Drag">
+      <action name="Resize"/>
+    </mousebind> 
+
+    <mousebind button="A-Middle" action="Press">
+      <action name="Lower"/>
+      <action name="FocusToBottom"/>
+      <action name="Unfocus"/>
+    </mousebind>
+
+    <mousebind button="A-Up" action="Click">
+      <action name="GoToDesktop"><to>previous</to></action>
+    </mousebind>
+    <mousebind button="A-Down" action="Click">
+      <action name="GoToDesktop"><to>next</to></action>
+    </mousebind>
+    <mousebind button="C-A-Up" action="Click">
+      <action name="GoToDesktop"><to>previous</to></action>
+    </mousebind>
+    <mousebind button="C-A-Down" action="Click">
+      <action name="GoToDesktop"><to>next</to></action>
+    </mousebind>
+    <mousebind button="A-S-Up" action="Click">
+      <action name="SendToDesktop"><to>previous</to></action>
+    </mousebind>
+    <mousebind button="A-S-Down" action="Click">
+      <action name="SendToDesktop"><to>next</to></action>
+    </mousebind>
+  </context>
+
+  <context name="Titlebar">
+    <mousebind button="Left" action="Drag">
+      <action name="Move"/>
+    </mousebind>
+
+    <mousebind button="Up" action="Click">
+      <action name="if">
+        <shaded>no</shaded>
+        <then>
+          <action name="Shade"/>
+          <action name="FocusToBottom"/>
+          <action name="Unfocus"/>
+          <action name="Lower"/>
+        </then>
+      </action>
+    </mousebind>
+    <mousebind button="Down" action="Click">
+      <action name="if">
+        <shaded>yes</shaded>
+        <then>
+          <action name="Unshade"/>
+          <action name="Raise"/>
+        </then>
+      </action>
+    </mousebind>
+  </context>
+
+  <context name="Titlebar Top Right Bottom Left TLCorner TRCorner BRCorner BLCorner">
+    <mousebind button="Left" action="Press">
+      <action name="Focus"/>
+      <action name="Raise"/>
+      <action name="Unshade"/>
+    </mousebind>
+
+    <mousebind button="Middle" action="Press">
+      <action name="Lower"/>
+      <action name="FocusToBottom"/>
+      <action name="Unfocus"/>
+    </mousebind>
+  </context>
+
+  <context name="Top">
+    <mousebind button="Left" action="Drag">
+      <action name="Resize"><edge>top</edge></action>
+    </mousebind>
+  </context>
+
+  <context name="Left">
+    <mousebind button="Left" action="Drag">
+      <action name="Resize"><edge>left</edge></action>
+    </mousebind>
+  </context>
+
+  <context name="Right">
+    <mousebind button="Left" action="Drag">
+      <action name="Resize"><edge>right</edge></action>
+    </mousebind>
+  </context>
+
+  <context name="Bottom">
+    <mousebind button="Left" action="Drag">
+      <action name="Resize"><edge>bottom</edge></action>
+    </mousebind>
+
+    <mousebind button="Right" action="Press">
+      <action name="Focus"/>
+      <action name="Raise"/>
+      <action name="ShowMenu"><menu>client-menu</menu></action>
+    </mousebind>
+  </context>
+
+  <context name="TRCorner BRCorner TLCorner BLCorner">
+    <mousebind button="Left" action="Press">
+      <action name="Focus"/>
+      <action name="Raise"/>
+      <action name="Unshade"/>
+    </mousebind>
+    <mousebind button="Left" action="Drag">
+      <action name="Resize"/>
+    </mousebind>
+  </context>
+
+  <context name="Client">
+    <mousebind button="Left" action="Press">
+      <action name="Focus"/>
+      <action name="Raise"/>
+    </mousebind>
+    <mousebind button="Middle" action="Press">
+      <action name="Focus"/>
+      <action name="Raise"/>
+    </mousebind>
+    <mousebind button="Right" action="Press">
+      <action name="Focus"/>
+      <action name="Raise"/>
+    </mousebind>
+  </context>
+
+  <context name="Icon">
+    <mousebind button="Left" action="Press">
+      <action name="Focus"/>
+      <action name="Raise"/>
+      <action name="Unshade"/>
+      <action name="ShowMenu"><menu>client-menu</menu></action>
+    </mousebind>
+    <mousebind button="Right" action="Press">
+      <action name="Focus"/>
+      <action name="Raise"/>
+      <action name="ShowMenu"><menu>client-menu</menu></action>
+    </mousebind>
+  </context>
+
+  <context name="AllDesktops">
+    <mousebind button="Left" action="Press">
+      <action name="Focus"/>
+      <action name="Raise"/>
+      <action name="Unshade"/>
+    </mousebind>
+    <mousebind button="Left" action="Click">
+      <action name="ToggleOmnipresent"/>
+    </mousebind>
+  </context>
+
+  <context name="Shade">
+    <mousebind button="Left" action="Press">
+      <action name="Focus"/>
+      <action name="Raise"/>
+    </mousebind>
+    <mousebind button="Left" action="Click">
+      <action name="ToggleShade"/>
+    </mousebind>
+  </context>
+
+  <context name="Iconify">
+    <mousebind button="Left" action="Press">
+      <action name="Focus"/>
+      <action name="Raise"/>
+    </mousebind>
+    <mousebind button="Left" action="Click">
+      <action name="Iconify"/>
+    </mousebind>
+  </context>
+
+  <context name="Maximize">
+    <mousebind button="Left" action="Press">
+      <action name="Focus"/>
+      <action name="Raise"/>
+      <action name="Unshade"/>
+    </mousebind>
+    <mousebind button="Middle" action="Press">
+      <action name="Focus"/>
+      <action name="Raise"/>
+      <action name="Unshade"/>
+    </mousebind>
+    <mousebind button="Right" action="Press">
+      <action name="Focus"/>
+      <action name="Raise"/>
+      <action name="Unshade"/>
+    </mousebind>
+    <mousebind button="Right" action="Click">
+      <action name="ToggleMaximize"><direction>horizontal</direction></action>
+    </mousebind>
+  </context>
+
+  <context name="Close">
+    <mousebind button="Left" action="Press">
+      <action name="Focus"/>
+      <action name="Raise"/>
+      <action name="Unshade"/>
+    </mousebind>
+    <mousebind button="Left" action="Click">
+      <action name="Close"/>
+    </mousebind>
+  </context>
+
+  <context name="Desktop">
+    <mousebind button="A-Up" action="Click">
+      <action name="GoToDesktop"><to>previous</to></action>
+    </mousebind>
+    <mousebind button="A-Down" action="Click">
+      <action name="GoToDesktop"><to>next</to></action>
+    </mousebind>
+    <mousebind button="C-A-Up" action="Click">
+      <action name="GoToDesktop"><to>previous</to></action>
+    </mousebind>
+    <mousebind button="C-A-Down" action="Click">
+      <action name="GoToDesktop"><to>next</to></action>
+    </mousebind>
+
+    <mousebind button="Left" action="Press">
+      <action name="Focus"/>
+      <action name="Raise"/>
+    </mousebind>
+    <mousebind button="Right" action="Press">
+      <action name="Focus"/>
+      <action name="Raise"/>
+    </mousebind>
+  </context>
+
+  <context name="Root">
+    <!-- Menus -->
+    <mousebind button="Middle" action="Press">
+      <action name="ShowMenu"><menu>client-list-combined-menu</menu></action>
+    </mousebind> 
+    <mousebind button="Right" action="Press">
+      <action name="ShowMenu"><menu>root-menu</menu></action>
+    </mousebind>
+  </context>
+
+  <context name="MoveResize">
+    <mousebind button="Up" action="Click">
+      <action name="GoToDesktop"><to>previous</to></action>
+    </mousebind>
+    <mousebind button="Down" action="Click">
+      <action name="GoToDesktop"><to>next</to></action>
+    </mousebind>
+    <mousebind button="A-Up" action="Click">
+      <action name="GoToDesktop"><to>previous</to></action>
+    </mousebind>
+    <mousebind button="A-Down" action="Click">
+      <action name="GoToDesktop"><to>next</to></action>
+    </mousebind>
+  </context>
+</mouse>
+
+<menu>
+  <!-- This is a pretty nice touch -->
+  <middle>yes</middle>
+</menu>
+
+</openbox_config>
