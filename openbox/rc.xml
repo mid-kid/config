@@ -536,4 +536,12 @@
   <middle>yes</middle>
 </menu>
 
+<applications>
+  <!-- Firefox always starts maximized anyway -->
+  <application class="Firefox">
+    <decor>no</decor>
+    <maximized>true</maximized>
+  </application>
+</applications>
+
 </openbox_config>
