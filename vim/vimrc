@@ -1,3 +1,16 @@
+set nocompatible
+filetype off
+
+" Set plugins
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'gmarik/Vundle.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'a.vim'
+
+call vundle#end()
+
 " Syntax highlighting
 filetype plugin indent on
 syntax on
@@ -11,6 +24,3 @@ set autoindent
 " Display
 set number
 set hlsearch
-
-" Infect VIM with pathogen
-execute pathogen#infect()
