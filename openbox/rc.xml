@@ -538,7 +538,7 @@
 
 <applications>
   <!-- Firefox always starts maximized anyway -->
-  <application class="Firefox">
+  <application type="normal" class="Firefox" role="browser">
     <decor>no</decor>
     <maximized>true</maximized>
   </application>
