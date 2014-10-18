@@ -8,8 +8,13 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'a.vim'
+Plugin 'Raimondi/delimitMate'
+Plugin 'nanotech/jellybeans.vim'
 
 call vundle#end()
+
+" Color scheme
+colorscheme jellybeans
 
 " Syntax highlighting
 filetype plugin indent on
