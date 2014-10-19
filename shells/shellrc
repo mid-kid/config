@@ -2,5 +2,6 @@
 export EDITOR='vim'
 export VISUAL=$EDITOR
 alias vi='vim'
+alias vii='vim +NERDTree'
 alias ls='ls --color=auto'
 alias httrack='httrack -%v'
