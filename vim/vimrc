@@ -15,7 +15,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'a.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'nanotech/jellybeans.vim'
-Plugin 'file://' . $HOME . '/.vim/manual/Conque-Shell'  " https://conque.googlecode.com/files/conque_2.3.tar.gz
+" Plugin 'file://' . $HOME . '/.vim/manual/Conque-Shell'  " https://conque.googlecode.com/files/conque_2.3.tar.gz
+Plugin 'yangchenyun/Conque-Shell'
 
 call vundle#end()
 
