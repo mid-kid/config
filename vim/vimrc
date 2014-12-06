@@ -34,6 +34,10 @@ set shiftwidth=4
 set expandtab
 set autoindent
 
+" Highlight trailing whitespace
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+
 " Display
 set number
 set hlsearch
