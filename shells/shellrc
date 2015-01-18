@@ -1,6 +1,7 @@
 # RC file for all the shells
 export EDITOR='vim'
 export VISUAL=$EDITOR
+export PAGER='less'
 alias vi='vim'
 alias vii='vim +NERDTree'
 alias ls='ls --color=auto'
