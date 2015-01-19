@@ -25,6 +25,8 @@ setopt autocd beep
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
-export PS1='%n@%m :: %c $ '
+autoload -U colors && colors
+
+export PS1="$fg[green]%n$reset_color@$fg[yellow]%m$reset_color :: $fg[cyan]%c$reset_color $ "
 
 source ~/.shellrc
