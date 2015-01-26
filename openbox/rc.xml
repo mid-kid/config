@@ -537,8 +537,12 @@
 </menu>
 
 <applications>
-  <!-- Firefox always starts maximized anyway -->
+  <!-- These apps are always maximized anyway -->
   <application type="normal" class="Firefox" role="browser">
+    <decor>no</decor>
+    <maximized>true</maximized>
+  </application>
+  <application type="normal" class="libreoffice">
     <decor>no</decor>
     <maximized>true</maximized>
   </application>
