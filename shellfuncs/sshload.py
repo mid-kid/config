@@ -2,7 +2,7 @@
 from sys import argv, stderr, exit
 from os import environ
 from os.path import isfile
-from json import loads
+from configparser import ConfigParser
 
 filename = environ["HOME"] + "/.ssh/profiles"
 
@@ -13,7 +13,9 @@ if len(argv) < 2:
 if not isfile(filename):
     exit()
 
-profiles = loads(open(filename).read())
+profiles = ConfigParser()
+profiles.read(filename)
+
 for profile in profiles:
     if profile == argv[1]:
         for info in profiles[profile]:
