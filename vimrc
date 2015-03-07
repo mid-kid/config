@@ -10,29 +10,41 @@ call vundle#begin()
 " Otherwise, https://github.com/MarcWeber/vim-addon-manager also looks nice,
 "   but it lacks documentation.
 
+" Vundle
 Plugin 'gmarik/Vundle.vim'
+
+" Color scheme
+Plugin 'nanotech/jellybeans.vim'
+
+" Syntax
+Plugin 'wting/rust.vim'
+Plugin 'cespare/vim-toml'
+
 Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree-git-plugin'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'a.vim'
 Plugin 'Raimondi/delimitMate'
-Plugin 'nanotech/jellybeans.vim'
-" Plugin 'file://' . $HOME . '/.vim/manual/Conque-Shell'  " https://conque.googlecode.com/files/conque_2.3.tar.gz
 Plugin 'yangchenyun/Conque-Shell'
-Plugin 'ervandew/supertab'
+Plugin 'AutoComplPop'
 
 call vundle#end()
 
 " Color scheme
 colorscheme jellybeans
 
-" Syntax highlighting
-filetype plugin indent on
-syntax on
+" Mapleader
+let mapleader="."
 
 " Whitespace
 set tabstop=4
 set shiftwidth=4
 set expandtab
 set autoindent
+
+" Syntax highlighting
+filetype plugin indent on
+syntax on
 
 " Highlight trailing whitespace
 highlight ExtraWhitespace ctermbg=red guibg=red
