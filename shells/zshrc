@@ -28,6 +28,6 @@ bindkey -e
 autoload -U colors
 colors
 
-PROMPT="%{$fg[green]%}%n%{$reset_color%}@%{$fg[yellow]%}%m%{$reset_color%} :: %{$fg[cyan]%}%c%{$reset_color%} $ "
+PROMPT="%{$fg[green]%}%C%{$reset_color%}@%{$fg[yellow]%}%m%{$reset_color%} :: %{$fg[cyan]%}%c%{$reset_color%} $ "
 
 source ~/.shellrc

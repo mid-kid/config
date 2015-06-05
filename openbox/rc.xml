@@ -542,7 +542,7 @@
     <decor>no</decor>
     <maximized>true</maximized>
   </application>
-  <application type="normal" class="libreoffice-*">
+  <application type="normal" class="LibreOffice 4.4">
     <decor>no</decor>
     <maximized>true</maximized>
   </application>
