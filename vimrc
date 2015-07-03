@@ -6,7 +6,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " Install plugins:
-" mkdir -p ~/.vim/bindle && git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim && vim +PluginInstall
+" mkdir -p ~/.vim/bundle && git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim && vim +PluginInstall
 
 " https://github.com/Shougo/neobundle.vim supports SVN, and may support other
 "   sources in the future, such as compressed files. Maybe switch.
