@@ -53,7 +53,6 @@ filetype plugin indent on
 syntax on
 
 " Behavior
-"au winleave * w
 set bufhidden="delete"
 let bufhidden="delete"
 set bufhidden=delete
