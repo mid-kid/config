@@ -1,0 +1,96 @@
+# Backport of commit: https://github.com/lxde/lxqt-powermanagement/commit/9b5518d6382a4db93840e9a5fce2c61312532126
+# This patch makes sure the screen is locked (If said option is selected) when closing the lid or some other thing happens (like idleness 'n stuff).
+diff -ur ./src/idlenesswatcher.cpp ../lxqt-powermanagement-patched/src/idlenesswatcher.cpp
+--- ./src/idlenesswatcher.cpp	2015-07-29 15:02:07.496997965 +0200
++++ ../lxqt-powermanagement-patched/src/idlenesswatcher.cpp	2015-07-29 15:03:32.283937983 +0200
+@@ -80,6 +80,7 @@
+ 
+     connect(&mTimer, SIGNAL(timeout()), SLOT(idleTimeout()));
+     connect(&mPSettings, SIGNAL(settingsChanged()), SLOT(restartTimer()));
++    connect(this, SIGNAL(done()), this, SLOT(restartTimer()));
+     connect(&mDBusWatcher, SIGNAL(serviceUnregistered(QString)), SLOT(serviceUnregistered(QString)));
+     connect(&mLockProcess, SIGNAL(finished(int,QProcess::ExitStatus)), SLOT(screenUnlocked(int,QProcess::ExitStatus)));
+     connect(&mErrorNotification, SIGNAL(actionActivated(int)), SLOT(notificationAction(int)));
+@@ -151,6 +152,7 @@
+     qDebug() << "    ms since user input:" << msSinceUserInput;
+     if (msSinceUserInput >= getMaxIdleTimeoutMs())
+     {
++        mTimer.stop();
+         doAction(mPSettings.getIdlenessAction());        
+     }
+     else
+diff -ur ./src/watcher.cpp ../lxqt-powermanagement-patched/src/watcher.cpp
+--- ./src/watcher.cpp	2015-07-29 15:02:07.497997953 +0200
++++ ../lxqt-powermanagement-patched/src/watcher.cpp	2015-07-29 15:09:58.315111929 +0200
+@@ -24,13 +24,14 @@
+  * END_COMMON_COPYRIGHT_HEADER */
+ 
+ #include <QDebug>
+-
+ #include "../config/powermanagementsettings.h"
+ #include "watcher.h"
+ 
+ Watcher::Watcher(QObject *parent) :
+-    QObject(parent)
++    QObject(parent),
++    mScreenSaver(this)
+ {
++    connect(&mScreenSaver, SIGNAL(done()), &mLoop, SLOT(quit()));
+ }
+ 
+ Watcher::~Watcher()
+@@ -39,9 +40,14 @@
+ 
+ void Watcher::doAction(int action)
+ {
+-    if (action > -1)
+-    {   
+-        mPower.doAction((LxQt::Power::Action) action);
++    // if (action == -1) { }
++    if (action == -2)
++    {
++        mScreenSaver.lockScreen();
++        mLoop.exec();
+     }
+-}
++    else if (action >= 0)
++        mPower.doAction((LxQt::Power::Action) action);
+ 
++    emit done();
++}
+diff -ur ./src/watcher.h ../lxqt-powermanagement-patched/src/watcher.h
+--- ./src/watcher.h	2015-07-29 15:02:07.497997953 +0200
++++ ../lxqt-powermanagement-patched/src/watcher.h	2015-07-29 15:08:25.819268286 +0200
+@@ -1,12 +1,13 @@
+ #ifndef WATCHER_H
+-#define	WATCHER_H
++#define WATCHER_H
+ 
+ #include <QObject>
++#include <QEventLoop>
+ #include <LXQt/Power>
++#include <LXQt/ScreenSaver>
+ 
+ class Watcher : public QObject
+ {
+-
+     Q_OBJECT
+ 
+ public:
+@@ -16,10 +17,13 @@
+ protected:
+     void doAction(int action);
+ 
++signals:
++    void done();
++
+ private:
+     LxQt::Power mPower;
+-
++    LxQt::ScreenSaver mScreenSaver;
++    QEventLoop mLoop;
+ };
+ 
+-#endif	/* WATCHER_H */
+-
++#endif // WATCHER_H

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+case "$1" in
+    lock)
+        i3lock
+        ;;
+#    *)
+#        echo "$@" >> /tmp/xdg-screensaver-failed
+#        ;;
+esac
