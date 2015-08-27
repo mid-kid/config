@@ -9,7 +9,5 @@ alias du='du -h'
 alias df='df -h'
 alias free='free -h'
 
-# Load custom shell functions
-for s in ~/.shellfuncs/*.sh; do
-    source $s
-done
+# Some random scripts
+export PATH=~/.scripts:$PATH

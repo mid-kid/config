@@ -1,34 +1,29 @@
-#!/bin/sh
-set -e
-
-. "$1/setupenv.sh"
-
 mirror="http://mirrors.kernel.org/archlinux/"
-version="2015.07.01"
+version="2015.08.01"
 
 # Download and unpack
 filename="archlinux-bootstrap-$version-$arch.tar.gz"
 [ ! -f "$tmpdir/$filename" ] && curl -L "$mirror/iso/$version/$filename" -o "$tmpdir/$filename"
 tar xf "$tmpdir/$filename" -C "$tmpdir"
-rmdir "$destdir"
-mv "$tmpdir/root.$arch" "$destdir"
+rmdir "$distdir"
+mv "$tmpdir/root.$arch" "$distdir"
 # This is literally all that has to be done to have a working chroot
 # The rest is tweaking
 
-rm "$destdir/README"
+rm "$distdir/README"
 
 # Why is systemd installed by default?
 chrootcmd pacman -Rs --noconfirm systemd
 
 # Setting up the pacman keyring, required for pacman to install packages
 # Calling this stuff with arch-chroot, since proot hangs with these commands.
-sudo env -i "$destdir/bin/arch-chroot" "$destdir" pacman-key --init
-sudo env -i "$destdir/bin/arch-chroot" "$destdir" pacman-key --populate archlinux
+sudo env -i "$distdir/bin/arch-chroot" "$distdir" pacman-key --init
+sudo env -i "$distdir/bin/arch-chroot" "$distdir" pacman-key --populate archlinux
 # Set the permissions right
-sudo chown $(id -u).$(id -g) -R "$destdir/etc/pacman.d/gnupg"
+sudo chown $(id -u).$(id -g) -R "$distdir/etc/pacman.d/gnupg"
 
 # Getting a complete mirrorlist, sorted by mirror status
-curl -sL "https://www.archlinux.org/mirrorlist/?country=all&protocol=http&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on" | sed -e 's/#Server/Server/g' > "$destdir/etc/pacman.d/mirrorlist"
+curl -sL "https://www.archlinux.org/mirrorlist/?country=all&protocol=http&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on" | sed -e 's/#Server/Server/g' > "$distdir/etc/pacman.d/mirrorlist"
 
 # Updating to the latest version of all packages, removing a new mirrorlist, since we just updated it.
 chrootcmd pacman -Syu --noconfirm
