@@ -80,8 +80,17 @@
 <keyboard>
   <!-- Some people like to abuse this, and I don't use it anyway -->
   <keybind key="A-F4"><action name="Execute"><command>zenity --error --text="No, fuck you"</command></action></keybind>
+
   <!-- I don't have kfmclient -->
   <keybind key="W-e"></keybind>
+
+  <!-- Some way to open the menus in a DE is nice -->
+  <keybind key="W-q">
+    <action name="ShowMenu"><menu>root-menu</menu></action>
+  </keybind>
+  <keybind key="W-w">
+    <action name="ShowMenu"><menu>client-list-combined-menu</menu></action>
+  </keybind>
 
   <!-- Oh, lazy me. Here go defaults: -->
   <chainQuitKey>C-g</chainQuitKey>
@@ -279,7 +288,7 @@
     </mousebind>
     <mousebind button="A-Right" action="Drag">
       <action name="Resize"/>
-    </mousebind> 
+    </mousebind>
 
     <mousebind button="A-Middle" action="Press">
       <action name="Lower"/>
@@ -482,19 +491,6 @@
   </context>
 
   <context name="Desktop">
-    <mousebind button="A-Up" action="Click">
-      <action name="GoToDesktop"><to>previous</to></action>
-    </mousebind>
-    <mousebind button="A-Down" action="Click">
-      <action name="GoToDesktop"><to>next</to></action>
-    </mousebind>
-    <mousebind button="C-A-Up" action="Click">
-      <action name="GoToDesktop"><to>previous</to></action>
-    </mousebind>
-    <mousebind button="C-A-Down" action="Click">
-      <action name="GoToDesktop"><to>next</to></action>
-    </mousebind>
-
     <mousebind button="Left" action="Press">
       <action name="Focus"/>
       <action name="Raise"/>
@@ -509,7 +505,7 @@
     <!-- Menus -->
     <mousebind button="Middle" action="Press">
       <action name="ShowMenu"><menu>client-list-combined-menu</menu></action>
-    </mousebind> 
+    </mousebind>
     <mousebind button="Right" action="Press">
       <action name="ShowMenu"><menu>root-menu</menu></action>
     </mousebind>
@@ -543,6 +539,10 @@
     <maximized>true</maximized>
   </application>
   <application type="normal" class="LibreOffice 4.4">
+    <decor>no</decor>
+    <maximized>true</maximized>
+  </application>
+  <application type="normal" class="Gvim">
     <decor>no</decor>
     <maximized>true</maximized>
   </application>

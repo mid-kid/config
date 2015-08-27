@@ -25,7 +25,7 @@ Plugin 'cespare/vim-toml'
 
 " Other
 Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdtree-git-plugin'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'a.vim'
 Plugin 'Raimondi/delimitMate'
@@ -44,6 +44,7 @@ set autoindent
 " Display
 set number
 set hlsearch
+set incsearch
 
 " Color scheme
 colorscheme jellybeans
@@ -53,11 +54,9 @@ filetype plugin indent on
 syntax on
 
 " Behavior
-set bufhidden="delete"
-let bufhidden="delete"
-set bufhidden=delete
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
+set omnifunc=syntaxcomplete#Complete
 
 " Keybinds
 let mapleader="."
