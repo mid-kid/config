@@ -1,0 +1,73 @@
+Privacy plugins:
+- Ublock Origin
+- NoScript
+- Self-Destructing Cookies
+
+Optional:
+- Privacy Badger (Kinda useless if you use the above)
+
+Options:
+(Also see https://github.com/amq/firefox-debloat)
+-- Safebrowsing stuff
+- browser.safebrowsing.enabled = false
+- browser.safebrowsing.downloads.enabled = false
+- browser.safebrowsing.malware.enabled = false
+- extensions.blocklist.enabled = false
+
+-- Don't phone home to mozilla
+- datareporting.healthreport.service.enabled = false
+- datareporting.healthreport.uploadEnabled = false
+- toolkit.telemetry.enabled = false
+
+-- Disable DRM shit
+- media.eme.enabled = false
+- media.gmp-eme-adobe.enabled = false
+
+-- Stupid integrated browser plugins
+- loop.enabled = false
+- browser.pocket.enabled = false
+
+-- Search suggestions
+- browser.search.suggest.enabled = false
+
+-- WebRTC
+- media.peerconnection.enabled = false
+
+-- Geolocation
+- beacon.enabled = false
+- geo.enabled = false
+
+-- Don't leak list of plugins
+- plugins.enumerable_names = ""
+
+-- Don't send the Referrer header
+- network.http.sendRefererHeader = 0 (Don't send it at all) or 1 (Just send it to clicked links)
+- network.http.sendSecureXSiteReferrer = false
+
+-- Disable prefetching
+- network.prefetch-next = false
+- network.dns.disablePrefetch = true
+
+-- WebGL (Puts code in the GPU, could be harmful, isn't necessary anyway. Unless you're one of those "webapp" worshippers.)
+- webgl.disabled = true
+
+-- Do not track (It's a good idea on paper, but without some enforcement it's useless. Especially when Google ignores it)
+- privacy.trackingprotection.enabled = true
+- privacy.donottrackheader.enabled = true
+
+-- Disable social media "integration"
+- social.directories = ""
+- social.remote-install.enabled = false
+- social.toast-notifications.enabled = false
+
+-- Only allow cookies from originating server
+- network.cookie.cookieBehavior = 1
+
+-- So much for that cheap anti-right-click trick some sites pull off
+- dom.event.clipboardevents.enabled = false
+
+-- Only I say where I want to go
+- accessibility.blockautorefresh = true
+
+-- Don't be shy.
+- browser.urlbar.trimURLs = false

@@ -1,0 +1,3 @@
+Openbox: OrangeBlue
+GTK: simpliX
+Icons: flattr-icons
