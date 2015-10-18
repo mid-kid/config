@@ -22,7 +22,5 @@ diff -ur ./wpa_supplicant/wpa_gui-qt4/wpagui.cpp ../wpa_supplicant-2.4-patched/w
 -		return;
 -
 -	tray_icon->showMessage(qAppName(), msg, type, sec * 1000);
-+    system(("notify-send -a " + qAppName() + " -t " + QString::number(sec * 1000) + " '" + msg + "'").toStdString().c_str());
++ 	system(("notify-send -a " + qAppName() + " -t " + QString::number(sec * 1000) + " '" + msg + "'").toStdString().c_str());
  }
- 
- 

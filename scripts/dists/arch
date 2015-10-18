@@ -1,5 +1,5 @@
-mirror="http://mirrors.kernel.org/archlinux/"
-version="2015.08.01"
+mirror="http://ftp.nluug.nl/os/Linux/distr/archlinux/"
+version="2015.09.01"
 
 # Download and unpack
 filename="archlinux-bootstrap-$version-$arch.tar.gz"
@@ -12,9 +12,6 @@ mv "$tmpdir/root.$arch" "$distdir"
 
 rm "$distdir/README"
 
-# Why is systemd installed by default?
-chrootcmd pacman -Rs --noconfirm systemd
-
 # Setting up the pacman keyring, required for pacman to install packages
 # Calling this stuff with arch-chroot, since proot hangs with these commands.
 sudo env -i "$distdir/bin/arch-chroot" "$distdir" pacman-key --init
@@ -25,6 +22,18 @@ sudo chown $(id -u).$(id -g) -R "$distdir/etc/pacman.d/gnupg"
 # Getting a complete mirrorlist, sorted by mirror status
 curl -sL "https://www.archlinux.org/mirrorlist/?country=all&protocol=http&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on" | sed -e 's/#Server/Server/g' > "$distdir/etc/pacman.d/mirrorlist"
 
+# Update repos
+chrootcmd pacman -Sy
+
+# Removing some packages.
+chrootcmd pacman -Rs --noconfirm systemd
+chrootcmd pacman -R --noconfirm arch-install-scripts
+chrootcmd pacman -S --asexplicit --noconfirm pacman
+chrootcmd pacman -Rs --noconfirm $(chrootcmd pacman -Qqdt)
+
 # Updating to the latest version of all packages, removing a new mirrorlist, since we just updated it.
-chrootcmd pacman -Syu --noconfirm
-rm -f arch/etc/pacman.d/mirrorlist.pacnew
+chrootcmd pacman -Su --noconfirm
+rm -f "$distdir/etc/pacman.d/mirrorlist.pacnew"
+
+# Patch makepkg to build as root
+sed -i -e 's/EUID\s==\s0/false/' "$distdir/usr/bin/makepkg"

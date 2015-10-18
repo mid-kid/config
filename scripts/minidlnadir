@@ -2,6 +2,6 @@
 set -e
 
 conf=$(mktemp)
-printf "media_dir=$1\ndb_dir=/var/lib/minidlna\nlog_dir=/var/log/minidlna" > $conf
+printf "user=$USER\nmedia_dir=$1\ndb_dir=$HOME/.minidlna\nlog_dir=$HOME/.minidlna" > $conf
 minidlnad -R -d -f $conf
 rm $conf

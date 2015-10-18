@@ -1,2 +1,7 @@
 #!/bin/sh
+# Regulate the brightness below/above levels usually not accessible using the hardware buttons.
+# Only for specific hardware.
 sudo su -c "echo $1 > /sys/class/backlight/intel_backlight/brightness"
+
+# /sys/devices/pci0000:00/0000:00:1d.7/usb1/1-6/bConfigurationValue
+# This should be the camera led on the same netbook as the above works, echo 0 there to disable it. I haven't been able to re-enable it, so just leaving it here if I'm ever interested in controlling that irritating led.

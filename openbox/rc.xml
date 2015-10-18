@@ -9,8 +9,7 @@
 </placement>
 
 <theme>
-  <!-- This theme combines so well with SimpliX - it's orgasmic -->
-  <name>OrangeBlue</name>
+  <name>Arc-Dark</name>
   <!-- Necessary for fullscreen without decor -->
   <keepBorder>yes</keepBorder>
   <!-- No, thanx, I don't want that old-school crapimation -->
@@ -535,6 +534,10 @@
 <applications>
   <!-- These apps are always maximized anyway -->
   <application type="normal" class="Firefox" role="browser">
+    <decor>no</decor>
+    <maximized>true</maximized>
+  </application>
+  <application type="normal" class="Pale moon" role="browser">
     <decor>no</decor>
     <maximized>true</maximized>
   </application>

@@ -4,6 +4,9 @@ set -e
 arch="$(uname -m)"
 dir="$HOME/.distroot"
 bindir="$dir/.bin"
+proot="$(command -v proot || true)"
+
+[ -e "$bindir/proot" ] && proot="$bindir/proot"
 
 proot_base() {
     # Some terminfos are usually not installed in chroots,
@@ -11,16 +14,18 @@ proot_base() {
     if [ "$TERM" = "rxvt-unicode-256color" ]; then
         local TERM="linux"
     fi
+    vars=$1
+    shift
 
-    env -i TERM=$TERM "$bindir/proot" -b /dev -b /run -b /sys -b /proc -b /etc/resolv.conf "$@"
+    env -i DISPLAY=$DISPLAY TERM=$TERM $vars "$proot" -b /dev -b /run -b /sys -b /proc -b /etc/resolv.conf "$@"
 }
 
 proot_root() {
-    proot_base -0 -w /root -r "$@"
+    proot_base "HOME=/root" -0 -w /root -r "$@"
 }
 
 proot_user() {
-    proot_base -b "$HOME" -b /etc/passwd -b /etc/group -r "$@"
+    proot_base "HOME=$HOME" -b "$HOME" -b /etc/passwd -b /etc/group -r "$@"
 }
 
 chrootcmd() {
@@ -46,11 +51,12 @@ tmpdir="$dir/.tmp/$dist"
 distdir="$dir/$dist"
 script="$HOME/.scripts/dists/$dist"
 
-if [ ! -f "$bindir/proot" ]; then
+if [ ! -e "$proot" ]; then
     echo "Installing proot"
     mkdir -p "$bindir"
     curl -L "http://portable.proot.me/proot-$arch" -o "$bindir/proot"
     chmod +x "$bindir/proot"
+    proot="$bindir/proot"
 fi
 
 if [ ! -f "$dir/.$dist" ]; then
@@ -61,7 +67,7 @@ if [ ! -f "$dir/.$dist" ]; then
     fi
 
     # Make sure we can use that dir.
-    [ -d "$distdir" ] && rm -rf "$distdir"
+    [ -d "$distdir" ] && chmod -R 777 "$distdir" && rm -rf "$distdir"
 
     mkdir -p "$distdir"
     mkdir -p "$tmpdir"

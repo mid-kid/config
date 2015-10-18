@@ -1,0 +1,4 @@
+#!/bin/sh
+# Download a crate from crates.io
+# $1 = Crate name, $2 = Crate version
+curl -H "Host: crates.io" -L "https://crates.io/api/v1/crates/$1/$2/download" -o "$1-$2.crate"

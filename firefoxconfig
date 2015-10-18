@@ -2,12 +2,12 @@ Privacy plugins:
 - Ublock Origin
 - NoScript
 - Self-Destructing Cookies
+- HTTPS everywhere
 
 Optional:
 - Privacy Badger (Kinda useless if you use the above)
 
 Options:
-(Also see https://github.com/amq/firefox-debloat)
 -- Safebrowsing stuff
 - browser.safebrowsing.enabled = false
 - browser.safebrowsing.downloads.enabled = false
@@ -18,6 +18,7 @@ Options:
 - datareporting.healthreport.service.enabled = false
 - datareporting.healthreport.uploadEnabled = false
 - toolkit.telemetry.enabled = false
+- browser.selfsupport.url = ""
 
 -- Disable DRM shit
 - media.eme.enabled = false
@@ -40,13 +41,10 @@ Options:
 -- Don't leak list of plugins
 - plugins.enumerable_names = ""
 
--- Don't send the Referrer header
-- network.http.sendRefererHeader = 0 (Don't send it at all) or 1 (Just send it to clicked links)
-- network.http.sendSecureXSiteReferrer = false
-
 -- Disable prefetching
 - network.prefetch-next = false
 - network.dns.disablePrefetch = true
+- network.predictor.enabled = false
 
 -- WebGL (Puts code in the GPU, could be harmful, isn't necessary anyway. Unless you're one of those "webapp" worshippers.)
 - webgl.disabled = true
@@ -63,11 +61,20 @@ Options:
 -- Only allow cookies from originating server
 - network.cookie.cookieBehavior = 1
 
+-- Cookies last for one session only
+- network.cookie.lifetimePolicy = 2
+
 -- So much for that cheap anti-right-click trick some sites pull off
 - dom.event.clipboardevents.enabled = false
+
+-- Why do websites need my battery stats?
+- dom.battery.enabled = false
 
 -- Only I say where I want to go
 - accessibility.blockautorefresh = true
 
 -- Don't be shy.
 - browser.urlbar.trimURLs = false
+
+-- Don't cache "webapps"
+- browser.cache.offline.enable = false

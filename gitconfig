@@ -6,3 +6,5 @@
 [core]
         eol = lf
         autocrlf = input
+[color]
+	ui = auto
