@@ -1,50 +1,43 @@
-set nocompatible
-filetype off
-
 " Set plugins
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
 " Install plugins:
-" mkdir -p ~/.vim/bundle && git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim && vim +PluginInstall
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && vim +PlugInstall
 
-" https://github.com/Shougo/neobundle.vim supports SVN, and may support other
-"   sources in the future, such as compressed files. Maybe switch.
-" Otherwise, https://github.com/MarcWeber/vim-addon-manager also looks nice,
-"   but it lacks documentation.
-
-" Vundle
-Plugin 'gmarik/Vundle.vim'
-
-" Color scheme
-Plugin 'nanotech/jellybeans.vim'
+" Faaancy
+Plug 'nanotech/jellybeans.vim'
+"Plug 'bling/vim-airline'
+Plug 'airblade/vim-gitgutter'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Syntax
-Plugin 'wting/rust.vim'
-Plugin 'cespare/vim-toml'
+Plug 'wting/rust.vim'
+Plug 'cespare/vim-toml'
+Plug 'Glench/Vim-Jinja2-Syntax'
 
 " Other
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'a.vim'
-Plugin 'Raimondi/delimitMate'
-Plugin 'yangchenyun/Conque-Shell'
-Plugin 'AutoComplPop'
-Plugin 'embear/vim-localvimrc'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'a.vim'
+Plug 'Raimondi/delimitMate'
+Plug 'AutoComplPop'
+Plug 'embear/vim-localvimrc'
+Plug 'scrooloose/syntastic'
 
-call vundle#end()
+call plug#end()
 
 " Whitespace
 set tabstop=4
 set shiftwidth=4
 set expandtab
+set smarttab
 set autoindent
 
 " Display
 set number
 set hlsearch
 set incsearch
+set statusline=%f
 
 " Color scheme
 colorscheme jellybeans
@@ -57,10 +50,15 @@ syntax on
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 set omnifunc=syntaxcomplete#Complete
+set mouse=a
+set ttyfast
+set clipboard+=unnamed
+set clipboard+=unnamedplus
 
 " Keybinds
 let mapleader="."
 map <F1> :make<CR>
+map <F12> :syntax sync fromstart<CR>
 
 " NERDTree
 autocmd StdinReadPre * let s:std_in=1
@@ -69,3 +67,13 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " Localvimrc
 let g:localvimrc_sandbox=0
 let g:localvimrc_ask=0
+
+" Syntastic
+set statusline+=\ %#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0

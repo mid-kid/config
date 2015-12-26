@@ -1,4 +1,4 @@
 #!/bin/sh -e
 # List how frequently a command appears in a file.
 # Made for things like ~/.zsh_history
-cat "$1" | awk '{print $1}' | sort | uniq -c | sort -nr
+cat "$1" | awk '{print $1}' | sort | uniq -c | sort -nr | head -n 10

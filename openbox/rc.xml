@@ -541,7 +541,7 @@
     <decor>no</decor>
     <maximized>true</maximized>
   </application>
-  <application type="normal" class="LibreOffice 4.4">
+  <application type="normal" name="libreoffice">
     <decor>no</decor>
     <maximized>true</maximized>
   </application>

@@ -1,35 +1,33 @@
 #!/bin/sh
 set -e
 
+command -v jchroot > /dev/null || { echo "This script needs a copy of jchroot"; exit 1; }
+
 arch="$(uname -m)"
 dir="$HOME/.distroot"
-bindir="$dir/.bin"
-proot="$(command -v proot || true)"
 
-[ -e "$bindir/proot" ] && proot="$bindir/proot"
-
-proot_base() {
+chroot_base() {
     # Some terminfos are usually not installed in chroots,
     #   and are mostly compatible with other, installed terminfos.
     if [ "$TERM" = "rxvt-unicode-256color" ]; then
         local TERM="linux"
     fi
-    vars=$1
-    shift
+    dir="$1"; shift
 
-    env -i DISPLAY=$DISPLAY TERM=$TERM $vars "$proot" -b /dev -b /run -b /sys -b /proc -b /etc/resolv.conf "$@"
+    sudo jchroot "$dir" env -i DISPLAY=$DISPLAY TERM=$TERM $@
 }
 
-proot_root() {
-    proot_base "HOME=/root" -0 -w /root -r "$@"
+chroot_root() {
+    dir="$1"; shift
+    chroot_base "$dir" HOME=/root $@
 }
 
-proot_user() {
-    proot_base "HOME=$HOME" -b "$HOME" -b /etc/passwd -b /etc/group -r "$@"
+chroot_user() {
+    chroot_base $@
 }
 
 chrootcmd() {
-    proot_root "$distdir" /usr/bin/env "$@"
+    chroot_root "$distdir" /usr/bin/env "$@"
 }
 
 if [ "$#" -lt 1 ]; then
@@ -51,14 +49,6 @@ tmpdir="$dir/.tmp/$dist"
 distdir="$dir/$dist"
 script="$HOME/.scripts/dists/$dist"
 
-if [ ! -e "$proot" ]; then
-    echo "Installing proot"
-    mkdir -p "$bindir"
-    curl -L "http://portable.proot.me/proot-$arch" -o "$bindir/proot"
-    chmod +x "$bindir/proot"
-    proot="$bindir/proot"
-fi
-
 if [ ! -f "$dir/.$dist" ]; then
     # Exit if we don't have a script for this distro
     if [ ! -f "$script" ]; then
@@ -67,9 +57,8 @@ if [ ! -f "$dir/.$dist" ]; then
     fi
 
     # Make sure we can use that dir.
-    [ -d "$distdir" ] && chmod -R 777 "$distdir" && rm -rf "$distdir"
+    [ -d "$distdir" ] && sudo rm -rf "$distdir"
 
-    mkdir -p "$distdir"
     mkdir -p "$tmpdir"
 
     echo "Creating chroot for distribution: $dist"
@@ -90,8 +79,8 @@ fi
 
 if [ -f "$dir/.$dist" ]; then
     if [ "$user" = true ]; then
-        proot_user "$distdir" $command
+        chroot_user "$distdir" "$command"
     else
-        proot_root "$distdir" $command
+        chroot_root "$distdir" $command
     fi
 fi

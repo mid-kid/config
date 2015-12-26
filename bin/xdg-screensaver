@@ -1,11 +1,15 @@
 #!/bin/sh
 
+if [ ! "$1" ]; then
+    exit
+fi
+
 case "$1" in
     lock)
-        i3lock || true  # The true thing is so lxqt proceeds with locking, even if i3lock doesn't return 0 because it's already activated.
+        i3lock || true  # LXQt throws an error if the return value is non-zero
         ;;
     reset)
-        # VLC calls this every 30 seconds. 
+        # VLC calls this every 30 seconds.
         # Most xdg-screensaver implementations will disable themselves here.
         # I'll just tell LXQt it should wait a little longer before locking the screen,
         #   since VLC never reactivates the screensaver.
