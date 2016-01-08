@@ -1,0 +1,5 @@
+Openbox: Arc-Dark
+GTK: Arc-Darker
+Icons: Vivacious-Colors-Dark
+LXQt: Frost
+Wallpaper: LXQt Frost Default
