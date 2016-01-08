@@ -1,10 +1,13 @@
 " Set plugins
 call plug#begin('~/.vim/plugged')
 
-" Install plugins:
+" Install plugins (vim):
 " curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && vim +PlugInstall
+" Install plugins (neovim):
+" curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && nvim +PlugInstall
 
 " Faaancy
+Plug 'junegunn/seoul256.vim'
 Plug 'nanotech/jellybeans.vim'
 "Plug 'bling/vim-airline'
 Plug 'airblade/vim-gitgutter'
@@ -40,7 +43,8 @@ set incsearch
 set statusline=%f
 
 " Color scheme
-colorscheme jellybeans
+let g:seoul256_background = 233
+colorscheme seoul256
 
 " Syntax highlighting
 filetype plugin indent on
@@ -58,7 +62,9 @@ set clipboard+=unnamedplus
 " Keybinds
 let mapleader="."
 map <F1> :make<CR>
+map <F8> :!curl -T % chunk.io<CR>
 map <F12> :syntax sync fromstart<CR>
+map <F11> :SyntasticToggleMode<CR>
 
 " NERDTree
 autocmd StdinReadPre * let s:std_in=1
