@@ -62,6 +62,7 @@ zgen="$HOME/.zgen"
 [ "$zgen" -a ! -d "$zgen" -a "$(command -v git)" ] && mkdir -p "$zgen" && git clone https://github.com/tarjoilija/zgen "$zgen"
 
 if [ -d "$zgen" ]; then
+    ZGEN_AUTOLOAD_COMPINIT=false  # We do this ourselves
     source "$zgen/zgen.zsh"
 
     if ! zgen saved; then
