@@ -26,28 +26,11 @@ setopt autocd extendedglob notify beep prompt_subst
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
+# Keybinds
 bindkey ';5D' emacs-backward-word
 bindkey ';5C' emacs-forward-word
 
-autoload -U colors
-colors
-
-zgen="$HOME/.zgen"
-[ "$zgen" -a ! -d "$zgen" -a "$(command -v git)" ] && mkdir -p "$zgen" && git clone https://github.com/tarjoilija/zgen "$zgen"
-
-if [ -d "$zgen" ]; then
-    source "$zgen/zgen.zsh"
-
-    if ! zgen saved; then
-        zgen loadall << EOBUNDLES
-            zsh-users/zsh-syntax-highlighting
-            marzocchi/zsh-notify
-EOBUNDLES
-
-        zgen save
-    fi
-fi
-
+# Prompt
 prompt_git() {
     if [ -d ".git" ]; then
         local branch="$(git symbolic-ref HEAD 2> /dev/null | cut -d '/' -f 3)"
@@ -70,6 +53,25 @@ prompt_git() {
     fi
 }
 
+autoload -U colors
+colors
+
 PROMPT="%{$fg[green]%}%n%{$reset_color%}@%{$fg[yellow]%}%m%{$reset_color%} :%{$fg[magenta]%}\$(prompt_git)%{$reset_color%}: %{$fg[cyan]%}%c%{$reset_color%} $ "
+
+zgen="$HOME/.zgen"
+[ "$zgen" -a ! -d "$zgen" -a "$(command -v git)" ] && mkdir -p "$zgen" && git clone https://github.com/tarjoilija/zgen "$zgen"
+
+if [ -d "$zgen" ]; then
+    source "$zgen/zgen.zsh"
+
+    if ! zgen saved; then
+        zgen loadall << EOBUNDLES
+            zsh-users/zsh-syntax-highlighting
+            marzocchi/zsh-notify
+EOBUNDLES
+
+        zgen save
+    fi
+fi
 
 source ~/.shellrc
