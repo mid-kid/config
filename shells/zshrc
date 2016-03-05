@@ -67,7 +67,6 @@ if [ -d "$zplug" ]; then
     zplug "zsh-users/zsh-syntax-highlighting"
     zplug "zsh-users/zsh-completions"
     zplug "marzocchi/zsh-notify"
-    zplug "caarlos0/git-add-remote"
     zplug "supercrabtree/k"
     zplug "zsh-users/zsh-autosuggestions"
 
