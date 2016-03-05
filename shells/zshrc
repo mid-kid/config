@@ -58,21 +58,22 @@ colors
 
 PROMPT="%{$fg[green]%}%n%{$reset_color%}@%{$fg[yellow]%}%m%{$reset_color%} :%{$fg[magenta]%}\$(prompt_git)%{$reset_color%}: %{$fg[cyan]%}%c%{$reset_color%} $ "
 
-zgen="$HOME/.zgen"
-[ "$zgen" -a ! -d "$zgen" -a "$(command -v git)" ] && mkdir -p "$zgen" && git clone https://github.com/tarjoilija/zgen "$zgen"
+zplug="$HOME/.zplug"
+[ "$zplug" -a ! -d "$zplug" -a "$(command -v git)" ] && mkdir -p "$zplug" && git clone https://github.com/b4b4r07/zplug "$zplug"
 
-if [ -d "$zgen" ]; then
-    ZGEN_AUTOLOAD_COMPINIT=false  # We do this ourselves
-    source "$zgen/zgen.zsh"
+if [ -d "$zplug" ]; then
+    source "$zplug/zplug"
 
-    if ! zgen saved; then
-        zgen loadall << EOBUNDLES
-            zsh-users/zsh-syntax-highlighting
-            marzocchi/zsh-notify
-EOBUNDLES
+    zplug "zsh-users/zsh-syntax-highlighting"
+    zplug "zsh-users/zsh-completions"
+    zplug "marzocchi/zsh-notify"
+    zplug "caarlos0/git-add-remote"
+    zplug "supercrabtree/k"
+    zplug "zsh-users/zsh-autosuggestions"
 
-        zgen save
-    fi
+    zplug check || zplug install
+
+    zplug load
 fi
 
 source ~/.shellrc
