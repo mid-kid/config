@@ -8,7 +8,7 @@ call plug#begin('~/.vim/plugged')
 
 " Faaancy
 Plug 'junegunn/seoul256.vim'
-Plug 'nanotech/jellybeans.vim'
+"Plug 'nanotech/jellybeans.vim'
 "Plug 'bling/vim-airline'
 Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -62,9 +62,10 @@ set clipboard+=unnamedplus
 " Keybinds
 let mapleader="."
 map <F1> :make<CR>
-map <F8> :!curl -T % chunk.io<CR>
+map <F8> :!curl -T % chunk.io 2> /dev/null<CR>
 map <F12> :syntax sync fromstart<CR>
 map <F11> :SyntasticToggleMode<CR>
+map <C-m> :noh<CR>
 
 " NERDTree
 autocmd StdinReadPre * let s:std_in=1
