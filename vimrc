@@ -14,18 +14,17 @@ Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Syntax
-Plug 'wting/rust.vim'
+Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
 Plug 'Glench/Vim-Jinja2-Syntax'
 
 " Other
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
-Plug 'a.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'AutoComplPop'
 Plug 'embear/vim-localvimrc'
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
 
 call plug#end()
 
@@ -51,8 +50,9 @@ filetype plugin indent on
 syntax on
 
 " Behavior
-highlight ExtraWhitespace ctermbg=red guibg=red
+highlight ExtraWhitespace ctermbg=red guibg=#592929
 match ExtraWhitespace /\s\+$/
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 set omnifunc=syntaxcomplete#Complete
 set mouse=a
 set ttyfast
@@ -66,6 +66,8 @@ map <F8> :!curl -T % chunk.io 2> /dev/null<CR>
 map <F12> :syntax sync fromstart<CR>
 map <F11> :SyntasticToggleMode<CR>
 map <C-m> :noh<CR>
+map <C-o> :match OverLength /\%81v.\+/<CR>
+map <C-z><C-o> :match OverLength //<CR>
 
 " NERDTree
 autocmd StdinReadPre * let s:std_in=1
@@ -76,11 +78,11 @@ let g:localvimrc_sandbox=0
 let g:localvimrc_ask=0
 
 " Syntastic
-set statusline+=\ %#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=\ %#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
