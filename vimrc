@@ -58,6 +58,8 @@ set mouse=a
 set ttyfast
 set clipboard+=unnamed
 set clipboard+=unnamedplus
+set nobackup
+set noundofile
 
 " Keybinds
 let mapleader="."
