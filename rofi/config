@@ -1,0 +1,7 @@
+rofi.modi: combi,run,ssh
+rofi.combi-modi: drun,window
+rofi.font: DejaVu Sans 12
+rofi.bw: 2
+rofi.sidebar-mode: true
+rofi.kb-mode-next: Super+l,Super+Tab
+rofi.kb-mode-previous: Super+h,Super+Shift+Tab
