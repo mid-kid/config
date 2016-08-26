@@ -64,13 +64,13 @@ colors
 PROMPT="%{$fg[green]%}%n%{$reset_color%}@%{$fg[yellow]%}%m%{$reset_color%} :%{$fg[magenta]%}\$(prompt_git)%{$reset_color%}: %{$fg[cyan]%}%c%{$reset_color%} $ "
 
 zplug="$HOME/.zplug"
-if [ -d "$zplug" -a ! -f "$zplug/zplug" -a "$(command -v git)" ]; then
+if [ -d "$zplug" -a ! -f "$zplug/init.zsh" -a "$(command -v git)" ]; then
     mkdir -p "$zplug"
     git clone https://github.com/b4b4r07/zplug "$zplug"
 fi
 
-if [ -f "$zplug/zplug" ]; then
-    source "$zplug/zplug"
+if [ -f "$zplug/init.zsh" ]; then
+    source "$zplug/init.zsh"
 
     zplug "zsh-users/zsh-syntax-highlighting"
     zplug "zsh-users/zsh-completions"
