@@ -12,10 +12,11 @@ bindsym $mod+d exec rofi -show combi
 
 # Application discrimination
 for_window [class="Qemu-system-.+"] floating enable
-for_window [class="qutebrowser"] focus child, layout tabbed, focus
+for_window [class="qutebrowser"] layout tabbed
 
 # Window Manager keybinds
 bindsym $mod+Shift+q kill
+bindsym --release button2 kill
 
 bindsym $mod+h focus left
 bindsym $mod+j focus down
