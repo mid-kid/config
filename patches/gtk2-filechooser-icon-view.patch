@@ -1,8 +1,8 @@
 # https://gist.github.com/ahodesuka/01213036b58e510dc074
-diff --git gtk/gtkfilechooserdefault.c gtk/gtkfilechooserdefault.c
+diff --git a/gtk/gtkfilechooserdefault.c b/gtk/gtkfilechooserdefault.c
 index 2a75365..b466ab2 100644
---- gtk/gtkfilechooserdefault.c
-+++ gtk/gtkfilechooserdefault.c
+--- a/gtk/gtkfilechooserdefault.c
++++ b/gtk/gtkfilechooserdefault.c
 @@ -81,6 +81,7 @@
  #include <sys/stat.h>
  #include <sys/types.h>
@@ -2222,10 +2222,10 @@ index 2a75365..b466ab2 100644
 +    g_assert_not_reached ();
 +}
 +
-diff --git gtk/gtkfilechooserprivate.h gtk/gtkfilechooserprivate.h
+diff --git a/gtk/gtkfilechooserprivate.h b/gtk/gtkfilechooserprivate.h
 index dab74c3..ba09a55 100644
---- gtk/gtkfilechooserprivate.h
-+++ gtk/gtkfilechooserprivate.h
+--- a/gtk/gtkfilechooserprivate.h
++++ b/gtk/gtkfilechooserprivate.h
 @@ -33,6 +33,8 @@
  #include "gtktreestore.h"
  #include "gtktreeview.h"
@@ -2312,10 +2312,10 @@ index dab74c3..ba09a55 100644
    gulong toplevel_set_focus_id;
    GtkWidget *toplevel_last_focus_widget;
  
-diff --git gtk/gtkfilechoosersettings.c gtk/gtkfilechoosersettings.c
+diff --git a/gtk/gtkfilechoosersettings.c b/gtk/gtkfilechoosersettings.c
 index 5b8fb87..ce34291 100644
---- gtk/gtkfilechoosersettings.c
-+++ gtk/gtkfilechoosersettings.c
+--- a/gtk/gtkfilechoosersettings.c
++++ b/gtk/gtkfilechoosersettings.c
 @@ -39,6 +39,8 @@
  
  #define SETTINGS_GROUP		"Filechooser Settings"
@@ -2457,10 +2457,10 @@ index 5b8fb87..ce34291 100644
    g_key_file_set_boolean (key_file, SETTINGS_GROUP,
  			  SHOW_HIDDEN_KEY, settings->show_hidden);
    g_key_file_set_boolean (key_file, SETTINGS_GROUP,
-diff --git gtk/gtkfilechoosersettings.h gtk/gtkfilechoosersettings.h
+diff --git a/gtk/gtkfilechoosersettings.h b/gtk/gtkfilechoosersettings.h
 index 2283192..b987fca 100644
---- gtk/gtkfilechoosersettings.h
-+++ gtk/gtkfilechoosersettings.h
+--- a/gtk/gtkfilechoosersettings.h
++++ b/gtk/gtkfilechoosersettings.h
 @@ -45,9 +45,10 @@ struct _GtkFileChooserSettings
    GObject object;
  

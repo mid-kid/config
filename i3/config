@@ -11,12 +11,14 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+d exec rofi -show combi
 
 # Application discrimination
-for_window [class="Qemu-system-.+"] floating enable
+for_window [class="Qemu-system-.+"] floating enable border normal
 for_window [class="qutebrowser"] layout tabbed
+for_window [class="Pidgin"] floating enable border normal
 
 # Window Manager keybinds
 bindsym $mod+Shift+q kill
 bindsym --release button2 kill
+bindsym button2 nop
 
 bindsym $mod+h focus left
 bindsym $mod+j focus down

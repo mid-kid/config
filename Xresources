@@ -2,8 +2,9 @@ URxvt.background: #121212
 URxvt.foreground: white
 URxvt.font: xft:DejaVuSansMono:size=10
 
-!URxvt.scrollstyle: plain
-URxvt.scrollBar: false
+URxvt.scrollstyle: plain
+URxvt.scrollBar_right: true
 URxvt.scrollTtyOutput: false
 URxvt.scrollWithBuffer: true
 URxvt.scrollTtyKeypress: true
+URxvt.secondaryScroll: false

@@ -1,8 +1,8 @@
 # https://gist.github.com/ahodesuka/49c1d0eea4b64f24c4c7
-diff --git gio/glocalfileinfo.c gio/glocalfileinfo.c
+diff --git a/gio/glocalfileinfo.c b/gio/glocalfileinfo.c
 index f75a0d2..bb4c8a6 100644
---- gio/glocalfileinfo.c
-+++ gio/glocalfileinfo.c
+--- a/gio/glocalfileinfo.c
++++ b/gio/glocalfileinfo.c
 @@ -64,6 +64,12 @@
  #endif
  
