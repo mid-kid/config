@@ -33,6 +33,7 @@ alsa-plugins
 pulseaudio
 
 # n
+ModemManager
 NetworkManager
 mobile-broadband-provider
 
@@ -56,10 +57,10 @@ rxvt
 #
 # -- Replaced:
 # pulseaudio, alsa-plugins, pavucontrol, pamixer: ALSA
-# NetworkManager, mobile-broadband-provider, network-manager-applet: dhcpcd/wpa_supplicant
+# NetworkManager, ModemManager, mobile-broadband-provider, network-manager-applet: dhcpcd/wpa_supplicant
 # elvis: vim
 # rxvt: rxvt-unicode
-# gcc-go: go
+# gcc-go: go (They actually conflict)
 #
 # -- Updated manually:
 # vim
