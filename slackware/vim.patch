@@ -1,0 +1,54 @@
+diff --git a/vim-gvim.SlackBuild b/vim-gvim.SlackBuild
+index 0af5aab..0466d53 100644
+--- a/vim-gvim.SlackBuild
++++ b/vim-gvim.SlackBuild
+@@ -23,7 +23,7 @@
+ # This package must be build right after the main vim package, and the
+ # generated vim package must still be in $TMP.
+ 
+-VIMBRANCH=7.4
++VIMBRANCH=8.0
+ VERSION=$(echo vim-${VIMBRANCH}*.tar.xz | rev | cut -f 3- -d . | cut -f 1 -d - | rev)
+ BUILD=${BUILD:-1}
+ 
+diff --git a/vim.SlackBuild b/vim.SlackBuild
+index 5f5e79b..766d377 100644
+--- a/vim.SlackBuild
++++ b/vim.SlackBuild
+@@ -20,16 +20,34 @@
+ #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ 
+-VIMBRANCH=7.4
++VIMBRANCH=8.0
+ CTAGSVER=5.8
+ BUILD=${BUILD:-1}
+ 
+ CWD=$(pwd)
+ 
++if [ "$1" = "check" ]; then
++  VERSION=$(echo vim-${VIMBRANCH}*.tar.xz | rev | cut -f 3- -d . | cut -f 1 -d - | rev)
++  NEWVERSION="$(echo $(basename $(wget -q -O - https://github.com/vim/vim/releases | grep -F v${VIMBRANCH} | head -n 1 | cut -f 2 -d \" )) | cut -b2- )"
++
++  if [ ! "$NEWVERSION" ]; then
++    echo "Failed to fetch latest version"
++    exit
++  fi
++
++  if [ "$VERSION" != "$NEWVERSION" ]; then
++    echo "New version available: $NEWVERSION"
++    exit
++  fi
++
++  echo "No updates available"
++  exit
++fi
++
+ if [ -r vim-${VIMBRANCH}*.tar.xz ]; then # if there's a source archive already, use the version number from it:
+   VERSION=$(echo vim-${VIMBRANCH}*.tar.xz | rev | cut -f 3- -d . | cut -f 1 -d - | rev)
+ else # need to fetch the latest source archive for this branch:
+-  VERSION="$(echo $(basename $(wget -q -O - https://github.com/vim/vim/releases | grep v${VIMBRANCH} | head -n 1 | cut -f 2 -d \" )) | cut -b2- )"
++  VERSION="$(echo $(basename $(wget -q -O - https://github.com/vim/vim/releases | grep -F v${VIMBRANCH} | head -n 1 | cut -f 2 -d \" )) | cut -b2- )"
+   ( lftpget https://github.com/vim/vim/archive/v${VERSION}.tar.gz
+     gzip -d v${VERSION}.tar.gz
+     mv v${VERSION}.tar vim-${VERSION}.tar
