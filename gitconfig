@@ -7,4 +7,4 @@
         eol = lf
         autocrlf = input
 [color]
-	ui = auto
+        ui = auto

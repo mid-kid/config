@@ -36,27 +36,31 @@ bindkey '\e[7~' beginning-of-line  # Home
 bindkey '\e[8~' end-of-line  # End
 
 # Prompt
-prompt_git() {
-    if [ -d ".git" ]; then
-        local branch="$(git symbolic-ref HEAD 2> /dev/null | cut -d '/' -f 3)"
-        [ ! "$branch" ] && branch="$(git rev-parse --short HEAD)"
-        printf "$branch"
+if [ -x "$(command -v git)" ]; then
+    prompt_git() {
+        if [ -d ".git" ]; then
+            local branch="$(git symbolic-ref HEAD 2> /dev/null | cut -d '/' -f 3)"
+            [ ! "$branch" ] && branch="$(git rev-parse --short HEAD)"
+            printf "$branch"
 
-        local staged_file_status=$(git diff --staged --name-status)
+            local staged_file_status=$(git diff --staged --name-status)
 
-        local staged_files="$(printf "$staged_file_status" | grep -v "^U" | wc -l)"
-        [ "$staged_files" -gt 0 ] && printf " ●$staged_files"
+            local staged_files="$(printf "$staged_file_status" | grep -v "^U" | wc -l)"
+            [ "$staged_files" -gt 0 ] && printf " ●$staged_files"
 
-        local conflicting_files="$(printf "$staged_file_status" | grep "^U" | wc -l)"
-        [ "$conflicting_files" -gt 0 ] && printf " ✖$conflicting_files"
+            local conflicting_files="$(printf "$staged_file_status" | grep "^U" | wc -l)"
+            [ "$conflicting_files" -gt 0 ] && printf " ✖$conflicting_files"
 
-        local changed_files="$(( $(git diff --name-only | uniq | wc -l) - $conflicting_files ))"
-        [ "$changed_files" -gt 0 ] && printf " ✚$changed_files"
+            local changed_files="$(( $(git diff --name-only | uniq | wc -l) - $conflicting_files ))"
+            [ "$changed_files" -gt 0 ] && printf " ✚$changed_files"
 
-        local untracked_files="$(git status --porcelain | grep "^??" | wc -l)"
-        [ "$untracked_files" -gt 0 ] && printf " …$untracked_files"
-    fi
-}
+            local untracked_files="$(git status --porcelain | grep "^??" | wc -l)"
+            [ "$untracked_files" -gt 0 ] && printf " …$untracked_files"
+        fi
+    }
+else
+    prompt_git() { :; }
+fi
 
 autoload -U colors
 colors
