@@ -12,7 +12,7 @@ bindsym $mod+d exec rofi -show combi
 
 # Application discrimination
 for_window [class="Qemu-system-.+"] floating enable border normal
-for_window [class="qutebrowser"] layout tabbed
+for_window [class="qutebrowser"] focus child layout tabbed focus
 for_window [class="Pidgin"] floating enable border normal
 
 # Window Manager keybinds

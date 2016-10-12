@@ -17,6 +17,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
 Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'PotatoesMaster/i3-vim-syntax'
 
 " Other
 Plug 'scrooloose/nerdtree'
