@@ -9,25 +9,34 @@ floating_modifier $mod
 # External programs
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+d exec rofi -show combi
+bindsym $mod+m exec ~/.scripts/screenshot -s
+bindsym $mod+Shift+m exec ~/.scripts/screenshot
 
 # Application discrimination
 for_window [class="Qemu-system-.+"] floating enable border normal
 for_window [class="qutebrowser"] focus child layout tabbed focus
-for_window [class="Pidgin"] floating enable border normal
 
 # Window Manager keybinds
 bindsym $mod+Shift+q kill
 bindsym --release button2 kill
 bindsym button2 nop
 
-bindsym $mod+h focus left
-bindsym $mod+j focus down
 bindsym $mod+k focus up
+bindsym $mod+j focus down
+bindsym $mod+h focus left
 bindsym $mod+l focus right
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
+bindsym $mod+Up focus up
+bindsym $mod+Down focus down
+bindsym $mod+Left focus left
+bindsym $mod+Right focus right
 bindsym $mod+Shift+k move up
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+h move left
 bindsym $mod+Shift+l move right
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Right move right
 
 bindsym $mod+a split h
 bindsym $mod+s split v

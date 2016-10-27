@@ -1,0 +1,29 @@
+#!/bin/sh
+file="$(mktemp -t Screenshot.XXXXXX)"
+maim --format png $@ "$file"
+
+input="$(echo 'Save,Upload' | rofi -dmenu -sep ',' -p Screenshot)"
+
+func="$(echo "$input " | cut -d ' ' -f 1)"
+args="$(echo "$input " | cut -d ' ' -f 2- | xargs)"
+
+if [ "$func" = "Save" ]; then
+    if [ "$args" ]; then
+        cp "$file" "$args"
+    else
+        cp "$file" "$HOME/Screenshot-$(date +%F-%T).png"
+    fi
+elif [ "$func" = "Upload" ]; then
+    errorfile="$(mktemp -t Screenshot-curlerr.XXXXXX)"
+    url="$(curl -T "$file" 'http://chunk.io' 2> "$errorfile").png"
+    if [ "$?" = 0 ]; then
+        notify-send -a 'Screenshot' 'Upload successful'
+        echo "$url" | xclip -selection clipboard -i
+    else
+        notify-send -a 'Screenshot' 'Failed to upload' "$(cat "$errorfile")"
+    fi
+
+    rm -f "$errorfile"
+fi
+
+rm -f "$file"
