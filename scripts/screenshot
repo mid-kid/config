@@ -1,6 +1,10 @@
 #!/bin/sh
 file="$(mktemp -t Screenshot.XXXXXX)"
 maim --format png $@ "$file"
+if [ ! "$?" = 0 ]; then
+    rm -f "$file"
+    exit 1
+fi
 
 input="$(echo 'Save,Upload' | rofi -dmenu -sep ',' -p Screenshot)"
 
