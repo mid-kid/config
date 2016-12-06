@@ -16,4 +16,4 @@ alias dumount='udisksctl unmount -b'
 eval $(dircolors -b)
 
 # Some random scripts
-export PATH=~/.scripts:$PATH
+PATH=~/.scripts:$PATH
