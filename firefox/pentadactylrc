@@ -1,0 +1,13 @@
+"1.2pre-pm-3
+
+loadplugins '\.(js|penta)$'
+group user
+map -count -modes=n,v <C-h> <count>:tabprevious<Return>
+map -count -modes=n,v <C-l> <count>:tabnext<Return>
+map -count -modes=n j -builtin <count>4<Down>
+map -count -modes=n J -builtin <count><Down>
+map -count -modes=n k -builtin <count>4<Up>
+map -count -modes=n K -builtin <count><Up>
+set cdpath=''
+
+" vim: set ft=pentadactyl:

@@ -67,14 +67,16 @@ colors
 
 PROMPT="%{$fg[green]%}%n%{$reset_color%}@%{$fg[yellow]%}%m%{$reset_color%} :%{$fg[magenta]%}\$(prompt_git)%{$reset_color%}: %{$fg[cyan]%}%c%{$reset_color%} $ "
 
-zplug="$HOME/.zplug"
-if [ -d "$zplug" -a ! -f "$zplug/init.zsh" -a "$(command -v git)" ]; then
-    mkdir -p "$zplug"
-    git clone https://github.com/b4b4r07/zplug "$zplug"
+export ZPLUG_HOME="$HOME/.zplug"  # Install zplug by running: mkdir -p "$ZPLUG_HOME"
+if [ -d "$ZPLUG_HOME" -a ! -f "$ZPLUG_HOME/init.zsh" -a "$(command -v git)" ]; then
+    mkdir -p "$ZPLUG_HOME"
+    git clone https://github.com/b4b4r07/zplug "$ZPLUG_HOME"
 fi
 
-if [ -f "$zplug/init.zsh" ]; then
-    source "$zplug/init.zsh"
+if [ -f "$ZPLUG_HOME/init.zsh" ]; then
+    source "$ZPLUG_HOME/init.zsh"
+
+    zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
     zplug "zsh-users/zsh-syntax-highlighting"
     zplug "zsh-users/zsh-completions"

@@ -5,12 +5,13 @@ export PAGER='less'
 alias vi='vim'
 alias ls='ls --color=auto -F --quoting-style=shell-escape'
 alias grep='grep --color=auto'
-alias httrack='httrack -%v'
 alias du='du -h'
 alias df='df -h'
 alias free='free -h'
 alias dmount='udisksctl mount -b'
 alias dumount='udisksctl unmount -b'
+alias httrack='httrack -%v'
+alias streamlink='streamlink -player mpv'
 
 # Set up the directory colors
 eval $(dircolors -b)

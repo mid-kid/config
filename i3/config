@@ -77,20 +77,40 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 mode "resize" {
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
+    bindsym j resize grow height 10 px or 10 ppt
+    bindsym h resize shrink width 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
 
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+
+# Enable/disable external screens
+set $screen_main LVDS1
+set $screen_ext HDMI1 VGA1
+
+set $screen_mod Toggle external screen: Left (1), Right (2), Above (3), Below (4), Off (0)
+mode "$screen_mod" {
+    bindsym 1 exec --no-startup-id "for x in $screen_ext; do xrandr --output $x --auto --left-of $screen_main; done", mode "default"
+    bindsym 2 exec --no-startup-id "for x in $screen_ext; do xrandr --output $x --auto --right-of $screen_main; done", mode "default"
+    bindsym 3 exec --no-startup-id "for x in $screen_ext; do xrandr --output $x --auto --above $screen_main; done", mode "default"
+    bindsym 4 exec --no-startup-id "for x in $screen_ext; do xrandr --output $x --auto --below $screen_main; done", mode "default"
+
+    bindsym 0 exec --no-startup-id "for x in $screen_ext; do xrandr --output $x --off; done", mode "default"
+
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+x mode "$screen_mod"
 
 bar {
         status_command i3status
 }
+
+# Autostart applications
+exec --no-startup-id sh ~/.xprofile wm

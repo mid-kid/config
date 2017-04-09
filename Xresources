@@ -1,5 +1,5 @@
 URxvt.depth: 32
-URxvt.background: [80]#121212
+URxvt.background: [90]#121212
 URxvt.foreground: white
 URxvt.font: xft:DejaVuSansMono:size=10
 

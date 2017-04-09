@@ -9,6 +9,7 @@ call plug#begin('~/.vim/plugged')
 " Faaancy
 Plug 'junegunn/seoul256.vim'
 "Plug 'nanotech/jellybeans.vim'
+
 "Plug 'bling/vim-airline'
 Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -18,6 +19,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'PotatoesMaster/i3-vim-syntax'
+Plug 'lervag/vimtex'
 
 " Other
 Plug 'scrooloose/nerdtree'
@@ -28,6 +30,14 @@ Plug 'embear/vim-localvimrc'
 "Plug 'scrooloose/syntastic'
 
 call plug#end()
+
+" Color scheme
+let g:seoul256_background = 233
+colorscheme seoul256
+
+" Syntax highlighting
+filetype plugin indent on
+syntax on
 
 " Whitespace
 set tabstop=4
@@ -41,19 +51,10 @@ set number
 set hlsearch
 set incsearch
 set statusline=%f
-
-" Color scheme
-let g:seoul256_background = 233
-colorscheme seoul256
-
-" Syntax highlighting
-filetype plugin indent on
-syntax on
+set colorcolumn=80
+match ExtraWhitespace /\s\+$/ " ExtraWhitespace is defined in the theme
 
 " Behavior
-highlight ExtraWhitespace ctermbg=red guibg=#592929
-match ExtraWhitespace /\s\+$/
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 set omnifunc=syntaxcomplete#Complete
 set mouse=a
 set ttyfast
@@ -63,14 +64,18 @@ set nobackup
 set noundofile
 
 " Keybinds
-let mapleader="."
+let mapleader=";"
+let maplocalleader=";"
 map <F1> :make<CR>
 map <F8> :!curl -T % chunk.io 2> /dev/null<CR>
 map <F12> :syntax sync fromstart<CR>
 map <F11> :SyntasticToggleMode<CR>
-map <C-m> :noh<CR>
-map <C-o> :match OverLength /\%81v.\+/<CR>
-map <C-z><C-o> :match OverLength //<CR>
+map <C-n> :noh<CR>
+
+nnoremap <C-h> <C-w><C-h>
+nnoremap <C-j> <C-w><C-j>
+nnoremap <C-k> <C-w><C-k>
+nnoremap <C-l> <C-w><C-l>
 
 " NERDTree
 autocmd StdinReadPre * let s:std_in=1
@@ -79,6 +84,7 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " Localvimrc
 let g:localvimrc_sandbox=0
 let g:localvimrc_ask=0
+let g:localvimrc_count=1
 
 " Syntastic
 "set statusline+=\ %#warningmsg#
