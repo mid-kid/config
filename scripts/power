@@ -1,0 +1,20 @@
+#!/bin/sh
+
+ck_call() {
+    dbus-send --system --print-reply --dest=org.freedesktop.ConsoleKit /org/freedesktop/ConsoleKit/Manager "org.freedesktop.ConsoleKit.Manager.$@"
+}
+
+input="$(rofi -dmenu -i -p 'Power: ' -no-custom << EOF
+Suspend
+Hibernate
+Reboot
+Poweroff
+EOF
+)"
+
+case "$input" in
+    Suspend) ck_call Suspend boolean:true ;;
+    Hibernate) ck_call Hibernate boolean:true ;;
+    Reboot) ck_call Restart ;;
+    Poweroff) ck_call Stop ;;
+esac

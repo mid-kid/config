@@ -11,8 +11,11 @@ fi
 input_save="Save"
 input_upload="Upload"
 
-input="$(echo "$input_save|$input_upload" | rofi -dmenu -i -sep '|' -p Screenshot -l 2 -hide-scrollbar)"
-echo "$?"
+input="$(rofi -dmenu -i -p 'Screenshot: ' << EOF
+$input_save
+$input_upload
+EOF
+)"
 
 func="$(echo "$input " | cut -d ' ' -f 1)"
 args="$(echo "$input " | cut -d ' ' -f 2- | xargs)"

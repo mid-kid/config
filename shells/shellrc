@@ -11,7 +11,7 @@ alias free='free -h'
 alias dmount='udisksctl mount -b'
 alias dumount='udisksctl unmount -b'
 alias httrack='httrack -%v'
-alias streamlink='streamlink -player mpv'
+alias streamlink='streamlink --player mpv'
 
 # Set up the directory colors
 eval $(dircolors -b)

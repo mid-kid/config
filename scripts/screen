@@ -1,0 +1,34 @@
+#!/bin/sh
+
+screen_main='LVDS1'
+screen_ext='HDMI1 VGA1'
+
+input="$(rofi -dmenu -i -p 'Toggle external screen: ' -no-custom << EOF
+Off
+Left
+Right
+Above
+Below
+EOF
+)"
+input="$(echo "$input" | tr '[:upper:]' '[:lower:]')"
+
+case $input in
+    off)
+        for screen in $screen_ext; do
+            xrandr --output $screen --$input
+        done
+        ;;
+
+    left|right)
+        for screen in $screen_ext; do
+            xrandr --output $screen --auto --$input-of $screen_main
+        done
+        ;;
+
+    above|below)
+        for screen in $screen_ext; do
+            xrandr --output $screen --auto --$input $screen_main
+        done
+        ;;
+esac

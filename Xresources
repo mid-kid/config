@@ -1,7 +1,27 @@
+*foreground: #FAF4FB
+*background: #222220
+*color0: #1E272B
+*color1: #685742
+*color2: #9D6A47
+*color3: #B36D43
+*color4: #78824B
+*color5: #D99F57
+*color6: #C9A554
+*color7: #EAD49B
+*color8: #666666
+*color9: #685742
+*color10: #9D6A47
+*color11: #B36D43
+*color12: #78824B
+*color13: #D99F57
+*color14: #C9A554
+*color15: #EAD49B
+
 URxvt.depth: 32
-URxvt.background: [90]#121212
-URxvt.foreground: white
 URxvt.font: xft:DejaVuSansMono:size=10
+URxvt.internalBorder: 6
+URxvt.background: [90]#222220
+URxvt.cursorColor: #FAF4FB
 
 URxvt.scrollstyle: plain
 URxvt.scrollBar_right: true

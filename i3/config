@@ -1,6 +1,15 @@
 # Look
 font pango:DejaVu Sans Mono 8
-new_window pixel
+new_window pixel 3
+
+# Colors
+set $color_primary #9d6a47
+set $color_inactive #21373a
+set $color_background #011011
+
+client.focused          $color_primary $color_primary #ffffff #ebdbb2 $color_primary
+client.focused_inactive $color_inactive $color_inactive #ffffff #484e50 $color_inactive
+client.unfocused        $color_background $color_background #888888 #292d2e $color_background
 
 # Keybinds
 set $mod Mod4
@@ -11,9 +20,12 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+d exec rofi -show combi
 bindsym $mod+m exec ~/.scripts/screenshot -s
 bindsym $mod+Shift+m exec ~/.scripts/screenshot
+bindsym $mod+Shift+x exec ~/.scripts/screen
+bindsym $mod+Shift+z exec ~/.scripts/power
 
 # Application discrimination
 for_window [class="Qemu-system-.+"] floating enable border normal
+for_window [class="VirtualBox"] floating enable border normal
 for_window [class="qutebrowser"] focus child layout tabbed focus
 
 # Window Manager keybinds
@@ -76,6 +88,7 @@ bindsym $mod+Shift+w reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
+# Resize windows
 mode "resize" {
     bindsym k resize shrink height 10 px or 10 ppt
     bindsym j resize grow height 10 px or 10 ppt
@@ -91,25 +104,18 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# Enable/disable external screens
-set $screen_main LVDS1
-set $screen_ext HDMI1 VGA1
-
-set $screen_mod Toggle external screen: Left (1), Right (2), Above (3), Below (4), Off (0)
-mode "$screen_mod" {
-    bindsym 1 exec --no-startup-id "for x in $screen_ext; do xrandr --output $x --auto --left-of $screen_main; done", mode "default"
-    bindsym 2 exec --no-startup-id "for x in $screen_ext; do xrandr --output $x --auto --right-of $screen_main; done", mode "default"
-    bindsym 3 exec --no-startup-id "for x in $screen_ext; do xrandr --output $x --auto --above $screen_main; done", mode "default"
-    bindsym 4 exec --no-startup-id "for x in $screen_ext; do xrandr --output $x --auto --below $screen_main; done", mode "default"
-
-    bindsym 0 exec --no-startup-id "for x in $screen_ext; do xrandr --output $x --off; done", mode "default"
-
-    bindsym Escape mode "default"
-}
-bindsym $mod+Shift+x mode "$screen_mod"
-
 bar {
-        status_command i3status
+    status_command i3status
+    colors {
+        background $color_background
+        statusline #ffffff
+        separator #999999
+
+        focused_workspace  $color_primary $color_primary   #ffffff
+        inactive_workspace $color_inactive $color_inactive #ffffff
+        urgent_workspace   #2f343a #c13133 #ffffff
+        binding_mode       #2f343a #c12123 #ffffff
+    }
 }
 
 # Autostart applications

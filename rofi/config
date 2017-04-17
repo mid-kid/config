@@ -7,8 +7,8 @@ rofi.kb-mode-next: Super+l,Super+Tab
 rofi.kb-mode-previous: Super+h,Super+Shift+Tab
 
 rofi.color-enabled: true
-rofi.color-normal: argb:00000000, #D8DEE9, argb:00000000, #6699CC , #1B2B34
-rofi.color-active: argb:00000000, #FAC863, argb:00000000, #FAC863 , #1B2B34
-rofi.color-urgent: argb:00000000, #F99157, argb:00000000, #F99157 , #1B2B34
-rofi.color-window: argb:ee222222, #6699CC, #6699CC
+rofi.color-window: argb:ee222220, #9D6A47, #9D6A47
+rofi.color-normal: argb:00000000, #FAF4FB, argb:00000000, #9D6A47 , #FAF4FB
+rofi.color-active: argb:00000000, #FAC863, argb:00000000, #FAC863 , #000000
+rofi.color-urgent: argb:00000000, #F99157, argb:00000000, #F99157 , #000000
 rofi.separator-style: solid
