@@ -1,0 +1,5 @@
+#!/bin/sh
+# Create source archive from git repo
+name="$(basename "$(git remote get-url origin)")"
+version="$(git rev-parse --short HEAD)"
+git archive --format tar --prefix="$name-$version/" HEAD | xz -c -9 > "$name-$version.tar.xz"
