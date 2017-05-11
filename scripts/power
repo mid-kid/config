@@ -5,6 +5,7 @@ ck_call() {
 }
 
 input="$(rofi -dmenu -i -p 'Power: ' -no-custom << EOF
+Lock
 Suspend
 Hibernate
 Reboot
@@ -13,8 +14,9 @@ EOF
 )"
 
 case "$input" in
-    Suspend) ck_call Suspend boolean:true ;;
-    Hibernate) ck_call Hibernate boolean:true ;;
+    Lock) xautolock -locknow ;;
+    Suspend) xautolock -locknow; ck_call Suspend boolean:true ;;
+    Hibernate) xautolock -locknow; ck_call Hibernate boolean:true ;;
     Reboot) ck_call Restart ;;
     Poweroff) ck_call Stop ;;
 esac
