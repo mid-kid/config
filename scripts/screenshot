@@ -8,12 +8,11 @@ if [ "$?" != 0 ]; then
     exit 1
 fi
 
-input_save="Save"
-input_upload="Upload"
-
 input="$(rofi -dmenu -i -p 'Screenshot: ' << EOF
-$input_save
-$input_upload
+Save
+Save sha
+Upload
+Clipboard
 EOF
 )"
 
@@ -21,7 +20,7 @@ func="$(echo "$input " | cut -d ' ' -f 1)"
 args="$(echo "$input " | cut -d ' ' -f 2- | xargs)"
 
 case "$func" in
-    "$input_save")
+    Save)
         if [ "$args" ]; then
             if [ "$args" = 'sha' ]; then
                 sha="$(sha256sum "$file" | cut -d' ' -f1)"
@@ -36,7 +35,7 @@ case "$func" in
         fi
         ;;
 
-    "$input_upload")
+    Upload)
         errorfile="$(mktemp -t Screenshot-curlerr.XXXXXX)"
         url="$(curl -T "$file" 'http://chunk.io' 2> "$errorfile").png"
         if [ "$?" = 0 ]; then
@@ -48,6 +47,9 @@ case "$func" in
 
         rm -f "$errorfile"
         ;;
+
+    Clipboard)
+        xclip -selection clipboard -t image/png -i "$file"
 esac
 
 rm -f "$file"
