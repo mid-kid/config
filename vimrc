@@ -8,9 +8,6 @@ call plug#begin('~/.vim/plugged')
 
 " Faaancy
 Plug 'junegunn/seoul256.vim'
-"Plug 'nanotech/jellybeans.vim'
-
-"Plug 'bling/vim-airline'
 Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
@@ -20,14 +17,15 @@ Plug 'cespare/vim-toml'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'lervag/vimtex'
+Plug 'zah/nim.vim'
 
 " Other
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Raimondi/delimitMate'
-Plug 'AutoComplPop'
+Plug 'vim-scripts/AutoComplPop'
 Plug 'embear/vim-localvimrc'
-"Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-surround'
 
 call plug#end()
 
@@ -52,13 +50,13 @@ set hlsearch
 set incsearch
 set statusline=%f
 set colorcolumn=80
-match ExtraWhitespace /\s\+$/ " ExtraWhitespace is defined in the theme
+match ExtraWhitespace /\s\+$/  " ExtraWhitespace is defined in the theme
 
 " Behavior
 set omnifunc=syntaxcomplete#Complete
 set mouse=a
 set ttyfast
-set clipboard+=unnamed
+set clipboard=unnamed
 set clipboard+=unnamedplus
 set nobackup
 set noundofile
@@ -81,17 +79,9 @@ nnoremap <C-l> <C-w><C-l>
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
+" NERDCommenter
+let g:NERDAltDelims_c=1
+
 " Localvimrc
 let g:localvimrc_sandbox=0
-let g:localvimrc_ask=0
 let g:localvimrc_count=1
-
-" Syntastic
-"set statusline+=\ %#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
