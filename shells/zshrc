@@ -36,7 +36,7 @@ bindkey '\e[7~' beginning-of-line  # Home
 bindkey '\e[8~' end-of-line  # End
 
 # Prompt
-if [ -x "$(command -v git)" ]; then
+if command -v git > /dev/null; then
     prompt_git() {
         if [ -d ".git" ]; then
             local branch="$(git symbolic-ref HEAD 2> /dev/null | cut -d '/' -f 3)"
