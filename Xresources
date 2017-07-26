@@ -1,5 +1,5 @@
-*foreground: #FAF4FB
-*background: #222220
+URxvt.foreground: #FAF4FB
+URxvt.background: #222220
 
 URxvt.depth: 32
 URxvt.font: xft:DejaVuSansMono:size=10
