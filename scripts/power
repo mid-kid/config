@@ -14,7 +14,7 @@ EOF
 )"
 
 case "$input" in
-    Lock) xautolock -locknow ;;
+    Lock) xautolock -locknow; sleep 1; xset s activate ;;
     Suspend) xautolock -locknow; ck_call Suspend boolean:true ;;
     Hibernate) xautolock -locknow; ck_call Hibernate boolean:true ;;
     Reboot) ck_call Restart ;;
