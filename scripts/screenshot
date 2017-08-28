@@ -50,6 +50,7 @@ case "$func" in
 
     Clipboard)
         xclip -selection clipboard -t image/png -i "$file"
+        ;;
 esac
 
 rm -f "$file"

@@ -10,12 +10,17 @@ smart_borders on
 
 # Colors
 set $color_primary #9d6a47
+set $color_primary_light #b9963b
 set $color_inactive #21373a
+set $color_inactive_light #484e50
 set $color_background #011011
+set $color_background_light #292d2e
+set $color_text #ffffff
+set $color_text_background #888888
 
-client.focused          $color_primary $color_primary #ffffff #ebdbb2 $color_primary
-client.focused_inactive $color_inactive $color_inactive #ffffff #484e50 $color_inactive
-client.unfocused        $color_background $color_background #888888 #292d2e $color_background
+client.focused          $color_primary $color_primary $color_text $color_primary_light $color_primary
+client.focused_inactive $color_inactive $color_inactive $color_text_background $color_inactive_light $color_inactive
+client.unfocused        $color_background $color_background $color_text_background $color_background_light $color_background
 
 # Keybinds
 set $mod Mod4
@@ -32,6 +37,7 @@ bindsym $mod+Shift+z exec ~/.scripts/power
 # Application discrimination
 for_window [class="Qemu-system-.+"] floating enable border normal
 for_window [class="VirtualBox"] floating enable border normal
+for_window [window_role="About"] floating enable border normal
 for_window [class="qutebrowser"] focus child layout tabbed focus
 
 # Window Manager keybinds
@@ -115,13 +121,13 @@ bar {
     status_command i3status
     colors {
         background $color_background
-        statusline #ffffff
-        separator #999999
+        statusline $color_text
+        separator $color_text_background
 
-        focused_workspace  $color_primary $color_primary   #ffffff
-        inactive_workspace $color_inactive $color_inactive #ffffff
-        urgent_workspace   #2f343a #c13133 #ffffff
-        binding_mode       #2f343a #c12123 #ffffff
+        focused_workspace  $color_primary $color_primary $color_text
+        inactive_workspace $color_inactive $color_inactive $color_text
+        urgent_workspace   #2f343a #c13133 $color_text
+        binding_mode       #2f343a #c12123 $color_text
     }
 }
 
