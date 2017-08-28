@@ -11,8 +11,9 @@ user_pref("security.ssl.enable_ocsp_stapling", false);  // WARNING: This is a ba
 
 // Privacy/Security settings
 user_pref("privacy.donottrackheader.enabled", true);  // Tell websites I don't like what they're doing
-user_pref("privacy.trackingprotection.enabled", true);  // Use mozilla's tracking protection (NOTE: sends requests to mozilla)
 user_pref("network.http.speculative-parallel-limit", 0);  // Disable link pre-fetching
 user_pref("media.peerconnection.enabled", true);  // Disable WebRTC
 user_pref("webgl.disabled", true);  // Disable WebGL
 user_pref("canvas.poisondata", true);  // Poison canvas data
+user_pref("plugins.enumerable_names", "");  // Don't tell what plugins I have enabled
+user_pref("extensions.blocklist.enabled", false);  // Disable plugin/extension blocklist

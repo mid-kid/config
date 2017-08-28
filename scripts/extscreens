@@ -5,6 +5,7 @@ screen_ext='HDMI1 VGA1'
 
 input="$(rofi -dmenu -i -p 'Toggle external screen: ' -no-custom << EOF
 Off
+Same
 Left
 Right
 Above
@@ -18,17 +19,26 @@ case $input in
         for screen in $screen_ext; do
             xrandr --output $screen --$input
         done
+        [ -x ~/.fehbg ] && ~/.fehbg
         ;;
 
     left|right)
         for screen in $screen_ext; do
             xrandr --output $screen --auto --$input-of $screen_main
         done
+        [ -x ~/.fehbg ] && ~/.fehbg
         ;;
 
     above|below)
         for screen in $screen_ext; do
             xrandr --output $screen --auto --$input $screen_main
         done
+        [ -x ~/.fehbg ] && ~/.fehbg
         ;;
+
+    same)
+        for screen in $screen_ext; do
+            xrandr --output $screen --auto --$input-as $screen_main
+        done
+        [ -x ~/.fehbg ] && ~/.fehbg
 esac
