@@ -1,13 +1,15 @@
+noblacklist ~/.local/opt/arduino
 whitelist ~/.local/opt/arduino
 
-noblacklist ~/.arduino15
 mkdir ~/.arduino15
+noblacklist ~/.arduino15
 whitelist ~/.arduino15
 
-noblacklist ~/.jssc
 mkdir ~/.jssc
+noblacklist ~/.jssc
 whitelist ~/.jssc
 
+noblacklist ~/Stuff/Workspace/Arduino
 whitelist ~/Stuff/Workspace/Arduino
 
 ignore noroot

@@ -1,3 +1,4 @@
+noblacklist ~/.wineprefix/osu
 whitelist ~/.wineprefix/osu
 
 ignore seccomp
