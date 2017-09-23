@@ -1,0 +1,48 @@
+# Add functionality to preview torrent when double clicking on it.
+# Lacks proper translations.
+
++++ src/gui/optionsdlg.h
+@@ -44,6 +44,7 @@
+ {
+     TOGGLE_PAUSE,
+     OPEN_DEST,
++    PREVIEW,
+     NO_ACTION
+ };
+ 
++++ src/gui/optionsdlg.ui
+@@ -295,6 +295,11 @@
+                     </item>
+                     <item>
+                      <property name="text">
++                      <string>Preview file</string>
++                     </property>
++                    </item>
++                    <item>
++                     <property name="text">
+                       <string>No action</string>
+                      </property>
+                     </item>
+@@ -320,6 +325,11 @@
+                      </property>
+                     </item>
+                     <item>
++                     <property name="text">
++                      <string>Preview file</string>
++                     </property>
++                    </item>
++                    <item>
+                      <property name="text">
+                       <string>No action</string>
+                      </property>
++++ src/gui/transferlistwidget.cpp
+@@ -239,6 +239,9 @@
+         else
+             Utils::Misc::openPath(torrent->contentPath(true));
+         break;
++    case PREVIEW:
++        if (torrent->hasMetadata())
++            new PreviewSelect(this, torrent);
+     }
+ }
+ 
