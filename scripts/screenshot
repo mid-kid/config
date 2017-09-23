@@ -37,7 +37,7 @@ case "$func" in
 
     Upload)
         errorfile="$(mktemp -t Screenshot-curlerr.XXXXXX)"
-        url="$(curl -T "$file" 'http://chunk.io' 2> "$errorfile").png"
+        url="$(curl -nsT "$file" 'https://chunk.io/' 2> "$errorfile").png"
         if [ "$?" = 0 ]; then
             notify-send -a 'Screenshot' 'Upload successful'
             echo "$url" | xclip -selection clipboard -i
