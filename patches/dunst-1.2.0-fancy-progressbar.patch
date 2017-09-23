@@ -1,0 +1,59 @@
+# This patch implements a fancy progressbar in dunst.
+# It changes the background of a notification to imitate a progress bar by darkening part of it.
+
+diff --git a/src/x11/x.c b/src/x11/x.c
+index 9f7ac20..3430892 100644
+--- a/src/x11/x.c
++++ b/src/x11/x.c
+@@ -565,14 +565,22 @@ static dimension_t x_render_layout(cairo_t *c, colored_layout *cl, colored_layou
+         double bg_half_height = settings.notification_height/2.0;
+         int pango_offset = (int) floor(h/2.0);
+ 
++        int progress_width = cl->n->progress > 0 ? bg_width * (cl->n->progress - 1) / 100 : bg_width;
++
+         if (first) bg_height += settings.frame_width;
+         if (last) bg_height += settings.frame_width;
+         else bg_height += settings.separator_height;
+ 
+         cairo_set_source_rgb(c, cl->frame.r, cl->frame.g, cl->frame.b);
+-        cairo_rectangle(c, bg_x, bg_y, bg_width, bg_height);
++        cairo_rectangle(c, bg_x, bg_y, progress_width, bg_height);
+         cairo_fill(c);
+ 
++        if (progress_width != bg_width) {
++                cairo_set_source_rgb(c, cl->frame.r - 0.2, cl->frame.g - 0.2, cl->frame.b - 0.2);
++                cairo_rectangle(c, bg_x + progress_width, bg_y, bg_width - progress_width, bg_height);
++                cairo_fill(c);
++        }
++
+         /* adding frame */
+         bg_x += settings.frame_width;
+         if (first) {
+@@ -582,13 +590,26 @@ static dimension_t x_render_layout(cairo_t *c, colored_layout *cl, colored_layou
+                 if (!last) bg_height -= settings.separator_height;
+         }
+         bg_width -= 2 * settings.frame_width;
++        if (progress_width < settings.frame_width) {
++                progress_width = 0;
++        } else if (progress_width - settings.frame_width > bg_width) {
++                progress_width = bg_width;
++        } else {
++                progress_width -= settings.frame_width;
++        }
+         if (last)
+                 bg_height -= settings.frame_width;
+ 
+         cairo_set_source_rgb(c, cl->bg.r, cl->bg.g, cl->bg.b);
+-        cairo_rectangle(c, bg_x, bg_y, bg_width, bg_height);
++        cairo_rectangle(c, bg_x, bg_y, progress_width, bg_height);
+         cairo_fill(c);
+ 
++        if (progress_width != bg_width) {
++                cairo_set_source_rgb(c, cl->bg.r - 0.2, cl->bg.g - 0.2, cl->bg.b - 0.2);
++                cairo_rectangle(c, bg_x + progress_width, bg_y, bg_width - progress_width, bg_height);
++                cairo_fill(c);
++        }
++
+         bool use_padding = settings.notification_height <= (2 * settings.padding) + h;
+         if (use_padding)
+             dim.y += settings.padding;

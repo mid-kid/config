@@ -1,0 +1,26 @@
+# In i3, if the liferea window was tabbed with another window, and this window was unfocussed,
+#   it would be minimized to the systray.
+# This patch fixes the trayicon plugin so it doesn't happen.
+
++++ plugins/trayicon.py
+@@ -110,8 +110,6 @@
+         self.window = self.shell.get_window()
+         self.minimize_to_tray_delete_handler = self.window.connect("delete_event",
+                                                                    self.trayicon_minimize_on_close)
+-        self.minimize_to_tray_minimize_handler = self.window.connect("window-state-event",
+-                                                                     self.window_state_event_cb)
+ 
+         # show the window if it is hidden when starting liferea
+         self.window.deiconify()
+@@ -123,11 +121,6 @@
+         self.feedlist_new_items_cb_id = sigid
+         self.feedlist = feedlist
+ 
+-    def window_state_event_cb(self, widget, event):
+-        "Hide window when minimize"
+-        if event.changed_mask & event.new_window_state & Gdk.WindowState.ICONIFIED:
+-            self.window.hide()
+-
+     def trayicon_click(self, widget, data = None):
+         self.window.deiconify()
+         self.window.show()

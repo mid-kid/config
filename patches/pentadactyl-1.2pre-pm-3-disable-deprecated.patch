@@ -1,0 +1,13 @@
+# Disable annoying deprecated warnings only intended for developers.
+
++++ common/modules/base.jsm
+@@ -378,9 +378,6 @@
+                   this.constructor.className ? this.constructor.className + "#" :
+                       "";
+ 
+-        deprecated.warn(func,
+-                        obj + (fn.realName || fn.name || name || "").replace(/__/g, "."),
+-                        alternative);
+         return func.apply(this, arguments);
+     }
+     if (func.name)
