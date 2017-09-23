@@ -1,10 +1,9 @@
 URxvt.foreground: #FAF4FB
-URxvt.background: #222220
+URxvt.background: [90]#222220
 
 URxvt.depth: 32
-URxvt.font: xft:DejaVuSansMono:size=10
+URxvt.font: xft:DejaVuSansMono:size=8
 URxvt.internalBorder: 6
-URxvt.background: [90]#222220
 URxvt.cursorColor: #FAF4FB
 
 URxvt.scrollstyle: plain
