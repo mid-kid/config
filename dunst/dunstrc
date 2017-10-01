@@ -16,7 +16,8 @@
     dmenu = /usr/bin/rofi -dmenu -p dunst:
     browser = /usr/bin/xdg-open
     icon_position = left
-    icon_folders = /usr/share/icons/Tango/22x22/status/:/usr/share/icons/Tango/22x22/devices/
+    max_icon_size = 22
+    icon_folders = /home/mid-kid/.icons/oomox-Colors-flat/status/scalable:/usr/share/icons/Tango/22x22/status/:/usr/share/icons/Tango/22x22/devices/
 
 [frame]
     width = 3
