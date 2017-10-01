@@ -8,7 +8,7 @@ prefix="$HOME/.wineprefix/osu"
 mkdir -p "$prefix/temp"
 
 for x in "$@"; do
-    b="$(basename "$x")"
-    mv "$x" "$prefix/temp/$b"
+    b="$(basename -- "$x")"
+    mv -- "$x" "$prefix/temp/$b"
     WINEPREFIX="$prefix" firejail --join=osu wine "C:/users/mid-kid/Local Settings/Application Data/osu!/osu!.exe" "Z:$prefix/temp/$b" &
 done
