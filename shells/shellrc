@@ -18,3 +18,8 @@ eval $(dircolors -b)
 
 # Some random scripts
 PATH=~/.scripts:$PATH
+
+# Function to prepend to path
+prepath() {
+    export PATH="$(realpath "${1:-$PWD}"):$PATH"
+}
