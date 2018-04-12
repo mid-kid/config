@@ -8,3 +8,12 @@
         autocrlf = input
 [color]
         ui = auto
+[diff]
+        tool = vimdiff
+        renameLimit = 3000
+[credential]
+        helper = store
+[alias]
+        diff-img = difftool -x 'compare \"$LOCAL\" \"$REMOTE\" png:- | montage -mode concatenate \"$LOCAL\" png:- \"$REMOTE\" png:- | display -title \"$BASE: Local | Diff | Remote\" png:-'
+[merge]
+        tool = vimdiff

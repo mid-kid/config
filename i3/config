@@ -37,6 +37,11 @@ bindsym $mod+Shift+z exec ~/.scripts/power
 # Application discrimination
 for_window [class="Qemu-system-.+"] floating enable border normal
 for_window [class="VirtualBox"] floating enable border normal
+for_window [class="Gambatte_.+"] floating enable border normal
+for_window [class="sameboy"] floating enable border normal
+for_window [class="Gbe_plus_qt"] floating enable border normal
+for_window [class="mGBA"] floating enable border normal
+for_window [class="Display"] floating enable border normal
 for_window [window_role="About"] floating enable border normal
 for_window [class="qutebrowser"] focus child layout tabbed focus
 
@@ -116,6 +121,22 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+
+# Move workspace to output
+mode "output" {
+    bindsym k move workspace to output up; mode "default"
+    bindsym j move workspace to output down; mode "default"
+    bindsym h move workspace to output left; mode "default"
+    bindsym l move workspace to output right; mode "default"
+    bindsym Up move workspace to output up; mode "default"
+    bindsym Down move workspace to output down; mode "default"
+    bindsym Left move workspace to output left; mode "default"
+    bindsym Right move workspace to output right; mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+t mode "output"
 
 bar {
     status_command i3status
