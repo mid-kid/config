@@ -1,0 +1,142 @@
+#!/bin/sh
+set -e
+set -f
+IFS=$'\n'
+
+if [ "$(id -u)" != '0' ]; then
+    echo "This script needs root permissions!" 1>&2
+    exit 1
+fi
+
+if [ "$#" -lt 1 ]; then
+    echo "Usage: $0 [-mcuO] [-br src:dst] [-o lowerdir] [-s script] <dir> [su arguments]" 1>&2
+    exit 1
+fi
+
+only_mount=false
+only_chroot=false
+only_umount=false
+separate_overlay=false
+binds=''
+robinds=''
+lowerdir=''
+script=''
+
+while getopts "mcuOb:r:o:s:" opt; do
+    case "$opt" in
+        m) only_mount=true ;;
+        c) only_chroot=true ;;
+        u) only_umount=true ;;
+        O) separate_overlay=true ;;
+        b) binds+="$OPTARG
+" ;;
+        r) robinds+="$OPTARG
+" ;;
+        o) lowerdir="$OPTARG" ;;
+        s) script="$OPTARG" ;;
+    esac
+done
+shift $(expr $OPTIND - 1)
+[ "$1" = '--' ] && shift
+
+chroot="$1"
+shift
+
+if [ "$only_chroot" = 'false' ]; then
+    # Utility functions to keep track of mounts to be able to exit cleanly,
+    #  even if we fail to do something halfway.
+    chroot_mounts=''
+    chroot_workdir=''
+    chroot_mount() {
+        local mount="$2"
+        if [ "$only_umount" = 'false' ]; then
+            if ! mountpoint -q "$2"; then
+                if [ -e "$mount" ]; then
+                    mount "$@" && chroot_mounts="$mount
+$chroot_mounts"
+                fi
+            fi
+        else
+            if [ -e "$mount" ]; then
+                if mountpoint -q "$2"; then
+                    chroot_mounts="$mount
+$chroot_mounts"
+                fi
+            fi
+        fi
+    }
+    chroot_cleanup() {
+        local IFS=$'\n'
+        for mount in $chroot_mounts; do
+            umount "$mount"
+        done
+        if [ "$workdir" ]; then
+            rm -rf "$workdir"
+        fi
+    }
+    [ "$only_mount" = 'false' ] && trap 'chroot_cleanup' EXIT
+
+    # Create overlay
+    if [ "$lowerdir" ]; then
+        # Mount overlay
+        if [ "$separate_overlay" = 'false' ]; then
+            workdir="$(dirname "$chroot")/$(basename "$chroot").workdir"
+            if [ "$only_umount" = 'false' -a -e "$workdir" ]; then
+                echo "Trying to create overlay, but '$workdir' exists." 1>&2
+                echo 'Either remove that file/folder or use the -O option' 1>&2
+                exit 1
+            fi
+            mkdir -p "$chroot" "$workdir"
+
+            chroot_mount overlay "$chroot" -t overlay -o lowerdir="$lowerdir",upperdir="$chroot",workdir="$workdir"
+        else
+            mkdir -p "$chroot/upperdir" "$chroot/workdir" "$chroot/merged"
+            chroot_mount overlay "$chroot/merged" -t overlay -o lowerdir="$lowerdir",upperdir="$chroot/upperdir",workdir="$chroot/workdir"
+            chroot="$chroot/merged"
+        fi
+    fi
+
+    # Mount the filesystems we need
+    chroot_mount chroot "$chroot/proc" -t proc -o nosuid,noexec,nodev
+    chroot_mount chroot "$chroot/sys" -t sysfs -o nosuid,noexec,nodev,ro
+    chroot_mount chroot "$chroot/dev" -t devtmpfs -o nosuid,ro
+    chroot_mount chroot "$chroot/dev/pts" -t devpts -o nosuid,noexec
+    chroot_mount chroot "$chroot/dev/shm" -t tmpfs -o nosuid,nodev
+    chroot_mount chroot "$chroot/run" -t tmpfs -o nosuid,nodev
+
+    # Bind-mount resolv.conf
+    [ -f /etc/resolv.conf -a -f "$chroot/etc/resolv.conf" ] && chroot_mount /etc/resolv.conf "$chroot/etc/resolv.conf" --bind -o ro,bind
+
+    # Ensure the choot has the host's terminfo
+    #terminfo="/usr/share/terminfo/$(echo "$TERM" | cut -c 1)/$TERM"
+    #if [ -f "$terminfo" -a -d "$chroot/usr/share/terminfo" ]; then
+        #mkdir -p "$chroot/$(dirname "$terminfo")"
+        #touch "$chroot/$terminfo"
+        #chroot_mount "$terminfo" "$chroot/$terminfo" --bind
+    #fi
+    # If uncommenting this make sure env -i copies the proper TERM variable.
+
+    # Setup all user-provided bind-mounts
+    for bind in $binds; do
+        chroot_mount "$(echo "$bind" | cut -d : -f 1)" "$chroot/$(echo "$bind" | cut -d : -f 2)" --bind
+    done
+    for bind in $robinds; do
+        chroot_mount "$(echo "$bind" | cut -d : -f 1)" "$chroot/$(echo "$bind" | cut -d : -f 2)" --bind -o ro,bind
+    done
+fi
+
+if [ "$only_mount" = 'false' -a "$only_umount" = 'false' ]; then
+    # Chroot into the directory
+    if [ "$script" ]; then
+        cat "$script" | unshare -impuf --mount-proc="$chroot/proc" env -i TERM=linux chroot "$chroot" su -l "$@"
+    else
+        unshare -impuf --mount-proc="$chroot/proc" env -i TERM=linux chroot "$chroot" su -l "$@"
+    fi
+    # We use env -i in combination with su -l to reset the current environment and pick up the chroot's environment.
+    # This has the beneficial side-effect of properly setting $HOME and $SHELL as well.
+    # We also use unshare to provide the most minimal kernel-space isolation of the environment inside the chroot.
+    # It doesn't create a new network namespace nor a new user namespace, so watch out for that.
+    # Another caveat is that su runs as PID 1, which can cause problems with "reaping children".
+    # If you're going to run long-term services through this, consider LXC instead.
+    # If you're going to run potentially harmful software, consider Firejail instead.
+fi
