@@ -21,5 +21,5 @@ PATH=~/.scripts:$PATH
 
 # Function to prepend to path
 prepath() {
-    export PATH="$(realpath "${1:-$PWD}"):$PATH"
+    eval export ${2:-PATH}=\"$(realpath "${1:-$PWD}"):\$${2:-PATH}\"
 }
