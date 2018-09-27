@@ -1,19 +1,20 @@
 [user]
-        email = esteve.varela@gmail.com
-        name = mid-kid
+	email = esteve.varela@gmail.com
+	name = mid-kid
 [push]
-        default = simple
+	default = simple
 [core]
-        eol = lf
-        autocrlf = input
+	eol = lf
+	autocrlf = input
 [color]
-        ui = auto
+	ui = auto
 [diff]
-        tool = vimdiff
-        renameLimit = 3000
+	tool = vimdiff
+	renameLimit = 3000
+	algorithm = minimal
 [credential]
-        helper = store
+	helper = store
 [alias]
-        diff-img = difftool -x 'compare \"$LOCAL\" \"$REMOTE\" png:- | montage -mode concatenate \"$LOCAL\" png:- \"$REMOTE\" png:- | display -title \"$BASE: Local | Diff | Remote\" png:-'
+	diff-img = difftool -x 'compare \"$LOCAL\" \"$REMOTE\" png:- | montage -mode concatenate \"$LOCAL\" png:- \"$REMOTE\" png:- | display -title \"$BASE: Local | Diff | Remote\" png:-'
 [merge]
-        tool = vimdiff
+	tool = vimdiff
