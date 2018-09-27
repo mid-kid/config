@@ -52,6 +52,7 @@ set shiftwidth=4
 set expandtab
 set smarttab
 set autoindent
+set listchars=tab:>-,space:·
 
 " Display
 set number
@@ -76,8 +77,8 @@ let maplocalleader=";"
 map <F1> :make<CR>
 map <F8> :!curl -T % chunk.io 2> /dev/null<CR>
 map <F12> :syntax sync fromstart<CR>
-map <F11> :SyntasticToggleMode<CR>
 map <C-n> :noh<CR>
+map <C-o> :set invlist<CR>
 map <C-p> :NERDTreeToggle<CR>
 
 nnoremap <C-h> <C-w><C-h>
