@@ -33,6 +33,8 @@ bindsym $mod+m exec ~/.scripts/screenshot -s
 bindsym $mod+Shift+m exec ~/.scripts/screenshot
 bindsym $mod+Shift+x exec ~/.scripts/extscreens
 bindsym $mod+Shift+z exec ~/.scripts/power
+bindsym $mod+Shift+o exec compton-trans -c +10
+bindsym $mod+o exec compton-trans -c -- -10
 
 # Application discrimination
 for_window [class="Qemu-system-.+"] floating enable border normal
@@ -42,6 +44,9 @@ for_window [class="sameboy"] floating enable border normal
 for_window [class="Gbe_plus_qt"] floating enable border normal
 for_window [class="mGBA"] floating enable border normal
 for_window [class="Display"] floating enable border normal
+for_window [class="Gpsim"] floating enable border normal
+for_window [class="Jstest-gtk"] floating enable border normal
+for_window [class="qjoypad"] floating enable border normal
 for_window [window_role="About"] floating enable border normal
 for_window [class="qutebrowser"] focus child layout tabbed focus
 
