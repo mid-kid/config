@@ -24,15 +24,17 @@ case "$func" in
         if [ "$args" ]; then
             if [ "$args" = 'sha' ]; then
                 sha="$(sha256sum "$file" | cut -d' ' -f1)"
-                cp "$file" "$save_root/$sha.png"
+                path="$save_root/$sha.png"
             elif [ -d "$save_root/$args" ]; then
-                cp "$file" "$save_root/$args/Screenshot-$(date +%F-%T).png"
+                path="$save_root/$args/Screenshot-$(date +%F-%T).png"
             else
-                cp "$file" "$save_root/$args"
+                path="$save_root/$args"
             fi
         else
-            cp "$file" "$save_root/Screenshot-$(date +%F-%T).png"
+            path="$save_root/Screenshot-$(date +%F-%T).png"
         fi
+        cp "$file" "$path"
+        echo "$path" | xclip -selection clipboard -i
         ;;
 
     Upload)
