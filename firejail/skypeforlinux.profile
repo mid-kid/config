@@ -6,4 +6,4 @@ noblacklist ~/.config/skypeforlinux
 whitelist ~/.config/skypeforlinux
 
 protocol unix,inet,inet6,netlink
-include /etc/firejail/default.profile
+include ~/.config/firejail/default.profile

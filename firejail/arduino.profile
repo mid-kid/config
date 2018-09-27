@@ -13,4 +13,4 @@ noblacklist ~/Stuff/Workspace/Arduino
 whitelist ~/Stuff/Workspace/Arduino
 
 ignore noroot
-include /etc/firejail/default.profile
+include ~/.config/firejail/default.profile

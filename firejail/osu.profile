@@ -2,4 +2,4 @@ noblacklist ~/.wineprefix/osu
 whitelist ~/.wineprefix/osu
 
 ignore seccomp
-include /etc/firejail/default.profile
+include ~/.config/firejail/default.profile

@@ -21,5 +21,4 @@ noblacklist ~/.config/unity3d
 whitelist ~/.config/unity3d
 
 protocol unix,inet,inet6,netlink
-
-include /etc/firejail/default.profile
+include ~/.config/firejail/default.profile

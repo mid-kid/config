@@ -4,4 +4,4 @@ whitelist ~/.local/opt/DefleMask_Linux
 noblacklist ~/Stuff/Workspace/DefleMask
 whitelist ~/Stuff/Workspace/DefleMask
 
-include /etc/firejail/default.profile
+include ~/.config/firejail/default.profile
