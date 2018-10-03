@@ -10,7 +10,7 @@ TARGET_PK2CMD := -PPIC16f877a
 CC := sdcc
 AS := gpasm
 
-CFLAGS := -Wp,-Wall --std-c11 -MMD --opt-code-size
+CFLAGS := -Wp,-Wall --std-c11 --opt-code-size
 
 rwildcard = $(foreach d, $(wildcard $1*), $(filter $(subst *, %, $2), $d) $(call rwildcard, $d/, $2))
 objects := $(patsubst $(dir_source)/%.c, $(dir_build)/%.o, $(call rwildcard, $(dir_source)/, *.c))
@@ -30,7 +30,7 @@ upload: $(name).hex
 	pk2cmd -J -M $(TARGET_PK2CMD) -F$<
 
 $(name).hex: $(objects)
-	$(LINK.o) $(OUTPUT_OPTION) $^
+	$(LINK.o) -MMD -MF $(@:.o=.d) $(OUTPUT_OPTION) $^
 
 $(dir_build)/%.o: $(dir_source)/%.c | $$(dir $$@)
 	$(COMPILE.c) $(OUTPUT_OPTION) $<

@@ -26,7 +26,7 @@ $(name): $(objects)
 	$(LINK.o) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
 $(dir_build)/%.o: $(dir_source)/%.c | $$(dir $$@)
-	$(COMPILE.c) -MM -MF $(@:.o=.d) $(OUTPUT_OPTION) $<
+	$(COMPILE.c) -MMD -MF $(@:.o=.d) $(OUTPUT_OPTION) $<
 
 .PRECIOUS: %/
 %/:
