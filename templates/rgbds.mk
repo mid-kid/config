@@ -1,7 +1,7 @@
 name := name
 
 dir_build := build
-dir_source := src
+dir_source := source
 dir_assets := assets
 
 RGBASM := rgbasm
@@ -11,7 +11,7 @@ RGBFIX := rgbfix
 
 RGBASMFLAGS := -p 0xff -L
 RGBLINKFLAGS := -p 0xff -d -t
-RGBFIXFLAGS := -p 0xff -j -m 0 -n 0 -r 0 -k "  " -i "    " -t "               "
+RGBFIXFLAGS := -p 0xff -j -m 0 -r 0 -n 0 -k "  " -i "    " -t "               "
 
 rwildcard = $(foreach d, $(wildcard $1*), $(filter $(subst *, %, $2), $d) $(call rwildcard, $d/, $2))
 objects := $(patsubst $(dir_source)/%.asm, $(dir_build)/%.o, $(call rwildcard, $(dir_source)/, *.asm))
@@ -19,17 +19,17 @@ objects := $(patsubst $(dir_source)/%.asm, $(dir_build)/%.o, $(call rwildcard, $
 .SECONDEXPANSION:
 
 .PHONY: all
-all: $(name).gbc
+all: $(name).gb
 
 .PHONY: clean
 clean:
-	rm -rf $(name).gbc $(name).sym $(dir_build)
+	rm -rf $(name).gb $(name).sym $(dir_build)
 
-$(name).gbc: $(objects)
+$(name).gb: $(objects)
 
-%.gbc: %.link
-	$(RGBLINK) $(RGBLINKFLAGS) -l $< -n $(@:.gbc=.sym) -o $@ $(filter-out $<, $^)
-	$(RGBFIX) $(RGBFIXFLAGS) $@
+%.gb: %.link
+	$(RGBLINK) $(RGBLINKFLAGS) -l $< -n $(@:.gb=.sym) -o $@ $(filter-out $<, $^)
+	$(RGBFIX) $(RGBFIXFLAGS) -v $@
 
 $(dir_build)/%.o: $(dir_source)/%.asm | $$(dir $$@)
 	$(RGBASM) $(RGBASMFLAGS) -i $(dir_build)/ -i $(dir_source)/ -M $(@:.o=.d) -o $@ $<
