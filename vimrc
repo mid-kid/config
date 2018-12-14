@@ -99,6 +99,7 @@ let g:ctrlp_prompt_mappings={
   \ 'AcceptSelection("h")': ['<C-i>'],
   \ 'AcceptSelection("v")': ['<C-x>'],
   \ }
+let g:ctrlp_working_path_mode='a'
 
 " NERDTree
 autocmd StdinReadPre * let s:std_in=1
@@ -120,5 +121,8 @@ set statusline+=%{gutentags#statusline()}
 set tags=.tags
 let g:gutentags_ctags_tagfile='.tags'
 let g:gutentags_project_root=['.tags']
+let g:gutentags_add_default_project_roots=0
 let g:ctrlp_root_markers=['.tags']
+
+" Taghighlight
 let g:TagHighlightSettings={'TagFileName': '.tags'}
