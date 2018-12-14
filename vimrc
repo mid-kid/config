@@ -13,6 +13,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/seoul256.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'abudden/taghighlight-automirror'
 
 " Syntax
 Plug 'rust-lang/rust.vim'
@@ -22,13 +23,18 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'lervag/vimtex'
 Plug 'zah/nim.vim'
 
-" Other
+" Project management
 Plug 'scrooloose/nerdtree'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'embear/vim-localvimrc'
+Plug 'ludovicchabant/vim-gutentags'
+
+" Editing
 Plug 'scrooloose/nerdcommenter'
 Plug 'Raimondi/delimitMate'
 Plug 'vim-scripts/AutoComplPop'
-Plug 'embear/vim-localvimrc'
 Plug 'tpope/vim-surround'
+Plug 'junegunn/vim-easy-align'
 Plug 'chrisbra/vim-diff-enhanced'
 
 call plug#end()
@@ -78,13 +84,21 @@ map <F1> :make<CR>
 map <F8> :!curl -T % chunk.io 2> /dev/null<CR>
 map <F12> :syntax sync fromstart<CR>
 map <C-n> :noh<CR>
-map <C-o> :set invlist<CR>
-map <C-p> :NERDTreeToggle<CR>
+map <C-w> :set invlist<CR>
+map <C-o> :NERDTreeToggle<CR>
+map <leader>. :CtrlPTag<CR>
 
 nnoremap <C-h> <C-w><C-h>
 nnoremap <C-j> <C-w><C-j>
 nnoremap <C-k> <C-w><C-k>
 nnoremap <C-l> <C-w><C-l>
+
+" CtrlP
+let g:ctrlp_map='<C-p>'
+let g:ctrlp_prompt_mappings={
+  \ 'AcceptSelection("h")': ['<C-i>'],
+  \ 'AcceptSelection("v")': ['<C-x>'],
+  \ }
 
 " NERDTree
 autocmd StdinReadPre * let s:std_in=1
@@ -93,9 +107,18 @@ let g:NERDTreeQuitOnOpen=1
 
 " NERDCommenter
 let g:NERDAltDelims_c=1
+let g:NERDCustomDelimiters={'rgbds': {'left': ';', 'right': ''}}
 
 " Localvimrc
 let g:localvimrc_sandbox=0
 let g:localvimrc_count=1
 let g:localvimrc_persistent=1
 let g:localvimrc_persistence_file=$HOME."/.vim/.localvimrc_persistent"
+
+" Gutentags
+set statusline+=%{gutentags#statusline()}
+set tags=.tags
+let g:gutentags_ctags_tagfile='.tags'
+let g:gutentags_project_root=['.tags']
+let g:ctrlp_root_markers=['.tags']
+let g:TagHighlightSettings={'TagFileName': '.tags'}
