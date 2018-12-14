@@ -30,10 +30,10 @@ upload: $(name).hex
 	pk2cmd -J -M $(TARGET_PK2CMD) -F$<
 
 $(name).hex: $(objects)
-	$(LINK.o) -MMD -MF $(@:.o=.d) $(OUTPUT_OPTION) $^
+	$(LINK.o) $(OUTPUT_OPTION) $^
 
 $(dir_build)/%.o: $(dir_source)/%.c | $$(dir $$@)
-	$(COMPILE.c) $(OUTPUT_OPTION) $<
+	$(COMPILE.c) -MMD $(OUTPUT_OPTION) $<
 
 $(dir_build)/%.o: $(dir_source)/%.asm | $$(dir $$@)
 	$(AS) $(TARGET_GPASM) $(OUTPUT_OPTION) -c $<
