@@ -23,12 +23,12 @@ all: $(name).gb
 
 .PHONY: clean
 clean:
-	rm -rf $(name).gb $(name).sym $(dir_build)
+	rm -rf $(name).gb $(name).sym $(name).map $(dir_build)
 
 $(name).gb: $(objects)
 
 %.gb: %.link
-	$(RGBLINK) $(RGBLINKFLAGS) -l $< -n $(@:.gb=.sym) -o $@ $(filter-out $<, $^)
+	$(RGBLINK) $(RGBLINKFLAGS) -l $< -n $(@:.gb=.sym) -m $(@:.gb=.map) -o $@ $(filter-out $<, $^)
 	$(RGBFIX) $(RGBFIXFLAGS) -v $@
 
 $(dir_build)/%.o: $(dir_source)/%.asm | $$(dir $$@)
