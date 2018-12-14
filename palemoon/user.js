@@ -7,14 +7,17 @@ user_pref("browser.startup.page", 0);  // Show a blank page on startup
 user_pref("general.smoothScroll", false);  // Disable smooth scrolling
 user_pref("general.warnOnAboutConfig", false);  // ...seriously?
 user_pref("layout.spellcheckDefault", 0);  // Disable spelling check
+
+// Look and feel
+user_pref("browser.tabs.onTop", true);  // Tabs on top
 user_pref("status4evar.status", 3);  // Show status in pop-up
 user_pref("status4evar.status.linkOver", 3);  // Show link in pop-up
 user_pref("status4evar.status.default", false);  // Don't show the "Done" status
 
 // WARNING: This is a bad idea security-wise, but malfunctioning sites suck even worse
-user_pref("security.OCSP.enabled", 0);
-user_pref("security.ssl.enable_ocsp_must_staple", false);
-user_pref("security.ssl.enable_ocsp_stapling", false);
+//user_pref("security.OCSP.enabled", 0);
+//user_pref("security.ssl.enable_ocsp_must_staple", false);
+//user_pref("security.ssl.enable_ocsp_stapling", false);
 
 // Privacy/Security settings
 user_pref("privacy.donottrackheader.enabled", true);  // Tell websites I don't like what they're doing
