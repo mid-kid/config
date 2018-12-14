@@ -1,0 +1,101 @@
+#! /bin/sh
+# Source: https://unix.stackexchange.com/questions/312395/reformat-sd-card
+# Old source: http://3gfp.com/wp/2014/07/formatting-sd-cards-for-speed-and-lifetime/
+
+# fdisk portion of script based on mkcard.sh v0.4
+# (c) Copyright 2009 Graeme Gregory <dp@xora.org.uk>
+# Additional functionality by Steve Sakoman
+# (c) Copyright 2010-2011 Steve Sakoman <steve@sakoman.com>
+# Updated by Alan Jenkins (2016)
+# Licensed under terms of GPLv2
+#
+# Parts of the procudure base on the work of Denys Dmytriyenko
+# http://wiki.omap.com/index.php/MMC_Boot_Format
+
+# exit if any command fails
+set -e
+
+export LC_ALL=C
+
+format_whole_disk_fat32() {
+    if ! id | grep -q root; then
+        echo "This utility must be run prefixed with sudo or as root"
+        return 1
+    fi
+
+    local DRIVE=$1
+
+    # Make sure drive isn't mounted
+    # so hopefully this will fail e.g. if we're about to blow away the root filesystem
+    for mounted in $(findmnt -o source | grep "^$DRIVE") ; do
+        umount "$mounted"
+    done
+
+    # Make sure current partition table is deleted
+    wipefs --all $DRIVE
+
+    # Get disk size in bytes
+    local SIZE=$(fdisk -l $DRIVE | grep Disk | grep bytes | awk '{print $5}')
+    echo DISK SIZE – $SIZE bytes
+
+    # Note: I'm changing our default cluster size to 32KiB since all of
+    # our 8GiB cards are arriving with 32KiB clusters. The manufacturers
+    # may know something that we do not *or* they're trading speed for
+    # more space.
+    local CLUSTER_SIZE_KB=32
+    local CLUSTER_SIZE_IN_SECTORS=$(( $CLUSTER_SIZE_KB * 2 ))
+
+    # This won't work for drives bigger than 32GiB because
+    # 32GiB / 64kiB clusters = 524288 FAT entries
+    # 524288 FAT entries * 4 bytes / FAT = 2097152 bytes
+    # 2097152 bytes / 512 bytes = 4096 sectors for FAT size
+    # 4096 * 2 = 8192 sectors for both FAT tables which leaves no
+    # room for the BPB sector
+    if [ $SIZE -ge $(( ($CLUSTER_SIZE_KB / 2) * 1024 * 1024 * 1024 )) ]; then
+        echo -n "This drive is too large, >= $(($CLUSTER_SIZE_KB / 2))GiB, for this "
+        echo "formatting routine."
+        return 1
+    fi
+
+    # Align partitions for SD card performance/wear optimization
+    # Summary: start 1st partition at sector 8192 (4MiB) and align FAT32
+    #          data to start at 8MiB (4MiB logical)
+    #          There's a document that explains why, but its too long to
+    #          reproduce here.
+    {
+    echo 8192,,0x0C,*
+    } | sfdisk -uS -q $DRIVE
+
+    sleep 1
+
+    if [ -b ${DRIVE}1 ]; then
+        PART1=${DRIVE}1
+    elif [ -b ${DRIVE}p1 ]; then
+        PART1=${DRIVE}p1
+    else
+        echo "Improper partitioning on $DRIVE"
+        return 1
+    fi
+
+    # Delete any old filesystem visible in new partition
+    wipefs --all $PART1
+
+    # Format FAT32 with 64kiB clusters (128 * 512)
+    # Format once to get the calculated FAT size
+    local FAT_SIZE=$(mkdosfs -F 32 -s $CLUSTER_SIZE_IN_SECTORS -v ${PART1} | \
+        sed -n -r -e '/^FAT size is/ s,FAT size is ([0-9]+) sectors.*$,\1,p')
+
+    # Calculate the number of reserved sectors to pad in order to align
+    # the FAT32 data area to 4MiB
+    local RESERVED_SECTORS=$(( 8192 - 2 * $FAT_SIZE ))
+
+    # Format again with padding
+    mkdosfs -F 32 -s $CLUSTER_SIZE_IN_SECTORS -v -R $RESERVED_SECTORS ${PART1}
+
+    # Uncomment to label filesystem
+    #fatlabel ${PART1} BOOT
+}
+
+#set -x
+
+format_whole_disk_fat32 "$@"
