@@ -21,5 +21,26 @@ PATH=~/.scripts:$PATH
 
 # Function to prepend to path
 prepath() {
-    eval export ${2:-PATH}=\"$(realpath "${1:-$PWD}"):\$${2:-PATH}\"
+    local _path="$(realpath -eq "${1:-$PWD}")"
+    [ "$_path" ] && eval export ${2:-PATH}=\"$_path:\$${2:-PATH}\"
+}
+prefix() {
+    local _path="$(realpath "${1:-$PWD}")"
+    prepath "$_path/bin" PATH
+    prepath "$_path/sbin" PATH
+    prepath "$_path/lib" LD_LIBRARY_PATH
+    prepath "$_path/lib64" LD_LIBRARY_PATH
+    prepath "$_path/lib/pkgconfig" PKG_CONFIG_PATH
+    prepath "$_path/lib64/pkgconfig" PKG_CONFIG_PATH
+    prepath "$_path/share/man" MANPATH
+    prepath "$_path/man" MANPATH
+    prepath "$_path/share/info" INFOPATH
+    prepath "$_path/info" INFOPATH
+
+    local _include="$(realpath -eq "$_path/include")"
+    local _lib="$(realpath -eq "$_path/lib")"
+    local _lib64="$(realpath -eq "$_path/lib64")"
+    [ "$_include" ] && export CFLAGS="$CFLAGS -I $_include"
+    [ "$_lib" ] && export LDFLAGS="$LDFLAGS -L $_lib"
+    [ "$_lib64" ] && export LDFLAGS="$LDFLAGS -L $_lib64"
 }
