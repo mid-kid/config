@@ -16,5 +16,6 @@
 	helper = store
 [alias]
 	diff-img = difftool -x 'compare \"$LOCAL\" \"$REMOTE\" png:- | montage -mode concatenate \"$LOCAL\" png:- \"$REMOTE\" png:- | display -title \"$BASE: Local | Diff | Remote\" png:-'
+	gud = commit
 [merge]
 	tool = vimdiff
