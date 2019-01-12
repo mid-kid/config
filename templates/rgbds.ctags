@@ -1,0 +1,6 @@
+--exclude=@.gitignore
+--languages=asm
+--langmap=asm:.asm.inc
+--regex-asm=/^([a-z0-9_]+):+.*/\1/l,labels/i
+--regex-asm=/^([a-z0-9_]+)\s+=.*/\1/c,constants/i
+--regex-asm=/^([a-z0-9_]+)\s+[Ee][Qq][Uu][Ss]?.*/\1/c,constants/i

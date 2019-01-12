@@ -100,6 +100,7 @@ let g:ctrlp_prompt_mappings={
   \ 'AcceptSelection("v")': ['<C-x>'],
   \ }
 let g:ctrlp_working_path_mode='a'
+let g:ctrlp_lazy_update=1
 
 " NERDTree
 autocmd StdinReadPre * let s:std_in=1
