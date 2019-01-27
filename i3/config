@@ -158,4 +158,4 @@ bar {
 }
 
 # Autostart applications
-exec --no-startup-id sh ~/.autostart
+exec --no-startup-id sh ~/.config/i3/autostart
