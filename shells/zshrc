@@ -27,13 +27,30 @@ bindkey -e
 # End of lines configured by zsh-newuser-install
 
 # Keybinds
-bindkey ';5D' emacs-backward-word  # CTRL+left
-bindkey ';5C' emacs-forward-word  # CTRL+right
-bindkey '\e[3~' delete-char  # Delete
-bindkey '\e[5~' insert-last-word  # PgUp
-bindkey '\e[6~' end-of-history  # PgDown
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter07/inputrc.html
+# https://git.archlinux.org/svntogit/packages.git/tree/trunk/inputrc?h=packages/readline
+bindkey '\eOc' emacs-forward-word  # CTRL+right
+bindkey '\eOd' emacs-backward-word  # CTRL+left
+bindkey '\e[5C' emacs-forward-word  # CTRL+right
+bindkey '\e[5D' emacs-backward-word  # CTRL+left
+bindkey '\e\e[C' emacs-forward-word  # CTRL+right
+bindkey '\e\e[D' emacs-backward-word  # CTRL+left
+bindkey '\e[1;5C' emacs-forward-word  # CTRL+right
+bindkey '\e[1;5D' emacs-backward-word  # CTRL+left
+
+bindkey '\eOH' beginning-of-line  # Home
+bindkey '\eOF' end-of-line  # End
+bindkey '\e[H' beginning-of-line  # Home
+bindkey '\e[F' end-of-line  # End
+bindkey '\e[1~' beginning-of-line  # Home
+bindkey '\e[4~' end-of-line  # End
 bindkey '\e[7~' beginning-of-line  # Home
 bindkey '\e[8~' end-of-line  # End
+
+bindkey '\e[5~' history-search-backward  # PgUp
+bindkey '\e[6~' history-search-forward  # PgDown
+bindkey '\e[3~' delete-char  # Delete
+bindkey '\e[2~' quoted-insert
 
 # Prompt
 if command -v git > /dev/null; then

@@ -1,0 +1,4 @@
+#!/bin/sh
+for file in "$@"; do
+    mv -v "$file" "$(sha1sum "$file" | cut -d " " -f1).$(echo "$file" | rev | cut -d. -f1 | rev)"
+done

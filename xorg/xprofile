@@ -4,9 +4,3 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 export SAL_USE_VCLPLUGIN=gtk
 export TERMINAL=urxvtc
 export FREETYPE_PROPERTIES="truetype:interpreter-version=40"
-
-#export all_proxy="socks5://localhost:8080"
-#export SOCKS_SERVER="localhost:8080"
-#export SOCKS_VERSION=5
-
-#xrandr --setprovideroffloadsink 1 0
