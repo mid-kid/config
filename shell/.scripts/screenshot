@@ -8,7 +8,7 @@ if [ "$?" != 0 ]; then
     exit 1
 fi
 
-input="$(rofi -dmenu -i -p 'Screenshot: ' << EOF
+input="$(rofi -dmenu -i -p 'Screenshot' << EOF
 Save
 Save sha
 Upload
@@ -23,7 +23,7 @@ case "$func" in
     Save)
         if [ "$args" ]; then
             if [ "$args" = 'sha' ]; then
-                sha="$(sha256sum "$file" | cut -d' ' -f1)"
+                sha="$(sha1sum "$file" | cut -d' ' -f1)"
                 path="$save_root/$sha.png"
             elif [ -d "$save_root/$args" ]; then
                 path="$save_root/$args/Screenshot-$(date +%F-%T).png"

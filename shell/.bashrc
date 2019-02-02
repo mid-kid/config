@@ -1,3 +1,7 @@
+if [[ $- != *i* ]] ; then
+    return
+fi
+
 color_reset=$(tput sgr0)
 color_green=$(tput setaf 2)
 color_yellow=$(tput setaf 3)

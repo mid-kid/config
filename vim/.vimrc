@@ -45,8 +45,8 @@ set backupdir=~/.vim/.backup//
 set directory=~/.vim/.swp//
 
 " Color scheme
-let g:seoul256_background = 233
-colorscheme seoul256
+"let g:seoul256_background = 233
+"colorscheme seoul256
 
 " Syntax highlighting
 filetype plugin indent on
@@ -65,8 +65,8 @@ set number
 set hlsearch
 set incsearch
 set statusline=%f
-set colorcolumn=80
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/  " ExtraWhitespace is defined in the theme
+"set colorcolumn=80
+"autocmd BufWinEnter * match ExtraWhitespace /\s\+$/  " ExtraWhitespace is defined in the theme
 
 " Behavior
 set omnifunc=syntaxcomplete#Complete

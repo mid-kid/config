@@ -1,0 +1,45 @@
+#!/bin/sh
+
+lock() {
+    if command -v xflock4 2> /dev/null; then
+        xflock4
+    else
+        if command -v xautolock 2> /dev/null; then
+            xautolock -locknow; sleep 1; xset s activate;
+        else
+            sleep 1; xset s activate
+        fi
+    fi
+}
+
+call_ck() {
+    dbus-send --system --print-reply --dest=org.freedesktop.ConsoleKit /org/freedesktop/ConsoleKit/Manager "org.freedesktop.ConsoleKit.Manager.$@" > /dev/null 2> /dev/null
+}
+
+call() {
+    dbus-send --print-reply --dest=org.freedesktop.PowerManagement /org/freedesktop/PowerManagement "org.freedesktop.PowerManagement.$@" > /dev/null 2> /dev/null || {
+        echo "PowerManager failed"
+        case "$1" in
+            Suspend) lock; call_ck Suspend boolean:true ;;
+            Hibernate) lock; call_ck Hibernate boolean:true ;;
+            Reboot) call_ck Restart ;;
+            Shutdown) call_ck Stop ;;
+        esac
+    }
+}
+
+input="$(rofi -dmenu -i -p 'Power' -no-custom << EOF
+Lock
+Logout
+Suspend
+Hibernate
+Reboot
+Shutdown
+EOF
+)"
+
+case "$input" in
+    Logout) i3-msg exit ;;
+    Lock) lock ;;
+    Suspend|Hibernate|Reboot|Shutdown) call "$input" ;;
+esac
