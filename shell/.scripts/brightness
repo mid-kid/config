@@ -1,0 +1,4 @@
+#!/bin/sh
+# Regulate the brightness below/above levels usually not accessible using the hardware buttons.
+# Only for specific hardware.
+sudo su -c "echo $1 > /sys/class/backlight/*/brightness"
