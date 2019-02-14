@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=
+Exec=~/.config/firejail/setup.sh
+Icon=
+Categories=
+# https://specifications.freedesktop.org/menu-spec/menu-spec-1.0.html#category-registry

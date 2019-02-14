@@ -45,8 +45,8 @@ set backupdir=~/.vim/.backup//
 set directory=~/.vim/.swp//
 
 " Color scheme
-"let g:seoul256_background = 233
-"colorscheme seoul256
+let g:seoul256_background = 233
+colorscheme seoul256
 
 " Syntax highlighting
 filetype plugin indent on
@@ -65,8 +65,8 @@ set number
 set hlsearch
 set incsearch
 set statusline=%f
-"set colorcolumn=80
-"autocmd BufWinEnter * match ExtraWhitespace /\s\+$/  " ExtraWhitespace is defined in the theme
+set colorcolumn=80
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/  " ExtraWhitespace is defined in the theme
 
 " Behavior
 set omnifunc=syntaxcomplete#Complete
@@ -122,7 +122,7 @@ let g:localvimrc_persistent=1
 let g:localvimrc_persistence_file=$HOME."/.vim/.localvimrc_persistent"
 
 " Gutentags
-set statusline+=%{gutentags#statusline()}
+set statusline+=\ %{gutentags#statusline()}
 set tags=.tags
 let g:gutentags_ctags_tagfile='.tags'
 let g:gutentags_project_root=['.tags']

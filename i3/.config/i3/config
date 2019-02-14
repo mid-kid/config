@@ -1,5 +1,5 @@
 # Look
-font pango:DejaVu Sans Mono 10
+font pango:monospace 10
 default_border pixel 3
 default_floating_border normal
 
@@ -37,7 +37,9 @@ bindsym $mod+d exec rofi -show combi
 bindsym Print exec ~/.scripts/screenshot -s
 bindsym Shift+Print exec ~/.scripts/screenshot
 bindsym $mod+Ctrl+o exec ~/.scripts/extscreens
+bindsym XF86Display exec ~/.scripts/extscreens
 bindsym $mod+Ctrl+p exec ~/.scripts/power
+bindsym XF86PowerOff exec ~/.scripts/power
 bindsym $mod+Shift+o exec compton-trans -c +10
 bindsym $mod+o exec compton-trans -c -- -10
 

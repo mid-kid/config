@@ -1,6 +1,6 @@
 # RC file for all the shells
 export EDITOR='vim'
-export VISUAL=$EDITOR
+export VISUAL="$EDITOR"
 export PAGER='less'
 alias vi='vim'
 alias ls='ls --color=auto -F --quoting-style=shell-escape'

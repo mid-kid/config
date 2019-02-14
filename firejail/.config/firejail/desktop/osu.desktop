@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=osu!
+Comment=Freeware rhythm video game
+Exec=~/.config/firejail/setup.sh osu %F
+Icon=osu
+Categories=Game;

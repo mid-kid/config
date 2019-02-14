@@ -1,9 +1,7 @@
-noblacklist ~/.wineprefix/ida
-whitelist ~/.wineprefix/ida
+whitelist ~/.firejail/ida
 
-noblacklist ~/Stuff/Workspace/IDA
+mkdir ~/Stuff/Workspace/IDA
 whitelist ~/Stuff/Workspace/IDA
 
-net none
 ignore seccomp
-include ~/.config/firejail/default.profile
+include ~/.config/firejail/inc/default.inc

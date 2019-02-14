@@ -3,8 +3,9 @@ URxvt.background: [90]#222220
 URxvt.color4: #4444FF
 URxvt.color12: #4444FF
 
+*.dpi: 120
 URxvt.depth: 32
-URxvt.font: xft:DejaVu Sans Mono:size=10
+URxvt.font: xft:monospace:size=10
 URxvt.letterSpace: -1
 URxvt.internalBorder: 6
 URxvt.cursorColor: #FAF4FB
@@ -16,10 +17,5 @@ URxvt.scrollWithBuffer: true
 URxvt.scrollTtyKeypress: true
 URxvt.secondaryScroll: false
 
-*.dpi: 120
-Xft.autohint: 0
-Xft.lcdfilter: lcddefault
-Xft.hintstyle: hintfull
-Xft.hinting: 1
-Xft.antialias: 1
-Xft.rgba: rgb
+URxvt.perl-ext-common: new-window
+URxvt.keysym.C-M-n: perl:new-window

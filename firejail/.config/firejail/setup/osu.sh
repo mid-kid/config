@@ -1,6 +1,10 @@
 #!/bin/sh
 set -e
 
+# This was mostly taken from the osu AUR package
+
+prefix="${prefix:-$HOME/.local/opt/osu}"
+
 export WINEARCH=win32
 export WINEPREFIX="$prefix"
 
@@ -20,17 +24,24 @@ REGEDIT4
 EOF
     chmod +x winetricks
 
+    WINEDLLOVERRIDES='mscoree=' wine hh
     "$tmp/winetricks" dotnet45
     "$tmp/winetricks" ddr=opengl fontsmooth=rgb sound=alsa strictdrawordering=enabled
     regedit "$tmp/directsound-latency.reg"
-    wine "$tmp/osu!install.exe"
+    vblank_mode=0 __GL_SYNC_TO_VBLANK=0 exec wine "$tmp/osu!install.exe"
 }
 
 run() {
-    vblank_mode=0 __GL_SYNC_TO_VBLANK=0 exec wine "$WINEPREFIX/drive_c/users/$USER/Local Settings/Application Data/osu!/osu!.exe" $@
+    vblank_mode=0 __GL_SYNC_TO_VBLANK=0 exec wine "$WINEPREFIX/drive_c/users/$USER/Local Settings/Application Data/osu!/osu!.exe" "$@"
 }
 
 case "$1" in
-    setup) setup ;;
-    run) run ;;
+    setup) shift; setup ;;
+    run) shift; run "$@" ;;
 esac
+
+if [ ! -d "$prefix/drive_c" ]; then
+    setup
+else
+    run "$@"
+fi

@@ -25,6 +25,7 @@ caps.drop all
 ipc-namespace
 netfilter
 #no3d
+nodbus
 nodvd
 #nogroups
 nonewprivs
@@ -34,16 +35,13 @@ notv
 novideo
 protocol unix,inet,inet6
 seccomp
+#shell none
 net none
+#memory-deny-write-execute
 
 disable-mnt
 private-tmp
 private-dev
-
-memory-deny-write-execute
-noexec ${HOME}
-noexec /tmp
-noexec /var/tmp
 
 read-only /tmp/.X11-unix
 blacklist /boot
@@ -54,12 +52,14 @@ blacklist /usr/portage
 blacklist /usr/local
 whitelist /var/tmp
 
-ignore blacklist /usr/lib/llvm*
-blacklist /usr/lib/llvm*/*/include
-blacklist /usr/lib/llvm*/*/bin
-blacklist /usr/lib/llvm*/*/libexec
-blacklist /usr/lib/llvm*/*/share
+noblacklist /usr/lib/llvm*
+#blacklist /usr/lib/llvm*/*/include
+#blacklist /usr/lib/llvm*/*/bin
+#blacklist /usr/lib/llvm*/*/libexec
+#blacklist /usr/lib/llvm*/*/share
 include /etc/firejail/disable-common.inc
 include /etc/firejail/disable-devel.inc
+include /etc/firejail/disable-interpreters.inc
 include /etc/firejail/disable-passwdmgr.inc
 include /etc/firejail/disable-programs.inc
+include /etc/firejail/disable-xdg.inc

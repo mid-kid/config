@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Celeste
+Exec=~/.config/firejail/setup.sh celeste
+Icon=celeste
+Categories=Game;

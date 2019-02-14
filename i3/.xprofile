@@ -4,4 +4,3 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 export QT_SCREEN_SCALE_FACTORS=1.25
 export SAL_USE_VCLPLUGIN=gtk
 export TERMINAL=urxvtc
-export FREETYPE_PROPERTIES="truetype:interpreter-version=40"

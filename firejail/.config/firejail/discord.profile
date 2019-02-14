@@ -1,9 +1,10 @@
-noblacklist ~/.local/opt/Discord
-whitelist ~/.local/opt/Discord
+whitelist ~/.firejail/discord
 
 mkdir ~/.config/discord
 noblacklist ~/.config/discord
 whitelist ~/.config/discord
 
+ignore net none
+ignore nodbus
 protocol unix,inet,inet6,netlink
-include ~/.config/firejail/default.profile
+include ~/.config/firejail/inc/default.inc

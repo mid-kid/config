@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Discord
+Comment=All-in-one voice and text chat for gamers that's free, secure, and works on both your desktop and phone.
+GenericName=Instant Messanger
+Exec=~/.config/firejail/setup.sh discord --disable-smooth-scrolling
+Icon=discord
+Categories=Network;InstantMessaging;

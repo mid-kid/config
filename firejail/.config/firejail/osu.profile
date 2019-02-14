@@ -1,5 +1,5 @@
 whitelist ~/.firejail/osu
 
 ignore net none
-include ~/.config/firejail/inc/wine.inc
+ignore seccomp
 include ~/.config/firejail/inc/default.inc
