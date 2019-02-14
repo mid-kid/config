@@ -3,46 +3,51 @@
 
 ; Usage:
 ; - Select the sprite you want to "extract" using the selection tool and copy it to your clipboard
-; - In the "Edit" menu, go to "Paste As", select "Extract Sprite" (or Backsprite)
+; - In the "Script-Fu" menu, go to "Pokecrystal", select "Extract Sprite" (or Backsprite)
 
 ; Disclaimer: This script doesn't check your sprite's resolution beyond making sure it's a multiple of 8.
+;             It also doesn't work with animations, since it makes sure both sides of the image are exactly as long.
 
 (define (script-fu-make-palette
     image
-    layer
   )
 
-  ; Convert the image to be RGB
-  (if (= TRUE (car (gimp-drawable-is-rgb layer))) () (gimp-image-convert-rgb image))
-
-  ; Convert the image to use a color index
-  (gimp-image-convert-indexed
-    image
-    NO-DITHER
-    MAKE-PALETTE
-    4
-    FALSE
-    TRUE
-    ""
-  )
-
-  ; Reverse the colors
-  (plug-in-colormap-swap RUN-NONINTERACTIVE image layer 0 3)
-  (plug-in-colormap-swap RUN-NONINTERACTIVE image layer 1 2)
-
-  ; Set the first and last colors to pure black and white, respectively
   (let* (
-      (colormap (gimp-image-get-colormap image))
-      (colormap_len (car colormap))
-      (colormap_arr (cadr colormap))
+      (layer (car (gimp-image-get-active-layer image)))
     )
-    (aset colormap_arr 0 255)
-    (aset colormap_arr 1 255)
-    (aset colormap_arr 2 255)
-    (aset colormap_arr 9 0)
-    (aset colormap_arr 10 0)
-    (aset colormap_arr 11 0)
-    (gimp-image-set-colormap image colormap_len colormap_arr)
+
+    ; Convert the image to be RGB
+    (if (= TRUE (car (gimp-drawable-is-rgb layer))) () (gimp-image-convert-rgb image))
+
+    ; Convert the image to use a color index
+    (gimp-image-convert-indexed
+      image
+      NO-DITHER
+      MAKE-PALETTE
+      4
+      FALSE
+      TRUE
+      ""
+    )
+
+    ; Reverse the colors
+    (plug-in-colormap-swap RUN-NONINTERACTIVE image layer 0 3)
+    (plug-in-colormap-swap RUN-NONINTERACTIVE image layer 1 2)
+
+    ; Set the first and last colors to pure black and white, respectively
+    (let* (
+        (colormap (gimp-image-get-colormap image))
+        (colormap_len (car colormap))
+        (colormap_arr (cadr colormap))
+      )
+      (aset colormap_arr 0 255)
+      (aset colormap_arr 1 255)
+      (aset colormap_arr 2 255)
+      (aset colormap_arr 9 0)
+      (aset colormap_arr 10 0)
+      (aset colormap_arr 11 0)
+      (gimp-image-set-colormap image colormap_len colormap_arr)
+    )
   )
 )
 
@@ -52,8 +57,7 @@
     center
   )
 
-  (let*
-    (
+  (let* (
       (layer (car (gimp-image-get-active-layer image)))
       (width 0)
       (height 0)
@@ -138,7 +142,7 @@
     (gimp-layer-flatten layer)
 
     ; Now, make the palette in a correct format
-    (script-fu-make-palette image layer)
+    (script-fu-make-palette image)
   )
 )
 
@@ -261,10 +265,59 @@
   "script-fu-extract-backsprite"
   "Extract Backprite"
   "Extracts a backsprite from a selection"
-  "pfero <ohpee@loves.dicksinhisan.us>"
+  "someone <someone@example.com>"
   "WTFPL"
   "Never ever"
   ""
 )
-(script-fu-menu-register "script-fu-extract-sprite" "<Image>/Edit/Paste as")
-(script-fu-menu-register "script-fu-extract-backsprite" "<Image>/Edit/Paste as")
+(script-fu-register
+  "script-fu-make-palette"
+  "Make Palette"
+  "Convert image into a proper pokemon paletted image"
+  "someone <someone@example.com>"
+  "WTFPL"
+  "Never ever"
+  ""
+  SF-IMAGE "Image" 0
+)
+(script-fu-menu-register "script-fu-extract-sprite" "<Image>/Script-Fu/Pokecrystal")
+(script-fu-menu-register "script-fu-extract-backsprite" "<Image>/Script-Fu/Pokecrystal")
+(script-fu-menu-register "script-fu-make-palette" "<Image>/Script-Fu/Pokecrystal")
+
+(define (script-fu-set-8-grid image) (gimp-image-grid-set-spacing image 8.0 8.0))
+(define (script-fu-set-16-grid image) (gimp-image-grid-set-spacing image 16.0 16.0))
+(define (script-fu-set-32-grid image) (gimp-image-grid-set-spacing image 32.0 32.0))
+
+(script-fu-register
+  "script-fu-set-8-grid"
+  "08x08"
+  "Enables a 8x8 pixel grid"
+  "someone <someone@example.com>"
+  "WTFPL"
+  "Never ever"
+  ""
+  SF-IMAGE "Image" 0
+)
+(script-fu-register
+  "script-fu-set-16-grid"
+  "16x16"
+  "Enables a 16x16 pixel grid"
+  "someone <someone@example.com>"
+  "WTFPL"
+  "Never ever"
+  ""
+  SF-IMAGE "Image" 0
+)
+(script-fu-register
+  "script-fu-set-32-grid"
+  "32x32"
+  "Enables a 32x32 pixel grid"
+  "someone <someone@example.com>"
+  "WTFPL"
+  "Never ever"
+  ""
+  SF-IMAGE "Image" 0
+)
+(script-fu-menu-register "script-fu-set-8-grid" "<Image>/Script-Fu/Grid")
+(script-fu-menu-register "script-fu-set-16-grid" "<Image>/Script-Fu/Grid")
+(script-fu-menu-register "script-fu-set-32-grid" "<Image>/Script-Fu/Grid")
