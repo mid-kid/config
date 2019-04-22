@@ -1,0 +1,22 @@
+# Oneplus 2
+## System
+SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="4ee7", MODE="0660", GROUP="plugdev"
+## Fastboot
+SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="d00d", MODE="0660", GROUP="plugdev"
+## ADB
+SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="d001", MODE="0660", GROUP="plugdev"
+
+# Adafruit Trinket
+SUBSYSTEM=="usb", ATTR{idVendor}=="1781", ATTR{idProduct}=="0c9f", MODE="0660", GROUP="plugdev"
+
+# Arduino Yun
+SUBSYSTEM=="usb", ATTR{idVendor}=="2341", ATTR{idProduct}=="8041", MODE="0660", GROUP="plugdev"
+
+# Arduino Uno
+SUBSYSTEM=="usb", ATTR{idVendor}=="2341", ATTR{idProduct}=="0043", MODE="0660", GROUP="plugdev"
+
+# TI-84+ CE-T
+SUBSYSTEM=="usb", ATTR{idVendor}=="0451", ATTR{idProduct}=="e008", MODE="0660", GROUP="plugdev"
+
+# PICkit2
+SUBSYSTEM=="usb", ATTR{idVendor}=="04d8", ATTR{idProduct}=="0033", MODE="0660", GROUP="plugdev"
