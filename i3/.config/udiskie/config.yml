@@ -1,0 +1,4 @@
+program_options:
+  udisks_version: 2
+  tray: auto
+  automount: false
