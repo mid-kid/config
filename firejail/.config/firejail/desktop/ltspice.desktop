@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=LTspice XVII
+Exec=~/.config/firejail/setup.sh ltspice
+Icon=ltspice
+Categories=Development;Electronics;

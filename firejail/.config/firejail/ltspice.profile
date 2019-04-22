@@ -1,5 +1,6 @@
-noblacklist ~/.wineprefix/ltspice
-whitelist ~/.wineprefix/ltspice
+whitelist ~/.firejail/ltspice
 
-ignore seccomp
-include ~/.config/firejail/default.profile
+whitelist ~/Stuff/Workspace/LTspice
+
+ignore net none
+include ~/.config/firejail/inc/wine.inc

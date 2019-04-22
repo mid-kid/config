@@ -17,4 +17,5 @@ fi
 
 mkdir -p "$prefix"
 cp "$setup/$prog.sh" "$tmp"
+
 firejail --whitelist="$tmp" --profile="~/.config/firejail/$prog.profile" --join-or-start="$prog" sh "$tmp/$prog.sh" "$@"

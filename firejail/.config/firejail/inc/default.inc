@@ -22,9 +22,9 @@ read-only ~/.local/share/applications/defaults.list
 ignore read-only ${HOME}/.local/share/applications
 
 caps.drop all
-ipc-namespace
+#ipc-namespace
 netfilter
-#no3d
+no3d
 nodbus
 nodvd
 #nogroups
@@ -50,6 +50,7 @@ blacklist /usr/src
 blacklist /usr/tmp
 blacklist /usr/portage
 blacklist /usr/local
+blacklist /run/user
 whitelist /var/tmp
 
 noblacklist /usr/lib/llvm*

@@ -19,6 +19,7 @@ setup() {
 
     cd "$tmp"
     mv "$prefix/setup.exe" .
+    winecfg
     exec wine setup.exe
 }
 
@@ -35,5 +36,5 @@ esac
 if [ ! -d "$prefix/drive_c" ]; then
     setup
 else
-    run
+    run "$@"
 fi

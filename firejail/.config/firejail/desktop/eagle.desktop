@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Autodesk EAGLE
+Exec=~/.config/firejail/setup.sh eagle %U
+Icon=eagle
+Categories=Development;

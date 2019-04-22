@@ -1,4 +1,12 @@
+whitelist ~/.firejail/telegram
+
+mkdir ~/.local/share/TelegramDesktop
 noblacklist ~/.local/share/TelegramDesktop
 whitelist ~/.local/share/TelegramDesktop
 
-include ~/.config/firejail/default.profile
+# Telegram takes very long to generate a cache for this with noto-cjk installed, so it's best to keep it around...
+mkdir ~/.cache/fontconfig_11
+whitelist ~/.cache/fontconfig_11
+
+ignore net none
+include ~/.config/firejail/inc/default.inc

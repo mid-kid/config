@@ -8,8 +8,8 @@ setup() {
     trap "rm -rf '$tmp'" EXIT
 
     cd "$tmp"
-    wget 'https://dl.discordapp.net/apps/linux/0.0.8/discord-0.0.8.tar.gz'
-    tar xf 'discord-0.0.8.tar.gz'
+    wget 'https://dl.discordapp.net/apps/linux/0.0.9/discord-0.0.9.tar.gz'
+    tar xf 'discord-0.0.9.tar.gz'
     mkdir -p "$prefix"
     mv Discord/* "$prefix"
     chmod +x "$prefix/Discord"
@@ -17,7 +17,11 @@ setup() {
 
 run() {
     cd "$prefix"
-    ./Discord "$@"
+    if command -v apulse 2> /dev/null; then
+        exec apulse ./Discord "$@"
+    else
+        exec ./Discord "$@"
+    fi
 }
 
 case "$1" in
