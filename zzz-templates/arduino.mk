@@ -1,4 +1,4 @@
-name := name
+name := $(notdir $(PWD))
 
 dir_source := source
 dir_build := build
@@ -12,7 +12,7 @@ OBJCOPY := avr-objcopy
 OBJDUMP := avr-objdump
 AVRDUDE := avrdude
 
-OPTIM := -Os -g -fdata-sections -ffunction-sections -flto -fuse-linker-plugin -fgraphite-identity
+OPTIM := -Os -g -fdata-sections -ffunction-sections -flto -fuse-linker-plugin -fipa-pta #-fgraphite-identity -floop-nest-optimize
 CFLAGS := $(OPTIM) -Wall -Wextra -std=c11 -DF_CPU=16000000L
 LDFLAGS := $(OPTIM) -Wl,--gc-sections -Wl,--print-gc-sections
 

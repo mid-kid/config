@@ -1,4 +1,4 @@
-name := name
+name := $(notdir $(PWD))
 
 dir_source := source
 dir_build := build
