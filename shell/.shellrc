@@ -2,6 +2,7 @@
 export EDITOR='vim'
 export VISUAL="$EDITOR"
 export PAGER='less'
+export LESS='-RXF'
 alias vi='vim'
 alias ls='ls --color=auto -F --quoting-style=shell-escape'
 alias grep='grep --color=auto'
@@ -40,7 +41,7 @@ prefix() {
     local _include="$(realpath -eq "$_path/include")"
     local _lib="$(realpath -eq "$_path/lib")"
     local _lib64="$(realpath -eq "$_path/lib64")"
-    [ "$_include" ] && export CFLAGS="$CFLAGS -I $_include"
-    [ "$_lib" ] && export LDFLAGS="$LDFLAGS -L $_lib"
-    [ "$_lib64" ] && export LDFLAGS="$LDFLAGS -L $_lib64"
+    [ "$_include" ] && export CFLAGS="$CFLAGS -I$_include"
+    [ "$_lib" ] && export LDFLAGS="$LDFLAGS -L$_lib"
+    [ "$_lib64" ] && export LDFLAGS="$LDFLAGS -L$_lib64"
 }
