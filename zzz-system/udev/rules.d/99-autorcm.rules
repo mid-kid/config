@@ -1,0 +1,1 @@
+ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}="0955", ATTR{idProduct}="7321", RUN+="/root/fusee-launcher/env/bin/python3 /root/fusee-launcher/fusee-launcher.py /root/fusee-launcher/hekate.bin"
