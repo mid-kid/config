@@ -99,7 +99,7 @@ $chroot_mounts"
     # Mount the filesystems we need
     chroot_mount chroot "$chroot/proc" -t proc -o nosuid,noexec,nodev
     chroot_mount chroot "$chroot/sys" -t sysfs -o nosuid,noexec,nodev,ro
-    chroot_mount chroot "$chroot/dev" -t devtmpfs -o nosuid,ro
+    chroot_mount /dev   "$chroot/dev" --bind -o nosuid,ro,bind
     chroot_mount chroot "$chroot/dev/pts" -t devpts -o nosuid,noexec
     chroot_mount chroot "$chroot/dev/shm" -t tmpfs -o nosuid,nodev
     chroot_mount chroot "$chroot/run" -t tmpfs -o nosuid,nodev
@@ -128,9 +128,9 @@ fi
 if [ "$only_mount" = 'false' -a "$only_umount" = 'false' ]; then
     # Chroot into the directory
     if [ "$script" ]; then
-        cat "$script" | unshare -impuf --mount-proc="$chroot/proc" env -i TERM=linux chroot "$chroot" su -l "$@"
+        cat "$script" | unshare -impuf --mount-proc="$chroot/proc" env -i TERM=linux HOME=/root chroot "$chroot" sh -l "$@"
     else
-        unshare -impuf --mount-proc="$chroot/proc" env -i TERM=linux chroot "$chroot" su -l "$@"
+        unshare -impuf --mount-proc="$chroot/proc" env -i TERM=linux HOME=/root chroot "$chroot" sh -l "$@"
     fi
     # We use env -i in combination with su -l to reset the current environment and pick up the chroot's environment.
     # This has the beneficial side-effect of properly setting $HOME and $SHELL as well.
