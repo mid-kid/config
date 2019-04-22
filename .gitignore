@@ -1,8 +1,1 @@
-openbox/setlayout
-qutebrowser/qsettings/QtProject.conf
-qutebrowser/quickmarks
-qutebrowser/bookmarks
-scripts/hotspot
-oomox/recent_palette.json
-git/credentials
-zim/notebooks.list
+zim/.config/zim/notebooks.list
