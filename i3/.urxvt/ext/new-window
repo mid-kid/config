@@ -20,7 +20,7 @@ sub new_window {
 }
 
 sub on_child_start {
-    my ($self,$pid) = @_;
+    my ($self, $pid) = @_;
 
     $self->{child_pid} = $pid;  # keep for later determining our shells
                                 # CWD for relative path names
