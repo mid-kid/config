@@ -27,7 +27,7 @@ clean:
 
 $(name).gb: $(objects)
 
-%.gb: %.link
+%.gb: layout.link
 	$(RGBLINK) $(RGBLINKFLAGS) -l $< -n $(@:.gb=.sym) -m $(@:.gb=.map) -o $@ $(filter-out $<, $^)
 	$(RGBFIX) $(RGBFIXFLAGS) -v $@
 

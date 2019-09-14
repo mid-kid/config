@@ -5,6 +5,7 @@ rofi.bw: 2
 rofi.sidebar-mode: true
 rofi.kb-mode-next: Super+l,Super+Tab
 rofi.kb-mode-previous: Super+h,Super+Shift+Tab
+rofi.show-icons: true
 
 !rofi.color-enabled: true
 !rofi.color-window: argb:ee222220, #9D6A47, #9D6A47

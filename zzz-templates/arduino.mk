@@ -13,7 +13,7 @@ OBJDUMP := avr-objdump
 AVRDUDE := avrdude
 
 OPTIM := -Os -g -fdata-sections -ffunction-sections -flto -fuse-linker-plugin -fipa-pta #-fgraphite-identity -floop-nest-optimize
-CFLAGS := $(OPTIM) -Wall -Wextra -std=c11 -DF_CPU=16000000L
+CFLAGS := $(OPTIM) -Wall -Wextra -std=c17 -DF_CPU=16000000L
 LDFLAGS := $(OPTIM) -Wl,--gc-sections -Wl,--print-gc-sections
 
 rwildcard = $(foreach d, $(wildcard $1*), $(filter $(subst *, %, $2), $d) $(call rwildcard, $d/, $2))
@@ -29,12 +29,12 @@ clean:
 	rm -rf $(dir_build) $(name).hex $(name).lst
 
 .PHONY: upload
-upload: $(name).hex
+upload: $(name).hex $(name).lst
 	$(AVRDUDE) -v $(TARGET_AVRDUDE) -P$(SERIAL) -Uflash:w:$<:i
 
 .PHONY: screen
 screen: upload
-	screen $(SERIAL) 9600
+	minicom -D $(SERIAL) -b 9600
 
 %.hex: $(dir_build)/%.elf
 	$(OBJCOPY) -O ihex -R .eeprom $< $@

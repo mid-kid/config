@@ -33,8 +33,10 @@ floating_modifier $mod
 
 # External programs
 bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Shift+Return exec i3-sensible-terminal -name floating
 bindsym $mod+d exec rofi -show combi
-bindsym Print exec ~/.scripts/screenshot -s
+bindsym $mod+i exec rofi-pass
+bindsym Print exec --no-startup-id ~/.scripts/screenshot -s
 bindsym Shift+Print exec ~/.scripts/screenshot
 bindsym $mod+Ctrl+o exec ~/.scripts/extscreens
 bindsym XF86Display exec ~/.scripts/extscreens
@@ -44,12 +46,14 @@ bindsym $mod+Shift+o exec compton-trans -c +10
 bindsym $mod+o exec compton-trans -c -- -10
 
 # Application discrimination
+for_window [class="URxvt" instance="floating"] move scratchpad scratchpad show
 for_window [class="Qemu-system-.+"] floating enable border normal
 for_window [class="VirtualBox"] floating enable border normal
 for_window [class="Gambatte_.+"] floating enable border normal
 for_window [class="sameboy"] floating enable border normal
 for_window [class="Gbe_plus_qt"] floating enable border normal
 for_window [class="mGBA"] floating enable border normal
+for_window [class="Desmume"] floating enable border normal
 for_window [class="Display"] floating enable border normal
 for_window [class="Gpsim"] floating enable border normal
 for_window [class="Jstest-gtk"] floating enable border normal

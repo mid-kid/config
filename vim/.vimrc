@@ -59,6 +59,7 @@ set expandtab
 set smarttab
 set autoindent
 set listchars=tab:>-,space:·
+set cinoptions+=:0  " Don't indent case in switch
 
 " Display
 set number
@@ -84,7 +85,7 @@ map <F1> :make<CR>
 map <F8> :!curl -T % chunk.io 2> /dev/null<CR>
 map <F12> :syntax sync fromstart<CR>
 map <C-n> :noh<CR>
-map <C-w> :set invlist<CR>
+map <C-a> :set invlist<CR>
 map <C-o> :NERDTreeToggle<CR>
 map <leader>. :CtrlPTag<CR>
 
@@ -131,3 +132,15 @@ let g:ctrlp_root_markers=['.tags']
 
 " Taghighlight
 let g:TagHighlightSettings={'TagFileName': '.tags'}
+
+" vim -b : edit binary using xxd-format!
+augroup Binary
+  au!
+  au BufReadPre *.bin setlocal binary
+  au BufReadPost * if &binary | %!xxd
+  au BufReadPost * set ft=xxd | endif
+  au BufWritePre * if &binary | %!xxd -r
+  au BufWritePre * endif
+  au BufWritePost * if &binary | %!xxd
+  au BufWritePost * set nomod | endif
+augroup END
