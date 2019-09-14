@@ -1,7 +1,7 @@
 #!/bin/sh
 
-screen_main='LVDS1'
-screen_ext='HDMI1 VGA1'
+screen_main='eDP-1' # 'LVDS1'
+screen_ext='HDMI-1 DP-1 DP-2' # 'HDMI1 VGA1'
 
 input="$(rofi -dmenu -i -p 'Toggle external screen' -no-custom << EOF
 Off

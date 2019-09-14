@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Minecraft
+Comment=Block Game
+Exec=~/.config/firejail/setup.sh minecraft
+Icon=minecraft
+Categories=Game;Application;

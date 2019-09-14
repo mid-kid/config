@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Minecraft (FTB)
+Comment=Block Game Mod Packs
+Exec=~/.config/firejail/setup.sh minecraft ftb
+Icon=minecraft
+Categories=Game;Application;

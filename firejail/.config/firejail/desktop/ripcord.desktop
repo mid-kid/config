@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Ripcord
+Comment=All-in-one voice and text chat for gamers that's free, secure, and works on both your desktop and phone.
+GenericName=Instant Messanger
+Exec=~/.config/firejail/setup.sh ripcord
+Icon=discord
+Categories=Network;InstantMessaging;

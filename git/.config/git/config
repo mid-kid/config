@@ -4,7 +4,6 @@
 [push]
 	default = simple
 [core]
-	eol = lf
 	autocrlf = input
 [color]
 	ui = auto
@@ -13,9 +12,13 @@
 	renameLimit = 3000
 	algorithm = minimal
 [credential]
-	helper = store
+	helper = cache
 [alias]
 	diff-img = difftool -x 'compare \"$LOCAL\" \"$REMOTE\" png:- | montage -mode concatenate \"$LOCAL\" png:- \"$REMOTE\" png:- | display -title \"$BASE: Local | Diff | Remote\" png:-'
 	gud = commit
+	tree-log = log --all --decorate --oneline --graph
 [merge]
 	tool = vimdiff
+[diff "hex"]
+	textconv = xxd
+	binary = true

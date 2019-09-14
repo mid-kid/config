@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-prefix="${prefix:-$HOME/.local/opt/discord}"
+prefix="${prefix:-$HOME/.local/opt/eagle}"
 
 setup() {
     tmp=$(mktemp -d)
@@ -20,8 +20,8 @@ run() {
 }
 
 case "$1" in
-    setup) shift; setup ;;
-    run) shift; run ;;
+    setup) shift; setup; exit ;;
+    run) shift; run "$@"; exit ;;
 esac
 
 if [ ! -f "$prefix/eagle" ]; then

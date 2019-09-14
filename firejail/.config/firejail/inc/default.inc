@@ -53,11 +53,6 @@ blacklist /usr/local
 blacklist /run/user
 whitelist /var/tmp
 
-noblacklist /usr/lib/llvm*
-#blacklist /usr/lib/llvm*/*/include
-#blacklist /usr/lib/llvm*/*/bin
-#blacklist /usr/lib/llvm*/*/libexec
-#blacklist /usr/lib/llvm*/*/share
 include /etc/firejail/disable-common.inc
 include /etc/firejail/disable-devel.inc
 include /etc/firejail/disable-interpreters.inc

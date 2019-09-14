@@ -16,6 +16,12 @@ if [ "$1" = 'shell' ]; then
 fi
 
 mkdir -p "$prefix"
+if [ "$prog" = ripcord ]; then
+    if [ -z "$1" ] ; then
+        firejail --profile="~/.config/firejail/$prog.profile" --join-or-start="$prog" --appimage "$prefix/Ripcord.AppImage" "$@"
+    fi
+fi
+
 cp "$setup/$prog.sh" "$tmp"
 
 firejail --whitelist="$tmp" --profile="~/.config/firejail/$prog.profile" --join-or-start="$prog" sh "$tmp/$prog.sh" "$@"

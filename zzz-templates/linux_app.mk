@@ -3,11 +3,12 @@ name := $(notdir $(PWD))
 dir_source := source
 dir_build := build
 
-CFLAGS := -O0 -g -Wall -Wextra -std=c11 -DPROGRAM_NAME="\"$(name)\"" $(CFLAGS)
+CFLAGS := -O0 -g -Wall -Wextra -std=c17 $(CFLAGS)
 
 CFLAGS += #$(shell pkg-config --cflags ...)
-LDLIBS := #$(shell pkg-config --libs ...)
+LDLIBS += #$(shell pkg-config --libs ...)
 
+SANIT := -fsanitize=address -fsanitize=pointer-compare -fsanitize=pointer-subtract -fsanitize=leak -fsanitize=undefined
 OPTIM := -Os -fdata-sections -ffunction-sections -flto -fuse-linker-plugin -fipa-pta -Wl,--gc-sections -Wl,--print-gc-sections #-fgraphite-identity -floop-nest-optimize
 
 rwildcard = $(foreach d, $(wildcard $1*), $(filter $(subst *, %, $2), $d) $(call rwildcard, $d/, $2))
@@ -21,6 +22,11 @@ all: $(name)
 .PHONY: clean
 clean:
 	rm -rf $(dir_build) $(name)
+
+.PHONY: sanit
+sanit: CFLAGS += $(SANIT)
+sanit: LDFLAGS += $(SANIT)
+sanit: $(name)
 
 .PHONY: optim
 optim: CFLAGS += $(OPTIM)

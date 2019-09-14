@@ -29,8 +29,8 @@ run() {
 }
 
 case "$1" in
-    setup) shift; setup ;;
-    run) shift; run ;;
+    setup) shift; setup; exit ;;
+    run) shift; run "$@"; exit ;;
 esac
 
 if [ ! -d "$prefix/drive_c" ]; then

@@ -17,5 +17,6 @@ URxvt.scrollWithBuffer: true
 URxvt.scrollTtyKeypress: true
 URxvt.secondaryScroll: false
 
-URxvt.perl-ext-common: new-window
+URxvt.perl-ext-common: default,keyboard-select,new-window
 URxvt.keysym.C-M-n: perl:new-window
+URxvt.keysym.M-Escape: perl:keyboard-select:activate

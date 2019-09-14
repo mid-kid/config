@@ -1,22 +1,22 @@
 #!/bin/sh
 set -e
 
-prefix="${prefix:-$HOME/.local/opt/telegram}"
+prefix="${prefix:-$HOME/.local/opt/arduino}"
 
 setup() {
     tmp=$(mktemp -d)
     trap "rm -rf '$tmp'" EXIT
 
     cd "$tmp"
-    wget 'https://updates.tdesktop.com/tlinux/tsetup.1.6.7.tar.xz'
-    tar xf 'tsetup.1.6.7.tar.xz'
+    wget 'https://downloads.arduino.cc/arduino-1.8.9-linux64.tar.xz'
+    tar xf 'arduino-1.8.9-linux64.tar.xz'
     mkdir -p "$prefix"
-    mv Telegram/* "$prefix"
+    mv arduino-1.8.9/* "$prefix"
 }
 
 run() {
     cd "$prefix"
-    ./Telegram "$@"
+    ./arduino "$@"
 }
 
 case "$1" in
@@ -24,7 +24,7 @@ case "$1" in
     run) shift; run "$@"; exit ;;
 esac
 
-if [ ! -f "$prefix/Telegram" ]; then
+if [ ! -f "$prefix/arduino" ]; then
     setup
 fi
 run "$@"

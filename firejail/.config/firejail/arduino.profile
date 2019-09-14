@@ -1,16 +1,21 @@
-noblacklist ~/.local/opt/arduino
-whitelist ~/.local/opt/arduino
+whitelist ~/.firejail/arduino
 
 mkdir ~/.arduino15
 noblacklist ~/.arduino15
 whitelist ~/.arduino15
 
 mkdir ~/.jssc
-noblacklist ~/.jssc
 whitelist ~/.jssc
 
-noblacklist ~/Stuff/Workspace/Arduino
 whitelist ~/Stuff/Workspace/Arduino
 
+# Required for esp8266 core...
+noblacklist ${PATH}/python2*
+noblacklist ${PATH}/python3*
+noblacklist /usr/lib/python2*
+noblacklist /usr/lib/python3*
+
 ignore noroot
-include ~/.config/firejail/default.profile
+ignore private-dev
+ignore net none
+include ~/.config/firejail/inc/default.inc
