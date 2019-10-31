@@ -6,5 +6,5 @@ wpa_gui -t &
 volumeicon &
 #xautolock -time "$timer_lock" -locker 'i3lock -n' &
 xfce4-power-manager &
-udiskie &
 redshift-gtk &
+udiskie &

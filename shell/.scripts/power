@@ -2,12 +2,12 @@
 
 lock() {
     if command -v xflock4 2> /dev/null; then
-        xflock4
+        xflock4; sleep 1; xset s activate
     else
         if command -v xautolock 2> /dev/null; then
-            xautolock -locknow; sleep 1; xset s activate;
+            xautolock -locknow; sleep 1; xset s activate
         else
-            sleep 1; xset s activate
+            xset s activate
         fi
     fi
 }
@@ -38,6 +38,7 @@ Shutdown
 EOF
 )"
 
+sleep 0.5
 case "$input" in
     Logout) i3-msg exit ;;
     Lock) lock ;;

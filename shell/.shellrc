@@ -51,3 +51,8 @@ prefix() {
     [ "$_lib" ] && export LDFLAGS="$LDFLAGS -L$_lib"
     [ "$_lib64" ] && export LDFLAGS="$LDFLAGS -L$_lib64"
 }
+
+# Set the default make goal for the current session
+makegoal() {
+    export MAKEFLAGS="$MAKEFLAGS .DEFAULT_GOAL=$1"
+}
