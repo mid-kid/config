@@ -11,4 +11,4 @@ whitelist ~/.ftb
 ignore no3d
 ignore net none
 protocol unix,inet,inet6,netlink
-include ~/.config/firejail/inc/default.inc
+include ~/.config/firejail/inc/java.inc

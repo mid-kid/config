@@ -18,4 +18,6 @@ noblacklist /usr/lib/python3*
 ignore noroot
 ignore private-dev
 ignore net none
+# STM32CubeProgrammer needs netlink
+protocol unix,inet,inet6,netlink
 include ~/.config/firejail/inc/default.inc

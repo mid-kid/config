@@ -15,9 +15,5 @@ whitelist ~/.local/share/betterdiscordctl
 mkdir ~/.config/BetterDiscord
 whitelist ~/.config/BetterDiscord
 
-ignore net none
 ignore nodbus
-ignore no3d
-ignore novideo
-protocol unix,inet,inet6,netlink
-include ~/.config/firejail/inc/default.inc
+include ~/.config/firejail/inc/electron.inc

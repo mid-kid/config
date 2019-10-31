@@ -8,5 +8,6 @@ whitelist ~/.local/share/TelegramDesktop
 mkdir ~/.cache/fontconfig_11
 whitelist ~/.cache/fontconfig_11
 
+ignore nodbus
 ignore net none
 include ~/.config/firejail/inc/default.inc

@@ -1,9 +1,16 @@
+*.dpi: 120
+Xft.antialias: 1
+Xft.hinting: 1
+Xft.hintstyle: hintfull
+Xft.lcdfilter: lcddefault
+Xft.rgba: rgb
+Xft.autohint: 0
+
 URxvt.foreground: #FAF4FB
 URxvt.background: [90]#222220
 URxvt.color4: #4444FF
 URxvt.color12: #4444FF
 
-*.dpi: 120
 URxvt.depth: 32
 URxvt.font: xft:monospace:size=10
 URxvt.letterSpace: -1

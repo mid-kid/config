@@ -12,6 +12,8 @@
 # Parts of the procudure base on the work of Denys Dmytriyenko
 # http://wiki.omap.com/index.php/MMC_Boot_Format
 
+# Before formatting, you might want to run `blkdiscard` on the card
+
 # exit if any command fails
 set -e
 

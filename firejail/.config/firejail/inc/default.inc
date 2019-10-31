@@ -13,13 +13,10 @@ read-only ~/.config/gtk-3.0/settings.ini
 read-only ~/.config/Trolltech.conf
 read-only ~/.config/qt5ct
 
-whitelist ~/.local/share/applications/mimeapps.list
-whitelist ~/.local/share/applications/mimeinfo.cache
-whitelist ~/.local/share/applications/defaults.list
-read-only ~/.local/share/applications/mimeapps.list
-read-only ~/.local/share/applications/mimeinfo.cache
-read-only ~/.local/share/applications/defaults.list
-ignore read-only ${HOME}/.local/share/applications
+whitelist ~/.config/mimeapps.list
+read-only ~/.config/mimeapps.list
+whitelist ~/.local/share/applications/
+read-only ~/.local/share/applications/
 
 caps.drop all
 #ipc-namespace
