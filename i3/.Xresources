@@ -10,12 +10,12 @@ URxvt.foreground: #FAF4FB
 URxvt.background: [90]#222220
 URxvt.color4: #4444FF
 URxvt.color12: #4444FF
+URxvt.cursorColor: #FAF4FB
 
 URxvt.depth: 32
 URxvt.font: xft:monospace:size=10
 URxvt.letterSpace: -1
 URxvt.internalBorder: 6
-URxvt.cursorColor: #FAF4FB
 
 URxvt.scrollstyle: plain
 URxvt.scrollBar_right: true
@@ -25,5 +25,6 @@ URxvt.scrollTtyKeypress: true
 URxvt.secondaryScroll: false
 
 URxvt.perl-ext-common: default,keyboard-select,new-window
-URxvt.keysym.C-M-n: perl:new-window
+URxvt.keysym.M-Return: perl:new-window
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keyboard-select.clipboard: true

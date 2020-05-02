@@ -56,23 +56,26 @@ bindkey '\e[2~' quoted-insert
 if command -v git > /dev/null; then
     prompt_git() {
         if [ -d ".git" ]; then
-            local branch="$(git symbolic-ref HEAD 2> /dev/null | cut -d '/' -f 3)"
-            [ ! "$branch" ] && branch="$(git rev-parse --short HEAD)"
-            printf "$branch"
+            local branch=$(git symbolic-ref HEAD 2> /dev/null | cut -d '/' -f 3)
+            [ ! "$branch" ] && branch=$(git rev-parse --short HEAD)
+            printf '%s' $branch
 
-            local staged_file_status=$(git diff --staged --name-status)
+            local stashed_changes=$(git stash list | wc -l)
+            [ $stashed_changes -gt 0 ] && printf '!%d' $stashed_changes
 
-            local staged_files="$(printf "$staged_file_status" | grep -v "^U" | wc -l)"
-            [ "$staged_files" -gt 0 ] && printf " ●$staged_files"
+            local git_status=$(git status --porcelain)
 
-            local conflicting_files="$(printf "$staged_file_status" | grep "^U" | wc -l)"
-            [ "$conflicting_files" -gt 0 ] && printf " ✖$conflicting_files"
+            local staged_files=$(grep '^[^ ][^?U] ' <<< $git_status | wc -l)
+            [ $staged_files -gt 0 ] && printf ' ●%d' $staged_files
 
-            local changed_files="$(( $(git diff --name-only | uniq | wc -l) - $conflicting_files ))"
-            [ "$changed_files" -gt 0 ] && printf " ✚$changed_files"
+            local conflicting_files=$(grep '^UU ' <<< $git_status | wc -l)
+            [ $conflicting_files -gt 0 ] && printf ' ✖%d' $conflicting_files
 
-            local untracked_files="$(git status --porcelain | grep "^??" | wc -l)"
-            [ "$untracked_files" -gt 0 ] && printf " …$untracked_files"
+            local changed_files=$(grep '^[^?U][^ ] ' <<< $git_status | wc -l)
+            [ $changed_files -gt 0 ] && printf ' ✚%d' $changed_files
+
+            local untracked_files=$(grep '^?? ' <<< $git_status | wc -l)
+            [ $untracked_files -gt 0 ] && printf ' …%d' $untracked_files
         fi
     }
 else

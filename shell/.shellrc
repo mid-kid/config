@@ -19,6 +19,7 @@ alias streamlink='streamlink --player mpv'
 alias sxiv='sxiv -a'
 alias xci='xclip -sel clip -i'
 alias xco='xclip -sel clip -o'
+alias axf='aunpack'
 
 # Set up the directory colors
 eval $(dircolors -b)
