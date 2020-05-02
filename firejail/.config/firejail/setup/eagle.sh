@@ -16,7 +16,7 @@ setup() {
 
 run() {
     cd "$prefix"
-    ./eagle "$@"
+    exec ./eagle "$@"
 }
 
 case "$1" in

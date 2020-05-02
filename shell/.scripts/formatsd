@@ -2,6 +2,8 @@
 # Source: https://unix.stackexchange.com/questions/312395/reformat-sd-card
 # Old source: http://3gfp.com/wp/2014/07/formatting-sd-cards-for-speed-and-lifetime/
 
+# Formatting of USB stick: MBR with partition starting at 448 sectors
+
 # fdisk portion of script based on mkcard.sh v0.4
 # (c) Copyright 2009 Graeme Gregory <dp@xora.org.uk>
 # Additional functionality by Steve Sakoman
@@ -84,7 +86,7 @@ format_whole_disk_fat32() {
 
     # Format FAT32 with 64kiB clusters (128 * 512)
     # Format once to get the calculated FAT size
-    local FAT_SIZE=$(mkdosfs -F 32 -s $CLUSTER_SIZE_IN_SECTORS -v ${PART1} | \
+    local FAT_SIZE=$(mkfs.vfat -F 32 -s $CLUSTER_SIZE_IN_SECTORS -v ${PART1} | \
         sed -n -r -e '/^FAT size is/ s,FAT size is ([0-9]+) sectors.*$,\1,p')
 
     # Calculate the number of reserved sectors to pad in order to align
@@ -92,7 +94,7 @@ format_whole_disk_fat32() {
     local RESERVED_SECTORS=$(( 8192 - 2 * $FAT_SIZE ))
 
     # Format again with padding
-    mkdosfs -F 32 -s $CLUSTER_SIZE_IN_SECTORS -v -R $RESERVED_SECTORS ${PART1}
+    mkfs.vfat -F 32 -s $CLUSTER_SIZE_IN_SECTORS -v -R $RESERVED_SECTORS ${PART1}
 
     # Uncomment to label filesystem
     #fatlabel ${PART1} BOOT

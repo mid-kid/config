@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Ghidra
+Comment=Software reverse engineering framework
+Exec=~/.config/firejail/setup.sh ghidra
+Icon=ghidra
+Categories=Development;Debugger;

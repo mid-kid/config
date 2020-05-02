@@ -34,7 +34,7 @@ floating_modifier $mod
 # External programs
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+Return exec --no-startup-id i3-sensible-terminal -name floating
-bindsym $mod+d exec rofi -show combi
+bindsym $mod+d exec rofi -show drun
 bindsym $mod+i exec rofi-pass
 bindsym Print exec --no-startup-id ~/.scripts/screenshot -s
 bindsym Shift+Print exec ~/.scripts/screenshot
@@ -42,8 +42,8 @@ bindsym $mod+Ctrl+o exec ~/.scripts/extscreens
 bindsym XF86Display exec ~/.scripts/extscreens
 bindsym $mod+Ctrl+p exec ~/.scripts/power
 bindsym XF86PowerOff exec ~/.scripts/power
-bindsym $mod+Shift+o exec compton-trans -c +10
-bindsym $mod+o exec compton-trans -c -- -10
+bindsym $mod+Shift+o exec picom-trans -c +10
+bindsym $mod+o exec picom-trans -c -- -10
 
 # Application discrimination
 for_window [class="URxvt" instance="floating"] move scratchpad scratchpad show
@@ -59,7 +59,11 @@ for_window [class="Gpsim"] floating enable border normal
 for_window [class="Jstest-gtk"] floating enable border normal
 for_window [class="qjoypad"] floating enable border normal
 for_window [class="Blueman-manager"] floating enable border normal
+for_window [class="Pavucontrol"] floating enable border normal
 for_window [window_role="About"] floating enable border normal
+for_window [instance="ida64.exe" title="Please wait..."] floating enable
+for_window [instance="ida.exe" title="Please wait..."] floating enable
+for_window [window_type=notification] floating enable
 for_window [class="qutebrowser"] focus child layout tabbed focus
 
 # Window Manager keybinds
@@ -151,14 +155,14 @@ bindsym $mod+Ctrl+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut
 
 # Resize windows
 mode "resize" {
-    bindsym $left       resize shrink width 10 px or 10 ppt
-    bindsym $down       resize grow height 10 px or 10 ppt
-    bindsym $up         resize shrink height 10 px or 10 ppt
-    bindsym $right      resize grow width 10 px or 10 ppt
-    bindsym Left        resize shrink width 10 px or 10 ppt
-    bindsym Down        resize grow height 10 px or 10 ppt
-    bindsym Up          resize shrink height 10 px or 10 ppt
-    bindsym Right       resize grow width 10 px or 10 ppt
+    bindsym $left  resize shrink width 10 px or 10 ppt
+    bindsym $down  resize grow height 10 px or 10 ppt
+    bindsym $up    resize shrink height 10 px or 10 ppt
+    bindsym $right resize grow width 10 px or 10 ppt
+    bindsym Left   resize shrink width 10 px or 10 ppt
+    bindsym Down   resize grow height 10 px or 10 ppt
+    bindsym Up     resize shrink height 10 px or 10 ppt
+    bindsym Right  resize grow width 10 px or 10 ppt
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -168,13 +172,13 @@ bindsym $mod+m mode "resize"
 
 # Move workspace to output
 mode "output" {
-    bindsym k move workspace to output up; mode "default"
-    bindsym j move workspace to output down; mode "default"
-    bindsym h move workspace to output left; mode "default"
-    bindsym l move workspace to output right; mode "default"
-    bindsym Up move workspace to output up; mode "default"
-    bindsym Down move workspace to output down; mode "default"
-    bindsym Left move workspace to output left; mode "default"
+    bindsym k     move workspace to output up;    mode "default"
+    bindsym j     move workspace to output down;  mode "default"
+    bindsym h     move workspace to output left;  mode "default"
+    bindsym l     move workspace to output right; mode "default"
+    bindsym Up    move workspace to output up;    mode "default"
+    bindsym Down  move workspace to output down;  mode "default"
+    bindsym Left  move workspace to output left;  mode "default"
     bindsym Right move workspace to output right; mode "default"
 
     bindsym Return mode "default"

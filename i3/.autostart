@@ -1,10 +1,12 @@
 ~/.fehbg &
-compton &
+picom &
 urxvtd &
+start-pulseaudio-x11
 
+#xset s 300 5
+#xss-lock -n i3lock
+xfce4-power-manager &
 wpa_gui -t &
 volumeicon &
-#xautolock -time "$timer_lock" -locker 'i3lock -n' &
-xfce4-power-manager &
 redshift-gtk &
 udiskie &

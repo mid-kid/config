@@ -13,6 +13,9 @@ read-only ~/.config/gtk-3.0/settings.ini
 read-only ~/.config/Trolltech.conf
 read-only ~/.config/qt5ct
 
+whitelist ~/.asoundrc
+read-only ~/.asoundrc
+
 whitelist ~/.config/mimeapps.list
 read-only ~/.config/mimeapps.list
 whitelist ~/.local/share/applications/
@@ -40,6 +43,8 @@ disable-mnt
 private-tmp
 private-dev
 
+whitelist ${RUNUSER}/pulse
+read-only ${RUNUSER}/pulse
 read-only /tmp/.X11-unix
 blacklist /boot
 blacklist /opt
@@ -47,8 +52,9 @@ blacklist /usr/src
 blacklist /usr/tmp
 blacklist /usr/portage
 blacklist /usr/local
-blacklist /run/user
+blacklist /etc/os-release
 whitelist /var/tmp
+whitelist /var/run
 
 include /etc/firejail/disable-common.inc
 include /etc/firejail/disable-devel.inc

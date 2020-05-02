@@ -8,9 +8,9 @@ setup() {
     trap "rm -rf '$tmp'" EXIT
 
     cd "$tmp"
-    wget 'https://www.st.com/resource/en/library2/stm32cube_mx_v530.zip'
+    wget 'https://www.st.com/resource/en/library2/stm32cube_mx_v550.zip'
     mkdir -p "$prefix"
-    unzip 'stm32cube_mx_v530.zip' -d "$prefix"
+    unzip 'stm32cube_mx_v550.zip' -d "$prefix"
     mv "$prefix/STM32CubeMX.exe" "$prefix/STM32CubeMX"
 }
 

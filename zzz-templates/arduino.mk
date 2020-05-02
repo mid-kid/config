@@ -40,7 +40,7 @@ screen: upload
 	$(OBJCOPY) -O ihex -R .eeprom $< $@
 
 %.lst: $(dir_build)/%.elf
-	$(OBJDUMP) -h -S $< > $@
+	$(OBJDUMP) -S $< > $@
 
 $(dir_build)/$(name).elf: $(objects) | $$(dir $$@)
 	$(LINK.o) $^ $(LOADLIBES) $(LDLIBS) -o $@

@@ -36,6 +36,7 @@ Plug 'vim-scripts/AutoComplPop'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/vim-easy-align'
 Plug 'chrisbra/vim-diff-enhanced'
+Plug 'junegunn/goyo.vim'
 
 call plug#end()
 
@@ -77,6 +78,7 @@ set clipboard=unnamed
 set clipboard+=unnamedplus
 set backup
 set undofile
+set fileencodings=ucs-bom,utf-8,sjis,default  " Try SHIFT-JIS
 
 " Keybinds
 let mapleader=";"
@@ -132,6 +134,9 @@ let g:ctrlp_root_markers=['.tags']
 
 " Taghighlight
 let g:TagHighlightSettings={'TagFileName': '.tags'}
+
+" vimtex
+let g:vimtex_view_general_viewer='xpdf'
 
 " vim -b : edit binary using xxd-format!
 augroup Binary

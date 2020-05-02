@@ -9,6 +9,8 @@ export WINEARCH=win32
 export WINEPREFIX="$prefix"
 export WINEDLLPATH="$prefix/bin64:$prefix/bin32"
 
+export PULSE_LATENCY_MSEC=22
+
 setup() {
     tmp=$(mktemp -d)
     trap "rm -rf '$tmp'" EXIT
@@ -27,6 +29,7 @@ EOF
 
     WINEDLLOVERRIDES='mscoree=' winecfg
     "$tmp/winetricks" dotnet45
+    "$tmp/winetricks" gdiplus corefonts cjkfonts  # optional
     "$tmp/winetricks" ddr=opengl fontsmooth=rgb sound=alsa strictdrawordering=enabled
     regedit "$tmp/directsound-latency.reg"
     vblank_mode=0 __GL_SYNC_TO_VBLANK=0 $exec wine "$tmp/osu!install.exe"

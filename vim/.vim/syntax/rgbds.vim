@@ -64,6 +64,8 @@ syn keyword rgbPreProc POPO
 syn keyword rgbPreProc PUSHO
 syn keyword rgbPreProc POPS
 syn keyword rgbPreProc PUSHS
+syn keyword rgbPreProc POPC
+syn keyword rgbPreProc PUSHC
 syn keyword rgbPreProc PRINTT
 syn keyword rgbPreProc PRINTV
 syn keyword rgbPreProc PRINTF

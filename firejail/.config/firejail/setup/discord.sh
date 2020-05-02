@@ -8,12 +8,11 @@ setup() {
     trap "rm -rf '$tmp'" EXIT
     cd "$tmp"
 
-    wget 'https://dl.discordapp.net/apps/linux/0.0.9/discord-0.0.9.tar.gz'
-    tar xf 'discord-0.0.9.tar.gz'
+    wget 'https://dl.discordapp.net/apps/linux/0.0.10/discord-0.0.10.tar.gz'
+    tar xf 'discord-0.0.10.tar.gz'
     mkdir -p "$prefix"
     mv Discord/* "$prefix"
     chmod +x "$prefix/Discord"
-
 }
 
 better() {
@@ -23,7 +22,7 @@ better() {
 
     wget 'https://raw.githubusercontent.com/bb010g/betterdiscordctl/master/betterdiscordctl'
     chmod +x 'betterdiscordctl'
-    ./betterdiscordctl -d "$prefix" -m "${XDG_CONFIG_HOME:-$HOME/.config}/discord/0.0.9/modules/" "$@"
+    ./betterdiscordctl -d "$prefix" -m "${XDG_CONFIG_HOME:-$HOME/.config}/discord/0.0.10/modules/" "$@"
 }
 
 run() {
