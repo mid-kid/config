@@ -8,8 +8,8 @@ setup() {
     trap "rm -rf '$tmp'" EXIT
 
     cd "$tmp"
-    wget 'https://cancel.fm/dl/Ripcord-0.4.24-x86_64.AppImage'
-    mv 'Ripcord-0.4.24-x86_64.AppImage' "$prefix/Ripcord.AppImage"
+    wget 'https://cancel.fm/dl/Ripcord-0.4.26-x86_64.AppImage'
+    mv 'Ripcord-0.4.26-x86_64.AppImage' "$prefix/Ripcord.AppImage"
     chmod +x "$prefix/Ripcord.AppImage"
 }
 

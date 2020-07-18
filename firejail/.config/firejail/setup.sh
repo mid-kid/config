@@ -26,9 +26,13 @@ if [ -z "$1" -a "$prog" = ripcord ]; then
     exec firejail --profile="$XDG_CONFIG_HOME/firejail/$prog.profile" --join-or-start="$prog" --appimage "$prefix/Ripcord.AppImage" "$@"
 fi
 
+if [ "$prog" = discord -o "$prog" = osu -o "$prog" = clonehero ]; then
+    mkdir -p /tmp/discord-ipc/pulse
+    ln -sf "$XDG_RUNTIME_DIR/pulse"/* /tmp/discord-ipc/pulse/
+fi
+
 tmp="$(mktemp -d --tmpdir "firejail-$prog.XXXXXX")"
 trap "rm -rf '$tmp'" EXIT
 
 cp "$setup/$prog.sh" "$tmp"
-
 firejail "${extra_args[@]}" --whitelist="$tmp" --profile="$XDG_CONFIG_HOME/firejail/$prog.profile" --join-or-start="$prog" sh "$tmp/$prog.sh" "$@"

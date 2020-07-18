@@ -5,7 +5,9 @@ noblacklist ~/.config/discord
 whitelist ~/.config/discord
 
 # discord-ipc...
-whitelist ${RUNUSER}/discord-ipc-0
+mkdir /tmp/discord-ipc
+whitelist /tmp/discord-ipc
+env XDG_RUNTIME_DIR=/tmp/discord-ipc
 
 # betterdiscord
 mkdir ~/.local/share/betterdiscordctl

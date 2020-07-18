@@ -5,6 +5,9 @@ set -e
 
 prefix="${prefix:-$HOME/.local/opt/osu}"
 
+# God fucking mouse breaking every updatae aaaaaaaaaaaaaaaaa
+WINE=wine-staging-5.9
+
 export WINEARCH=win32
 export WINEPREFIX="$prefix"
 export WINEDLLPATH="$prefix/bin64:$prefix/bin32"
@@ -32,11 +35,11 @@ EOF
     "$tmp/winetricks" gdiplus corefonts cjkfonts  # optional
     "$tmp/winetricks" ddr=opengl fontsmooth=rgb sound=alsa strictdrawordering=enabled
     regedit "$tmp/directsound-latency.reg"
-    vblank_mode=0 __GL_SYNC_TO_VBLANK=0 $exec wine "$tmp/osu!install.exe"
+    vblank_mode=0 __GL_SYNC_TO_VBLANK=0 $exec $WINE "$tmp/osu!install.exe"
 }
 
 run() {
-    vblank_mode=0 __GL_SYNC_TO_VBLANK=0 $exec wine "$WINEPREFIX/drive_c/users/$USER/Local Settings/Application Data/osu!/osu!.exe" "$@"
+    vblank_mode=0 __GL_SYNC_TO_VBLANK=0 $exec $WINE "$WINEPREFIX/drive_c/users/$USER/Local Settings/Application Data/osu!/osu!.exe" "$@"
 }
 
 # Discord wants a PID higher than 10???

@@ -1,10 +1,5 @@
 whitelist ~/.firejail/eagle
 
-#mkfile ~/.~~~
-#whitelist ~/.~~~
-#mkfile ~/.eaglerc
-#whitelist ~/.eaglerc
-
 mkdir ~/.config/Autodesk
 whitelist ~/.config/Autodesk
 mkdir ~/.local/share/Eagle

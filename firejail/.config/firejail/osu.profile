@@ -1,5 +1,10 @@
 whitelist ~/.firejail/osu
 
+# discord-ipc...
+mkdir /tmp/discord-ipc
+whitelist /tmp/discord-ipc
+env XDG_RUNTIME_DIR=/tmp/discord-ipc
+
 # firefox sandbox ecaping (ease of downloading songs)...
 noblacklist ~/.mozilla
 whitelist ~/.mozilla
