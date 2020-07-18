@@ -35,6 +35,8 @@ floating_modifier $mod
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+Return exec --no-startup-id i3-sensible-terminal -name floating
 bindsym $mod+d exec rofi -show drun
+bindsym $mod+v exec i3-sensible-terminal -e ranger
+bindsym $mod+Shift+v exec --no-startup-id mpv $(xclip -o)
 bindsym $mod+i exec rofi-pass
 bindsym Print exec --no-startup-id ~/.scripts/screenshot -s
 bindsym Shift+Print exec ~/.scripts/screenshot
@@ -42,6 +44,7 @@ bindsym $mod+Ctrl+o exec ~/.scripts/extscreens
 bindsym XF86Display exec ~/.scripts/extscreens
 bindsym $mod+Ctrl+p exec ~/.scripts/power
 bindsym XF86PowerOff exec ~/.scripts/power
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute 1 toggle
 bindsym $mod+Shift+o exec picom-trans -c +10
 bindsym $mod+o exec picom-trans -c -- -10
 
@@ -60,9 +63,11 @@ for_window [class="Jstest-gtk"] floating enable border normal
 for_window [class="qjoypad"] floating enable border normal
 for_window [class="Blueman-manager"] floating enable border normal
 for_window [class="Pavucontrol"] floating enable border normal
-for_window [window_role="About"] floating enable border normal
 for_window [instance="ida64.exe" title="Please wait..."] floating enable
 for_window [instance="ida.exe" title="Please wait..."] floating enable
+for_window [class="Ghidra" title="win0"] floating enable
+for_window [class="Ghidra" title="References to .+"] floating enable
+for_window [window_role="About"] floating enable border normal
 for_window [window_type=notification] floating enable
 for_window [class="qutebrowser"] focus child layout tabbed focus
 
@@ -87,6 +92,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Right move right
+bindsym --whole-window $mod+button4 focus left
+bindsym --whole-window $mod+button5 focus right
+bindsym --whole-window $mod+Shift+button4 move left
+bindsym --whole-window $mod+Shift+button5 move right
 
 bindsym $mod+a split h
 bindsym $mod+s split v
