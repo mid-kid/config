@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Clone Hero
+Exec=~/.config/firejail/setup.sh clonehero
+Icon=clonehero
+Categories=Game;
