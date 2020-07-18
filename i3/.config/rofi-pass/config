@@ -1,0 +1,6 @@
+default_user=':filename'
+clip=clipboard
+notify='true'
+#default_do='copyPass' # Use Alt+p
+fix_layout=true
+layout_cmd(){ setxkbmap;}
