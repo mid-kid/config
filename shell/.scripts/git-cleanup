@@ -1,0 +1,7 @@
+#!/bin/sh
+set -eu
+git clean -xdf
+if [ "$(git branch -r)" ]; then
+    git branch -r --format="%(refname)" | sed -e 's@refs/remotes/@@' | xargs git branch -rd
+fi
+git gc --aggressive --prune=now
