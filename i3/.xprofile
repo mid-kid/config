@@ -6,5 +6,6 @@ export QT_SCREEN_SCALE_FACTORS=1.25
 export GDK_SCALE=1.25
 export SAL_USE_VCLPLUGIN=gtk
 export TERMINAL=urxvtc
+export BROWSER=firefox
 export MOZ_USE_XINPUT2=1
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd_hrgb'
