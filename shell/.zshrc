@@ -107,4 +107,5 @@ if [ -f "$ZPLUG_HOME/init.zsh" ]; then
     zplug load
 fi
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source ~/.shellrc
