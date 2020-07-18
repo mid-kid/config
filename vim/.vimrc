@@ -71,6 +71,7 @@ set colorcolumn=80
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/  " ExtraWhitespace is defined in the theme
 
 " Behavior
+set modeline
 set omnifunc=syntaxcomplete#Complete
 set mouse=a
 set ttyfast
