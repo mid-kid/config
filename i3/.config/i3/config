@@ -63,6 +63,7 @@ for_window [class="Jstest-gtk"] floating enable border normal
 for_window [class="qjoypad"] floating enable border normal
 for_window [class="Blueman-manager"] floating enable border normal
 for_window [class="Pavucontrol"] floating enable border normal
+for_window [class="listen.moe-desktop-app"] floating enable border none
 for_window [instance="ida64.exe" title="Please wait..."] floating enable
 for_window [instance="ida.exe" title="Please wait..."] floating enable
 for_window [class="Ghidra" title="win0"] floating enable
