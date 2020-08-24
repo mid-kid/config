@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=LISTEN.moe
+Exec=~/.config/firejail/setup.sh listenmoe
+Terminal=false
+Type=Application
+Icon=listenmoe
+StartupWMClass=LISTEN.moe
+Comment=It’s time to ditch other radios
+Categories=Audio;
