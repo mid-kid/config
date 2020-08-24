@@ -1,4 +1,4 @@
-whitelist ~/.firejail/clonehero
+whitelist ~/.local/share/firejail/clonehero
 
 # discord-ipc...
 mkdir /tmp/discord-ipc

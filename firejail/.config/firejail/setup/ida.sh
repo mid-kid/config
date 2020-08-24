@@ -8,12 +8,12 @@ prefix="${prefix:-$HOME/.local/opt/ida}"
 export WINEARCH=win64
 export WINEPREFIX="$prefix"
 
-setup() {
-    if [ ! -f "$prefix/setup.exe" ]; then
-        echo "ERROR: Please copy the IDA installer to '$prefix/setup.exe' and run this again"
-        exit 1
-    fi
+fetch() {
+    echo "ERROR: Please copy the IDA installer to '$prefix/setup.exe' and run this again"
+    exit 1
+}
 
+setup() {
     tmp=$(mktemp -d)
     trap "rm -rf '$tmp'" EXIT
 
@@ -29,11 +29,15 @@ run() {
 }
 
 case "$1" in
+    fetch) shift; fetch; exit ;;
     setup) shift; setup; exit ;;
     run) shift; run "$@"; exit ;;
 esac
 
 if [ ! -d "$prefix/drive_c" ]; then
+    if [ ! -f "$prefix/setup.exe" ]; then
+        fetch
+    fi
     setup
 else
     run "$@"

@@ -1,4 +1,4 @@
-whitelist ~/.firejail/teams
+whitelist ~/.local/share/firejail/teams
 
 mkdir ~/.config/Microsoft/Microsoft Teams
 whitelist ~/.config/Microsoft/Microsoft Teams

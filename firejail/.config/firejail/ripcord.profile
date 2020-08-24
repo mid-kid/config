@@ -1,4 +1,4 @@
-whitelist ~/.firejail/ripcord
+whitelist ~/.local/share/firejail/ripcord
 
 mkdir ~/.local/share/Ripcord
 whitelist ~/.local/share/Ripcord

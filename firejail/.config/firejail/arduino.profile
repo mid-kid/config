@@ -1,4 +1,4 @@
-whitelist ~/.firejail/arduino
+whitelist ~/.local/share/firejail/arduino
 
 mkdir ~/.arduino15
 noblacklist ~/.arduino15

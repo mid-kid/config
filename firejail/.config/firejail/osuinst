@@ -3,12 +3,12 @@
 
 set -e
 
-prefix="$HOME/.firejail/osu"
+prefix="$HOME/.local/share/firejail/osu"
 
 mkdir -p "$prefix/temp"
 
 for x in "$@"; do
     b="$(basename -- "$x")"
-    mv -- "$x" "$prefix/temp/$b"
-    WINEPREFIX="$prefix" "${XDG_CONFIG_HOME:-$HOME/.config}"/firejail/setup.sh osu wine-staging-5.9 "C:/users/$USER/Local Settings/Application Data/osu!/osu!.exe" "Z:$prefix/temp/$b"
+    mv -f -- "$x" "$prefix/temp/$b"
+    WINEPREFIX="$prefix" "${XDG_CONFIG_HOME:-$HOME/.config}"/firejail/setup.sh osu shell wine-staging-5.9 "C:/users/$USER/Local Settings/Application Data/osu!/osu!.exe" "Z:$prefix/temp/$b"
 done

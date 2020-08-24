@@ -1,4 +1,4 @@
-whitelist ~/.firejail/minecraft
+whitelist ~/.local/share/firejail/minecraft
 
 mkdir ~/.minecraft
 whitelist ~/.minecraft

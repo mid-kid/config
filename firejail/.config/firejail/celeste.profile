@@ -1,4 +1,4 @@
-whitelist ~/.firejail/celeste
+whitelist ~/.local/share/firejail/celeste
 
 mkdir ~/.local/share/Celeste
 whitelist ~/.local/share/Celeste

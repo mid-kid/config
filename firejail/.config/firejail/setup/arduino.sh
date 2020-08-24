@@ -3,7 +3,7 @@ set -e
 
 prefix="${prefix:-$HOME/.local/opt/arduino}"
 
-setup() {
+fetch() {
     tmp=$(mktemp -d)
     trap "rm -rf '$tmp'" EXIT
 
@@ -16,15 +16,15 @@ setup() {
 
 run() {
     cd "$prefix"
-    ./arduino "$@"
+    exec ./arduino "$@"
 }
 
 case "$1" in
-    setup) shift; setup; exit ;;
+    fetch) shift; fetch; exit ;;
     run) shift; run "$@"; exit ;;
 esac
 
 if [ ! -f "$prefix/arduino" ]; then
-    setup
+    fetch
 fi
 run "$@"

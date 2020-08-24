@@ -1,4 +1,4 @@
-whitelist ~/.firejail/osu
+whitelist ~/.local/share/firejail/osu
 
 # discord-ipc...
 mkdir /tmp/discord-ipc

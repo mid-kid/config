@@ -1,3 +1,7 @@
+# Sane set of exposed files for electron
+private-bin bash,cut,echo,egrep,grep,head,sed,sh,tr,xdg-mime,xdg-open,zsh
+private-etc alternatives,ca-certificates,crypto-policies,fonts,group,ld.so.cache,localtime,login.defs,machine-id,password,pki,resolv.conf,ssl
+
 # TODO: What syscalls need to be enabled?
 ignore seccomp
 ignore no3d

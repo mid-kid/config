@@ -1,4 +1,4 @@
-whitelist ~/.firejail/stm32cubemx
+whitelist ~/.local/share/firejail/stm32cubemx
 
 mkdir ~/.stm32cubemx
 whitelist ~/.stm32cubemx

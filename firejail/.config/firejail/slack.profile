@@ -1,4 +1,4 @@
-whitelist ~/.firejail/slack
+whitelist ~/.local/share/firejail/slack
 
 mkdir ~/.config/Slack
 noblacklist ~/.config/Slack

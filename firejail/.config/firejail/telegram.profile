@@ -1,4 +1,4 @@
-whitelist ~/.firejail/telegram
+whitelist ~/.local/share/firejail/telegram
 
 mkdir ~/.local/share/TelegramDesktop
 noblacklist ~/.local/share/TelegramDesktop

@@ -5,7 +5,7 @@ prefix="${prefix:-$HOME/.local/opt/clonehero}"
 
 export PULSE_LATENCY_MSEC=22
 
-setup() {
+fetch() {
     tmp=$(mktemp -d)
     trap "rm -rf '$tmp'" EXIT
 
@@ -31,11 +31,11 @@ if [ -e $XDG_RUNTIME_DIR/discord-ipc-0 ]; then
 fi
 
 case "$1" in
-    setup) shift; setup; exit ;;
+    fetch) shift; fetch; exit ;;
     run) shift; run "$@"; exit ;;
 esac
 
 if [ ! -f "$prefix/clonehero" ]; then
-    setup
+    fetch
 fi
 run "$@"

@@ -1,4 +1,4 @@
-whitelist ~/.firejail/ltspice
+whitelist ~/.local/share/firejail/ltspice
 
 whitelist ~/Stuff/Workspace/LTspice
 

@@ -50,6 +50,7 @@ if [ -e $XDG_RUNTIME_DIR/discord-ipc-0 ]; then
 fi
 
 case "$1" in
+    fetch) exit ;;  # Installation requires download
     setup) shift; setup; exit ;;
     run) shift; run "$@"; exit ;;
 esac

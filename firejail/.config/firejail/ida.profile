@@ -1,4 +1,4 @@
-whitelist ~/.firejail/ida
+whitelist ~/.local/share/firejail/ida
 
 whitelist ~/Stuff/Workspace/IDA
 

@@ -3,13 +3,13 @@ set -e
 
 prefix="${prefix:-$HOME/.local/opt/discord}"
 
-setup() {
+fetch() {
     tmp=$(mktemp -d)
     trap "rm -rf '$tmp'" EXIT
     cd "$tmp"
 
-    wget 'https://dl.discordapp.net/apps/linux/0.0.10/discord-0.0.10.tar.gz'
-    tar xf 'discord-0.0.10.tar.gz'
+    wget 'https://dl.discordapp.net/apps/linux/0.0.11/discord-0.0.11.tar.gz'
+    tar xf 'discord-0.0.11.tar.gz'
     mkdir -p "$prefix"
     mv Discord/* "$prefix"
     chmod +x "$prefix/Discord"
@@ -35,12 +35,12 @@ run() {
 }
 
 case "$1" in
-    setup) shift; setup; exit ;;
+    fetch) shift; fetch; exit ;;
     better) shift; better "$@"; exit ;;
     run) shift; run "$@"; exit ;;
 esac
 
 if [ ! -f "$prefix/Discord" ]; then
-    setup
+    fetch
 fi
 run "$@"

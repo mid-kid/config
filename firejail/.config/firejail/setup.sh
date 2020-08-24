@@ -2,6 +2,7 @@
 set -e
 
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 
 extra_args=()
 
@@ -11,19 +12,27 @@ if [ "$1" = '--net' ]; then
 fi
 
 prog="$1"; shift
+setup="$(realpath "$(dirname "$0")/setup")"
+export prefix="$XDG_DATA_HOME/firejail/$prog"
 
-if [ "$1" = 'shell' ]; then
+if [ "$1" = shell ]; then
     shift
-    firejail "${extra_args[@]}" --ignore='shell none' --profile="$XDG_CONFIG_HOME/firejail/$prog.profile" --join-or-start="$prog" "$@"
-    exit
+    exec firejail "${extra_args[@]}" --ignore='shell none' --profile="$XDG_CONFIG_HOME/firejail/$prog.profile" --join-or-start="$prog" "$@"
 fi
 
-setup="$(realpath "$(dirname "$0")/setup")"
-export prefix="$HOME/.firejail/$prog"
+if [ ! -d "$prefix" -o "$1" = fetch ]; then
+    "$setup/$prog.sh" fetch
+fi
 
-mkdir -p "$prefix"
-if [ -z "$1" -a "$prog" = ripcord ]; then
-    exec firejail --profile="$XDG_CONFIG_HOME/firejail/$prog.profile" --join-or-start="$prog" --appimage "$prefix/Ripcord.AppImage" "$@"
+if [ -z "$1" ]; then
+    appimage=
+    case "$prog" in
+        ripcord) appimage=Ripcord.AppImage ;;
+        listenmoe) appimage=LISTEN.moe.AppImage ;;
+    esac
+    if [ ! -z "$appimage" ]; then
+        exec firejail --profile="$XDG_CONFIG_HOME/firejail/$prog.profile" --join-or-start="$prog" --appimage "$prefix/$appimage" "$@"
+    fi
 fi
 
 if [ "$prog" = discord -o "$prog" = osu -o "$prog" = clonehero ]; then

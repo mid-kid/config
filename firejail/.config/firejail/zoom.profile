@@ -1,4 +1,4 @@
-whitelist ~/.firejail/zoom
+whitelist ~/.local/share/firejail/zoom
 
 mkfile ~/.config/zoomus.conf
 whitelist ~/.config/zoomus.conf

@@ -1,4 +1,4 @@
-whitelist ~/.firejail/ghidra
+whitelist ~/.local/share/firejail/ghidra
 
 mkdir ~/.ghidra
 whitelist ~/.ghidra

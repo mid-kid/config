@@ -3,7 +3,7 @@ set -e
 
 prefix="${prefix:-$HOME/.local/opt/eagle}"
 
-setup() {
+fetch() {
     tmp=$(mktemp -d)
     trap "rm -rf '$tmp'" EXIT
 
@@ -20,11 +20,11 @@ run() {
 }
 
 case "$1" in
-    setup) shift; setup; exit ;;
+    fetch) shift; fetch; exit ;;
     run) shift; run "$@"; exit ;;
 esac
 
 if [ ! -f "$prefix/eagle" ]; then
-    setup
+    fetch
 fi
 run "$@"

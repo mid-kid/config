@@ -1,4 +1,4 @@
-whitelist ~/.firejail/eagle
+whitelist ~/.local/share/firejail/eagle
 
 mkdir ~/.config/Autodesk
 whitelist ~/.config/Autodesk

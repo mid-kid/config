@@ -3,7 +3,7 @@ set -e
 
 prefix="${prefix:-$HOME/.local/opt/ghidra}"
 
-setup() {
+fetch() {
     tmp=$(mktemp -d)
     trap "rm -rf '$tmp'" EXIT
 
@@ -20,11 +20,11 @@ run() {
 }
 
 case "$1" in
-    setup) shift; setup; exit ;;
+    fetch) shift; fetch; exit ;;
     run) shift; run "$@"; exit ;;
 esac
 
 if [ ! -e "$prefix/ghidraRun" ]; then
-    setup
+    fetch
 fi
 run "$@"
