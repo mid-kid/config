@@ -1,12 +1,12 @@
 # Look
 font pango:monospace 10
 default_border pixel 3
-default_floating_border normal
+default_floating_border normal 3
 
 # i3-gaps
 gaps inner 5
-gaps outer 5
-smart_gaps on
+gaps outer 3
+#smart_gaps on
 smart_borders on
 
 # Colors
@@ -35,7 +35,7 @@ floating_modifier $mod
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+Return exec --no-startup-id i3-sensible-terminal -name floating
 bindsym $mod+d exec rofi -show drun
-bindsym $mod+v exec i3-sensible-terminal -e ranger
+bindsym $mod+Shift+d exec i3-sensible-terminal -e ranger
 bindsym $mod+Shift+v exec --no-startup-id mpv $(xclip -o)
 bindsym $mod+i exec rofi-pass
 bindsym Print exec --no-startup-id ~/.scripts/screenshot -s
@@ -44,7 +44,8 @@ bindsym $mod+Ctrl+o exec ~/.scripts/extscreens
 bindsym XF86Display exec ~/.scripts/extscreens
 bindsym $mod+Ctrl+p exec ~/.scripts/power
 bindsym XF86PowerOff exec ~/.scripts/power
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute 1 toggle
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute alsa_input.pci-0000_06_00.6.analog-stereo toggle
+bindsym XF86Tools exec --no-startup-id playerctl play-pause
 bindsym $mod+Shift+o exec picom-trans -c +10
 bindsym $mod+o exec picom-trans -c -- -10
 
@@ -61,15 +62,17 @@ for_window [class="Display"] floating enable border normal
 for_window [class="Gpsim"] floating enable border normal
 for_window [class="Jstest-gtk"] floating enable border normal
 for_window [class="qjoypad"] floating enable border normal
-for_window [class="Blueman-manager"] floating enable border normal
+for_window [class="Blueman-.+"] floating enable border normal
 for_window [class="Pavucontrol"] floating enable border normal
 for_window [class="listen.moe-desktop-app"] floating enable border none
 for_window [instance="ida64.exe" title="Please wait..."] floating enable
 for_window [instance="ida.exe" title="Please wait..."] floating enable
 for_window [class="Ghidra" title="win0"] floating enable
 for_window [class="Ghidra" title="References to .+"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
 for_window [window_role="About"] floating enable border normal
-for_window [window_type=notification] floating enable
+for_window [window_type="notification"] floating enable
 for_window [class="qutebrowser"] focus child layout tabbed focus
 
 # Window Manager keybinds
@@ -104,6 +107,8 @@ bindsym $mod+Shift+e split toggle
 bindsym $mod+e layout toggle split
 bindsym $mod+q layout stacking
 bindsym $mod+w layout tabbed
+
+bindsym $mod+b border toggle
 
 bindsym $mod+Shift+r move scratchpad
 bindsym $mod+r scratchpad show
@@ -197,8 +202,9 @@ mode "output" {
 }
 bindsym $mod+n mode "output"
 
-bar {
-    status_command i3status
+#bar {
+#    status_command i3status
+#    workspace_min_width 30
     #colors {
         #background $color_background
         #statusline $color_text
@@ -209,7 +215,8 @@ bar {
         #urgent_workspace   #2f343a #c13133 $color_text
         #binding_mode       #2f343a #c12123 $color_text
     #}
-}
+#}
 
 # Autostart applications
-exec --no-startup-id sh ~/.autostart
+exec_always --no-startup-id killall -q polybar && sleep 2; polybar example
+exec --no-startup-id ~/.autostart

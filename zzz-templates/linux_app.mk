@@ -9,7 +9,7 @@ CFLAGS += #$(shell pkg-config --cflags ...)
 LDLIBS += #$(shell pkg-config --libs ...)
 
 SANIT := -fsanitize=address -fsanitize=pointer-compare -fsanitize=pointer-subtract -fsanitize=leak -fsanitize=undefined
-OPTIM := -Os -fdata-sections -ffunction-sections -flto -fuse-linker-plugin -fdevirtualize-at-ltrans -fipa-pta -Wl,--gc-sections -Wl,--print-gc-sections #-fgraphite-identity -floop-nest-optimize
+OPTIM := -Os -fdata-sections -ffunction-sections -flto -fuse-linker-plugin -fipa-pta -Wl,--gc-sections -Wl,--print-gc-sections #-fgraphite-identity -floop-nest-optimize
 
 rwildcard = $(foreach d, $(wildcard $1*), $(filter $(subst *, %, $2), $d) $(call rwildcard, $d/, $2))
 objects := $(patsubst $(dir_source)/%.c, $(dir_build)/%.o, $(call rwildcard, $(dir_source)/, *.c))
@@ -44,4 +44,4 @@ $(dir_build)/%.o: $(dir_source)/%.c | $$(dir $$@)
 %/:
 	mkdir -p $@
 
--include $(patsubst %.o, %.d, $(objects))
+-include $(objects:.o=.d)

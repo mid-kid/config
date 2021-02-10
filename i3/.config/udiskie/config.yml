@@ -2,3 +2,11 @@ program_options:
   udisks_version: 2
   tray: auto
   automount: false
+
+device_config:
+- device_file: /dev/loop0
+  ignore: true
+- device_file: /dev/loop1
+  ignore: true
+- device_file: /dev/loop2
+  ignore: true

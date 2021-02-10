@@ -19,6 +19,12 @@ sub new_window {
     new urxvt::term $self->env, $urxvt::RXVTNAME, -cd => $ccwd;
 }
 
+sub new_fm {
+    my ($self) = @_;
+    my $ccwd = readlink("/proc/".$self->{child_pid}."/cwd");
+    new urxvt::term $self->env, $urxvt::RXVTNAME, -e => "ranger", $ccwd;
+}
+
 sub on_child_start {
     my ($self, $pid) = @_;
 
@@ -27,11 +33,13 @@ sub on_child_start {
     ()
 }
 
-
 sub on_user_command {
     my ($self, $cmd) = @_;
 
     if ($cmd eq "new-window") {
         new_window($self);
+    }
+    if ($cmd eq "new-fm") {
+        new_fm($self);
     }
 }

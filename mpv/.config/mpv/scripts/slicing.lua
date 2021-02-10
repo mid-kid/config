@@ -8,14 +8,14 @@ local cut_pos = nil
 local copy_audio = true
 local o = {
     target_dir = "~",
-    vcodec = "rawvideo",
-    acodec = "pcm_s16le",
+    vcodec = "libx264",
+    acodec = "aac",
     prevf = "",
     vf = "format=yuv444p16$hqvf,scale=in_color_matrix=$matrix,format=bgr24",
     hqvf = "",
     postvf = "",
     opts = "",
-    ext = "avi",
+    ext = "mp4",
     command_template = [[
         ffmpeg -v warning -y -stats
         -ss $shift -i '$in' -t $duration

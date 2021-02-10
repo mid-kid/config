@@ -26,5 +26,6 @@ URxvt.secondaryScroll: false
 
 URxvt.perl-ext-common: default,keyboard-select,new-window
 URxvt.keysym.M-Return: perl:new-window
+URxvt.keysym.M-d: perl:new-fm
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keyboard-select.clipboard: true

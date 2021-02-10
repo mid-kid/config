@@ -11,7 +11,7 @@ RGBFIX := rgbfix
 
 RGBASMFLAGS := -p 0xff -L
 RGBLINKFLAGS := -p 0xff -d -t
-RGBFIXFLAGS := -p 0xff -j -m 0 -r 0 -n 0 -k "  " -i "    " -t "               "
+RGBFIXFLAGS := -p 0xff -j -m 0 -r 0 -n 0 -k "  " -i "    " -t "           "
 
 rwildcard = $(foreach d, $(wildcard $1*), $(filter $(subst *, %, $2), $d) $(call rwildcard, $d/, $2))
 objects := $(patsubst $(dir_source)/%.asm, $(dir_build)/%.o, $(call rwildcard, $(dir_source)/, *.asm))
@@ -50,4 +50,4 @@ $(dir_build)/%.1bpp: $(dir_assets)/%.png | $$(dir $$@)
 %/:
 	mkdir -p $@
 
--include $(patsubst %.o, %.d, $(objects))
+-include $(objects:.o=.d)
