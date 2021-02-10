@@ -56,7 +56,7 @@ bindkey '\e[2~' quoted-insert
 if command -v git > /dev/null; then
     prompt_git() {
         if [ -d ".git" ]; then
-            local branch=$(git symbolic-ref HEAD 2> /dev/null | cut -d '/' -f 3)
+            local branch=$(git symbolic-ref HEAD 2> /dev/null | cut -d '/' -f 3-)
             [ ! $branch ] && branch=$(git rev-parse --short HEAD)
             printf '%s' $branch
 
