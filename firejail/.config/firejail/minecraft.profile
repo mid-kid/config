@@ -3,12 +3,13 @@ whitelist ~/.local/share/firejail/minecraft
 mkdir ~/.minecraft
 whitelist ~/.minecraft
 
-mkdir ~/.ftblauncher
-whitelist ~/.ftblauncher
-mkdir ~/.ftb
-whitelist ~/.ftb
+#mkdir ~/.ftblauncher
+#whitelist ~/.ftblauncher
+#mkdir ~/.ftb
+#whitelist ~/.ftb
 
 ignore no3d
 ignore net none
+ignore nosound
 protocol unix,inet,inet6,netlink
 include ~/.config/firejail/inc/java.inc

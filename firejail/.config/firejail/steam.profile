@@ -1,24 +1,30 @@
-noblacklist ~/.local/opt/steam
-whitelist ~/.local/opt/steam
-
-mkdir ~/.steam
-noblacklist ~/.steam
-whitelist ~/.steam
+whitelist ~/.local/share/firejail/steam
 
 mkdir ~/.local/share/Steam
 noblacklist ~/.local/share/Steam
 whitelist ~/.local/share/Steam
-
-noblacklist ~/.steampath
-whitelist ~/.steampath
-noblacklist ~/.steampid
-whitelist ~/.steampid
+mkdir ~/.steam
+noblacklist ~/.steam
+whitelist ~/.steam
 
 # Random games that use different folders
-noblacklist ~/.local/share/Daedalic Entertainment
 whitelist ~/.local/share/Daedalic Entertainment
-noblacklist ~/.config/unity3d
 whitelist ~/.config/unity3d
 
+# Needs /sbin/ldconfig...
+noblacklist /sbin
+
+# Game controllers...
+ignore private-dev
+
+ignore dbus-user none
+ignore dbus-system none
+dbus-user filter
+dbus-system filter
 protocol unix,inet,inet6,netlink
-include ~/.config/firejail/default.profile
+ignore net none
+ignore no3d
+ignore nosound
+ignore seccomp
+include allow-python3.inc
+include ~/.config/firejail/inc/default.inc

@@ -57,7 +57,7 @@ if command -v git > /dev/null; then
     prompt_git() {
         if [ -d ".git" ]; then
             local branch=$(git symbolic-ref HEAD 2> /dev/null | cut -d '/' -f 3)
-            [ ! "$branch" ] && branch=$(git rev-parse --short HEAD)
+            [ ! $branch ] && branch=$(git rev-parse --short HEAD)
             printf '%s' $branch
 
             local stashed_changes=$(git stash list | wc -l)

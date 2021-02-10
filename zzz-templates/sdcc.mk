@@ -42,4 +42,4 @@ $(dir_build)/%.o: $(dir_source)/%.asm | $$(dir $$@)
 %/:
 	mkdir -p $@
 
--include $(patsubst %.o, %.d, $(objects))
+-include $(objects:.o=.d)

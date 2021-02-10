@@ -24,6 +24,7 @@ Plug 'lervag/vimtex'
 Plug 'zah/nim.vim'
 
 " Project management
+Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'embear/vim-localvimrc'
@@ -137,6 +138,7 @@ let g:ctrlp_root_markers=['.tags']
 let g:TagHighlightSettings={'TagFileName': '.tags'}
 
 " vimtex
+let g:tex_flavor='latex'
 let g:vimtex_view_general_viewer='xpdf'
 
 " vim -b : edit binary using xxd-format!

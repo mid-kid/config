@@ -8,8 +8,8 @@ fetch() {
     trap "rm -rf '$tmp'" EXIT
     cd "$tmp"
 
-    wget 'https://dl.discordapp.net/apps/linux/0.0.11/discord-0.0.11.tar.gz'
-    tar xf 'discord-0.0.11.tar.gz'
+    wget 'https://dl.discordapp.net/apps/linux/0.0.13/discord-0.0.13.tar.gz'
+    tar xf 'discord-0.0.13.tar.gz'
     mkdir -p "$prefix"
     mv Discord/* "$prefix"
     chmod +x "$prefix/Discord"

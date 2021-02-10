@@ -4,14 +4,14 @@ set -e
 prefix="${prefix:-$HOME/.local/opt/ghidra}"
 
 fetch() {
-    tmp=$(mktemp -d)
+    tmp=$(mktemp -d -p /var/tmp)  # This package is huge
     trap "rm -rf '$tmp'" EXIT
 
     cd "$tmp"
-    wget 'https://ghidra-sre.org/ghidra_9.1.2_PUBLIC_20200212.zip'
-    unzip 'ghidra_9.1.2_PUBLIC_20200212.zip'
+    wget 'https://ghidra-sre.org/ghidra_9.2.2_PUBLIC_20201229.zip'
+    unzip 'ghidra_9.2.2_PUBLIC_20201229.zip'
     mkdir -p "$prefix"
-    mv ghidra_9.1.2_PUBLIC/* "$prefix"
+    mv ghidra_9.2.2_PUBLIC/* "$prefix"
 }
 
 run() {

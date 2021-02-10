@@ -1,15 +1,21 @@
 #!/bin/sh
 
 lock() {
-    if command -v xflock4 2> /dev/null; then
-        xflock4; sleep 1; xset s activate
-    else
-        if command -v xautolock 2> /dev/null; then
-            xautolock -locknow; sleep 1; xset s activate
-        else
-            xset s activate
-        fi
+    if command -v xss-lock > /dev/null 2> /dev/null; then
+        # Lock and blank the screen...
+        xset dpms force off
+        return
     fi
+    if command -v xflock4 > /dev/null 2> /dev/null; then
+        xflock4; sleep 1; xset s activate
+        return
+    fi
+    if command -v xautolock > /dev/null 2> /dev/null; then
+        xautolock -locknow; sleep 1; xset s activate
+        return
+    fi
+
+    xset s activate
 }
 
 call_ck() {
@@ -19,7 +25,7 @@ call_ck() {
 call() {
     # Try calling xfce4-powermanager or anything like it before trying consolekit2 directly
     dbus-send --print-reply --dest=org.freedesktop.PowerManagement /org/freedesktop/PowerManagement "org.freedesktop.PowerManagement.$@" > /dev/null 2> /dev/null || {
-        echo "PowerManagement failed"
+        echo 'PowerManagement failed'
         case "$1" in
             Suspend) lock; call_ck Suspend boolean:true ;;
             Hibernate) lock; call_ck Hibernate boolean:true ;;
@@ -30,7 +36,10 @@ call() {
 }
 
 close_programs() {
-    if ! command -v wmctrl 2> /dev/null; then
+    if [ "$force" = true ]; then
+        return 0
+    fi
+    if ! command -v wmctrl > /dev/null 2> /dev/null; then
         return 0
     fi
     wmctrl -l | cut -d ' ' -f 1 | xargs -L1 wmctrl -ic
@@ -40,13 +49,24 @@ close_programs() {
         local attempts="$(expr "$attempts" - 1)"
     done
     if [ "$(wmctrl -l | wc -l)" -gt 0 ]; then
-        i3-nagbar -t error -m "Some programs refuse to close. Close them manually and try again."
+        i3-nagbar -t error -m 'Some programs refuse to close. Close them manually and try again.' -B "Force $action" "'$program' -f $action"
         return 1
     fi
     return 0
 }
 
-input="$(rofi -dmenu -i -p 'Power' -no-custom << EOF
+program="$0"
+
+force=false
+if [ "$1" = '-f' ]; then
+    shift
+    force=true
+fi
+
+if [ "$1" ]; then
+    action="$1"
+else
+    action="$(rofi -dmenu -i -p 'Power' -no-custom << EOF
 Lock
 Logout
 Suspend
@@ -54,12 +74,13 @@ Hibernate
 Reboot
 Shutdown
 EOF
-)"
+    )"
+fi
 
-sleep 0.5
-case "$input" in
+sleep 0.2
+case "$action" in
     Logout) close_programs && i3-msg exit ;;
     Lock) lock ;;  # TODO: Can we tell the power manager to lock?
-    Suspend|Hibernate) call "$input" ;;
-    Reboot|Shutdown) close_programs && call "$input" ;;
+    Suspend|Hibernate) call "$action" ;;
+    Reboot|Shutdown) close_programs && call "$action" ;;
 esac

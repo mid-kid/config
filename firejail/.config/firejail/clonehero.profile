@@ -11,5 +11,7 @@ whitelist ~/.config/unity3d/srylain Inc_/Clone Hero
 ignore net none
 ignore no3d
 ignore seccomp
+ignore nosound
 protocol unix,inet,inet6,netlink
+include ~/.config/firejail/inc/discord-ipc.inc
 include ~/.config/firejail/inc/default.inc

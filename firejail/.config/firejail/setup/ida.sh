@@ -1,8 +1,6 @@
 #!/bin/sh
 set -e
 
-# This was mostly taken from the osu AUR package
-
 prefix="${prefix:-$HOME/.local/opt/ida}"
 
 export WINEARCH=win64

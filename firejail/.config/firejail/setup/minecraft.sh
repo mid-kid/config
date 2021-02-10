@@ -10,14 +10,11 @@ fetch() {
     cd "$tmp"
     wget 'https://launcher.mojang.com/download/Minecraft.tar.gz'
     tar xf Minecraft.tar.gz
+    mkdir -p "$prefix"
     mv minecraft-launcher/* "$prefix"
 }
 
 run() {
-    if [ ! -f /usr/lib64/libgconf-2.so ]; then
-        echo "TIP: You might have to install gconf"
-    fi
-
     cd "$prefix"
     if [ "$1" = "ftb" ]; then
         shift

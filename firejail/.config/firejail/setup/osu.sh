@@ -5,8 +5,8 @@ set -e
 
 prefix="${prefix:-$HOME/.local/opt/osu}"
 
-# God fucking mouse breaking every updatae aaaaaaaaaaaaaaaaa
-WINE=wine-staging-5.9
+# God fucking shit breaking every updatae aaaaaaaaaaaaaaaaa
+WINE=wine #-staging-5.21
 
 export WINEARCH=win32
 export WINEPREFIX="$prefix"
@@ -30,9 +30,13 @@ REGEDIT4
 EOF
     chmod +x winetricks
 
+    if ! command -v cabextract > /dev/null 2> /dev/null; then
+        echo "WARNING: cabextract not found, necessary for installing..."
+    fi
+
     WINEDLLOVERRIDES='mscoree=' winecfg
-    "$tmp/winetricks" dotnet45
-    "$tmp/winetricks" gdiplus corefonts cjkfonts  # optional
+    W_TMP="$tmp" "$tmp/winetricks" -q --force dotnet45
+    W_TMP="$tmp" "$tmp/winetricks" gdiplus corefonts cjkfonts  # optional
     "$tmp/winetricks" ddr=opengl fontsmooth=rgb sound=alsa strictdrawordering=enabled
     regedit "$tmp/directsound-latency.reg"
     vblank_mode=0 __GL_SYNC_TO_VBLANK=0 $exec $WINE "$tmp/osu!install.exe"

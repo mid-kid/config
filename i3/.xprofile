@@ -1,11 +1,12 @@
 export GTK_CSD=0
 export GTK_OVERLAY_SCROLLING=0
-export QT_QPA_PLATFORMTHEME="qt5ct"
-export QT_AUTO_SCREEN_SCALE_FACTOR=0
-export QT_SCREEN_SCALE_FACTORS=1.25
 export GDK_SCALE=1.25
+export QT_QPA_PLATFORMTHEME=qt5ct
+export QT_ENABLE_HIGHDPI_SCALING=0
+export QT_SCREEN_SCALE_FACTORS=1.25  # Too huge for Kvantum
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd_hrgb'
 export SAL_USE_VCLPLUGIN=gtk
+export MOZ_USE_XINPUT2=1
+export TDESKTOP_I_KNOW_ABOUT_GTK_INCOMPATIBILITY=1
 export TERMINAL=urxvtc
 export BROWSER=firefox
-export MOZ_USE_XINPUT2=1
-export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd_hrgb'

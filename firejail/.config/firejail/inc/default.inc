@@ -13,52 +13,47 @@ read-only ~/.config/gtk-3.0/settings.ini
 read-only ~/.config/Trolltech.conf
 read-only ~/.config/qt5ct
 
-whitelist ~/.asoundrc
-read-only ~/.asoundrc
-
-whitelist ~/.config/mimeapps.list
-read-only ~/.config/mimeapps.list
-whitelist ~/.local/share/applications/
-read-only ~/.local/share/applications/
-
 caps.drop all
 #ipc-namespace
+#machine-id
+net none
 netfilter
 no3d
-nodbus
 nodvd
 #nogroups
 nonewprivs
 noroot
-#nosound
+nosound
 notv
+nou2f
 novideo
 protocol unix,inet,inet6
 seccomp
 #shell none
-net none
-#memory-deny-write-execute
 
 disable-mnt
-private-tmp
 private-dev
+private-tmp
 
-whitelist ${RUNUSER}/pulse
-read-only ${RUNUSER}/pulse
-read-only /tmp/.X11-unix
+dbus-user none
+dbus-system none
+
 blacklist /boot
+blacklist /etc/portage
+blacklist /etc/gentoo-release
+blacklist /etc/lsb-release
+blacklist /etc/os-release
+blacklist /etc/portage
 blacklist /opt
+blacklist /usr/local
+blacklist /usr/portage
 blacklist /usr/src
 blacklist /usr/tmp
-blacklist /usr/portage
-blacklist /usr/local
-blacklist /etc/os-release
-whitelist /var/tmp
-whitelist /var/run
 
-include /etc/firejail/disable-common.inc
-include /etc/firejail/disable-devel.inc
-include /etc/firejail/disable-interpreters.inc
-include /etc/firejail/disable-passwdmgr.inc
-include /etc/firejail/disable-programs.inc
-include /etc/firejail/disable-xdg.inc
+include disable-common.inc
+include disable-devel.inc
+include disable-interpreters.inc
+include disable-passwdmgr.inc
+include disable-programs.inc
+include disable-write-mnt.inc
+include disable-xdg.inc

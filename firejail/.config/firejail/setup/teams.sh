@@ -17,7 +17,7 @@ fetch() {
 
 run() {
     cd "$prefix"
-    LD_LIBRARY_PATH="$PWD/libsecret/lib:$LD_LIBRARY_PATH" exec ./usr/bin/teams "$@"
+    LD_LIBRARY_PATH="$PWD/libsecret:$LD_LIBRARY_PATH" exec sh -x ./usr/bin/teams "$@"
 }
 
 case "$1" in

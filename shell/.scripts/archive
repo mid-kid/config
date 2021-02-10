@@ -1,5 +1,4 @@
 #!/bin/sh
 set -eu
 tar cvf "$1.tar" "$1"
-rm -rf "$1"
 xz -9v "$1.tar"

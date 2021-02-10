@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
-Name=osu!
+Name=osu!lazer
 Comment=A free-to-win rhythm game. Rhythm is just a *click* away!
-Exec=~/.config/firejail/setup.sh osu %F
-Icon=osu
+Exec=~/.config/firejail/setup.sh osulazer %F
+Icon=osulazer
 Categories=Game;
