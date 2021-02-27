@@ -80,6 +80,7 @@ syn keyword rgbPreProc SECTION
 " prefer to have it highlighted as instruction
 " syn keyword rgbPreProc SET
 syn keyword rgbPreProc SHIFT
+syn keyword rgbPreProc LOAD
 
 " strings
 syn match rgbString "\".*\""
