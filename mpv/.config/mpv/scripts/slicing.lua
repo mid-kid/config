@@ -11,7 +11,7 @@ local o = {
     vcodec = "libx264",
     acodec = "aac",
     prevf = "",
-    vf = "format=yuv444p16$hqvf,scale=in_color_matrix=$matrix,format=bgr24",
+    --vf = "format=yuv444p16$hqvf,scale=in_color_matrix=$matrix,format=bgr24",
     hqvf = "",
     postvf = "",
     opts = "",
@@ -20,8 +20,9 @@ local o = {
         ffmpeg -v warning -y -stats
         -ss $shift -i '$in' -t $duration
         -c:v $vcodec -c:a $acodec $audio
-        -vf $prevf$vf$postvf $opts '$out.$ext'
+        $opts '$out.$ext'
     ]],
+        -- -vf $prevf$vf$postvf
 }
 options.read_options(o)
 

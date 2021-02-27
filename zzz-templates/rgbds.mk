@@ -9,7 +9,7 @@ RGBGFX := rgbgfx
 RGBLINK := rgblink
 RGBFIX := rgbfix
 
-RGBASMFLAGS := -p 0xff -L
+RGBASMFLAGS := -p 0xff -L -Weverything
 RGBLINKFLAGS := -p 0xff -d -t
 RGBFIXFLAGS := -p 0xff -j -m 0 -r 0 -n 0 -k "  " -i "    " -t "           "
 
