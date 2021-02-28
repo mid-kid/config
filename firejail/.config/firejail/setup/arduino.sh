@@ -15,6 +15,11 @@ fetch() {
 }
 
 run() {
+    # XDG Base Directory specification
+    XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+    mkdir -p "$XDG_DATA_HOME/arduino"
+    ln -sf "$XDG_DATA_HOME/arduino" "$HOME/.arduino15"
+
     cd "$prefix"
     exec ./arduino "$@"
 }

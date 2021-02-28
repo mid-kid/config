@@ -1,6 +1,7 @@
 whitelist ~/.icons
 whitelist ~/.themes
 whitelist ~/.gtkrc-2.0
+whitelist ~/.config/gtk-2.0/gtkrc
 whitelist ~/.config/gtk-3.0/gtk.css
 whitelist ~/.config/gtk-3.0/settings.ini
 whitelist ~/.config/Trolltech.conf
@@ -8,6 +9,7 @@ whitelist ~/.config/qt5ct
 read-only ~/.icons
 read-only ~/.themes
 read-only ~/.gtkrc-2.0
+read-only ~/.config/gtk-2.0/gtkrc
 read-only ~/.config/gtk-3.0/gtk.css
 read-only ~/.config/gtk-3.0/settings.ini
 read-only ~/.config/Trolltech.conf

@@ -15,6 +15,11 @@ fetch() {
 }
 
 run() {
+    # XDG Base Directory specification
+    XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+    mkdir -p "$XDG_DATA_HOME/stm32cubemx"
+    ln -sf "$XDG_DATA_HOME/stm32cubemx" "$HOME/.stm32cubemx"
+
     cd "$prefix"
     exec java -jar STM32CubeMX "$@"
 }
