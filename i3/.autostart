@@ -1,10 +1,10 @@
 #!/bin/sh
-~/.fehbg
+"${XDG_CONFIG_HOME:-$HOME/.config}/fehbg"
 picom &
 start-pulseaudio-x11
 xss-lock -l -- xflock4 -n &
 xset s off  # Managed by xfce4-power-manager
-xset +fp ~/.local/share/fonts
+xset +fp "${XDG_DATA_HOME:-$HOME/.local/share}/fonts"
 xset fp rehash
 xset r rate 300 50
 
