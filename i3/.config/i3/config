@@ -38,12 +38,12 @@ bindsym $mod+d exec rofi -show drun
 bindsym $mod+Shift+d exec i3-sensible-terminal -e ranger
 bindsym $mod+Shift+v exec mpv $(xclip -o)
 bindsym $mod+i exec rofi-pass
-bindsym Print exec --no-startup-id ~/.scripts/screenshot -s
-bindsym Shift+Print exec --no-startup-id ~/.scripts/screenshot
-bindsym $mod+Ctrl+o exec ~/.scripts/extscreens
-bindsym XF86Display exec ~/.scripts/extscreens
-bindsym $mod+Ctrl+p exec ~/.scripts/power
-bindsym XF86PowerOff exec ~/.scripts/power
+bindsym Print exec --no-startup-id ~/.config/scripts/screenshot -s
+bindsym Shift+Print exec --no-startup-id ~/.config/scripts/screenshot
+bindsym $mod+Ctrl+o exec ~/.config/scripts/extscreens
+bindsym XF86Display exec ~/.config/scripts/extscreens
+bindsym $mod+Ctrl+p exec ~/.config/scripts/power
+bindsym XF86PowerOff exec ~/.config/scripts/power
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute alsa_input.pci-0000_06_00.6.analog-stereo toggle
 bindsym XF86Tools exec --no-startup-id playerctl play-pause
 bindsym $mod+Shift+o exec picom-trans -c +10
@@ -220,4 +220,4 @@ bindsym $mod+n mode "output"
 
 # Autostart applications
 exec_always --no-startup-id killall -q polybar && sleep 2; polybar example
-exec --no-startup-id ~/.autostart
+exec --no-startup-id ~/.config/i3/autostart

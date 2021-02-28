@@ -26,7 +26,7 @@ alias axf='aunpack'
 eval $(dircolors -b)
 
 # Some random scripts
-PATH=~/.scripts:$PATH
+PATH=~/.config/scripts:$PATH
 
 # Function to prepend to path
 prepath() {
