@@ -1,0 +1,2 @@
+# Please include this in your environment, for this to work:
+export URXVT_PERL_LIB="${XDG_CONFIG_HOME:-$HOME/.config}/urxvt/ext"
