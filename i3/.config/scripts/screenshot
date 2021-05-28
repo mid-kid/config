@@ -1,18 +1,17 @@
 #!/bin/sh
+set -e
 save_root="${HOME:-/tmp}"  # Directory to use as root for saving screenshots
 
 file="$(mktemp -t Screenshot.XXXXXX)"
-maim -u -f png $@ "$file"
-if [ "$?" != 0 ]; then
-    rm -f "$file"
-    exit 1
-fi
+trap "rm -f '$file'" EXIT
+maim -u -f png "$@" "$file"
 
 input="$(rofi -dmenu -i -p 'Screenshot' << EOF
 Save
 Save sha
 Upload
 Clipboard
+QRDecode
 EOF
 )"
 
@@ -38,10 +37,11 @@ case "$func" in
         ;;
 
     Upload)
+        error=false
         errorfile="$(mktemp -t Screenshot-curlerr.XXXXXX)"
         #url="$(curl -nsT "$file" 'https://chunk.io/' 2> "$errorfile").png"
-        url="$(curl -sT "$file" 'https://transfer.sh/screenshot.png' 2> "$errorfile")"
-        if [ "$?" = 0 ]; then
+        url="$(curl -sT "$file" 'https://transfer.sh/screenshot.png' 2> "$errorfile")" || error=true
+        if [ "$error" = false ]; then
             notify-send -a 'Screenshot' 'Upload successful'
             echo "$url" | xclip -selection clipboard -i
         else
@@ -54,6 +54,7 @@ case "$func" in
     Clipboard)
         xclip -selection clipboard -t image/png -i "$file"
         ;;
+    QRDecode)
+        zbarimg -1 -q --raw "$file" | xclip -selection clipboard -i
+        ;;
 esac
-
-rm -f "$file"
