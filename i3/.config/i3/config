@@ -30,27 +30,35 @@ set $down j
 set $left h
 set $right l
 floating_modifier $mod
+mouse_warping output
 
 # External programs
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+Return exec --no-startup-id i3-sensible-terminal -name floating
-bindsym $mod+d exec rofi -show drun
+bindsym $mod+o exec --no-startup-id picom-trans -c -- -10
+bindsym $mod+Shift+o exec --no-startup-id picom-trans -c +10
+bindsym $mod+d exec rofi -cache-dir ~/.local/share/rofi -show drun
 bindsym $mod+Shift+d exec i3-sensible-terminal -e ranger
-bindsym $mod+Shift+v exec mpv $(xclip -o)
+bindsym $mod+v exec pavucontrol
+bindsym $mod+Shift+v exec --no-startup-id mpv $(xclip -o)
 bindsym $mod+i exec rofi-pass
 bindsym Print exec --no-startup-id ~/.config/scripts/screenshot -s
 bindsym Shift+Print exec --no-startup-id ~/.config/scripts/screenshot
-bindsym $mod+Ctrl+o exec ~/.config/scripts/extscreens
-bindsym XF86Display exec ~/.config/scripts/extscreens
+bindsym $mod+Ctrl+o exec --no-startup-id ~/.config/scripts/extscreens
+bindsym XF86Display exec --no-startup-id ~/.config/scripts/extscreens
 bindsym $mod+Ctrl+p exec ~/.config/scripts/power
 bindsym XF86PowerOff exec ~/.config/scripts/power
+bindsym Shift+XF86AudioRaiseVolume exec --no-startup-id ~/.config/scripts/appvol +2%
+bindsym Shift+XF86AudioLowerVolume exec --no-startup-id ~/.config/scripts/appvol -2%
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute alsa_input.pci-0000_06_00.6.analog-stereo toggle
 bindsym XF86Tools exec --no-startup-id playerctl play-pause
-bindsym $mod+Shift+o exec picom-trans -c +10
-bindsym $mod+o exec picom-trans -c -- -10
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioStop exec --no-startup-id playerctl stop
+bindsym XF86Calculator exec --no-startup-id i3-sensible-terminal -name floating -e 'python'
 
 # Application discrimination
 for_window [class="URxvt" instance="floating"] move scratchpad scratchpad show
+for_window [class="URxvt" instance="emerge"] border normal
 for_window [class="Qemu-system-.+"] floating enable border normal
 for_window [class="VirtualBox"] floating enable border normal
 for_window [class="Gambatte_.+"] floating enable border normal
@@ -64,7 +72,9 @@ for_window [class="Jstest-gtk"] floating enable border normal
 for_window [class="qjoypad"] floating enable border normal
 for_window [class="Blueman-.+"] floating enable border normal
 for_window [class="Pavucontrol"] floating enable border normal
+for_window [class="Xfce4-power-manager-settings"] floating enable border none
 for_window [class="listen.moe-desktop-app"] floating enable border none
+for_window [class="qutebrowser"] focus child layout tabbed focus
 for_window [instance="ida64.exe" title="Please wait..."] floating enable
 for_window [instance="ida.exe" title="Please wait..."] floating enable
 for_window [class="Ghidra" title="win0"] floating enable
@@ -72,8 +82,7 @@ for_window [class="Ghidra" title="References to .+"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [window_role="About"] floating enable border normal
-for_window [window_type="notification"] floating enable
-for_window [class="qutebrowser"] focus child layout tabbed focus
+for_window [window_type="notification"] floating enable border none
 
 # Window Manager keybinds
 bindsym $mod+Shift+q kill

@@ -1,12 +1,16 @@
 #!/bin/sh
-"${XDG_CONFIG_HOME:-$HOME/.config}/fehbg"
-picom &
-start-pulseaudio-x11
 xss-lock -l -- xflock4 -n &
 xset s off  # Managed by xfce4-power-manager
 xset +fp "${XDG_DATA_HOME:-$HOME/.local/share}/fonts"
 xset fp rehash
 xset r rate 300 50
+
+"${XDG_CONFIG_HOME:-$HOME/.config}/fehbg"
+picom &
+start-pulseaudio-x11
+#pipewire &
+#lxqt-policykit-agent &
+/usr/lib64/libexec/polkit-kde-authentication-agent-1 &
 
 urxvtd &
 volumeicon &
@@ -14,6 +18,6 @@ xfce4-power-manager &
 wpa_gui -t &
 redshift-gtk &
 udiskie &
-blueman-applet &
+#blueman-applet &
 
 telegram-desktop -startintray &

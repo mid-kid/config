@@ -1,6 +1,13 @@
 [user]
 	email = esteve.varela@gmail.com
 	name = mid-kid
+[credential]
+	helper = cache
+[sendemail]
+	smtpserver = smtp.gmail.com
+	smtpuser = esteve.varela@gmail.com
+	smtpencryption = tls
+	smtpserverport = 587
 [push]
 	default = simple
 [core]
@@ -11,14 +18,17 @@
 	tool = vimdiff
 	renameLimit = 3000
 	algorithm = minimal
-[credential]
-	helper = cache
+[merge]
+	tool = vimdiff
 [alias]
 	diff-img = difftool -x 'compare \"$LOCAL\" \"$REMOTE\" png:- | montage -mode concatenate \"$LOCAL\" png:- \"$REMOTE\" png:- | display -title \"$BASE: Local | Diff | Remote\" png:-'
 	gud = commit
 	tree-log = log --all --decorate --oneline --graph
-[merge]
-	tool = vimdiff
+	full-log = log --pretty=fuller
 [diff "hex"]
 	textconv = xxd
 	binary = true
+[init]
+	defaultBranch = master
+[pull]
+	rebase = true

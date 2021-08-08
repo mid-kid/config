@@ -1,0 +1,43 @@
+#!/bin/sh
+
+AppDir="$PWD/AppDir"
+
+# Creates an AppDir using portage based on a package list
+mkdir -p "$AppDir/var/tmp" "$AppDir/var/log"
+
+ROOT="$AppDir" \
+SYSROOT="$AppDir" \
+EPREFIX="/" \
+EMERGE_LOG_DIR="$AppDir/var/log" \
+PORTAGE_TMPDIR="$AppDir/var/tmp" \
+FEATURES="-news" \
+emerge \
+    --ask=n \
+    --with-bdeps=n \
+    --usepkgonly \
+    --quickpkg-direct=y \
+    --oneshot \
+    --nodeps \
+    "$@"
+
+# Cleanup
+cd "$AppDir"
+rm -vrf \
+    var \
+    tmp \
+    etc/csh.env \
+    etc/env.d \
+    etc/environment.d \
+    etc/ld.so.conf \
+    etc/profile.env \
+    usr/include \
+    usr/lib/cmake \
+    usr/lib/pkgconfig \
+    usr/lib64/cmake \
+    usr/lib64/pkgconfig \
+    usr/share/applications/mimeinfo.cache \
+    usr/share/doc \
+    usr/share/info \
+    usr/share/man \
+
+find -type d -empty -delete

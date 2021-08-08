@@ -1,10 +1,10 @@
 *.dpi: 120
-Xft.antialias: 1
-Xft.hinting: 1
-Xft.hintstyle: hintfull
-Xft.lcdfilter: lcddefault
-Xft.rgba: rgb
 Xft.autohint: 0
+Xft.lcdfilter: lcddefault
+Xft.hinting: true
+Xft.hintstyle: hintslight
+Xft.antialias: 1
+Xft.rgba: rgb
 
 URxvt.foreground: #FAF4FB
 URxvt.background: [90]#222220

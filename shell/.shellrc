@@ -3,6 +3,8 @@ export EDITOR='vim'
 export VISUAL="$EDITOR"
 export PAGER='less'
 export LESS='-RXF'
+export NINJA_STATUS='[%p %f/%t] '
+export CMAKE_GENERATOR='Ninja'
 alias vi='vim'
 alias ls='ls --color=auto -F --quoting-style=shell-escape'
 alias grep='grep --color=auto'
@@ -21,6 +23,7 @@ alias sxiv='sxiv -a'
 alias xci='xclip -sel clip -i'
 alias xco='xclip -sel clip -o'
 alias axf='aunpack'
+alias py='python3'
 
 # Set up the directory colors
 eval $(dircolors -b)

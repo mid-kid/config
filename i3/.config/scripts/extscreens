@@ -6,6 +6,7 @@ screen_ext='HDMI1 VGA1 HDMI-A-0 DP-1 DP-2 DisplayPort-1 DisplayPort-2'
 input="$(rofi -dmenu -i -p 'Toggle external screen' -no-custom << EOF
 Off
 Same
+External
 Left
 Right
 Above
@@ -14,31 +15,53 @@ EOF
 )"
 input="$(echo "$input" | tr '[:upper:]' '[:lower:]')"
 
-case $input in
+update_feh=false
+case "$input" in
     off)
+        xrandr --output $screen_main --auto
         for screen in $screen_ext; do
             xrandr --output $screen --$input
         done
-        [ -x ~/.fehbg ] && ~/.fehbg
+        update_feh=true
         ;;
 
-    left|right)
+    external)
+        xrandr --output $screen_main --off
         for screen in $screen_ext; do
-            xrandr --output $screen --auto --$input-of $screen_main
+            xrandr --output $screen --auto
         done
-        [ -x ~/.fehbg ] && ~/.fehbg
-        ;;
-
-    above|below)
-        for screen in $screen_ext; do
-            xrandr --output $screen --auto --$input $screen_main
-        done
-        [ -x ~/.fehbg ] && ~/.fehbg
         ;;
 
     same)
+        xrandr --output $screen_main --auto
         for screen in $screen_ext; do
             xrandr --output $screen --auto --$input-as $screen_main
         done
-        [ -x ~/.fehbg ] && ~/.fehbg
+        update_feh=true
+        ;;
+
+    left|right)
+        xrandr --output $screen_main --auto
+        for screen in $screen_ext; do
+            xrandr --output $screen --auto --$input-of $screen_main
+        done
+        update_feh=true
+        ;;
+
+    above|below)
+        xrandr --output $screen_main --auto
+        for screen in $screen_ext; do
+            xrandr --output $screen --auto --$input $screen_main
+        done
+        update_feh=true
+        ;;
 esac
+
+if "$update_feh"; then
+    for x in "${XDG_CONFIG_HOME:-$HOME/.config}/fehbg" "$HOME/.fehbg"; do
+        if [ -x "$x" ]; then
+            "$x"
+            break
+        fi
+    done
+fi

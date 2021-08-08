@@ -1,2 +1,2 @@
 #!/bin/sh
-watch grep -e Dirty: -e Writeback: /proc/meminfo
+watch -n1 grep -e Dirty: -e Writeback: /proc/meminfo

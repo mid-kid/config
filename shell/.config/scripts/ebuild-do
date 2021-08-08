@@ -1,0 +1,40 @@
+#!/bin/sh
+#ebuild="$1"; shift
+#sudo=
+#test "$(id -u)" != 0 && sudo=sudo
+#exec $sudo USE="$USE" FEATURES="ccache $FEATURES" MAKEOPTS="${MAKEOPTS:--j$(nproc --ignore=1) -l$(nproc)}" ebuild "$ebuild" "$@"
+
+opt_local=false
+opt_root=false
+
+while [ "$#" -gt 0 ]; do
+    case "$1" in
+        -l) opt_local=true; shift; ;;
+        -lr) opt_local=true; opt_root=true; shift; ;;
+        --) shift; break; ;;
+        *) break; ;;
+    esac
+done
+
+ebuild="$1"; shift
+
+sudo='sudo --preserve-env=CFLAGS,CXXFLAGS,LDFLAGS,USE,MAKEOPTS,FEATURES,PORTAGE_TMPDIR,PORTAGE_USERNAME,PORTAGE_GRPNAME'
+
+export MAKEOPTS="${MAKEOPTS:--j$(nproc --ignore=1) -l$(nproc)}"
+export FEATURES="test $FEATURES"
+
+if ! "$opt_local"; then
+    export FEATURES="ccache $FEATURES"
+else
+    export FEATURES="fakeroot $FEATURES"
+    export PORTAGE_TMPDIR="$PWD"
+    export PORTAGE_USERNAME="$(id -un)"
+    export PORTAGE_GRPNAME="$(id -gn)"
+    export PKGDIR="$PORTAGE_TMPDIR/packages"
+    mkdir -p "$PORTAGE_TMPDIR"
+    if ! "$opt_root"; then
+        sudo=
+    fi
+fi
+
+exec $sudo ebuild "$ebuild" "$@"

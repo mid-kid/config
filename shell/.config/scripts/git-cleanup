@@ -1,9 +1,9 @@
 #!/bin/sh
 set -eu
-git clean -xdf
+#git clean -xdf
 if [ "$(git branch -r)" ]; then
     git branch -r --format="%(refname)" | sed -e 's@refs/remotes/@@' | xargs git branch -rd
 fi
 #git tag -l | xargs git tag -d
-git reflog expire --all --expire=now
-git gc --aggressive --prune=now
+git reflog expire --all --expire=all
+git gc --aggressive --prune=all

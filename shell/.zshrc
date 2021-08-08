@@ -27,7 +27,7 @@ bindkey -e
 # End of lines configured by zsh-newuser-install
 
 # Keybinds
-# http://www.linuxfromscratch.org/lfs/view/stable/chapter07/inputrc.html
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter09/inputrc.html
 # https://git.archlinux.org/svntogit/packages.git/tree/trunk/inputrc?h=packages/readline
 bindkey '\eOc' emacs-forward-word  # CTRL+right
 bindkey '\eOd' emacs-backward-word  # CTRL+left
@@ -55,7 +55,7 @@ bindkey '\e[2~' quoted-insert
 # Prompt
 if command -v git > /dev/null; then
     prompt_git() {
-        if [ -d ".git" ]; then
+        if [ -d ".git/objects" ]; then
             local branch=$(git symbolic-ref HEAD 2> /dev/null | cut -d '/' -f 3-)
             [ ! $branch ] && branch=$(git rev-parse --short HEAD)
             printf '%s' $branch

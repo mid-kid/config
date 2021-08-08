@@ -22,7 +22,7 @@ background = #222
 background-alt = #444
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
-foreground-alt = #555
+foreground-alt = #777
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
@@ -53,16 +53,15 @@ module-margin-left = 1
 module-margin-right = 2
 
 font-0 = misc fixed:pixelsize=14;1
-font-1 = unifont:fontformat=truetype:size=12:antialias=false;0
-font-2 = wuncon siji:pixelsize=10;1
+font-1 = wuncon siji:pixelsize=10;1
 
 modules-left = i3
 modules-center = 
-modules-right = pkgupdates-available wlan eth xkeyboard filesystem cpu memory temperature date backlight-acpi alsa powermenu
+modules-right = pkgupdates-available wlan eth xkeyboard filesystem cpu memory temperature date alsa powermenu
 
 tray-position = right
 tray-padding = 4
-;tray-background = #0063ff
+tray-background = #222
 tray-maxsize = 24
 
 ;wm-restack = bspwm
@@ -382,7 +381,8 @@ ramp-1 = 
 ramp-2 = 
 ramp-foreground = ${colors.foreground-alt}
 
-hwmon-path = /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon6/temp1_input
+#hwmon-path = /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon6/temp1_input
+hwmon-path = /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon4/temp1_input
 
 [module/powermenu]
 type = custom/menu
@@ -415,29 +415,12 @@ menu-2-1-exec = menu-open-0
 
 [module/pkgupdates-available]
 type = custom/script
-
-; Available tokens:
-;   %output%
-; Default: %output%
 label = Updates: %output%
 format-underline = #268bd2
 
-; Available tokens:
-;   %counter%
-; Command to be executed (using "/bin/sh -c [command]")
 exec = grep '^\[' /var/spool/updates/pending | wc -l
-
-; Conditional command that, if defined, needs to exit successfully
-; before the main exec command is invoked.
-; Default: ""
 exec-if = grep -q '^\[' /var/spool/updates/pending
-
-; Will the script output continous content?
-; Default: false
 tail = false
-
-; Seconds to sleep between updates
-; Default: 5 (0 if `tail = true`)
 interval = 300
 
 click-left = $TERMINAL -T emerge -e sh -c 'sudo emerge -uDN @world; sleep 1d'

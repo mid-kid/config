@@ -1,0 +1,2 @@
+#!/bin/sh
+exec make -C /lib/modules/${KERNELVERSION:-$(uname -r)}/build M=$PWD "$@"

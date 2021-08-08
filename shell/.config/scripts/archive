@@ -1,4 +1,27 @@
 #!/bin/sh
 set -eu
-tar cvf "$1.tar" "$1"
+
+# https://reproducible-builds.org/docs/archives/
+
+# Future versions of GNU Tar might switch to --format=posix
+# https://www.gnu.org/software/tar/manual/html_node/Formats.html#SEC134
+
+# To avoid embedding filename in gzip archive: --no-name
+# Xz doesn't embed filenames
+
+mtime=""
+
+while [ "$#" -gt 0 ]; do
+    case "$1" in
+        -t) mtime="--mtime=@0"; shift ;;
+        --) shift; break; ;;
+        *) break; ;;
+    esac
+done
+
+tar --format=gnu \
+    --sort=name \
+    --owner=0 --group=0 --numeric-owner \
+    $mtime \
+    -cvf "$1.tar" "$1"
 xz -9v "$1.tar"

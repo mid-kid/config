@@ -1,0 +1,13 @@
+#!/bin/sh
+# Modify the volume of the currently focussed application
+set -e
+
+xgetprop() {
+    xprop -f "$1" "32c" ' $0\n' "$@" | cut -d ' ' -f 2-
+}
+
+pid="$(xgetprop _NET_WM_PID -id "$(xgetprop _NET_ACTIVE_WINDOW -root)")"
+sinks="$(pactl list sink-inputs | awk '/^Sink Input #/{ gsub("^.*#", ""); input=$0 }; /^\t\tapplication.process.id/{ gsub("^.*= ", ""); gsub("\"", ""); print $0, input }')"
+for x in $(echo "$sinks" | grep "^$pid " | cut -d ' ' -f 2); do
+    pactl set-sink-input-volume "$x" "$@"
+done

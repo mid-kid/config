@@ -11,7 +11,7 @@ local o = {
     vcodec = "libx264",
     acodec = "aac",
     prevf = "",
-    --vf = "format=yuv444p16$hqvf,scale=in_color_matrix=$matrix,format=bgr24",
+    vf = "", -- "format=yuv444p16$hqvf,scale=in_color_matrix=$matrix,format=bgr24",
     hqvf = "",
     postvf = "",
     opts = "",
