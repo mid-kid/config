@@ -55,6 +55,8 @@ case "$func" in
         xclip -selection clipboard -t image/png -i "$file"
         ;;
     QRDecode)
-        zbarimg -1 -q --raw "$file" | xclip -selection clipboard -i
+        qr="$(zbarimg -1 -q --raw "$file")"
+        echo "$qr" | xclip -selection clipboard -i
+        notify-send -a 'Screenshot' 'QR Decoded' "$qr"
         ;;
 esac

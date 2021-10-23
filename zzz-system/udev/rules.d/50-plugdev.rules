@@ -3,8 +3,24 @@
 SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="4ee7", MODE="0660", GROUP="plugdev"
 ## Fastboot
 SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="d00d", MODE="0660", GROUP="plugdev"
-## ADB
+## ADB Sideload
 SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="d001", MODE="0660", GROUP="plugdev"
+## ADB
+SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="4ee2", MODE="0660", GROUP="plugdev"
+## ADB OxygenOS
+SUBSYSTEM=="usb", ATTR{idVendor}=="2a70", ATTR{idProduct}=="9011", MODE="0660", GROUP="plugdev"
+## ADB LineageOS
+SUBSYSTEM=="usb", ATTR{idVendor}=="05c6", ATTR{idProduct}=="9001", MODE="0660", GROUP="plugdev"
+
+# Pocophone F1
+## ADB
+SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="4ee7", MODE="0660", GROUP="plugdev"
+## Fastboot
+SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="d00d", MODE="0660", GROUP="plugdev"
+## ADB TWRP (Normal)
+SUBSYSTEM=="usb", ATTR{idVendor}=="0b05", ATTR{idProduct}=="7773", MODE="0660", GROUP="plugdev"
+## ADB TWRP (Sideload)
+SUBSYSTEM=="usb", ATTR{idVendor}=="0b05", ATTR{idProduct}=="d001", MODE="0660", GROUP="plugdev"
 
 # Adafruit Trinket
 SUBSYSTEM=="usb", ATTR{idVendor}=="1781", ATTR{idProduct}=="0c9f", MODE="0660", GROUP="plugdev"
@@ -15,8 +31,35 @@ SUBSYSTEM=="usb", ATTR{idVendor}=="2341", ATTR{idProduct}=="8041", MODE="0660", 
 # Arduino Uno
 SUBSYSTEM=="usb", ATTR{idVendor}=="2341", ATTR{idProduct}=="0043", MODE="0660", GROUP="plugdev"
 
+# Arduino Nano
+SUBSYSTEM=="usb", ATTR{idVendor}=="1a86", ATTR{idProduct}=="7523", MODE="0660", GROUP="plugdev"
+
 # TI-84+ CE-T
 SUBSYSTEM=="usb", ATTR{idVendor}=="0451", ATTR{idProduct}=="e008", MODE="0660", GROUP="plugdev"
 
 # PICkit2
 SUBSYSTEM=="usb", ATTR{idVendor}=="04d8", ATTR{idProduct}=="0033", MODE="0660", GROUP="plugdev"
+
+# Nintendo switch
+SUBSYSTEM=="usb", ATTR{idVendor}=="057e", ATTR{idProduct}=="3000", MODE="0660", GROUP="plugdev"
+
+# Teensy 2.0
+# This has many product IDs for different purposes, use that.
+SUBSYSTEM=="usb", ATTR{idVendor}=="16c0", MODE="0660", GROUP="plugdev"
+
+# ST-LINK V2
+SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="3748", MODE="0660", GROUP="plugdev"
+
+# Switch
+## System
+SUBSYSTEM=="usb", ATTR{idVendor}=="057e", ATTR{idProduct}=="3000", MODE="0660", GROUP="plugdev"
+## Debugger
+SUBSYSTEM=="usb", ATTR{idVendor}=="1209", ATTR{idProduct}=="8b00", MODE="0660", GROUP="plugdev"
+## SysDVR
+SUBSYSTEM=="usb", ATTR{idVendor}=="057e", ATTR{idProduct}=="3006", MODE="0660", GROUP="plugdev"
+
+# usbasp
+SUBSYSTEM=="usb", ATTR{idVendor}=="16c0", ATTR{idProduct}=="05dc", MODE="0660", GROUP="plugdev"
+
+# logic analyzer (saleae)
+SUBSYSTEM=="usb", ATTR{idVendor}=="0925", ATTR{idProduct}=="3881", MODE="0660", GROUP="plugdev"

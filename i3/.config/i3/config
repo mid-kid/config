@@ -50,7 +50,8 @@ bindsym $mod+Ctrl+p exec ~/.config/scripts/power
 bindsym XF86PowerOff exec ~/.config/scripts/power
 bindsym Shift+XF86AudioRaiseVolume exec --no-startup-id ~/.config/scripts/appvol +2%
 bindsym Shift+XF86AudioLowerVolume exec --no-startup-id ~/.config/scripts/appvol -2%
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute alsa_input.pci-0000_06_00.6.analog-stereo toggle
+bindsym Shift+XF86AudioMute exec --no-startup-id ~/.config/scripts/appvol mute
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86Tools exec --no-startup-id playerctl play-pause
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioStop exec --no-startup-id playerctl stop

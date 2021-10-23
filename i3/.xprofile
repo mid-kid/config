@@ -1,6 +1,6 @@
 export TERMINAL=urxvtc
 export BROWSER=firefox
-export FREETYPE_PROPERTIES="truetype:interpreter-version=38"
+export FREETYPE_PROPERTIES='truetype:interpreter-version=38'
 #export GTK_CSD=0  # gtk3-classic disables them fully
 export GTK_OVERLAY_SCROLLING=0
 export QT_QPA_PLATFORMTHEME=qt5ct
@@ -9,3 +9,7 @@ export SAL_USE_VCLPLUGIN=kf5
 export MOZ_USE_XINPUT2=1
 export DESKTOP_APP_I_KNOW_ABOUT_GTK_INCOMPATIBILITY=1  # Avoid telegram whining about gtk
 export DESKTOPINTEGRATION=0  # Avoid telegram making a desktop entry
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export SDL_IM_MODULE=fcitx
+export XMODIFIERS='@im=fcitx'

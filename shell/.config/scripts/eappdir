@@ -35,6 +35,7 @@ rm -vrf \
     usr/lib/pkgconfig \
     usr/lib64/cmake \
     usr/lib64/pkgconfig \
+    usr/share/aclocal \
     usr/share/applications/mimeinfo.cache \
     usr/share/doc \
     usr/share/info \

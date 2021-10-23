@@ -103,7 +103,7 @@ map <F1> :make<CR>
 map <F8> :!curl -T % chunk.io 2> /dev/null<CR>
 map <F12> :syntax sync fromstart<CR>
 map <C-n> :noh<CR>
-map <C-a> :set invlist<CR>
+map <C-d> :set invlist<CR>
 map <C-o> :NERDTreeToggle<CR>
 map <leader>. :CtrlPTag<CR>
 
