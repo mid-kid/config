@@ -7,8 +7,9 @@
 user_pref("accessibility.typeaheadfind", false);  // Don't search text when typing in a page
 user_pref("browser.download.useDownloadDir", true);  // Download to the "downloads" folder by default
 user_pref("browser.startup.page", 3);  // Keep session across shutdowns
-user_pref("dom.security.https_only_mode", true);  // Don't warn when a site only supports http
+user_pref("dom.security.https_only_mode", false);  // Don't warn when a site only supports http
 user_pref("extensions.pocket.enabled", false);  // 3rd party extension, proprietary
+user_pref("general.smoothScroll", false);  // I prefer quick/fast scrolling
 user_pref("keyword.enabled", true);  // Enable search in the URL bar
 user_pref("layout.spellcheckDefault", 0);  // Disable spellchecking
 user_pref("network.dns.disableIPv6", false);  // This is fucking retarded
@@ -28,7 +29,7 @@ user_pref("xpinstall.signatures.required", false);  // Disable extension signing
 user_pref("xpinstall.whitelist.required", false);  // Disable extension whitelist
 
 // Try not breaking sites
-//user_pref("network.http.referer.XOriginPolicy", 0);
+user_pref("network.http.referer.XOriginPolicy", 1);
 //user_pref("network.http.referer.XOriginTrimmingPolicy", 0);
 //user_pref("privacy.firstparty.isolate", false);
 

@@ -20,6 +20,22 @@ function Disable-Service { param ($Name)
     Get-Service -Name $Name | Set-Service -StartupType Disabled
 }
 
+# General: Set wallpaper
+Reg 'HKCU:\Control Panel\Desktop' WallPaper "$pwd\img\Win10.jpg" -PropertyType String
+# General: Set Lock Screen wallpaper
+Reg 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization' LockScreenImage "$pwd\img\Win10HD.jpg" -PropertyType String
+# General: Disable background blur on Lock Screen
+Reg 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\System' DisableAcrylicBackgroundOnLogon 1
+# General: Use the normal touchpad scroll direction
+## (settings) Devices -> Touchpad -> Scroll and zoom -> Scrolling direction = Down motion scrolls down
+Reg 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PrecisionTouchPad' ScrollDirection 4294967295
+# General: Set regional settings
+## (settings) Time & Language -> Region -> Regional format = English (Europe)
+Set-Culture en-150
+## Short date = 2017-04-05
+Reg 'HKCU:\Control Panel\International' sShortDate 'yyyy-MM-dd' -PropertyType String
+Reg 'HKCU:\Control Panel\International' iDate '2' -PropertyType String
+Reg 'HKCU:\Control Panel\International' sDate '-' -PropertyType String
 # General: Set system clock to UTC (to match linux behavior)
 Reg 'HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation' RealTimeIsUniversal 1
 # General: Disable Automatic Updates
@@ -40,7 +56,9 @@ Disable-Service VSS
 # Cleanup: Disable reserved storage
 Set-WindowsReservedStorageState -State Disabled
 # Cleanup: Disable swap file
-Reg 'HKLM:\SYSTEM\ControlSet001\Control\Session Manager\Memory Management' SwapfileControl 0
+Reg 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management' SwapfileControl 0
+# Cleanup: Disable hibernation (frees up some disk space)
+powercfg -h off
 
 # Privacy: Disable shared expriences
 ## (gpedit) Computer Configuration -> Administrative Templates -> System -> Group Policy -> Continue experiences on this device = Disabled
@@ -62,6 +80,9 @@ Reg 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost' EnableWebContentEv
 # Shell: Disable revealing passwords
 ## (gpedit) Computer Configuration -> Administrative Templates -> Windows Components -> Credential User Interface -> Do not display the password reveal button = Enabled
 Reg 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\CredUI' DisablePasswordReveal 1
+# Shell: Don't use security questions for local accounts
+## (gpedit) Computer Configuration -> Administrative Templates -> Windows Components -> Credential User Interface -> Prevent the use of security questions for local accounts = Enabled
+Reg 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\System\' NoLocalPasswordResetQuestions 1
 # Shell: Disable restarting apps after reboot
 Reg 'HKCU:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' RestartApps 0
 
@@ -105,13 +126,6 @@ Reg 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer' EnableAutoTray 0
 ## (gpedit) Computer Configuration -> Administrative Templates -> Windows Components -> Windows Security -> Systray -> Hide Windows Security Systray = Enabled
 Reg 'HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Systray' HideSystray 1
 
-# Settings -> Time & Language -> Region -> Regional format = English (Europe)
-Set-Culture en-150
-# Short date = 2017-04-05
-Reg 'HKCU:\Control Panel\International' sShortDate 'yyyy-MM-dd' -PropertyType String
-Reg 'HKCU:\Control Panel\International' iDate '2' -PropertyType String
-Reg 'HKCU:\Control Panel\International' sDate '-' -PropertyType String
-
 # Refresh the environment
 Stop-Process -Name explorer -Force
 
@@ -122,7 +136,5 @@ Stop-Process -Name explorer -Force
 ## (settings) Update & Security
 #New-ItemProperty -Path 'Registry::HKEY_USERS\S-1-5-20\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Settings' -Name DownloadMode -Value 0 -Force
 #Delete-DeliveryOptimizationCache -Force
-
-# Search: Don't store search history
-# NOTE: Reconsider, do I really care?
+## Search: Don't store search history
 #New-ItemProperty -Path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\SearchSettings' -Name IsDeviceSearchHistoryEnabled -Value 0 -Force

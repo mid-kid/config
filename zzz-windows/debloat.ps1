@@ -5,19 +5,19 @@
 
 $apps_exclude = @(
     # Required to install things...
-	'Microsoft.WindowsStore'
+    'Microsoft.WindowsStore'
 )
 $features_exclude = @(
 )
 $capabilities_exclude = @(
     # Cannot be removed
     'Language.Basic~*',
-    'Language.TextToSpeech~*',
+    'Language.TextToSpeech~*'
 )
 
 # Remove all apps
 $apps_prov = Get-AppxProvisionedPackage -Online |
-	where {$i=$_; -not ($apps_exclude | where {$i.DisplayName -like $_})}
+    where {$i=$_; -not ($apps_exclude | where {$i.DisplayName -like $_})}
 $apps_prov | Format-Table
 $apps_prov | Remove-AppxProvisionedPackage -Online
 $apps = Get-AppxPackage |
@@ -40,13 +40,13 @@ $capabilities | Remove-WindowsCapability -Online
 # Remove OneDrive
 $uninstall = Get-Package -Name "Microsoft OneDrive" -ProviderName Programs -ErrorAction Ignore | ForEach-Object -Process {$_.Meta.Attributes["UninstallString"]}
 if ($uninstall) {
-	echo "Uninstalling OneDrive"
-	taskkill /f /im OneDrive.exe
-	iex "& $uninstall"
+    echo "Uninstalling OneDrive"
+    taskkill /f /im OneDrive.exe
+    iex "& $uninstall"
     pause
     Stop-Process -Name explorer -Force
-	Remove-Item "$env:LocalAppData\Microsoft\OneDrive" -Force -Recurse
-	Remove-Item "$env:ProgramData\Microsoft OneDrive" -Force -Recurse
+    Remove-Item "$env:LocalAppData\Microsoft\OneDrive" -Force -Recurse
+    Remove-Item "$env:ProgramData\Microsoft OneDrive" -Force -Recurse
 }
 
 # Remove Edge
