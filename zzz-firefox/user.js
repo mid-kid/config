@@ -18,6 +18,7 @@ user_pref("privacy.resistFingerprinting.letterboxing", false);  // Don't mess wi
 user_pref("privacy.sanitize.sanitizeOnShutdown", false);  // Don't clear everything on shutdown
 user_pref("signon.rememberSignons", false);  // Don't ask to save passwords
 user_pref("widget.non-native-theme.enabled", false);  // I prefer native widgets...
+user_pref("browser.tabs.drawInTitlebar", false);  // Use native title bar, don't have spacer next to tabs
 
 // Disable "handholding" security
 // I know what I install/browse, and I don't want a 3rd party to decide for me
@@ -29,7 +30,7 @@ user_pref("xpinstall.signatures.required", false);  // Disable extension signing
 user_pref("xpinstall.whitelist.required", false);  // Disable extension whitelist
 
 // Try not breaking sites
-user_pref("network.http.referer.XOriginPolicy", 1);
+user_pref("network.http.referer.XOriginPolicy", 0);
 //user_pref("network.http.referer.XOriginTrimmingPolicy", 0);
 //user_pref("privacy.firstparty.isolate", false);
 
