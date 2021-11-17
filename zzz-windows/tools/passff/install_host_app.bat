@@ -2,7 +2,7 @@
 SETLOCAL
 
 SET "APP_NAME=passff"
-SET "VERSION=1.2.2"
+SET "VERSION=1.2.3"
 SET "HOST_URL=https://github.com/passff/passff-host/releases/download/%VERSION%/passff.py"
 SET "MANIFEST_URL=https://github.com/passff/passff-host/releases/download/%VERSION%/passff.json"
 
@@ -33,6 +33,9 @@ IF NOT "%1"=="" (
         GOTO :help
     ) ELSE IF "%1"=="firefox" (
         SET "TARGET_REG=HKCU\SOFTWARE\Mozilla\NativeMessagingHosts\%APP_NAME%"
+        SHIFT
+    ) ELSE IF "%1"=="librewolf" (
+        SET "TARGET_REG=HKCU\SOFTWARE\LibreWolf\NativeMessagingHosts\%APP_NAME%"
         SHIFT
     ) ELSE IF "%1"=="chrome"  (
         SET "TARGET_REG=HKCU\Software\Google\Chrome\NativeMessagingHosts\%APP_NAME%"
@@ -100,7 +103,7 @@ REG ADD "%TARGET_REG%" /ve /d "%HOST_MANIFEST_FULL%" /f || (
 EXIT /B
 
 :help
-ECHO Usage: %0 [OPTION] [chrome^|chromium^|firefox^|opera^|vivaldi]
+ECHO Usage: %0 [OPTION] [chrome^|chromium^|firefox^|opera^|vivaldi^|librewolf]
 ECHO
 ECHO Options:
 ECHO   --local    Install files from disk instead of downloading them

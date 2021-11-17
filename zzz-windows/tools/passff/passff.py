@@ -10,7 +10,7 @@ import struct
 import subprocess
 import sys
 
-VERSION = "1.2.2"
+VERSION = "1.2.3"
 
 ###############################################################################
 ######################## Begin preferences section ############################
@@ -95,7 +95,7 @@ if __name__ == "__main__":
         env[key] = val
 
     # Set up subprocess params
-    cmd = ["C:\\Program Files\\Git\\bin\\bash.exe", "/c/Users/u/AppData/Roaming/passff/password-store.sh"] + opt_args + ['--'] + pos_args
+    cmd = ["C:\\Program Files\\Git\\bin\\bash.exe", env["HOME"] + "/AppData/Roaming/passff/password-store.sh"] + opt_args + ['--'] + pos_args
     proc_params = {
         'input': bytes(std_input, CHARSET) if std_input else None,
         'stdout': subprocess.PIPE,
