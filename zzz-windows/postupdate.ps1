@@ -7,8 +7,7 @@
 
 # Clean up old packages
 dism /online /cleanup-image /analyzecomponentstore
-#dism /online /cleanup-image /startcomponentcleanup
-#dism /online /cleanup-image /startcomponentcleanup /resetbase
+dism /online /cleanup-image /startcomponentcleanup /resetbase
 # Offending dirs:
 # - \Windows\WinSxS\Backup
 # - \Windows\WinSxS\Temp
