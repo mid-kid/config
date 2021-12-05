@@ -22,6 +22,10 @@ cat "$profile/userjs/user.js" "$newline" \
     "$profile/chrome/user.js" "$newline" \
     user.js > "$profile/user.js"
 
+if [ "$(uname -o)" = "Msys" ]; then
+    cat user_win.js >> "$profile/user.js"
+fi
+
 cp "$profile/userjs/prefsCleaner.sh" "$profile/prefsCleaner.sh"
 chmod +x "$profile/prefsCleaner.sh"
 ( cd "$profile"
