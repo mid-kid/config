@@ -32,3 +32,5 @@
 	defaultBranch = master
 [pull]
 	rebase = true
+[rebase]
+	autoStash = true

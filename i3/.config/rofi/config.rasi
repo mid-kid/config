@@ -1,14 +1,17 @@
 configuration {
-	modi: "drun,run,ssh";
-	font: "DejaVu Sans 12";
-	bw: 2;
-	show-icons: true;
-	sidebar-mode: true;
-	combi-modi: "drun,window";
-	theme: "sidebar";
-	kb-mode-next: "Super+l,Super+Tab";
-	kb-mode-previous: "Super+h,Super+Shift+Tab";
+    modi: "drun,run,ssh";
+    font: "DejaVu Sans 12";
+    bw: 2;
+    show-icons: true;
+    sidebar-mode: true;
+    combi-modi: "drun,window";
+    kb-mode-next: "Super+l,Super+Tab";
+    kb-mode-previous: "Super+h,Super+Shift+Tab";
+    dpi: 0;
 }
+
+@theme "sidebar"
+
 /*
 !rofi.color-enabled: true
 !rofi.color-window: argb:ee222220, #9D6A47, #9D6A47

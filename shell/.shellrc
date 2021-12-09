@@ -28,6 +28,16 @@ alias py='python3'
 # Set up the directory colors
 eval $(dircolors -b)
 
+# Set up 'less' manpage colors
+# Using default gentoo colors (https://github.com/gentoo/gentoo/blob/master/app-text/manpager/files/manpager.c)
+export LESS_TERMCAP_mb=$'\e[5;31m'
+export LESS_TERMCAP_md=$'\e[1;34m'
+export LESS_TERMCAP_me=$'\e[0;0m'
+export LESS_TERMCAP_us=$'\e[4;36m'
+export LESS_TERMCAP_ue=$'\e[0;0m'
+export LESS_TERMCAP_so=$'\e[1;32m'
+export LESS_TERMCAP_se=$'\e[0;0m'
+
 # Some random scripts
 PATH=~/.config/scripts:$PATH
 

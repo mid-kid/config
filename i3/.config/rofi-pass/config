@@ -2,5 +2,6 @@ default_user=':filename'
 clip=clipboard
 notify='true'
 #default_do='copyPass' # Use Alt+p
-fix_layout=true
-layout_cmd(){ setxkbmap;}
+#fix_layout=true
+xdotool_delay=60
+#layout_cmd(){ setxkbmap;}
