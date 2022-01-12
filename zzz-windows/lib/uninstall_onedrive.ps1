@@ -1,9 +1,11 @@
 #Requires -RunAsAdministrator
 
+# C:\Windows\SysWOW64\OneDriveSetup.exe /uninstall
+
 $uninstall = Get-Package -Name 'Microsoft OneDrive' -ProviderName Programs -ErrorAction Ignore | ForEach-Object -Process {$_.Meta.Attributes["UninstallString"]}
 if ($uninstall) {
     echo 'Uninstalling OneDrive'
-    taskkill /f /im OneDrive.exe
+    Stop-Process -Name OneDrive -Force
     iex "& $uninstall"
     pause
     Stop-Process -Name explorer -Force

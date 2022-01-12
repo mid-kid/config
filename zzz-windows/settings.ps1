@@ -5,6 +5,9 @@ $ErrorActionPreference = "Stop"
 # - OOShutUp10
 #   - Apply Recommended and somewhat recommended settings
 
+# Post-install settings:
+# - intl.cpl -> Administrative -> Copy settings...
+
 # Finding new settings:
 # Download Process Monitor (by sysinternals), filter by Operation=RegSetValue
 
@@ -23,6 +26,11 @@ function Disable-Service { param ($Name)
 # General: Use the normal touchpad scroll direction
 ## (settings) Devices -> Touchpad -> Scroll and zoom -> Scrolling direction = Down motion scrolls down
 Reg 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PrecisionTouchPad' ScrollDirection 4294967295
+# General: Set keyboard repeat delay/speed
+## (control panel) Keyboard -> Speed -> Character repeat
+## Consider: https://superuser.com/questions/1058474/increase-keyboard-repeat-rate-beyond-control-panel-limits-in-windows-10
+Reg 'HKCU:\Control Panel\Keyboard' KeyboardDelay '0' -PropertyType String
+Reg 'HKCU:\Control Panel\Keyboard' KeyboardSpeed '31' -PropertyType String
 # General: Set regional settings
 ## (settings) Time & Language -> Region -> Regional format = English (Europe)
 Set-Culture en-150

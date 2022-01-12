@@ -4,10 +4,12 @@
 
 # Remove Edge
 .\lib\uninstall_edge.ps1
+.\lib\uninstall_onedrive.ps1
 
 # Clean up old packages
 dism /online /cleanup-image /analyzecomponentstore
 dism /online /cleanup-image /startcomponentcleanup /resetbase
+dism /online /cleanup-image /analyzecomponentstore
 # Offending dirs:
 # - \Windows\WinSxS\Backup
 # - \Windows\WinSxS\Temp
