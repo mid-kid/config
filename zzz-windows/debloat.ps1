@@ -11,9 +11,6 @@ $capabilities_exclude = @(
     # Cannot be removed
     'Language.Basic~*',
 
-    # Cannot be removed in some versions (should check)
-    'Language.TextToSpeech~*',
-
     # Stuff I generally want to keep
     'Microsoft.Windows.MSPaint~*',
     'Microsoft.Windows.Notepad~*'

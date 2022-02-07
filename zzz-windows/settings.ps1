@@ -139,6 +139,7 @@ Reg 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost' EnableWebContentEv
 Reg 'HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Systray' HideSystray 1
 
 # Refresh the environment
+rundll32.exe user32.dll,UpdatePerUserSystemParameters
 Stop-Process -Name explorer -Force
 
 # NOTE: Managed by OOShutUp10
