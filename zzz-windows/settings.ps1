@@ -43,6 +43,8 @@ Reg 'HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation' RealTimeIsUnive
 # General: Disable Automatic Updates
 ## (gpedit) Computer Configuration -> Administrative Templates -> Windows Components -> Windows Update -> Configure Automatic Updates = Disabled
 Reg 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU' NoAutoUpdate 1
+## (gpedit) Computer Configuration -> Administrative Templates -> Windows Components -> Windows Update -> No auto-restart with logged on users for scheduled automatice updates installations = Enabled
+Reg 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU' NoAutoRebootWithLoggedOnUsers 1
 # General: Enable developer mode (allow installing unsigned UWP apps without the store)
 ## (settings) Update & Security -> For Developers -> Developer Mode
 Reg 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock' AllowDevelopmentWithoutDevLicense 1
@@ -100,6 +102,8 @@ Reg 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions
 Reg 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer' ShowDriveLettersFirst 4
 # Explorer: Disable Microsoft Store "Open With"
 Reg 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer' NoUseStoreOpenWith 1
+# Explorer: Avoid creating "System Volume Information" on USB drives
+Reg 'HKLM:\SOFTWARE\Policies\Microsoft\Windows' DisableRemovableDriveIndexing 1
 
 # Cleanup: Delete all system restore points and disable them
 Disable-ComputerRestore -Drive $env:systemDrive
