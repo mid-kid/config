@@ -7,6 +7,7 @@ $ErrorActionPreference = "Stop"
 
 # Post-install settings:
 # - intl.cpl -> Administrative -> Copy settings...
+# - sysdm.cpl -> Advanced -> Performance -> Advanced -> Virtual memory -> Set "No paging file"
 
 # Finding new settings:
 # Download Process Monitor (by sysinternals), filter by Operation=RegSetValue
@@ -113,10 +114,23 @@ vssadmin Delete Shadows -All
 Disable-Service VSS
 # Cleanup: Disable reserved storage
 Set-WindowsReservedStorageState -State Disabled
-# Cleanup: Disable swap file
+# Cleanup: Disable swapfile.sys
 Reg 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management' SwapfileControl 0
+# Cleanup: Disable pagefile.sys on all drives
+$w = Gwmi Win32_ComputerSystem
+if ($w.AutomaticManagedPagefile) {
+	$w.AutomaticManagedPagefile = $False
+	$w.Put()
+}
+while (Gwmi Win32_PagefileSetting) {
+	$w = Gwmi Win32_PagefileSetting
+	$w.Delete()
+}
 # Cleanup: Disable hibernation (frees up some disk space)
 powercfg -h off
+# Cleanup: Disable WinRE recovery
+reagentc -disable
+Remove-Item "${env:SystemDrive}\Recovery" -Recurse -Force -ErrorAction Ignore
 
 # Privacy: Disable shared expriences
 ## (gpedit) Computer Configuration -> Administrative Templates -> System -> Group Policy -> Continue experiences on this device = Disabled
