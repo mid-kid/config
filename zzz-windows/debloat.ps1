@@ -51,7 +51,7 @@ $features = Get-WindowsOptionalFeature -Online | where State -eq 'Enabled' |
 $features | Format-Table
 $prompt = Read-Host -Prompt 'Disable optional features? (n)'
 if ($prompt -eq 'y') {
-    $features | Disable-WindowsOptionalFeature -Online -NoRestart
+    $features | Disable-WindowsOptionalFeature -Online -Remove -NoRestart
 }
 
 # Remove bloatware

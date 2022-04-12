@@ -1,1 +1,2 @@
 user_pref("browser.tabs.drawInTitlebar", true);  // On windows the native titlebar sucks
+user_pref("security.cert_pinning.enforcement_level", 1);  // Allow antivirus override
