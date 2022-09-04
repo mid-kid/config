@@ -3,10 +3,11 @@ export EDITOR='vim'
 export VISUAL="$EDITOR"
 export PAGER='less'
 export LESS='-RXF'
+export MAKEFLAGS="-j$(nproc)"
 export NINJA_STATUS='[%p %f/%t] '
 export CMAKE_GENERATOR='Ninja'
 alias vi='vim'
-alias ls='ls --color=auto -F --quoting-style=shell-escape'
+alias ls='ls --color=auto --quoting-style=shell-escape --file-type --group-directories-first --human-readable'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
@@ -15,11 +16,9 @@ alias ip='ip --color=auto'
 alias du='du -h'
 alias df='df -h'
 alias free='free -h'
-alias dmount='udisksctl mount -b'
-alias dumount='udisksctl unmount -b'
 alias httrack='httrack -%v'
 alias streamlink='streamlink --player mpv'
-alias sxiv='sxiv -a'
+alias sxiv='nsxiv -a'
 alias xci='xclip -sel clip -i'
 alias xco='xclip -sel clip -o'
 alias axf='aunpack'
@@ -43,7 +42,7 @@ PATH=~/.config/scripts:$PATH
 
 # Function to prepend to path
 prepath() {
-    local _path="$(realpath -eq "${1:-$PWD}")"
+    local _path="$(realpath -mq "${1:-$PWD}")"
     [ "$_path" ] && eval export ${2:-PATH}=\"$_path:\$${2:-PATH}\"
 }
 prefix() {
@@ -65,6 +64,15 @@ prefix() {
     [ "$_include" ] && export CFLAGS="$CFLAGS -I$_include"
     [ "$_lib" ] && export LDFLAGS="$LDFLAGS -L$_lib"
     [ "$_lib64" ] && export LDFLAGS="$LDFLAGS -L$_lib64"
+}
+
+dmount() {
+    local d="$1"; shift
+    udisksctl mount -b "/dev/$d" "$@"
+}
+dumount() {
+    local d="$1"; shift
+    udisksctl unmount -b "/dev/$d" "$@"
 }
 
 # Set the default make goal for the current session

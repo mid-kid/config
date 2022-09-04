@@ -22,7 +22,7 @@ compinit
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
-setopt autocd extendedglob notify beep prompt_subst
+setopt extendedglob notify beep prompt_subst
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
@@ -52,10 +52,14 @@ bindkey '\e[6~' history-search-forward  # PgDown
 bindkey '\e[3~' delete-char  # Delete
 bindkey '\e[2~' quoted-insert
 
+autoload -U colors
+colors
+
 # Prompt
+_prompt_git() { :; }
 if command -v git > /dev/null; then
-    prompt_git() {
-        if [ -d ".git/objects" ]; then
+    _prompt_git() {
+        if [ -d .git/objects ]; then
             local branch=$(git symbolic-ref HEAD 2> /dev/null | cut -d '/' -f 3-)
             [ ! $branch ] && branch=$(git rev-parse --short HEAD)
             printf '%s' $branch
@@ -78,34 +82,26 @@ if command -v git > /dev/null; then
             [ $untracked_files -gt 0 ] && printf ' …%d' $untracked_files
         fi
     }
-else
-    prompt_git() { :; }
+fi
+_prompt_eprefix() { :; }
+if [[ $SHELL != /bin/zsh ]]; then
+    _prompt_eprefix() {
+        local prefix=${SHELL%/bin/zsh}
+        prefix=${prefix##*/}
+        prefix=${prefix#.}
+        printf "%%{$fg[blue]%%}(%s)%%{$reset_color%%} " $prefix
+    }
 fi
 
-autoload -U colors
-colors
-
-PROMPT="%{$fg[green]%}%n%{$reset_color%}@%{$fg[yellow]%}%m%{$reset_color%} :%{$fg[magenta]%}\$(prompt_git)%{$reset_color%}: %{$fg[cyan]%}%c%{$reset_color%} $ "
-
-export ZPLUG_HOME="$HOME/.zplug"  # Install zplug by running: mkdir -p "$ZPLUG_HOME"
-if [ -d "$ZPLUG_HOME" -a ! -f "$ZPLUG_HOME/init.zsh" -a "$(command -v git)" ]; then
-    mkdir -p "$ZPLUG_HOME"
-    git clone https://github.com/b4b4r07/zplug "$ZPLUG_HOME"
-fi
-
-if [ -f "$ZPLUG_HOME/init.zsh" ]; then
-    source "$ZPLUG_HOME/init.zsh"
-
-    zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-
-    zplug "zsh-users/zsh-syntax-highlighting"
-    zplug "zsh-users/zsh-completions"
-    zplug "zsh-users/zsh-autosuggestions"
-
-    zplug check || zplug install
-
-    zplug load
-fi
+PROMPT="$(_prompt_eprefix)%{$fg[green]%}%n%{$reset_color%}@%{$fg[yellow]%}%m%{$reset_color%} :%{$fg[magenta]%}\$(_prompt_git)%{$reset_color%}: %{$fg[cyan]%}%c%{$reset_color%} $ "
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 source ~/.shellrc
+
+# Defined in ~/.shellrc:
+_dmount() {
+    devices=( $(lsblk -rn | cut -d ' '  -f 1) )
+    _values 'devices' "${devices[@]}"
+}
+compdef _dmount dmount dumount

@@ -10,8 +10,6 @@
 	smtpserverport = 587
 [push]
 	default = simple
-[core]
-	autocrlf = input
 [color]
 	ui = auto
 [diff]

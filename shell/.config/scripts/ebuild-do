@@ -1,8 +1,4 @@
 #!/bin/sh
-#ebuild="$1"; shift
-#sudo=
-#test "$(id -u)" != 0 && sudo=sudo
-#exec $sudo USE="$USE" FEATURES="ccache $FEATURES" MAKEOPTS="${MAKEOPTS:--j$(nproc --ignore=1) -l$(nproc)}" ebuild "$ebuild" "$@"
 
 opt_local=false
 opt_root=false

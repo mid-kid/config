@@ -10,3 +10,5 @@ device_config:
   ignore: true
 - device_file: /dev/loop2
   ignore: true
+- device_file: /dev/loop3
+  ignore: true

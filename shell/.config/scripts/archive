@@ -24,5 +24,5 @@ tar --format=gnu \
     --sort=name \
     --owner=0 --group=0 --numeric-owner \
     $mtime \
-    -cvf "$name.tar" "$1"
+    -cvf "$name.tar" "$@"
 xz -9v "$name.tar"

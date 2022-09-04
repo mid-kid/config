@@ -2,6 +2,8 @@
 set -e
 
 lock() {
+    $sway && return 0
+
     # If xss-lock is installed, assume it's enabled and it'll run the right locker
     if command -v xss-lock > /dev/null 2> /dev/null; then
         # Lock and blank the screen...
@@ -79,9 +81,8 @@ close_programs() {
     #  avoid losing libreoffice documents or whatnot.
     # NOTE: Doesn't handle notification apps or daemons, only open windows.
 
-    if [ "$force" = true ]; then
-        return 0
-    fi
+    $force && return 0
+    $sway && return 0
 
     # Requires wmctrl to function
     if ! command -v wmctrl > /dev/null 2> /dev/null; then
@@ -94,7 +95,7 @@ close_programs() {
         local attempts="$(expr "$attempts" - 1)"
     done
     if [ "$(wmctrl -l | wc -l)" -gt 0 ]; then
-        i3-nagbar -t error -m 'Some programs refuse to close. Close them manually and try again.' -B "Force $action" "'$program' -f $action"
+        i3-nagbar -t error -m 'Some programs refuse to close. Close them manually and try again.' -B "Force $action" "'$program' -f '$action'"
         return 1
     fi
     return 0
@@ -102,11 +103,15 @@ close_programs() {
 
 program="$0"
 
+sway=false
 force=false
-if [ "$1" = '-f' ]; then
-    shift
-    force=true
-fi
+while [ "$1" ]; do
+    case "$1" in
+    -s) sway=true; shift; continue ;;
+    -f) force=true; shift; continue ;;
+    *) break ;;
+    esac
+done
 
 if [ "$1" ]; then
     action="$1"
@@ -118,6 +123,7 @@ Switch User
 Suspend
 Hibernate
 Reboot
+Reboot to Windows
 Shutdown
 EOF
     )"
@@ -129,5 +135,6 @@ case "$action" in
     Lock) lock ;;  # TODO: Can we tell the power manager to lock?
     Suspend|Hibernate) call "$action" ;;
     Reboot|Shutdown) close_programs && call "$action" ;;
+    'Reboot to Windows') close_programs && sudo grub-reboot-windows && call Reboot ;;
     'Switch User') call_dm SwitchToGreeter ;;
 esac

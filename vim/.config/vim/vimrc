@@ -29,7 +29,7 @@ Plug 'junegunn/seoul256.vim'  " Theme
 Plug 'airblade/vim-gitgutter'  " Show git diffs on the side
 Plug 'Xuyuanp/nerdtree-git-plugin'  " Show git status in nerdtree
 Plug 'machakann/vim-highlightedyank'  " Highlight what you've copied
-"Plug 'abudden/taghighlight-automirror'
+"Plug 'https://heptapod.host/cgtk/taghighlight'
 
 " Syntax
 Plug 'cespare/vim-toml'
@@ -39,18 +39,29 @@ Plug 'lervag/vimtex'
 
 " Project management
 Plug 'editorconfig/editorconfig-vim'  " Support editorconfig spec
-Plug 'scrooloose/nerdtree'  " File browser (CTRL+O)
-Plug 'ctrlpvim/ctrlp.vim'  " Fuzzy finding file browser (CTRL+P) (browse tags with ;.)
+Plug 'scrooloose/nerdtree'  " File browser
+Plug 'ctrlpvim/ctrlp.vim'  " Fuzzy finding file and tag browser
 Plug 'embear/vim-localvimrc'  " Support per-project vimrc files
 Plug 'ludovicchabant/vim-gutentags'  " Auto-update tags file
 
 " Editing
 Plug 'scrooloose/nerdcommenter'  " Comment easily (easily my most-used plugin)
-Plug 'Raimondi/delimitMate'  " Auto-close quotes, parens, etc...
+"Plug 'Raimondi/delimitMate'  " Auto-close quotes, parens, etc...
+Plug 'LunarWatcher/auto-pairs'  " Auto-close quotes, parens, etc...
 Plug 'vim-scripts/AutoComplPop'  " Autocompletion popup
+Plug 'tpope/vim-endwise'  " Auto-end if statements in several languages
 Plug 'tpope/vim-surround'  " Bindings too hard to remember and use tbhon
 Plug 'junegunn/vim-easy-align'  " Alignment commands bound to 'ga'
 Plug 'junegunn/goyo.vim'  " Distraction-free editing
+
+" Consider
+"Plug 'jackguo380/vim-lsp-cxx-highlight'  " C(++) highlighting based on LSP
+"Plug 'ervandew/supertab'  " Replace AutoComplPop
+" Any of (completion)
+"Plug 'w0rp/ale'
+"Plug 'neoclide/coc.nvim'
+"Plug 'prabirshrestha/vim-lsp'
+"Plug 'valloric/youcompleteme'
 
 call plug#end()
 
@@ -73,6 +84,7 @@ set shiftwidth=4
 set expandtab
 set smarttab
 set autoindent
+set shiftround
 set listchars=tab:>-,space:·
 set cinoptions+=:0  " Don't indent case in switch
 
@@ -82,7 +94,7 @@ set hlsearch
 set incsearch
 set statusline=%f
 set colorcolumn=80
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/  " ExtraWhitespace is defined in the theme
+au BufWinEnter * match ExtraWhitespace /\s\+$/  " ExtraWhitespace is defined in the theme
 
 " Behavior
 set modeline
@@ -97,23 +109,39 @@ set fileencodings=ucs-bom,utf-8,sjis,default  " Try SHIFT-JIS
 if has("patch-8.1.0360") | set diffopt+=internal,algorithm:patience | endif  " Use slower but better diff algorithm
 
 " Keybinds
-let mapleader=";"
-let maplocalleader=";"
-map <F1> :make<CR>
-map <F8> :!curl -T % chunk.io 2> /dev/null<CR>
-map <F12> :syntax sync fromstart<CR>
-map <C-n> :noh<CR>
-map <C-d> :set invlist<CR>
-map <C-o> :NERDTreeToggle<CR>
-map <leader>. :CtrlPTag<CR>
+let mapleader="-"
+let maplocalleader="_"
+nnoremap <F1> :make<cr>
+nnoremap <F12> :syntax sync fromstart<cr>
+nnoremap <C-d> :set invlist<cr>
+nnoremap <C-n> :NERDTreeToggle<cr>
+nnoremap <leader>. :CtrlPTag<cr>
+nnoremap <leader>n :noh<cr>
+nnoremap <leader>ve :split ~/.config/vim/vimrc<cr>
+nnoremap <leader>vs :source ~/.config/vim/vimrc<cr>
 
-nnoremap <C-h> <C-w><C-h>
-nnoremap <C-j> <C-w><C-j>
-nnoremap <C-k> <C-w><C-k>
-nnoremap <C-l> <C-w><C-l>
+" Behavioral keybinds
+"" Escape alternative
+inoremap ÑÑ <esc>
+inoremap ññ <esc>
+"" Auto-indent on paste
+nnoremap p p=`]
+nnoremap P P=`]
+nnoremap <c-p> p
+nnoremap <c-P> P
+"" Easier split movement
+noremap <C-h> <C-w><C-h>
+noremap <C-j> <C-w><C-j>
+noremap <C-k> <C-w><C-k>
+noremap <C-l> <C-w><C-l>
+
+" auto-pairs
+let g:AutoPairsMapBS=1
+let g:AutoPairsMultilineBackspace=1
+let g:AutoPairsCenterLine=0
 
 " CtrlP
-let g:ctrlp_map="<C-p>"
+let g:ctrlp_map="<C-m>"
 let g:ctrlp_prompt_mappings={
   \ "AcceptSelection('h')": ["<C-i>"],
   \ "AcceptSelection('v')": ["<C-x>"],
@@ -126,8 +154,6 @@ nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 
 " NERDTree
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 let g:NERDTreeQuitOnOpen=1
 
 " NERDCommenter
