@@ -1,6 +1,8 @@
 /*** [SECTION XXXX]: MY SETTINGS ***/
 
 user_pref("accessibility.typeaheadfind", false);  // Don't search text when typing in a page
+user_pref("browser.download.improvements_to_download_panel", false);  // Don't save all files automatically...
+user_pref("browser.download.start_downloads_in_tmp_dir", false);  // Please don't save things in downloads when I use "open with"
 user_pref("browser.download.useDownloadDir", true);  // Download to the "downloads" folder by default
 user_pref("browser.startup.page", 3);  // Keep session across shutdowns
 user_pref("browser.tabs.drawInTitlebar", false);  // Use native title bar, don't have spacer next to tabs
@@ -8,12 +10,14 @@ user_pref("extensions.pocket.enabled", false);  // 3rd party extension, propriet
 user_pref("general.smoothScroll", false);  // I prefer quick/fast scrolling
 user_pref("keyword.enabled", true);  // Enable search in the URL bar
 user_pref("layout.spellcheckDefault", 0);  // Disable spellchecking
+user_pref("network.cookie.lifetimePolicy", 0);  // Plese store my cookies and site data regardless of site
 user_pref("network.dns.disableIPv6", false);  // This is fucking retarded
 user_pref("network.trr.mode", 5);  // Applications should stop trying to avoid the system's DNS resolver
 user_pref("places.history.expiration.max_pages", 1000000000);  // Keep history FOREVER!
 user_pref("privacy.resistFingerprinting.letterboxing", false);  // Don't mess with the content size
 user_pref("privacy.sanitize.sanitizeOnShutdown", false);  // Don't clear everything on shutdown
 user_pref("signon.rememberSignons", false);  // Don't ask to save passwords
+user_pref("widget.gtk.overlay-scrollbars.enabled", false);  // GTK3's overlay scrollbars are terrible
 user_pref("widget.non-native-theme.enabled", false);  // I prefer native widgets...
 
 // Disable "handholding" security
