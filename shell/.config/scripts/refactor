@@ -1,0 +1,15 @@
+#!/bin/sh
+sedescape_regex() {
+    echo "$@" | sed 's/[^^]/[&]/g; s/\^/\\^/g'
+}
+sedescape_subst() {
+    echo "$@" | sed 's/[&/\]/\\&/g'
+}
+
+grep -rwl \
+    --include='*.c' --include='*.h' \
+    --include='*.asm' --include='*.inc' \
+    --include='*.s' --include='*.i' \
+    --include='*.ld' \
+    --include='*.md' \
+    "$1" | xargs sed -i "s/\<$(sedescape_regex "$1")\>/$(sedescape_subst "$2")/g"

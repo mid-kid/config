@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+tmp="$(mktemp -d -t rsyncd.XXXXXX)"
+trap 'rm -rf "$tmp"' EXIT INT
+
+cat > "$tmp/rsyncd.conf" << EOF
+pid file = $tmp/rsyncd.pid
+port = 1873
+use chroot = false
+
+[sync]
+path = $PWD
+EOF
+
+rsync --daemon --no-detach --config="$tmp/rsyncd.conf"

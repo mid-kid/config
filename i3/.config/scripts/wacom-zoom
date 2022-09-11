@@ -1,0 +1,15 @@
+#!/bin/sh
+# "Zoom" a tablet drawing area by a given multiplier
+set -eu
+
+area="$(xsetwacom get "$1" area | awk '{
+    ow = ($3 - $1)
+    oh = ($4 - $2)
+    w = ow / '$2'
+    h = oh / '$2'
+    x = $1 + (ow - w) / 2
+    y = $2 + (oh - h) / 2
+    print int(x), int(y), int(x + w), int(y + h)
+}')"
+echo $area
+xsetwacom set "$1" area $area

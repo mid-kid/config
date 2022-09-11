@@ -1,0 +1,3 @@
+#!/bin/sh
+# Generate a short version string for a git project
+echo "$(git show -s --format=%cd --date=format:%Y%M%d HEAD)-$(git rev-parse --short HEAD)"
