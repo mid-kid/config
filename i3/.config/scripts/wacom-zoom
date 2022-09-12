@@ -2,6 +2,8 @@
 # "Zoom" a tablet drawing area by a given multiplier
 set -eu
 
+xsetwacom set "$1" resetarea
+
 area="$(xsetwacom get "$1" area | awk '{
     ow = ($3 - $1)
     oh = ($4 - $2)
