@@ -1,0 +1,11 @@
+# Sophia modifications
+DiagnosticDataLevel -Minimal  # Override override by RecommendedTroubleshooting
+ErrorReporting -Disable  # Override override by RecommendedTroubleshooting
+AppColorMode -Light
+Cursors -Default  # See "C:\Windows\Cursors" to delete downloaded files
+OneDrive -Uninstall
+AdminApprovalMode -Default
+IPv6Component -Enable
+InputMethod -Default
+NetworkDiscovery -Disable
+PinToStart -UnpinAll
