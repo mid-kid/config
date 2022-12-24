@@ -51,8 +51,11 @@ Plug 'LunarWatcher/auto-pairs'  " Auto-close quotes, parens, etc...
 Plug 'vim-scripts/AutoComplPop'  " Autocompletion popup
 Plug 'tpope/vim-endwise'  " Auto-end if statements in several languages
 Plug 'tpope/vim-surround'  " Bindings too hard to remember and use tbhon
+Plug 'tpope/vim-repeat'  " Allow pluggins to hook into '.' repeat
 Plug 'junegunn/vim-easy-align'  " Alignment commands bound to 'ga'
 Plug 'junegunn/goyo.vim'  " Distraction-free editing
+"Plug 'dpelle/vim-LanguageTool'  " Grammar correction
+Plug 'michaeljsmith/vim-indent-object'
 
 " Consider
 "Plug 'jackguo380/vim-lsp-cxx-highlight'  " C(++) highlighting based on LSP
@@ -135,13 +138,25 @@ noremap <C-j> <C-w><C-j>
 noremap <C-k> <C-w><C-k>
 noremap <C-l> <C-w><C-l>
 
+" vim -b : edit binary using xxd-format!
+augroup Binary
+    au!
+    au BufReadPre *.bin setlocal binary
+    au BufReadPost * if &binary | %!xxd
+    au BufReadPost * set ft=xxd | endif
+    au BufWritePre * if &binary | %!xxd -r
+    au BufWritePre * endif
+    au BufWritePost * if &binary | %!xxd
+    au BufWritePost * set nomod | endif
+augroup END
+
 " auto-pairs
 let g:AutoPairsMapBS=1
 let g:AutoPairsMultilineBackspace=1
 let g:AutoPairsCenterLine=0
 
 " CtrlP
-let g:ctrlp_map="<C-m>"
+let g:ctrlp_map="<C-u>"
 let g:ctrlp_prompt_mappings={
   \ "AcceptSelection('h')": ["<C-i>"],
   \ "AcceptSelection('v')": ["<C-x>"],
@@ -179,20 +194,13 @@ let g:TagHighlightSettings={"TagFileName": ".tags"}
 
 " vimtex
 let g:tex_flavor="latex"
-let g:vimtex_view_general_viewer="xpdf"
+let g:vimtex_view_general_viewer="okular"
+let g:vimtex_view_general_options="--unique file:@pdf\#src:@line@tex"
+"let g:vimtex_view_general_viewer="xpdf"
 
 " vim-highlightedyank
 let g:highlightedyank_highlight_duration=400
 highlight HighlightedyankRegion cterm=reverse gui=reverse
 
-" vim -b : edit binary using xxd-format!
-augroup Binary
-  au!
-  au BufReadPre *.bin setlocal binary
-  au BufReadPost * if &binary | %!xxd
-  au BufReadPost * set ft=xxd | endif
-  au BufWritePre * if &binary | %!xxd -r
-  au BufWritePre * endif
-  au BufWritePost * if &binary | %!xxd
-  au BufWritePost * set nomod | endif
-augroup END
+" vim-LanguageTool
+let g:languagetool_jar=$XDG_DATA_HOME."/vim/languagetool/languagetool-commandline.jar"

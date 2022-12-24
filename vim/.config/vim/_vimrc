@@ -4,6 +4,7 @@
 if has("ide")
     set commentary
     set highlightedyank
+    set surround
     "set ideajoin  " Insanely slow...
 endif
 
