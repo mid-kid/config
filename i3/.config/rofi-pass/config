@@ -5,3 +5,4 @@ notify='true'
 #fix_layout=true
 xdotool_delay=60
 #layout_cmd(){ setxkbmap;}
+help_color="#4872FF"

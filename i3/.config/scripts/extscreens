@@ -1,7 +1,7 @@
 #!/bin/sh
 
 screen_main='eDP' # 'LVDS1'
-screen_ext='HDMI1 VGA1 HDMI-A-0 DP-1 DP-2 DisplayPort-1 DisplayPort-2'
+screen_ext='HDMI1 VGA1 HDMI-A-0 DP-1 DP-2 DisplayPort-0 DisplayPort-1 DisplayPort-2'
 
 input="$(rofi -dmenu -i -p 'Toggle external screen' -no-custom << EOF
 Off
@@ -26,10 +26,10 @@ case "$input" in
         ;;
 
     external)
-        xrandr --output $screen_main --off
         for screen in $screen_ext; do
             xrandr --output $screen --auto
         done
+        xrandr --output $screen_main --off
         ;;
 
     same)

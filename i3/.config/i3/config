@@ -1,32 +1,32 @@
-# Look
-font pango:monospace 10
-default_border pixel 3
-default_floating_border normal 3
-for_window [all] title_window_icon yes
-
-# i3-gaps
-gaps inner 5
-gaps outer 3
-smart_borders on
-
-# Keybinds
+# Variables
 set $mod Mod4
+
 set $left h
 set $down j
 set $up k
 set $right l
 
+set $term i3-sensible-terminal
+set $menu rofi -cache-dir ~/.local/share/rofi -show drun
+
+# Look
+font pango:monospace 10
+default_border pixel 3
+default_floating_border normal 3
+for_window [all] title_window_icon yes
+gaps inner 5
+gaps outer 3
+smart_borders on
+
 # External programs
-bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Shift+Return exec --no-startup-id i3-sensible-terminal -name floating
+bindsym $mod+Return exec $term
+bindsym $mod+Shift+Return exec --no-startup-id $term -name floating
 bindsym $mod+space exec --no-startup-id dunstctl close
 bindsym $mod+Shift+space exec --no-startup-id dunstctl close-all
-bindsym $mod+o exec --no-startup-id picom-trans -c -10
-bindsym $mod+Shift+o exec --no-startup-id picom-trans -c +10
-bindsym $mod+d exec rofi -cache-dir ~/.local/share/rofi -show drun
+bindsym $mod+d exec $menu
 bindsym $mod+Shift+d exec i3-sensible-terminal -e ranger
 bindsym $mod+v exec pavucontrol
-bindsym $mod+Shift+v exec --no-startup-id mpv $(xclip -o)
+bindsym $mod+Shift+v exec --no-startup-id mpv --force-window=immediate $(xclip -sel clip -o)
 bindsym $mod+i exec rofi-pass
 bindsym $mod+Ctrl+o exec --no-startup-id ~/.config/scripts/extscreens
 bindsym $mod+Ctrl+p exec ~/.config/scripts/power
@@ -44,8 +44,13 @@ bindsym XF86AudioStop exec --no-startup-id playerctl stop
 bindsym XF86Calculator exec --no-startup-id i3-sensible-terminal -name floating -e 'python'
 
 # Application discrimination
+for_window [window_role="pop-up"] floating enable border pixel
+for_window [window_role="task_dialog"] floating enable border pixel
+for_window [window_role="About"] floating enable border normal
+for_window [window_type="notification"] floating enable border none
 for_window [class="URxvt" instance="floating"] move scratchpad scratchpad show
 for_window [class="URxvt" instance="emerge"] border normal
+for_window [class="qutebrowser"] focus child layout tabbed focus
 for_window [class="Qemu-system-.+"] floating enable border normal
 for_window [class="VirtualBox"] floating enable border normal
 for_window [class="Virt-manager"] floating enable border normal
@@ -62,15 +67,11 @@ for_window [class="Blueman-.+"] floating enable border normal
 for_window [class="Pavucontrol"] floating enable border normal
 for_window [class="Xfce4-power-manager-settings"] floating enable border none
 for_window [class="listen.moe-desktop-app"] floating enable border none
-for_window [class="qutebrowser"] focus child layout tabbed focus
-for_window [instance="ida64.exe" title="Please wait..."] floating enable
-for_window [instance="ida.exe" title="Please wait..."] floating enable
-for_window [class="Ghidra" title="win0"] floating enable
-for_window [class="Ghidra" title="References to .+"] floating enable
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="task_dialog"] floating enable
-for_window [window_role="About"] floating enable border normal
-for_window [window_type="notification"] floating enable border none
+for_window [class="Ghidra" title="win0"] floating enable border pixel
+for_window [class="Ghidra" title="References to .+"] floating enable border pixel
+for_window [instance="ida64.exe" title="Please wait..."] floating enable border pixel
+for_window [instance="ida.exe" title="Please wait..."] floating enable border pixel
+for_window [class="Qalculate-gtk"] floating enable border normal
 
 # Window Manager keybinds
 mouse_warping output
@@ -79,6 +80,9 @@ bindsym $mod+Shift+q kill
 bindsym $mod+Ctrl+q exec --no-startup-id xkill
 bindsym --release button2 kill
 bindsym button2 nop
+bindsym $mod+Ctrl+c reload
+bindsym $mod+Ctrl+r restart
+bindsym $mod+Ctrl+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
@@ -122,6 +126,9 @@ bindsym $mod+Shift+x floating toggle
 bindsym $mod+z focus parent
 bindsym $mod+Shift+z focus child
 
+bindsym $mod+o exec --no-startup-id picom-trans -c -10
+bindsym $mod+Shift+o exec --no-startup-id picom-trans -c +10
+
 workspace_auto_back_and_forth yes
 set $ws1 "1"
 set $ws2 "2"
@@ -164,10 +171,6 @@ bindsym $mod+Ctrl+7 move container to workspace number $ws7; workspace number $w
 bindsym $mod+Ctrl+8 move container to workspace number $ws8; workspace number $ws8
 bindsym $mod+Ctrl+9 move container to workspace number $ws9; workspace number $ws9
 bindsym $mod+Ctrl+0 move container to workspace number $ws10; workspace number $ws10
-
-bindsym $mod+Ctrl+c reload
-bindsym $mod+Ctrl+r restart
-bindsym $mod+Ctrl+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # Resize windows
 mode "resize" {

@@ -1,78 +1,88 @@
 #!/bin/sh
 set -e
 
-lock() {
-    $sway && return 0
-
-    # If xss-lock is installed, assume it's enabled and it'll run the right locker
-    if command -v xss-lock > /dev/null 2> /dev/null; then
-        # Lock and blank the screen...
-        xset dpms force off
-        return
-    fi
-
-    # If xflock4 is available, assume it's a script that locks the screen
-    # xfce4-power-manager will use this too
-    if command -v xflock4 > /dev/null 2> /dev/null; then
-        xflock4; sleep 1; xset s activate
-        return
-    fi
-
-    # If xautolock is installed, try that...
-    if command -v xautolock > /dev/null 2> /dev/null; then
-        xautolock -locknow; sleep 1; xset s activate
-        return
-    fi
-
-    # Or just blank the screen
-    xset s activate
-}
-
 call_ck() {
-    dbus-send --system --print-reply \
+    dbus-send --print-reply=literal --system \
         --dest=org.freedesktop.ConsoleKit \
         /org/freedesktop/ConsoleKit/Manager \
-        "org.freedesktop.ConsoleKit.Manager.$@" > /dev/null 2> /dev/null
+        "org.freedesktop.ConsoleKit.Manager.$@" 2> /dev/null
 }
 
 call_logind() {
-    dbus-send --system --print-reply \
+    dbus-send --print-reply=literal --system \
         --dest=org.freedesktop.login1 \
         /org/freedesktop/login1 \
-        "org.freedesktop.login1.Manager.$@" > /dev/null 2> /dev/null
+        "org.freedesktop.login1.Manager.$@" 2> /dev/null
+}
+
+get_seat() {
+    # Currently only supports (e)logind
+    call_logind GetSeat string:self | sed -e 's@^.*/seat/seat@@'
+}
+
+call_dm() {
+    dbus-send --print-reply=literal --system \
+        --dest=org.freedesktop.DisplayManager \
+        "/org/freedesktop/DisplayManager/Seat$(get_seat)" \
+        "org.freedesktop.DisplayManager.Seat.$@" 2> /dev/null
+}
+
+call_pm() {
+    dbus-send --print-reply=literal --session \
+        --dest=org.freedesktop.PowerManagement \
+        /org/freedesktop/PowerManagement \
+        "org.freedesktop.PowerManagement.$@" 2> /dev/null
 }
 
 call() {
     # Try calling xfce4-powermanager or anything like it before trying consolekit2 directly
     # Also added (e)logind support now CK2 is more than deprecated.
-    dbus-send --print-reply \
-            --dest=org.freedesktop.PowerManagement \
-            /org/freedesktop/PowerManagement \
-            "org.freedesktop.PowerManagement.$@" > /dev/null 2> /dev/null || {
+    if ! call_pm "$@"; then
         case "$1" in
             Suspend) lock; call_ck Suspend boolean:true || call_logind Suspend boolean:true ;;
             Hibernate) lock; call_ck Hibernate boolean:true || call_logind Hibernate boolean:true ;;
             Reboot) call_ck Restart || call_logind Reboot boolean:true ;;
             Shutdown) call_ck Stop || call_logind Poweroff boolean:true ;;
         esac
-    }
+    fi
 }
 
-get_seat() {
-    # Currently only supports (e)logind
-    dbus-send --system --print-reply=literal \
-        --dest=org.freedesktop.login1 \
-        /org/freedesktop/login1/seat/self \
-        org.freedesktop.DBus.Properties.Get \
-        string:org.freedesktop.login1.Seat string:Id 2> /dev/null \
-        | sed -e 's/^   variant       //' -e 's/^seat/Seat/'
-}
+lock() {
+    # If swayidle is running, send the signal to lock (and blank the screen) now
+    if killall -q -USR1 swayidle > /dev/null 2> /dev/null; then
+        sleep 1
+        return
+    fi
 
-call_dm() {
-    dbus-send --system --print-reply \
-        --dest=org.freedesktop.DisplayManager \
-        /org/freedesktop/DisplayManager/"$(get_seat)" \
-        "org.freedesktop.DisplayManager.Seat.$@" > /dev/null 2> /dev/null
+    # If xss-lock is running, it'll run the right locker
+    if pgrep -u "$(id -u)" -x xss-lock > /dev/null 2> /dev/null; then
+        # Lock and blank the screen...
+        xset s activate; sleep 1; xset dpms force off
+        return
+    fi
+
+    # If xautolock is running, try that...
+    if pgrep -u "$(id -u)" -x xautolock > /dev/null 2> /dev/null; then
+        xautolock -locknow; sleep 1; xset s activate
+        return
+    fi
+
+    # If xflock4 is available, assume it's a script that locks the screen
+    # xfce4-power-manager will use this too
+    if ! $wayland && command -v xflock4 > /dev/null 2> /dev/null; then
+        xflock4; sleep 1; xset s activate
+        return
+    fi
+
+    # Fall back to logind, hoping there's something responding to this
+    if call_logind LockSession string:self; then
+        sleep 1
+        ! $wayland && xset dpms force off
+        return
+    fi
+
+    # Or just blank the screen
+    xset s activate; xset dpms force off
 }
 
 close_programs() {
@@ -82,7 +92,7 @@ close_programs() {
     # NOTE: Doesn't handle notification apps or daemons, only open windows.
 
     $force && return 0
-    $sway && return 0
+    $wayland && return 0
 
     # Requires wmctrl to function
     if ! command -v wmctrl > /dev/null 2> /dev/null; then
@@ -103,15 +113,16 @@ close_programs() {
 
 program="$0"
 
-sway=false
 force=false
 while [ "$1" ]; do
     case "$1" in
-    -s) sway=true; shift; continue ;;
     -f) force=true; shift; continue ;;
     *) break ;;
     esac
 done
+
+wayland=false
+test -n "$WAYLAND_DISPLAY" && wayland=true
 
 if [ "$1" ]; then
     action="$1"
@@ -127,9 +138,9 @@ Reboot to Windows
 Shutdown
 EOF
     )"
+    sleep 0.2
 fi
 
-sleep 0.2
 case "$action" in
     Logout) close_programs && i3-msg exit ;;
     Lock) lock ;;  # TODO: Can we tell the power manager to lock?
