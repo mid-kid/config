@@ -2,10 +2,11 @@
 
 user_pref("accessibility.typeaheadfind", false);  // Don't search text when typing in a page
 user_pref("browser.download.improvements_to_download_panel", false);  // Don't save all files automatically...
-user_pref("browser.download.start_downloads_in_tmp_dir", false);  // Please don't save things in downloads when I use "open with"
+user_pref("browser.download.start_downloads_in_tmp_dir", true);  // Please don't save things in downloads when I use "open with"
 user_pref("browser.download.useDownloadDir", true);  // Download to the "downloads" folder by default
 user_pref("browser.startup.page", 3);  // Keep session across shutdowns
 user_pref("browser.tabs.drawInTitlebar", false);  // Use native title bar, don't have spacer next to tabs
+user_pref("browser.tabs.warnOnClose", true);  // Warn when closing multiple tabs
 user_pref("extensions.pocket.enabled", false);  // 3rd party extension, proprietary
 user_pref("general.smoothScroll", false);  // I prefer quick/fast scrolling
 user_pref("keyword.enabled", true);  // Enable search in the URL bar
