@@ -1,3 +1,5 @@
+ZSH_CACHE=${XDG_CACHE_HOME:-$HOME/.cache}/zsh
+test ! -d $ZSH_CACHE && mkdir -p $ZSH_CACHE
 # The following lines were added by compinstall
 
 zstyle ':completion:*' auto-description 'Specify: %d'
@@ -16,7 +18,7 @@ zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p
 zstyle ':completion:*' squeeze-slashes true
 
 autoload -Uz compinit
-compinit
+compinit -d $ZSH_CACHE/zsh/zcompdump-$ZSH_VERSION
 # End of lines added by compinstall
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.zsh_history
@@ -52,6 +54,8 @@ bindkey '\e[6~' history-search-forward  # PgDown
 bindkey '\e[3~' delete-char  # Delete
 bindkey '\e[2~' quoted-insert
 
+# Additional zsh configuration
+REPORTTIME=10
 autoload -U colors
 colors
 
@@ -94,8 +98,6 @@ if [[ $SHELL != /bin/zsh ]]; then
 fi
 
 PROMPT="$(_prompt_eprefix)%{$fg[green]%}%n%{$reset_color%}@%{$fg[yellow]%}%m%{$reset_color%} :%{$fg[magenta]%}\$(_prompt_git)%{$reset_color%}: %{$fg[cyan]%}%c%{$reset_color%} $ "
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 source ~/.shellrc
 

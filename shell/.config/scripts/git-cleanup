@@ -1,9 +1,7 @@
 #!/bin/sh
 set -eu
 #git clean -xdf
-if [ "$(git branch -r)" ]; then
-    git branch -r --format="%(refname:short)" | xargs git branch -rd
-fi
+git branch -r --format="%(refname:short)" | xargs -r git branch -rd
 #git branch --format="%(refname:short)" | xargs git branch -D
 #git tag -l | xargs git tag -d
 git reflog expire --all --expire=all

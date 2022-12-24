@@ -6,12 +6,13 @@ export LESS='-RXF'
 export MAKEFLAGS="-j$(nproc)"
 export NINJA_STATUS='[%p %f/%t] '
 export CMAKE_GENERATOR='Ninja'
+export PYTHONSTARTUP="${XDG_CONFIG_HOME:-$HOME/.config}/pythonrc"
 alias vi='vim'
 alias ls='ls --color=auto --quoting-style=shell-escape --file-type --group-directories-first --human-readable'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-alias diff='diff --color=auto'
+alias diff='diff --color=auto -ruN'
 alias ip='ip --color=auto'
 alias du='du -h'
 alias df='df -h'
@@ -23,6 +24,10 @@ alias xci='xclip -sel clip -i'
 alias xco='xclip -sel clip -o'
 alias axf='aunpack'
 alias py='python3'
+alias open='xdg-open'
+alias netstat='netstat -putan'
+alias wineinit='WINEDLLOVERRIDES=winemenubuilder.exe=d winecfg'
+alias svi='sudoedit'
 
 # Set up the directory colors
 eval $(dircolors -b)
