@@ -40,7 +40,7 @@ Plug 'lervag/vimtex'
 " Project management
 Plug 'editorconfig/editorconfig-vim'  " Support editorconfig spec
 Plug 'scrooloose/nerdtree'  " File browser
-Plug 'ctrlpvim/ctrlp.vim'  " Fuzzy finding file and tag browser
+"Plug 'ctrlpvim/ctrlp.vim'  " Fuzzy finding file and tag browser
 Plug 'embear/vim-localvimrc'  " Support per-project vimrc files
 Plug 'ludovicchabant/vim-gutentags'  " Auto-update tags file
 
