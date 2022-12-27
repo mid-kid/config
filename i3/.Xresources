@@ -5,6 +5,7 @@ Xft.hinting: true
 Xft.hintstyle: hintslight
 Xft.antialias: 1
 Xft.rgba: rgb
+Xcursor.theme: Dot-Dark
 
 URxvt.foreground: #FAF4FB
 URxvt.background: [90]#222220
