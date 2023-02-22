@@ -64,12 +64,6 @@ if ($prompt -eq 'y') {
     .\lib\uninstall_edge.ps1
 }
 
-# Unpin everything from the start menu
-$prompt = Read-Host -Prompt 'Unpin all applications? (n)'
-if ($prompt -eq 'y') {
-    .\lib\unpin_start.ps1
-}
-
 # Reboot...
 echo "Time to reboot"
 pause

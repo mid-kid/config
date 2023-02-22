@@ -1,0 +1,82 @@
+Windows Registry Editor Version 5.00
+
+; Finding new settings:
+; Download Process Monitor (by sysinternals), filter by Operation=RegSetValue
+
+; General: Use "twilight" color mode
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize]
+"SystemUsesLightTheme"=dword:0
+"AppsUseLightTheme"=dword:1
+
+; General: Use the normal touchpad scroll direction
+;; (settings) Devices -> Touchpad -> Scroll and zoom -> Scrolling direction = Down motion scrolls down
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\PrecisionTouchPad]
+"ScrollDirection"=dword:ffffffff
+
+; General: Set keyboard repeat delay/speed
+;; (control panel) Keyboard -> Speed -> Character repeat
+;; Consider: https://superuser.com/questions/1058474/increase-keyboard-repeat-rate-beyond-control-panel-limits-in-windows-10
+[HKEY_CURRENT_USER\Control Panel\Keyboard]
+"KeyboardDelay"="0"
+"KeyboardSpeed"="31"
+
+; General: Set regional settings
+;; Short date = 2017-04-05
+[HKEY_CURRENT_USER\Control Panel\International]
+"sShortDate"="yyyy-MM-dd"
+"sShortTime"="hh:mm"
+"sTimeFormat"="hh:mm:ss"
+"iDate"="2"
+"sDate"="-"
+
+; General: Disable restarting apps after reboot
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon]
+"RestartApps"=dword:0
+
+; General: Allow executing unsigned local powershell scripts
+;; (developer settings toggle)
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\PowerShell\1\ShellIds\Microsoft.PowerShell]
+"ExecutionPolicy"="RemoteSigned"
+
+; Taskbar: Make it small
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"TaskbarSmallIcons"=dword:1
+
+; Taskbar: Open the last active windows on click
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"LastActiveClick"=dword:1
+
+; Taskbar: Show search icon instead of box
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search]
+"SearchboxTaskbarMode"=dword:1
+
+; Taskbar: Show all icons in notification tray
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer]
+"EnableAutoTray"=dword:0
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+; Explorer: Show file extensions
+;; (developer settings toggle)
+"HideFileExt"=dword:0
+; Explorer: Show hidden and system files
+;; (developer settings toggle)
+"Hidden"=dword:1
+; Explorer: Show empty drives
+;; (developer settings toggle)
+"HideDrivesWithNoMedia"=dword:0
+; Explorer: Open to This PC instead of Quick Access
+"LaunchTo"=dword:1
+
+; Explorer: Show full path in title bar
+;; (developer settings toggle)
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CabinetState]
+"FullPath"=dword:1
+
+; Explorer: Show Run as different user in Start
+;; (developer settings toggle)
+[HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer]
+"ShowRunAsDifferentUserInStart"=dword:1
+
+; Explorer: Don't suggest using the Microsoft Store
+[HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer]
+"NoUseStoreOpenWith"=dword:1

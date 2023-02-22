@@ -1,0 +1,60 @@
+Windows Registry Editor Version 5.00
+
+; Extra steps:
+; - Make sure Tamper Protection is turned off in Windows Defender
+
+; General: Set system clock to UTC (to match linux behavior)
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation]
+"RealTimeIsUniversal"=dword:1
+
+; General: Disable automatic updates
+;; (gpedit) Computer Configuration -> Administrative Templates -> Windows Components -> Windows Update -> Configure Automatic Updates = Disabled
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU]
+"NoAutoUpdate"=dword:1
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System]
+; General: Don't use security questions for local accounts
+;; (gpedit) Computer Configuration -> Administrative Templates -> Windows Components -> Credential User Interface -> Prevent the use of security questions for local accounts = Enabled
+"NoLocalPasswordResetQuestions"=dword:1
+; Shell: Disable background blur on Lock Screen
+"DisableAcrylicBackgroundOnLogon"=dword:1
+; Privacy: Disable SmartScreen
+;; (settings) Windows Defender -> App & browser control -> Reputation-based protection -> Check apps and files
+"EnableSmartScreen"=dword:0
+
+; Shell: Disable revealing passwords
+;; (gpedit) Computer Configuration -> Administrative Templates -> Windows Components -> Credential User Interface -> Do not display the password reveal button = Enabled
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\CredUI]
+"DisablePasswordReveal"=dword:1
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender]
+; Privacy: Disable Windows Defender
+;; (gpedit) Computer Configuration -> Administrative Templates -> Windows Components -> Microsoft Defender Antivirus -> Turn off Microsoft Defender Antivirus = Enabled
+;"DisableAntiSpyware"=dword:1
+; Privacy: Disable Potentially unwanted app blocking
+;; (settings) Windows Defender -> App & browser control -> Reputation-based protection -> Potentially unwanted app blocking = Disabled
+"PUAProtection"=dword:0
+; Privacy: Disable routine remediation
+;; (settings) Windows Defender -> App & browser control -> Reputation-based protection -> Turn off routine remediation = Disabled
+"DisableRoutinelyTakingAction"=dword:1
+
+; Privacy: Disable Windows Defender real time protection
+; "DisableAntiSpyware" doesn't stick, at least disable everything else
+;; (gpedit) Computer Configuration -> Administrative Templates -> Windows Components -> Microsoft Defender Antivirus -> Real-time Protection -> (various...)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection]
+"DisableBehaviorMonitoring"=dword:1
+"DisableIOAVProtection"=dword:1
+"DisableOnAccessProtection"=dword:1
+"DisableRawWriteNotification"=dword:1
+"DisableRealtimeMonitoring"=dword:1
+"DisableScanOnRealtimeEnable"=dword:1
+
+; Privacy: Hide windows security from systray, to avoid it begging for scans
+;; (gpedit) Computer Configuration -> Administrative Templates -> Windows Components -> Windows Security -> Systray -> Hide Windows Security Systray = Enabled
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Systray]
+"HideSystray"=dword:1
+
+; Privacy: Disable Xbox Game Bar
+;; (gpedit) Computer Configuration -> Administrative Templates -> Windows Components -> Windows Game Recording and Broadcasting -> Enables or disables Windows Game Recording and Broadcasting = Disabled
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\GameDVR]
+"AllowGameDVR"=dword:0

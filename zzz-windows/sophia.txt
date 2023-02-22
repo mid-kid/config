@@ -1,11 +1,21 @@
-# Sophia modifications
-DiagnosticDataLevel -Minimal  # Override override by RecommendedTroubleshooting
-ErrorReporting -Disable  # Override override by RecommendedTroubleshooting
-AppColorMode -Light
-Cursors -Default  # See "C:\Windows\Cursors" to delete downloaded files
-OneDrive -Uninstall
-AdminApprovalMode -Default
-IPv6Component -Enable
+# Preset modifications for Sophia.Script.for.Windows.10.LTSC.2021.v5.14.7
+
+Checks
+#CreateRestorePoint
+#TaskbarSearch  # Set in user.reg
+#AppColorMode  # Set in user.reg
+#Cursors  # See "C:\Windows\Cursors" to delete downloaded files
+AdminApprovalMode -Default  # !!!
+IPv6Component -Enable  # !!!
 InputMethod -Default
-NetworkDiscovery -Disable
-PinToStart -UnpinAll
+#SetUserShellFolderLocation
+#RecommendedTroubleshooting  # !!! Overrides DiagnosticDataLevel and ErrorReporting
+#SaveRestartableApps  # Set in user.reg
+NetworkDiscovery -Disable  # !!!
+#InstallVCRedist
+#InstallDotNetRuntimes
+RunPowerShellShortcut -NonElevated
+#PinToStart
+#SetAppGraphicsPerformance
+PowerShellModulesLogging -Disable
+PowerShellScriptsLogging -Disable
