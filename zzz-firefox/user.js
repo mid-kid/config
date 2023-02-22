@@ -8,6 +8,7 @@ user_pref("browser.startup.page", 3);  // Keep session across shutdowns
 user_pref("browser.tabs.drawInTitlebar", false);  // Use native title bar, don't have spacer next to tabs
 user_pref("browser.tabs.warnOnClose", true);  // Warn when closing multiple tabs
 user_pref("extensions.pocket.enabled", false);  // 3rd party extension, proprietary
+user_pref("extensions.unifiedExtensions.enabled", false);  // Remove dumb extension collapse
 user_pref("general.smoothScroll", false);  // I prefer quick/fast scrolling
 user_pref("keyword.enabled", true);  // Enable search in the URL bar
 user_pref("layout.spellcheckDefault", 0);  // Disable spellchecking
