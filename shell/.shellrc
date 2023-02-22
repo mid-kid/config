@@ -7,6 +7,7 @@ export MAKEFLAGS="-j$(nproc)"
 export NINJA_STATUS='[%p %f/%t] '
 export CMAKE_GENERATOR='Ninja'
 export PYTHONSTARTUP="${XDG_CONFIG_HOME:-$HOME/.config}/pythonrc"
+export CCACHE_DISABLE=1
 alias vi='vim'
 alias ls='ls --color=auto --quoting-style=shell-escape --file-type --group-directories-first --human-readable'
 alias grep='grep --color=auto'
@@ -48,7 +49,8 @@ PATH=~/.config/scripts:$PATH
 # Function to prepend to path
 prepath() {
     local _path="$(realpath -mq "${1:-$PWD}")"
-    [ "$_path" ] && eval export ${2:-PATH}=\"$_path:\$${2:-PATH}\"
+    test -n "$_path" && \
+        eval export ${2:-PATH}=\"\$_path\${${2:-PATH}:+:}\${${2:-PATH}}\"
 }
 prefix() {
     local _path="$(realpath "${1:-$PWD}")"

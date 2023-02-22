@@ -17,7 +17,7 @@ export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
 export WINEPREFIX="$XDG_DATA_HOME/wine"
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
 export RXVT_SOCKET="$XDG_RUNTIME_DIR/urxvtd"
-export XCURSOR_PATH="$XDG_DATA_HOME/icons"
+#export XCURSOR_PATH="$XDG_DATA_HOME/icons"
 
 # Disable caches of some applications that don't follow the XDG spec
 export LESSHISTFILE=-
@@ -26,7 +26,8 @@ export DVDCSS_CACHE=off
 # Path management
 addpath() {
     local _path="$(realpath -mq "${1:-$PWD}")"
-    [ "$_path" ] && eval export ${2:-PATH}=\"\$${2:-PATH}:$_path\"
+    test -n "$_path" && \
+        eval export ${2:-PATH}=\"\${${2:-PATH}}\${${2:-PATH}:+:}\$_path\"
 }
 addpath "$HOME/.local/bin"
 

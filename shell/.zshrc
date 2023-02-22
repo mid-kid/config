@@ -103,7 +103,12 @@ source ~/.shellrc
 
 # Defined in ~/.shellrc:
 _dmount() {
-    devices=( $(lsblk -rn | cut -d ' '  -f 1) )
+    devices=( $(lsblk -rn | awk '{print $1}') )
     _values 'devices' "${devices[@]}"
 }
-compdef _dmount dmount dumount
+compdef _dmount dmount
+_dumount() {
+    devices=( $(lsblk -rn | awk '{if($7){print $1}}') )
+    _values 'mounted devices' "${devices[@]}"
+}
+compdef _dumount dumount
