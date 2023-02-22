@@ -24,8 +24,11 @@ if !has("nvim") | silent! set viminfofile=$XDG_CACHE_HOME/vim/viminfo | endif
 " Set plugins
 call plug#begin($XDG_DATA_HOME."/vim/plugged")
 
+" Themes
+Plug 'junegunn/seoul256.vim'
+"Plug 'sainnhe/everforest'
+
 " Faaancy
-Plug 'junegunn/seoul256.vim'  " Theme
 Plug 'airblade/vim-gitgutter'  " Show git diffs on the side
 Plug 'Xuyuanp/nerdtree-git-plugin'  " Show git status in nerdtree
 Plug 'machakann/vim-highlightedyank'  " Highlight what you've copied
@@ -73,9 +76,22 @@ set undodir=$XDG_CACHE_HOME/vim/undo | silent! call mkdir(&undodir, "p")
 set backupdir=$XDG_CACHE_HOME/vim/backup | silent! call mkdir(&backupdir, "p")
 set directory=$XDG_CACHE_HOME/vim/swp | silent! call mkdir(&directory, "p")
 
-" Color scheme
-let g:seoul256_background = 233
+" Color scheme (seoul256)
+let g:seoul256_background=233
+"set termguicolors
 colorscheme seoul256
+
+" Color scheme (everforest)
+"set background=dark
+"let g:everforest_background='hard'
+"let g:everforest_better_performance=1
+"let g:everforest_disable_italic_comment=1
+"let g:everforest_ui_contrast='high'
+"let g:everforest_colors_override = {
+"    \ 'bg0': ['#262626', '235'],
+"    \ 'bg1': ['#303030', '236']}
+"set termguicolors
+"colorscheme everforest
 
 " Syntax highlighting
 filetype plugin indent on
@@ -97,7 +113,9 @@ set hlsearch
 set incsearch
 set statusline=%f
 set colorcolumn=80
-au BufWinEnter * match ExtraWhitespace /\s\+$/  " ExtraWhitespace is defined in the theme
+
+highlight ExtraWhitespace ctermbg=234
+"au BufWinEnter * match ExtraWhitespace /\s\+$/
 
 " Behavior
 set modeline
