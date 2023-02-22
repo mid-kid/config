@@ -94,6 +94,9 @@ close_programs() {
     $force && return 0
     $wayland && return 0
 
+    # Firefox is speshul
+    killall -USR1 firefox
+
     # Requires wmctrl to function
     if ! command -v wmctrl > /dev/null 2> /dev/null; then
         return 0

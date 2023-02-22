@@ -72,6 +72,7 @@ for_window [class="Ghidra" title="References to .+"] floating enable border pixe
 for_window [instance="ida64.exe" title="Please wait..."] floating enable border pixel
 for_window [instance="ida.exe" title="Please wait..."] floating enable border pixel
 for_window [class="Qalculate-gtk"] floating enable border normal
+for_window [class="ktimetracker"] floating enable border normal
 
 # Window Manager keybinds
 mouse_warping output

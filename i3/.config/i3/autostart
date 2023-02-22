@@ -2,8 +2,6 @@
 xss-lock --ignore-sleep -l -- ~/.config/i3/locker -n &
 xfconf-query -c xfce4-session -p /general/LockCommand -n -t string -s "~/.config/scripts/power Lock"
 xset s off  # Managed by xfce4-power-manager
-xset +fp "${XDG_DATA_HOME:-$HOME/.local/share}/fonts"
-xset fp rehash
 xset r rate 300 50
 
 "${XDG_CONFIG_HOME:-$HOME/.config}/fehbg"
