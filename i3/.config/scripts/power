@@ -48,6 +48,9 @@ call() {
 }
 
 lock() {
+    opt_blank=true
+    [ "$1" -eq noblank ] && opt_blank=false
+
     # If swayidle is running, send the signal to lock (and blank the screen) now
     if killall -q -USR1 swayidle > /dev/null 2> /dev/null; then
         sleep 1
@@ -57,27 +60,26 @@ lock() {
     # If xss-lock is running, it'll run the right locker
     if pgrep -u "$(id -u)" -x xss-lock > /dev/null 2> /dev/null; then
         # Lock and blank the screen...
-        xset s activate; sleep 1; xset dpms force off
+        xset s activate; $opt_blank && { sleep 1; xset dpms force off; }
         return
     fi
 
     # If xautolock is running, try that...
     if pgrep -u "$(id -u)" -x xautolock > /dev/null 2> /dev/null; then
-        xautolock -locknow; sleep 1; xset s activate
+        xautolock -locknow; $opt_blank && { sleep 1; xset s activate; }
         return
     fi
 
     # If xflock4 is available, assume it's a script that locks the screen
     # xfce4-power-manager will use this too
-    if ! $wayland && command -v xflock4 > /dev/null 2> /dev/null; then
-        xflock4; sleep 1; xset s activate
+    if command -v xflock4 > /dev/null 2> /dev/null; then
+        xflock4; $opt_blank && ! $wayland && { sleep 1; xset s activate; }
         return
     fi
 
     # Fall back to logind, hoping there's something responding to this
     if call_logind LockSession string:self; then
-        sleep 1
-        ! $wayland && xset dpms force off
+        $opt_blank && ! $wayland && { sleep 1; xset dpms force off; }
         return
     fi
 
@@ -147,6 +149,7 @@ fi
 case "$action" in
     Logout) close_programs && i3-msg exit ;;
     Lock) lock ;;  # TODO: Can we tell the power manager to lock?
+    Lock_noblank) lock noblank ;;
     Suspend|Hibernate) call "$action" ;;
     Reboot|Shutdown) close_programs && call "$action" ;;
     'Reboot to Windows') close_programs && sudo grub-reboot-windows && call Reboot ;;

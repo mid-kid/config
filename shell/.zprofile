@@ -16,12 +16,12 @@ export URXVT_PERL_LIB="$XDG_CONFIG_HOME/urxvt/ext"
 export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
 export WINEPREFIX="$XDG_DATA_HOME/wine"
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
-export RXVT_SOCKET="$XDG_RUNTIME_DIR/urxvtd"
 #export XCURSOR_PATH="$XDG_DATA_HOME/icons"
+export NODE_REPL_HISTORY="$XDG_CACHE_HOME/node_repl_history"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export W3M_DIR="$XDG_DATA_HOME/w3m"
 
-# Disable caches of some applications that don't follow the XDG spec
-export LESSHISTFILE=-
-export DVDCSS_CACHE=off
+export RXVT_SOCKET="$XDG_RUNTIME_DIR/urxvtd"
 
 # Path management
 addpath() {
@@ -33,3 +33,9 @@ addpath "$HOME/.local/bin"
 
 # Additional path configurations
 test -f "$HOME/.local/opt/pathrc" && . "$HOME/.local/opt/pathrc"
+
+# Clean up paths I don't want to keep, that I can't change the location of
+rm -f "$HOME/.ash_history"
+rm -f "$HOME/.bash_history"
+rm -rf "$HOME/.net"
+rm -rf "$HOME/.npm"

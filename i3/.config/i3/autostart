@@ -1,17 +1,18 @@
 #!/bin/sh
 xss-lock --ignore-sleep -l -- ~/.config/i3/locker -n &
-xfconf-query -c xfce4-session -p /general/LockCommand -n -t string -s "~/.config/scripts/power Lock"
+xfconf-query -c xfce4-session -p /general/LockCommand -n -t string -s "$HOME/.config/scripts/power Lock_noblank"
 xset s off  # Managed by xfce4-power-manager
 xset r rate 300 50
 
 "${XDG_CONFIG_HOME:-$HOME/.config}/fehbg"
 picom &
 start-pulseaudio-x11
-fcitx
+snixembed &
 /usr/lib64/libexec/polkit-kde-authentication-agent-1 &
 
 urxvtd &
 xfce4-power-manager &
+fcitx
 wpa_gui -t &
 redshift-gtk &
 udiskie &

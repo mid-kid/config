@@ -41,7 +41,8 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 bindsym XF86Tools exec --no-startup-id playerctl play-pause
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioStop exec --no-startup-id playerctl stop
-bindsym XF86Calculator exec --no-startup-id i3-sensible-terminal -name floating -e 'python'
+bindsym $mod+Shift+u exec --no-startup-id qalculate-gtk
+bindsym XF86Calculator exec --no-startup-id qalculate-gtk
 
 # Application discrimination
 for_window [window_role="pop-up"] floating enable border pixel

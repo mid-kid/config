@@ -29,12 +29,14 @@ alias open='xdg-open'
 alias netstat='netstat -putan'
 alias wineinit='WINEDLLOVERRIDES=winemenubuilder.exe=d winecfg'
 alias svi='sudoedit'
+alias 7z='7zz'
 
 # Set up the directory colors
 eval $(dircolors -b)
 
 # Set up 'less' manpage colors
 # Using default gentoo colors (https://github.com/gentoo/gentoo/blob/master/app-text/manpager/files/manpager.c)
+# Set groff and nroff to use the -c flag in /etc/man_db.conf
 export LESS_TERMCAP_mb=$'\e[5;31m'
 export LESS_TERMCAP_md=$'\e[1;34m'
 export LESS_TERMCAP_me=$'\e[0;0m'
@@ -85,4 +87,8 @@ dumount() {
 # Set the default make goal for the current session
 makegoal() {
     export MAKEFLAGS="$MAKEFLAGS .DEFAULT_GOAL=$1"
+}
+
+timestamp() {
+    while IFS= read -r line; do printf '[%s] %s\n' "$(date '+%Y-%m-%d %H:%M:%S.%N')" "$line"; done
 }

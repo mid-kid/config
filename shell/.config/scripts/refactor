@@ -1,9 +1,10 @@
 #!/bin/sh
+# https://stackoverflow.com/questions/29613304/is-it-possible-to-escape-regex-metacharacters-reliably-with-sed
 sedescape_regex() {
-    echo "$@" | sed 's/[^^]/[&]/g; s/\^/\\^/g'
+    printf '%s' "$@" | sed 's/[^^]/[&]/g; s/\^/\\^/g'
 }
 sedescape_subst() {
-    echo "$@" | sed 's/[&/\]/\\&/g'
+    printf '%s' "$@" | sed 's/[&/\]/\\&/g'
 }
 
 grep -rwl \

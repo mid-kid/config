@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Trim the disk
+#sudo trimforce enable
+
 # Disable indexing
 sudo mdutil -a -i off
 

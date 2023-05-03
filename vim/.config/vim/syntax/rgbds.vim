@@ -81,6 +81,7 @@ syn keyword rgbPreProc SECTION
 " syn keyword rgbPreProc SET
 syn keyword rgbPreProc SHIFT
 syn keyword rgbPreProc LOAD
+syn keyword rgbPreProc ENDL
 
 " strings
 syn match rgbString "\".*\""
