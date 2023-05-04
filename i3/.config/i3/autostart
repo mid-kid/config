@@ -6,9 +6,12 @@ xset r rate 300 50
 
 "${XDG_CONFIG_HOME:-$HOME/.config}/fehbg"
 snixembed --fork
-start-pulseaudio-x11
 picom &
 /usr/lib64/libexec/polkit-kde-authentication-agent-1 &
+
+pipewire &
+pipewire-pulse &
+( sleep 1; exec wireplumber ) &
 
 fcitx
 urxvtd &
