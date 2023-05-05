@@ -2,16 +2,77 @@
 # Modify the volume of the currently focussed application
 set -e
 
+# Figure out the audio backend
+case "$(LANG=C pactl info | grep '^Server Name:')" in
+    *PipeWire*) backend=pipewire ;;
+    *PulseAudio*) backend=pulseaudio ;;
+    *) exit 1 ;;
+esac
+
+# Get the window PID
 xgetprop() {
     xprop -f "$1" "32c" ' $0\n' "$@" | cut -d ' ' -f 2-
 }
-
 pid="$(xgetprop _NET_WM_PID -id "$(xgetprop _NET_ACTIVE_WINDOW -root)")"
-sinks="$(pactl list sink-inputs | awk '/^Sink Input #/{ gsub("^.*#", ""); input=$0 }; /^\t\tapplication.process.id/{ gsub("^.*= ", ""); gsub("\"", ""); print $0, input }')"
-for x in $(echo "$sinks" | grep "^$pid " | cut -d ' ' -f 2); do
-    if [ "$1" = 'mute' ]; then
-        pactl set-sink-input-mute "$x" toggle
-    else
-        pactl set-sink-input-volume "$x" "$@"
-    fi
-done
+
+if [ $backend = pipewire ]; then
+    pw_grab() {
+        pw-cli i all 2> /dev/null | awk '
+        /^\tid: /{
+            id = $2
+            type = ""
+        }
+        /^\ttype: / {
+            gsub("/.*$", "")
+            type = $2
+        }
+        /^\*?\t\t'"$1"' = / {
+            gsub("^.*= ", "")
+            gsub("\"", "")
+            if (type == "'"$2"'") {
+                print $0, id
+            }
+        }
+        '
+    }
+
+    # pid -> client mapping
+    clients="$(pw_grab application.process.id PipeWire:Interface:Client)"
+
+    # client -> node mapping
+    nodes="$(pw_grab client.id PipeWire:Interface:Node)"
+
+    for client in $(echo "$clients" | grep "^$pid " | cut -d ' ' -f 2); do
+        for node in $(echo "$nodes" | grep "^$client" | cut -d ' ' -f 2); do
+            if [ "$1" = mute ]; then
+                wpctl set-mute "$node" toggle
+            else
+                # Suffix + and - instead of prefix
+                vol="$(echo "$1" | sed -e 's/^\([+-]*\)\(.*\)$/\2\1/')"
+                wpctl set-volume "$node" "$vol"
+            fi
+        done
+    done
+fi
+
+if [ $backend = pulseaudio ]; then
+    sinks="$(LANG=C pactl list sink-inputs | awk '
+        /^Sink Input #/{
+            gsub("^.*#", "")
+            input = $0
+        }
+        /^\t\tapplication.process.id = /{
+            gsub("^.*= ", "")
+            gsub("\"", "")
+            print $0, input
+        }
+    ')"
+
+    for x in $(echo "$sinks" | grep "^$pid " | cut -d ' ' -f 2); do
+        if [ "$1" = mute ]; then
+            pactl set-sink-input-mute "$x" toggle
+        else
+            pactl set-sink-input-volume "$x" "$@"
+        fi
+    done
+fi
