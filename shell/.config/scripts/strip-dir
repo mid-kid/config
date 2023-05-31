@@ -1,5 +1,5 @@
 #!/bin/sh
-tool_host="${STRIP:-strip}"
-find "$@" -type f -print0 | xargs -0 -r file | grep 'executable' | grep ELF | cut -f 1 -d : | xargs -L1 -r -t $tool_host --strip-all || true
-find "$@" -type f -name '*.a' | xargs -L1 -r -t $tool_host --strip-debug || true
-find "$@" -type f -name '*.so*' | xargs -L1 -r -t $tool_host --strip-unneeded || true
+tool="${STRIP:-strip}"
+find "$@" -type f -print0 | xargs -0 -r file | grep executable | grep ELF | cut -f 1 -d : | xargs -L1 -r -t $tool --strip-all --remove-section=.comment || true
+find "$@" -type f -name '*.a' | xargs -L1 -r -t $tool --strip-debug --remove-section=.comment || true
+find "$@" -type f -name '*.so*' | xargs -L1 -r -t $tool --strip-unneeded --remove-section=.comment || true
