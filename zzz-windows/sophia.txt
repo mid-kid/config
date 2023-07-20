@@ -6,16 +6,15 @@ Checks
 #AppColorMode  # Set in user.reg
 #Cursors  # See "C:\Windows\Cursors" to delete downloaded files
 AdminApprovalMode -Default  # !!!
-IPv6Component -Enable  # !!!
+#IPv6Component  # !!!
 InputMethod -Default
-#SetUserShellFolderLocation
+#Set-UserShellFolderLocation
 #RecommendedTroubleshooting  # !!! Overrides DiagnosticDataLevel and ErrorReporting
 #SaveRestartableApps  # Set in user.reg
 NetworkDiscovery -Disable  # !!!
 #InstallVCRedist
 #InstallDotNetRuntimes
-RunPowerShellShortcut -NonElevated
 #PinToStart
-#SetAppGraphicsPerformance
+#Set-AppGraphicsPerformance
 PowerShellModulesLogging -Disable
 PowerShellScriptsLogging -Disable

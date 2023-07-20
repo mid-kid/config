@@ -3,6 +3,8 @@ Windows Registry Editor Version 5.00
 ; Finding new settings:
 ; Download Process Monitor (by sysinternals), filter by Operation=RegSetValue
 
+; TODO: Cursor speed: 14
+
 ; General: Use "twilight" color mode
 [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize]
 "SystemUsesLightTheme"=dword:0
@@ -24,8 +26,8 @@ Windows Registry Editor Version 5.00
 ;; Short date = 2017-04-05
 [HKEY_CURRENT_USER\Control Panel\International]
 "sShortDate"="yyyy-MM-dd"
-"sShortTime"="hh:mm"
-"sTimeFormat"="hh:mm:ss"
+"sShortTime"="HH:mm"
+"sTimeFormat"="HH:mm:ss"
 "iDate"="2"
 "sDate"="-"
 
@@ -37,6 +39,11 @@ Windows Registry Editor Version 5.00
 ;; (developer settings toggle)
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\PowerShell\1\ShellIds\Microsoft.PowerShell]
 "ExecutionPolicy"="RemoteSigned"
+
+; General: Disable spellchecking
+[HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Control Panel\International]
+"TurnOffAutocorrectMisspelledWords"=dword:1
+"TurnOffHighlightMisspelledWords"=dword:1
 
 ; Taskbar: Make it small
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
