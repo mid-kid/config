@@ -27,7 +27,7 @@ bindsym $mod+d exec $menu
 bindsym $mod+Shift+d exec i3-sensible-terminal -e ranger
 bindsym $mod+v exec pavucontrol
 bindsym $mod+Shift+v exec --no-startup-id mpv --force-window=immediate $(xclip -sel clip -o)
-bindsym $mod+i exec rofi-pass
+bindsym $mod+p exec rofi-pass
 bindsym $mod+Ctrl+o exec --no-startup-id ~/.config/scripts/extscreens
 bindsym $mod+Ctrl+p exec ~/.config/scripts/power
 bindsym XF86Display exec --no-startup-id ~/.config/scripts/extscreens
@@ -83,7 +83,7 @@ bindsym $mod+Ctrl+q exec --no-startup-id xkill
 bindsym --release button2 kill
 bindsym button2 nop
 bindsym $mod+Ctrl+c reload
-bindsym $mod+Ctrl+r restart
+bindsym $mod+Ctrl+r exec --no-startup-id ~/.config/i3/autostart rein; restart
 bindsym $mod+Ctrl+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 bindsym $mod+$left focus left
@@ -209,6 +209,5 @@ mode "output" {
 bindsym $mod+n mode "output"
 
 # Autostart applications
-exec_always --no-startup-id killall -q polybar && sleep 2; polybar example
-exec_always --no-startup-id killall -q volumeicon && sleep 2; volumeicon
-exec --no-startup-id ~/.config/i3/autostart
+#exec_always --no-startup-id ~/.config/i3/autostart rein  # Handled by restart
+exec --no-startup-id ~/.config/i3/autostart init

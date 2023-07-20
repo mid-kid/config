@@ -153,5 +153,5 @@ case "$action" in
     Suspend|Hibernate) call "$action" ;;
     Reboot|Shutdown) close_programs && call "$action" ;;
     'Reboot to Windows') close_programs && sudo grub-reboot-windows && call Reboot ;;
-    'Switch User') call_dm SwitchToGreeter ;;
+    'Switch User') lock; call_dm SwitchToGreeter ;;
 esac

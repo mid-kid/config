@@ -7,10 +7,14 @@ sedescape_subst() {
     printf '%s' "$@" | sed 's/[&/\]/\\&/g'
 }
 
+regex="$(sedescape_regex "$1")"; shift
+subst="$(sedescape_subst "$1")"; shift
+
 grep -rwl \
+    --include='*.sh' \
     --include='*.c' --include='*.h' \
     --include='*.asm' --include='*.inc' \
     --include='*.s' --include='*.i' \
     --include='*.ld' \
     --include='*.md' \
-    "$1" | xargs sed -i "s/\<$(sedescape_regex "$1")\>/$(sedescape_subst "$2")/g"
+    "$regex" "$@" | xargs -t sed -i "s/\<$regex\>/$subst/g"

@@ -57,7 +57,7 @@ Plug 'tpope/vim-repeat'  " Allow pluggins to hook into '.' repeat
 Plug 'junegunn/vim-easy-align'  " Alignment commands bound to 'ga'
 Plug 'junegunn/goyo.vim'  " Distraction-free editing
 "Plug 'dpelle/vim-LanguageTool'  " Grammar correction
-Plug 'michaeljsmith/vim-indent-object'
+Plug 'michaeljsmith/vim-indent-object'  " Select indentation levels
 
 " Consider
 "Plug 'jackguo380/vim-lsp-cxx-highlight'  " C(++) highlighting based on LSP
@@ -139,6 +139,9 @@ nnoremap <leader>. :CtrlPTag<cr>
 nnoremap <leader>n :noh<cr>
 nnoremap <leader>ve :split ~/.config/vim/vimrc<cr>
 nnoremap <leader>vs :source ~/.config/vim/vimrc<cr>
+nnoremap <leader>tb :call Tabs(8)<cr>
+nnoremap <leader>ts :call Tabs(4)<cr>
+nnoremap <leader>tn :call Tabs(0)<cr>
 
 " Behavioral keybinds
 "" Escape alternative
@@ -221,3 +224,18 @@ highlight HighlightedyankRegion cterm=reverse gui=reverse
 
 " vim-LanguageTool
 let g:languagetool_jar=$XDG_DATA_HOME."/vim/languagetool/languagetool-commandline.jar"
+
+" Utility functions
+function Tabs(stop)
+    if a:stop != 0
+        let &tabstop=a:stop
+        let &shiftwidth=a:stop
+        set noexpandtab
+        set nosmarttab
+    else
+        set tabstop=4
+        set shiftwidth=4
+        set expandtab
+        set smarttab
+    endif
+endfunction

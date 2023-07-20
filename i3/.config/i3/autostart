@@ -1,24 +1,48 @@
 #!/bin/sh
-xss-lock --ignore-sleep -l -- ~/.config/i3/locker -n &
-xfconf-query -c xfce4-session -p /general/LockCommand -n -t string -s "$HOME/.config/scripts/power Lock_noblank"
-xset s off  # Managed by xfce4-power-manager
-xset r rate 300 50
 
-"${XDG_CONFIG_HOME:-$HOME/.config}/fehbg"
-snixembed --fork
-picom &
-/usr/lib64/libexec/polkit-kde-authentication-agent-1 &
+polybar_exec() { exec polybar example; }
+volumeicon_exec() { exec volumeicon; }
 
-pipewire &
-pipewire-pulse &
-( sleep 1; exec wireplumber ) &
+all_rein() {
+    ( killall -q polybar && sleep 2; polybar_exec & ) &
+    ( killall -q volumeicon && sleep 2; volumeicon_exec & ) &
+}
 
-fcitx
-urxvtd &
-xfce4-power-manager &
-wpa_gui -t &
-redshift-gtk &
-udiskie &
-#blueman-applet &
+all_init() {
+    xss-lock --ignore-sleep -l -- ~/.config/i3/locker -n &
+    xfconf-query -c xfce4-session -p /general/LockCommand -n -t string -s "$HOME/.config/scripts/power Lock_noblank"
+    xset s off  # Managed by xfce4-power-manager
+    xset r rate 300 50
 
-telegram-desktop -startintray &
+    # Start pipewire in a sane order
+    pipewire &
+    pipewire-pulse &
+    ( sleep 1; ( exec wireplumber ) & ) &
+    pipewire_sleep="$!"
+
+    # Desktop-related daemons
+    "${XDG_CONFIG_HOME:-$HOME/.config}/fehbg"
+    snixembed --fork
+    fcitx
+    picom &
+    /usr/lib64/libexec/polkit-kde-authentication-agent-1 &
+    urxvtd &
+    redshift &
+    xfce4-power-manager &
+    wpa_gui -t &
+    udiskie &
+
+    # Some things depend on pipewire
+    wait "$pipewire_sleep"
+    polybar_exec &
+    volumeicon_exec &
+
+    # Misc applications
+    #blueman-applet &
+    telegram-desktop -startintray &
+}
+
+case "$1" in
+    init) all_init ;;
+    rein) all_rein ;;
+esac

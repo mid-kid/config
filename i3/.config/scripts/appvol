@@ -18,7 +18,7 @@ pid="$(xgetprop _NET_WM_PID -id "$(xgetprop _NET_ACTIVE_WINDOW -root)")"
 if [ $backend = pipewire ]; then
     pw_grab() {
         pw-cli i all 2> /dev/null | awk '
-        /^\tid: /{
+        /^\tid: / {
             id = $2
             type = ""
         }
@@ -57,11 +57,11 @@ fi
 
 if [ $backend = pulseaudio ]; then
     sinks="$(LANG=C pactl list sink-inputs | awk '
-        /^Sink Input #/{
+        /^Sink Input #/ {
             gsub("^.*#", "")
             input = $0
         }
-        /^\t\tapplication.process.id = /{
+        /^\t\tapplication.process.id = / {
             gsub("^.*= ", "")
             gsub("\"", "")
             print $0, input

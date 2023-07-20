@@ -17,7 +17,7 @@ ebuild="$1"; shift
 sudo='sudo --preserve-env=CC,CXX,CFLAGS,CXXFLAGS,LDFLAGS,USE,MAKEOPTS,FEATURES,PORTAGE_TMPDIR,PORTAGE_USERNAME,PORTAGE_GRPNAME,SANDBOX_ACTIVE'
 
 export MAKEOPTS="${MAKEOPTS:--j$(nproc --ignore=1) -l$(nproc)}"
-export FEATURES="test $FEATURES"
+export FEATURES="test warn-on-large-env $FEATURES"
 
 if ! "$opt_local"; then
     export FEATURES="ccache $FEATURES"

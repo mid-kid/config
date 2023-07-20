@@ -3,6 +3,6 @@ pcm.!default {
     slave.pcm {
         @func getenv
         vars [ ALSAPCM ]
-        default "pulse"
+        default "pipewire"
     }
 }
