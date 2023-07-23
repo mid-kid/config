@@ -22,7 +22,7 @@ all_init() {
 
     # Desktop-related daemons
     "${XDG_CONFIG_HOME:-$HOME/.config}/fehbg"
-    snixembed --fork
+    #snixembed --fork  # crashing and hanging piece of shit
     fcitx
     picom &
     /usr/lib64/libexec/polkit-kde-authentication-agent-1 &
