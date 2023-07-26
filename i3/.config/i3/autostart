@@ -29,13 +29,15 @@ all_init() {
     urxvtd &
     redshift &
     xfce4-power-manager &
-    wpa_gui -t &
     udiskie &
 
     # Some things depend on pipewire
     wait "$pipewire_sleep"
     polybar_exec &
     volumeicon_exec &
+
+    # Other things depend on the presence of a tray
+    wpa_gui -t &
 
     # Misc applications
     #blueman-applet &
