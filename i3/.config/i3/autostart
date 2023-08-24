@@ -17,7 +17,7 @@ all_init() {
     # Start pipewire in a sane order
     pipewire &
     pipewire-pulse &
-    ( sleep 1; ( exec wireplumber ) & ) &
+    ( sleep .5; ( exec wireplumber ) & sleep .5 ) &
     pipewire_sleep="$!"
 
     # Desktop-related daemons
