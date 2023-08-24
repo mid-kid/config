@@ -90,5 +90,5 @@ makegoal() {
 }
 
 timestamp() {
-    while IFS= read -r line; do printf '[%s] %s\n' "$(date '+%Y-%m-%d %H:%M:%S.%N')" "$line"; done
+    while IFS= read -r line; do printf '[%s] %s\n' "$(date '+%F %T.%4N')" "$line"; done
 }
