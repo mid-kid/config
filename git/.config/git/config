@@ -21,8 +21,9 @@
 [alias]
 	diff-img = difftool -x 'compare \"$LOCAL\" \"$REMOTE\" png:- | montage -mode concatenate \"$LOCAL\" png:- \"$REMOTE\" png:- | display -title \"$BASE: Local | Diff | Remote\" png:-'
 	gud = commit
-	tree-log = log --all --decorate --oneline --graph
-	full-log = log --pretty=fuller
+	log-tree = log --all --decorate --oneline --graph
+	log-full = log --pretty=fuller
+	clean-sub = submodule foreach --recursive git clean
 [diff "hex"]
 	textconv = xxd
 	binary = true

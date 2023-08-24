@@ -1,0 +1,5 @@
+#!/bin/sh
+# Run "git clean" in main dir and all submodules
+set -e
+git clean "$@"
+git submodule foreach --recursive git clean "$@"
