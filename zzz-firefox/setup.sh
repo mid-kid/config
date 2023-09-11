@@ -2,7 +2,7 @@
 set -eu
 
 profile="$1"
-userjs_ver="102.1"
+userjs_ver="115.1"
 
 if [ ! -d "$profile/userjs" ]; then
     git clone -b "$userjs_ver" --depth=1 https://github.com/arkenfox/user.js/ "$profile/userjs"
@@ -12,7 +12,7 @@ git -C "$profile/userjs" checkout "$userjs_ver"
 if [ ! -d "$profile/chrome" ]; then
     git clone -b photon-style --depth=1 https://github.com/black7375/Firefox-UI-Fix/ "$profile/chrome"
 fi
-git -C "$profile/chrome" pull --depth=1
+git -C "$profile/chrome" pull --depth=1 || true
 
 newline="$profile/user.js-newline"
 trap 'rm -f "$newline"' EXIT
@@ -29,7 +29,11 @@ fi
 cp "$profile/userjs/prefsCleaner.sh" "$profile/prefsCleaner.sh"
 chmod +x "$profile/prefsCleaner.sh"
 ( cd "$profile"
+    rm -vrf prefsjs_backups
     ./prefsCleaner.sh -s
-    diff -u prefs.js.backup.* prefs.js || true
-    rm -vf prefs.js.backup.*
+    diff -u prefsjs_backups/prefs.js.backup.* prefs.js || true
+    rm -vrf prefsjs_backups
 )
+
+# Remove binaries
+rm -rf "$profile/gmp-gmpopenh264"
