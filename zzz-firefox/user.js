@@ -10,6 +10,7 @@ user_pref("browser.tabs.drawInTitlebar", false);  // Use native title bar, don't
 user_pref("browser.tabs.firefox-view", false);  // Useless feature
 user_pref("browser.tabs.warnOnClose", true);  // Warn when closing multiple tabs
 user_pref("browser.toolbars.bookmarks.visibility", "never");  // Don't show the bookmarks toolbar
+user_pref("browser.uidensity", 1);  // Compact density is best density
 user_pref("extensions.pocket.enabled", false);  // 3rd party extension, proprietary
 user_pref("general.smoothScroll", false);  // I prefer quick/fast scrolling
 user_pref("layout.spellcheckDefault", 0);  // Disable spellchecking
