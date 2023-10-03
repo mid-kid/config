@@ -58,9 +58,13 @@ Windows Registry Editor Version 5.00
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search]
 "SearchboxTaskbarMode"=dword:1
 
-; Taskbar: Show all icons in notification tray
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer]
+; Taskbar: Show all icons in notification tray
 "EnableAutoTray"=dword:0
+; Explorer: Don't show recently accessed files
+"ShowRecent"=dword:0
+; Explorer: Don't show frequently accessed folders
+"ShowFrequent"=dword:0
 
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
 ; Explorer: Show file extensions
@@ -90,6 +94,8 @@ Windows Registry Editor Version 5.00
 "Start_IrisRecommendations"=dword:0
 ; Explorer: (win11) Disable recent documents
 "Start_TrackDocs"=dword:0
+; Explorer: (win11) Use compact mode
+"UseCompactMode"=dword:1
 
 ; Explorer: Show full path in title bar
 ;; (developer settings toggle)
