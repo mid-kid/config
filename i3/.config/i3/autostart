@@ -17,8 +17,7 @@ all_init() {
     # Start pipewire in a sane order
     pipewire &
     pipewire-pulse &
-    ( sleep .5; ( exec wireplumber ) & sleep .5 ) &
-    pipewire_sleep="$!"
+    ( sleep .5; ( exec wireplumber ) & sleep .5 ) & pipewire_sleep="$!"
 
     # Desktop-related daemons
     "${XDG_CONFIG_HOME:-$HOME/.config}/fehbg"
@@ -30,13 +29,15 @@ all_init() {
     redshift &
     xfce4-power-manager &
     udiskie &
+    kdeconnect-indicator &
 
     # Some things depend on pipewire
     wait "$pipewire_sleep"
-    polybar_exec &
+    ( polybar_exec & sleep .1 ) & polybar_sleep="$!"
     volumeicon_exec &
 
-    # Other things depend on the presence of a tray
+    # Some things depend on the presence of a tray
+    wait "$polybar_sleep"
     wpa_gui -t &
 
     # Misc applications

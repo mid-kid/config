@@ -12,7 +12,7 @@ subst="$(sedescape_subst "$1")"; shift
 
 grep -rwl \
     --include='*.sh' \
-    --include='*.c' --include='*.h' \
+    --include='*.c' --include='*.cc' --include='*.cpp' --include='*.h' \
     --include='*.asm' --include='*.inc' \
     --include='*.s' --include='*.i' \
     --include='*.ld' \

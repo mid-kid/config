@@ -210,4 +210,5 @@ bindsym $mod+n mode "output"
 
 # Autostart applications
 #exec_always --no-startup-id ~/.config/i3/autostart rein  # Handled by restart
+#exec --no-startup-id urxvt -e sh -c '~/.config/i3/autostart init; sleep 1d'  # Debug
 exec --no-startup-id ~/.config/i3/autostart init
