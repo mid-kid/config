@@ -108,6 +108,8 @@ Windows Registry Editor Version 5.00
 "ShowRunAsDifferentUserInStart"=dword:1
 ; Explorer: Don't suggest using the Microsoft Store
 "NoUseStoreOpenWith"=dword:1
+; Explorer: Disable recently added apps
+"HideRecentlyAddedApps"=dword:1
 ; Explorer: (win11) Disable Bing
 "DisableSearchBoxSuggestions"=dword:1
 
