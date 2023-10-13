@@ -1,6 +1,7 @@
 /*** [SECTION XXXX]: MY SETTINGS ***/
 
 user_pref("accessibility.typeaheadfind", false);  // Don't search text when typing in a page
+user_pref("apz.overscroll.enabled", false);  // While not default on Linux, this behavior is annoying on Windows
 user_pref("browser.download.alwaysOpenPanel", true);  // Show downloads panel when a download starts
 user_pref("browser.download.improvements_to_download_panel", false);  // Don't save all files automatically...
 user_pref("browser.download.start_downloads_in_tmp_dir", true);  // Please don't save things in downloads when I use "open with"
@@ -10,6 +11,7 @@ user_pref("browser.tabs.drawInTitlebar", false);  // Use native title bar, don't
 user_pref("browser.tabs.firefox-view", false);  // Useless feature
 user_pref("browser.tabs.warnOnClose", true);  // Warn when closing multiple tabs
 user_pref("browser.toolbars.bookmarks.visibility", "never");  // Don't show the bookmarks toolbar
+user_pref("browser.translations.enable", false);  // I've never liked this feature
 user_pref("browser.uidensity", 1);  // Compact density is best density
 user_pref("extensions.pocket.enabled", false);  // 3rd party extension, proprietary
 user_pref("general.smoothScroll", false);  // I prefer quick/fast scrolling
