@@ -1,8 +1,9 @@
-# Preset modifications for Sophia.Script.for.Windows.10.LTSC.2021.v5.14.7
+# Preset modifications for Sophia.Script.for.Windows.10.LTSC.2021.v5.17.6
 
-Checks
+InitialActions
 #CreateRestorePoint
 #TaskbarSearch  # Set in user.reg
+#TaskViewButton  # Set in user.reg
 #AppColorMode  # Set in user.reg
 #Cursors  # See "C:\Windows\Cursors" to delete downloaded files
 AdminApprovalMode -Default  # !!!

@@ -46,14 +46,6 @@ Windows Registry Editor Version 5.00
 "TurnOffAutocorrectMisspelledWords"=dword:1
 "TurnOffHighlightMisspelledWords"=dword:1
 
-; Taskbar: Make it small
-[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
-"TaskbarSmallIcons"=dword:1
-
-; Taskbar: Open the last active windows on click
-[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
-"LastActiveClick"=dword:1
-
 ; Taskbar: Show search icon instead of box
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search]
 "SearchboxTaskbarMode"=dword:1
@@ -67,6 +59,12 @@ Windows Registry Editor Version 5.00
 "ShowFrequent"=dword:0
 
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+; Taskbar: Make it small
+"TaskbarSmallIcons"=dword:1
+; Taskbar: Open the last active windows on click
+"LastActiveClick"=dword:1
+; Taskbar: Show task view button
+"ShowTaskViewButton"=dword:1
 ; Explorer: Show file extensions
 ;; (developer settings toggle)
 "HideFileExt"=dword:0
@@ -78,15 +76,13 @@ Windows Registry Editor Version 5.00
 "HideDrivesWithNoMedia"=dword:0
 ; Explorer: Open to This PC instead of Quick Access
 "LaunchTo"=dword:1
-; Explorer: Show task view button
-"ShowTaskViewButton"=dword:1
-; Explorer: (win11) Align items to the left
+; Taskbar: (win11) Align items to the left
 "TaskbarAl"=dword:0
-; Explorer: (win11) Hide widgets
+; Taskbar: (win11) Hide widgets
 "TaskbarDa"=dword:0
-; Explorer: (win11) Hide chat
+; Taskbar: (win11) Hide chat
 "TaskbarMn"=dword:0
-; Explorer: (win11) Seconds in system clock
+; Taskbar: (win11) Seconds in system clock
 "ShowSecondsInSystemClock"=dword:1
 ; Explorer: (win11) Disable browsing history
 "Start_RecoPersonalizedSites"=dword:0
