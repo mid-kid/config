@@ -11,10 +11,13 @@ Windows Registry Editor Version 5.00
 "SystemUsesLightTheme"=dword:0
 "AppsUseLightTheme"=dword:1
 
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\PrecisionTouchPad]
 ; General: Use the normal touchpad scroll direction
 ;; (settings) Devices -> Touchpad -> Scroll and zoom -> Scrolling direction = Down motion scrolls down
-[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\PrecisionTouchPad]
 "ScrollDirection"=dword:ffffffff
+; General: Set three-finger tap to middle mouse button
+;; (settings) Devices -> Touchpad -> Three-finger movements -> Tapping = Middle mousebutton
+"ThreeFingerTapEnabled"=dword:4
 
 ; General: Set keyboard repeat delay/speed
 ;; (control panel) Keyboard -> Speed -> Character repeat
