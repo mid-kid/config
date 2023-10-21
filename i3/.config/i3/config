@@ -187,9 +187,9 @@ mode "resize" {
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
-    bindsym $mod+m mode "default"
+    bindsym $mod+n mode "default"
 }
-bindsym $mod+m mode "resize"
+bindsym $mod+n mode "resize"
 
 # Move workspace to output
 mode "output" {
@@ -204,9 +204,9 @@ mode "output" {
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
-    bindsym $mod+n mode "default"
+    bindsym $mod+m mode "default"
 }
-bindsym $mod+n mode "output"
+bindsym $mod+m mode "output"
 
 # Autostart applications
 #exec_always --no-startup-id ~/.config/i3/autostart rein  # Handled by restart
