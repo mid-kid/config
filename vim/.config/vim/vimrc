@@ -49,22 +49,20 @@ Plug 'junegunn/seoul256.vim'
 
 " Faaancy
 Plug 'airblade/vim-gitgutter'  " Show git diffs on the side
-Plug 'Xuyuanp/nerdtree-git-plugin'  " Show git status in nerdtree
 Plug 'machakann/vim-highlightedyank'  " Highlight what you've copied
+"Plug 'Xuyuanp/nerdtree-git-plugin'  " Show git status in nerdtree
 "Plug 'https://heptapod.host/cgtk/taghighlight'
 
-" Syntax
-Plug 'cespare/vim-toml'
-Plug 'Glench/Vim-Jinja2-Syntax'
-Plug 'PotatoesMaster/i3-vim-syntax'
+" File types
+Plug 'lepture/vim-jinja'
 Plug 'lervag/vimtex'
 
 " Project management
 Plug 'editorconfig/editorconfig-vim'  " Support editorconfig spec
-Plug 'scrooloose/nerdtree'  " File browser
-"Plug 'ctrlpvim/ctrlp.vim'  " Fuzzy finding file and tag browser
 Plug 'embear/vim-localvimrc'  " Support per-project vimrc files
 Plug 'ludovicchabant/vim-gutentags'  " Auto-update tags file
+"Plug 'preservim/nerdtree'  " File browser
+"Plug 'ctrlpvim/ctrlp.vim'  " Fuzzy finding file and tag browser
 
 " Editing
 Plug 'scrooloose/nerdcommenter'  " Comment easily (easily my most-used plugin)
@@ -75,17 +73,9 @@ Plug 'tpope/vim-surround'  " Bindings too hard to remember and use tbhon
 Plug 'tpope/vim-repeat'  " Allow pluggins to hook into '.' repeat
 Plug 'junegunn/vim-easy-align'  " Alignment commands bound to 'ga'
 Plug 'junegunn/goyo.vim'  " Distraction-free editing
-"Plug 'dpelle/vim-LanguageTool'  " Grammar correction
 Plug 'michaeljsmith/vim-indent-object'  " Select indentation levels
-
-" Consider
-"Plug 'jackguo380/vim-lsp-cxx-highlight'  " C(++) highlighting based on LSP
-"Plug 'ervandew/supertab'  " Replace AutoComplPop
-" Any of (completion)
-"Plug 'w0rp/ale'
-"Plug 'neoclide/coc.nvim'
-"Plug 'prabirshrestha/vim-lsp'
-"Plug 'valloric/youcompleteme'
+"Plug 'dpelle/vim-LanguageTool'  " Grammar correction
+"Plug 'ervandew/supertab'  " Alternative for AutoComplPop
 
 call plug#end()
 
