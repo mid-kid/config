@@ -1,7 +1,8 @@
-" Install plugins (vim):
-" curl -fLo ${XDG_DATA_HOME:-$HOME/.local/share}/vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && vim +PlugInstall
+" Install plugins:
+" vim (unix): curl -fLo ${XDG_DATA_HOME:-$HOME/.local/share}/vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && vim +PlugInstall
+" vim (windows): curl -fLo $HOME/vimfiles/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-" Add to .profile:
+" Add to .profile (for linux):
 " export VIMINIT="if !has('nvim') | source ${XDG_CONFIG_HOME:-$HOME/.config}/vim/vimrc | endif"
 
 " Must-have...
