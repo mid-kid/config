@@ -44,14 +44,11 @@ Windows Registry Editor Version 5.00
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\PowerShell\1\ShellIds\Microsoft.PowerShell]
 "ExecutionPolicy"="Unrestricted"
 
-; General: Disable spellchecking
-[HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Control Panel\International]
-"TurnOffAutocorrectMisspelledWords"=dword:1
-"TurnOffHighlightMisspelledWords"=dword:1
-
-; Taskbar: Show search icon instead of box
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search]
+; Taskbar: Show search icon instead of box
 "SearchboxTaskbarMode"=dword:1
+; Explorer: (win11) Remove bing from search box
+"BingSearchEnabled"=dword:0
 
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer]
 ; Taskbar: Show all icons in notification tray
@@ -96,21 +93,14 @@ Windows Registry Editor Version 5.00
 ; Explorer: (win11) Use compact mode
 "UseCompactMode"=dword:1
 
+; Explorer: Disable recently added apps
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Start]
+"ShowRecentList"=dword:0
+
 ; Explorer: Show full path in title bar
 ;; (developer settings toggle)
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CabinetState]
 "FullPath"=dword:1
-
-[HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer]
-; Explorer: Show Run as different user in Start
-;; (developer settings toggle)
-"ShowRunAsDifferentUserInStart"=dword:1
-; Explorer: Don't suggest using the Microsoft Store
-"NoUseStoreOpenWith"=dword:1
-; Explorer: Disable recently added apps
-"HideRecentlyAddedApps"=dword:1
-; Explorer: (win11) Disable Bing
-"DisableSearchBoxSuggestions"=dword:1
 
 ; Explorer: (win11) Disable Windows Cloud Search
 ; (settings) Privacy & Security -> Search Permissions
@@ -118,6 +108,7 @@ Windows Registry Editor Version 5.00
 "IsDeviceSearchHistoryEnabled"=dword:0
 "IsMSACloudSearchEnabled"=dword:0
 "IsAADCloudSearchEnabled"=dword:0
+"IsDynamicSearchEnabled"=dword:0
 
 ; Explorer: (win11) Disable rotating lock screen
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]

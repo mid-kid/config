@@ -27,6 +27,18 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\CredUI]
 "DisablePasswordReveal"=dword:1
 
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer]
+; Explorer: Show Run as different user in Start
+;; (developer settings toggle)
+"ShowRunAsDifferentUserInStart"=dword:1
+; Explorer: Don't suggest using the Microsoft Store
+"NoUseStoreOpenWith"=dword:1
+
+; Privacy: Disable Xbox Game Bar
+;; (gpedit) Computer Configuration -> Administrative Templates -> Windows Components -> Windows Game Recording and Broadcasting -> Enables or disables Windows Game Recording and Broadcasting = Disabled
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\GameDVR]
+"AllowGameDVR"=dword:0
+
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender]
 ; Privacy: Disable Windows Defender
 ;; (gpedit) Computer Configuration -> Administrative Templates -> Windows Components -> Microsoft Defender Antivirus -> Turn off Microsoft Defender Antivirus = Enabled
@@ -53,8 +65,3 @@ Windows Registry Editor Version 5.00
 ;; (gpedit) Computer Configuration -> Administrative Templates -> Windows Components -> Windows Security -> Systray -> Hide Windows Security Systray = Enabled
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Systray]
 "HideSystray"=dword:1
-
-; Privacy: Disable Xbox Game Bar
-;; (gpedit) Computer Configuration -> Administrative Templates -> Windows Components -> Windows Game Recording and Broadcasting -> Enables or disables Windows Game Recording and Broadcasting = Disabled
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\GameDVR]
-"AllowGameDVR"=dword:0
