@@ -7,22 +7,40 @@
 " Must-have...
 set nocompatible
 
-" XDG Base Directory specification (https://blog.joren.ga/tools/vim-xdg)
-if empty($XDG_CACHE_HOME) | let $XDG_CACHE_HOME = $HOME."/.cache" | endif
-if empty($XDG_CONFIG_HOME) | let $XDG_CONFIG_HOME = $HOME."/.config" | endif
-if empty($XDG_DATA_HOME) | let $XDG_DATA_HOME = $HOME."/.local/share" | endif
-set runtimepath^=$XDG_CONFIG_HOME/vim
-set runtimepath+=$XDG_DATA_HOME/vim
-set runtimepath+=$XDG_CONFIG_HOME/vim/after
-set packpath^=$XDG_DATA_HOME/vim
-set packpath+=$XDG_DATA_HOME/vim/after
-let g:netrw_home = $XDG_DATA_HOME."/vim"
-silent! call mkdir($XDG_DATA_HOME."/vim/spell", "p")
-set viewdir=$XDG_DATA_HOME/vim/view | silent! call mkdir(&viewdir, "p")
-if !has("nvim") | silent! set viminfofile=$XDG_CACHE_HOME/vim/viminfo | endif
+" XDG Base Directory specification
+if empty($XDG_DATA_HOME) | let $XDG_DATA_HOME=$HOME."/.local/share" | endif
+if empty($XDG_CONFIG_HOME) | let $XDG_CONFIG_HOME=$HOME."/.config" | endif
+if empty($XDG_CACHE_HOME) | let $XDG_CACHE_HOME=$HOME."/.cache" | endif
+let $VIM_DATA=$XDG_DATA_HOME."/vim"
+let $VIM_CONFIG=$XDG_CONFIG_HOME."/vim"
+let $VIM_CACHE=$XDG_CACHE_HOME."/vim"
+
+" Alternative for windows
+if (has("win32") || has("win32unix")) && isdirectory($HOME."/vimfiles")
+    let $VIM_DATA=$HOME."/vimfiles"
+    let $VIM_CONFIG=$VIM_DATA
+    let $VIM_CACHE=$VIM_DATA
+endif
+
+" Set paths to use XDG spec (https://blog.joren.ga/tools/vim-xdg)
+set runtimepath^=$VIM_DATA
+set runtimepath^=$VIM_CONFIG
+set runtimepath+=$VIM_CONFIG/after
+set packpath^=$VIM_CONFIG,$VIM_DATA
+set packpath+=$VIM_CONFIG/after,$VIM_DATA/after
+
+silent! call mkdir($VIM_DATA."/spell", "p", 0700)
+if !has("nvim") | set viminfofile=$VIM_CACHE/viminfo | endif
+set backupdir=$VIM_CACHE/backup// | silent! call mkdir(&backupdir, "p", 0700)
+set directory=$VIM_CACHE/swp// | silent! call mkdir(&directory, "p", 0700)
+set undodir=$VIM_CACHE/undo | silent! call mkdir(&undodir, "p", 0700)
+set viewdir=$VIM_DATA/view | silent! call mkdir(&viewdir, "p", 0700)
+
+let g:netrw_home=$VIM_DATA
+let g:plug_home=$VIM_DATA."/plugged"
 
 " Set plugins
-call plug#begin($XDG_DATA_HOME."/vim/plugged")
+call plug#begin()
 
 " Themes
 Plug 'junegunn/seoul256.vim'
@@ -70,25 +88,21 @@ Plug 'michaeljsmith/vim-indent-object'  " Select indentation levels
 
 call plug#end()
 
-" Don't litter tempfiles everywhere
-set undodir=$XDG_CACHE_HOME/vim/undo | silent! call mkdir(&undodir, "p")
-set backupdir=$XDG_CACHE_HOME/vim/backup | silent! call mkdir(&backupdir, "p")
-set directory=$XDG_CACHE_HOME/vim/swp | silent! call mkdir(&directory, "p")
-
-" Color scheme (seoul256)
+" Theming (seoul256)
 let g:seoul256_background=233
 "set termguicolors
 colorscheme seoul256
+if has("win32") | set guifont=DejaVu_Sans_Mono:h10:cANSI:qDRAFT | endif
 
-" Color scheme (everforest)
+" Theming (everforest)
 "set background=dark
-"let g:everforest_background='hard'
+"let g:everforest_background="hard"
 "let g:everforest_better_performance=1
 "let g:everforest_disable_italic_comment=1
-"let g:everforest_ui_contrast='high'
+"let g:everforest_ui_contrast="high"
 "let g:everforest_colors_override = {
-"    \ 'bg0': ['#262626', '235'],
-"    \ 'bg1': ['#303030', '236']}
+"    \ "bg0": ["#262626", "235"],
+"    \ "bg1": ["#303030", "236"]}
 "set termguicolors
 "colorscheme everforest
 
