@@ -55,5 +55,6 @@ user_pref("userChrome.rounding.square_panelitem", true);
 user_pref("userChrome.rounding.square_urlView_item", true);
 user_pref("userChrome.tab.box_shadow", true);
 user_pref("userChrome.urlView.full_width_padding", true);
+user_pref("userChrome.hidden.private_indicator", true);
 
 user_pref("_user.js.parrot", "SUCCESS");
