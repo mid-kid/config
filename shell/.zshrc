@@ -58,6 +58,10 @@ bindkey '\e[2~' quoted-insert
 REPORTTIME=10
 autoload -U colors
 colors
+autoload -Uz bracketed-paste-magic
+zle -N bracketed-paste bracketed-paste-magic
+autoload -Uz url-quote-magic
+zle -N self-insert url-quote-magic
 
 # Prompt
 _prompt_git() { :; }
