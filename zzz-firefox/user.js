@@ -13,6 +13,8 @@ user_pref("browser.tabs.warnOnClose", true);  // Warn when closing multiple tabs
 user_pref("browser.toolbars.bookmarks.visibility", "never");  // Don't show the bookmarks toolbar
 user_pref("browser.translations.enable", false);  // I've never liked this feature
 user_pref("browser.uidensity", 1);  // Compact density is best density
+user_pref("cookiebanners.service.mode", 2);  // Block cookie banners
+user_pref("cookiebanners.service.mode.privateBrowsing", 2);  // ...everywhere
 user_pref("extensions.pocket.enabled", false);  // 3rd party extension, proprietary
 user_pref("general.smoothScroll", false);  // I prefer quick/fast scrolling
 user_pref("layout.spellcheckDefault", 0);  // Disable spellchecking
@@ -21,6 +23,8 @@ user_pref("media.gmp-gmpopenh264.autoupdate", false);  // Don't download binarie
 user_pref("media.gmp-widevinecdm.autoupdate", false);  // Don't download binaries
 user_pref("network.trr.mode", 5);  // Applications should stop trying to avoid the system's DNS resolver
 user_pref("places.history.expiration.max_pages", 1000000000);  // Keep history FOREVER!
+user_pref("privacy.donottrackheader.enabled", true);  // Enabled by default with resistFingerprinting, this just ticks the box in settings
+user_pref("privacy.globalprivacycontrol.enabled", true);  // Another attempt at donottrack, but legally binding this time
 user_pref("privacy.resistFingerprinting.letterboxing", false);  // Don't mess with the content size
 user_pref("privacy.sanitize.sanitizeOnShutdown", false);  // Don't clear everything on shutdown
 user_pref("signon.rememberSignons", false);  // Don't ask to save passwords
