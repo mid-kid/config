@@ -28,15 +28,15 @@ bindsym $mod+Shift+d exec i3-sensible-terminal -e ranger
 bindsym $mod+v exec pavucontrol
 bindsym $mod+Shift+v exec --no-startup-id mpv --force-window=immediate $(xclip -sel clip -o)
 bindsym $mod+p exec rofi-pass
-bindsym $mod+Ctrl+o exec --no-startup-id ~/.config/scripts/extscreens
-bindsym $mod+Ctrl+p exec ~/.config/scripts/power
-bindsym XF86Display exec --no-startup-id ~/.config/scripts/extscreens
-bindsym XF86PowerOff exec ~/.config/scripts/power
-bindsym Print exec --no-startup-id ~/.config/scripts/screenshot -s
-bindsym Shift+Print exec --no-startup-id ~/.config/scripts/screenshot
-bindsym Shift+XF86AudioRaiseVolume exec --no-startup-id ~/.config/scripts/appvol +2%
-bindsym Shift+XF86AudioLowerVolume exec --no-startup-id ~/.config/scripts/appvol -2%
-bindsym Shift+XF86AudioMute exec --no-startup-id ~/.config/scripts/appvol mute
+bindsym $mod+Ctrl+o exec --no-startup-id ~/.config/scripts/i3-screens
+bindsym XF86Display exec --no-startup-id ~/.config/scripts/i3-screens
+bindsym $mod+Ctrl+p exec ~/.config/scripts/i3-power
+bindsym XF86PowerOff exec ~/.config/scripts/i3-power
+bindsym Shift+Print exec --no-startup-id ~/.config/scripts/i3-screenshot
+bindsym Print exec --no-startup-id ~/.config/scripts/i3-screenshot -s
+bindsym Shift+XF86AudioRaiseVolume exec --no-startup-id ~/.config/scripts/i3-appvol +2%
+bindsym Shift+XF86AudioLowerVolume exec --no-startup-id ~/.config/scripts/i3-appvol -2%
+bindsym Shift+XF86AudioMute exec --no-startup-id ~/.config/scripts/i3-appvol mute
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86Tools exec --no-startup-id playerctl play-pause
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
