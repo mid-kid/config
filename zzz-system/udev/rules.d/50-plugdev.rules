@@ -3,6 +3,8 @@
 SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="4ee7", MODE="0660", GROUP="plugdev"
 ## Fastboot
 SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="d00d", MODE="0660", GROUP="plugdev"
+## Fastbootd
+SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="4ee0", MODE="0660", GROUP="plugdev"
 ## ADB Sideload
 SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="d001", MODE="0660", GROUP="plugdev"
 ## ADB
@@ -17,10 +19,12 @@ SUBSYSTEM=="usb", ATTR{idVendor}=="05c6", ATTR{idProduct}=="9001", MODE="0660", 
 SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="4ee7", MODE="0660", GROUP="plugdev"
 ## Fastboot
 SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="d00d", MODE="0660", GROUP="plugdev"
-## ADB TWRP (Normal)
-SUBSYSTEM=="usb", ATTR{idVendor}=="0b05", ATTR{idProduct}=="7773", MODE="0660", GROUP="plugdev"
-## ADB TWRP (Sideload)
+## ADB TWRP
+SUBSYSTEM=="usb", ATTR{idVendor}=="2717", ATTR{idProduct}=="ff68", MODE="0660", GROUP="plugdev"
+## ADB TWRP (REIGNZ)
 SUBSYSTEM=="usb", ATTR{idVendor}=="0b05", ATTR{idProduct}=="d001", MODE="0660", GROUP="plugdev"
+## MTP
+SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="4ee1", MODE="0660", GROUP="plugdev"
 
 # Adafruit Trinket
 SUBSYSTEM=="usb", ATTR{idVendor}=="1781", ATTR{idProduct}=="0c9f", MODE="0660", GROUP="plugdev"
@@ -63,3 +67,13 @@ SUBSYSTEM=="usb", ATTR{idVendor}=="16c0", ATTR{idProduct}=="05dc", MODE="0660", 
 
 # logic analyzer (saleae)
 SUBSYSTEM=="usb", ATTR{idVendor}=="0925", ATTR{idProduct}=="3881", MODE="0660", GROUP="plugdev"
+
+# Oculus Quest 2
+## Friend
+SUBSYSTEM=="usb", ATTR{idVendor}=="2833", ATTR{idProduct}=="0182", MODE="0660", GROUP="plugdev"
+## Mine
+SUBSYSTEM=="usb", ATTR{idVendor}=="2833", ATTR{idProduct}=="0186", MODE="0660", GROUP="plugdev"
+
+# RPI Pico
+## Boot
+SUBSYSTEM=="usb", ATTR{idVendor}=="2e8a", ATTR{idProduct}=="0003", MODE="0660", GROUP="plugdev"
