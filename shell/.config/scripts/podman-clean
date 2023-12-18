@@ -1,3 +1,4 @@
 #!/bin/sh
+podman stop -a
 podman system prune -f
 buildah rm -a
