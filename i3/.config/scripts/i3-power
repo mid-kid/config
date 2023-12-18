@@ -49,7 +49,7 @@ call() {
 
 lock() {
     opt_blank=true
-    [ "$1" -eq noblank ] && opt_blank=false
+    [ "$1" = noblank ] && opt_blank=false
 
     # If swayidle is running, send the signal to lock (and blank the screen) now
     if killall -q -USR1 swayidle > /dev/null 2> /dev/null; then
