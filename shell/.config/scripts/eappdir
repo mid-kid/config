@@ -6,7 +6,6 @@ AppDir="$PWD/AppDir"
 mkdir -p "$AppDir/var/tmp" "$AppDir/var/log"
 
 ROOT="$AppDir" \
-SYSROOT="$AppDir" \
 EPREFIX="/" \
 EMERGE_LOG_DIR="$AppDir/var/log" \
 PORTAGE_TMPDIR="$AppDir/var/tmp" \

@@ -60,26 +60,26 @@ lock() {
     # If xss-lock is running, it'll run the right locker
     if pgrep -u "$(id -u)" -x xss-lock > /dev/null 2> /dev/null; then
         # Lock and blank the screen...
-        xset s activate; $opt_blank && { sleep 1; xset dpms force off; }
+        xset s activate; $opt_blank && { sleep 1; xset dpms force off; } || true
         return
     fi
 
     # If xautolock is running, try that...
     if pgrep -u "$(id -u)" -x xautolock > /dev/null 2> /dev/null; then
-        xautolock -locknow; $opt_blank && { sleep 1; xset s activate; }
+        xautolock -locknow; $opt_blank && { sleep 1; xset s activate; } || true
         return
     fi
 
     # If xflock4 is available, assume it's a script that locks the screen
     # xfce4-power-manager will use this too
     if command -v xflock4 > /dev/null 2> /dev/null; then
-        xflock4; $opt_blank && ! $wayland && { sleep 1; xset s activate; }
+        xflock4; $opt_blank && ! $wayland && { sleep 1; xset s activate; } || true
         return
     fi
 
     # Fall back to logind, hoping there's something responding to this
     if call_logind LockSession string:self; then
-        $opt_blank && ! $wayland && { sleep 1; xset dpms force off; }
+        $opt_blank && ! $wayland && { sleep 1; xset dpms force off; } || true
         return
     fi
 
