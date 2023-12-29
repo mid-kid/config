@@ -22,7 +22,8 @@ all_init() {
     ( sleep .5; ( exec wireplumber ) & sleep 1 ) & pipewire_sleep="$!"
 
     # Desktop-related daemons
-    "${XDG_CONFIG_HOME:-$HOME/.config}/fehbg"
+    "${XDG_CONFIG_HOME:-$HOME/.config}/fehbg" || \
+        feh --bg-scale "${XDG_CONFIG_HOME:-$HOME/.config}/wallpaper.jpg"
     picom_exec &
     #snixembed --fork  # crashing and hanging piece of shit
     fcitx
