@@ -1,0 +1,25 @@
+#!/bin/sh
+set -e
+
+action_get() {
+    pkg="$1"
+    cp -rv "/etc/portage/patches/$pkg/" patches
+    echo "$pkg" > .genpatch
+}
+
+action_set() {
+    pkg=""
+    test -f .genpatch && pkg="$(cat .genpatch)"
+    test -n "$1" && pkg="$1"
+    if [ -z "$pkg" ]; then
+        echo "No package set!" 1>&2
+        exit 1
+    fi
+    sudo rm -rf "/etc/portage/patches/$pkg/"
+    sudo cp -rv patches "/etc/portage/patches/$pkg/"
+}
+
+case "$1" in
+    get) shift; action_get "$@" ;;
+    set) shift; action_set "$@" ;;
+esac
