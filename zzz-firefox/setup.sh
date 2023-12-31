@@ -28,7 +28,9 @@ fi
 
 ( cd "$profile"
     rm -vrf prefsjs_backups
-    ./userjs/prefsCleaner.sh -s -d
+    cp userjs/prefsCleaner.sh .
+    ./prefsCleaner.sh -s -d
+    rm prefsCleaner.sh
     diff -u prefsjs_backups/prefs.js.backup.* prefs.js || true
     rm -vrf prefsjs_backups
 )
