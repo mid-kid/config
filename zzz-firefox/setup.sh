@@ -26,11 +26,9 @@ if [ "$(uname -o)" = "Msys" ]; then
     cat user_win.js >> "$profile/user.js"
 fi
 
-cp "$profile/userjs/prefsCleaner.sh" "$profile/prefsCleaner.sh"
-chmod +x "$profile/prefsCleaner.sh"
 ( cd "$profile"
     rm -vrf prefsjs_backups
-    ./prefsCleaner.sh -s
+    ./userjs/prefsCleaner.sh -s -d
     diff -u prefsjs_backups/prefs.js.backup.* prefs.js || true
     rm -vrf prefsjs_backups
 )
