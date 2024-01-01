@@ -1,13 +1,38 @@
 #!/bin/sh
 
-picom_exec() { exec picom; }
-polybar_exec() { exec polybar example; }
-volumeicon_exec() { exec volumeicon; }
+exec_picom() { exec picom; }
+exec_polybar() { exec polybar example; }
+exec_volumeicon() { exec volumeicon; }
+
+wait_pipewire() {
+    for x in $(seq 400); do  # 4s timeout
+        test -n "$XDG_RUNTIME_DIR" -a -S "$XDG_RUNTIME_DIR/pipewire-0" && return 0
+        test -S /run/pipewire/pipewire-0 && return 0
+        sleep .01
+    done
+    return 1
+}
+
+wait_alsa() {
+    for x in $(seq 400); do  # 4s timeout
+        amixer get Master 2>&1 > /dev/null && return 0
+        sleep .01
+    done
+    return 1
+}
+
+wait_polybar() {
+    for x in $(seq 400); do  # 4s timeout
+        xprop -name 'Polybar tray window' 2>&1 > /dev/null && return 0
+        sleep .01
+    done
+    return 1
+}
 
 all_rein() {
-    ( killall -q picom && sleep 1; picom_exec & ) &
-    ( killall -q polybar && sleep 2; polybar_exec & ) &
-    ( killall -q volumeicon && sleep 2; volumeicon_exec & ) &
+    ( killall -q picom && sleep 1; exec_picom & ) &
+    ( killall -q polybar && sleep 2; exec_polybar & ) &
+    ( killall -q volumeicon && sleep 2; exec_volumeicon & ) &
 }
 
 all_init() {
@@ -19,12 +44,14 @@ all_init() {
     # Start pipewire in a sane order
     pipewire &
     pipewire-pulse &
-    ( sleep .5; ( exec wireplumber ) & sleep 1 ) & pipewire_sleep="$!"
+    if wait_pipewire; then
+        wireplumber &
+    fi &
 
     # Desktop-related daemons
     "${XDG_CONFIG_HOME:-$HOME/.config}/fehbg" || \
         feh --bg-scale "${XDG_CONFIG_HOME:-$HOME/.config}/wallpaper.jpg"
-    picom_exec &
+    exec_picom &
     #snixembed --fork  # crashing and hanging piece of shit
     fcitx
     /usr/lib64/libexec/polkit-kde-authentication-agent-1 &
@@ -33,15 +60,17 @@ all_init() {
     xfce4-power-manager &
     udiskie &
 
-    # Some things depend on pipewire
-    wait "$pipewire_sleep"
-    ( polybar_exec & sleep .5 ) & polybar_sleep="$!"
-    volumeicon_exec &
+    # Some things depend on audio/alsa
+    if wait_alsa; then
+        exec_polybar &
+        exec_volumeicon &
+    fi &
 
     # Some things depend on the presence of a tray
-    wait "$polybar_sleep"
-    wpa_gui -t &
-    kdeconnect-indicator &
+    if wait_polybar; then
+        wpa_gui -t &
+        kdeconnect-indicator &
+    fi &
 
     # Misc applications
     #blueman-applet &
