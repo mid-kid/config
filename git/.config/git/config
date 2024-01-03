@@ -1,35 +1,37 @@
 [user]
 	email = esteve.varela@gmail.com
 	name = mid-kid
-[credential]
-	helper = cache
 [sendemail]
 	smtpserver = smtp.gmail.com
 	smtpuser = esteve.varela@gmail.com
 	smtpencryption = tls
 	smtpserverport = 587
-[push]
-	default = simple
+[credential]
+	helper = cache
 [color]
 	ui = auto
+[init]
+	defaultBranch = master
+[push]
+	default = simple
+[pull]
+	rebase = true
+[merge]
+	tool = vimdiff
+[rebase]
+	autoStash = true
 [diff]
 	tool = vimdiff
 	renameLimit = 3000
 	algorithm = minimal
-[merge]
-	tool = vimdiff
 [alias]
-	diff-img = difftool -x 'compare \"$LOCAL\" \"$REMOTE\" png:- | montage -mode concatenate \"$LOCAL\" png:- \"$REMOTE\" png:- | display -title \"$BASE: Local | Diff | Remote\" png:-'
 	gud = commit
+	diff-img = difftool -x 'compare \"$LOCAL\" \"$REMOTE\" png:- | montage -mode concatenate \"$LOCAL\" png:- \"$REMOTE\" png:- | display -title \"$BASE: Local | Diff | Remote\" png:-'
 	log-tree = log --all --decorate --oneline --graph
 	log-full = log --pretty=fuller
 	clean-sub = submodule foreach --recursive git clean
 [diff "hex"]
 	textconv = xxd
 	binary = true
-[init]
-	defaultBranch = master
-[pull]
-	rebase = true
-[rebase]
-	autoStash = true
+[url "git@github.com:"]
+	pushInsteadOf = https://github.com/
