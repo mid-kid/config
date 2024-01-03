@@ -18,7 +18,7 @@ zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p
 zstyle ':completion:*' squeeze-slashes true
 
 autoload -Uz compinit
-compinit -d $ZSH_CACHE/zsh/zcompdump-$ZSH_VERSION
+compinit -d $ZSH_CACHE/zcompdump-$ZSH_VERSION
 # End of lines added by compinstall
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.zsh_history
