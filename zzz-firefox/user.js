@@ -27,6 +27,7 @@ user_pref("privacy.donottrackheader.enabled", true);  // Enabled by default with
 user_pref("privacy.globalprivacycontrol.enabled", true);  // Another attempt at donottrack, but legally binding this time
 user_pref("privacy.resistFingerprinting.letterboxing", false);  // Don't mess with the content size
 user_pref("privacy.sanitize.sanitizeOnShutdown", false);  // Don't clear everything on shutdown
+user_pref("privacy.spoof_english", 2);  // Tell everyone I'm english (avoid dialog on first use)
 user_pref("signon.rememberSignons", false);  // Don't ask to save passwords
 user_pref("widget.gtk.overlay-scrollbars.enabled", false);  // GTK3's overlay scrollbars are terrible
 user_pref("widget.non-native-theme.enabled", false);  // I prefer native widgets...
@@ -37,6 +38,7 @@ user_pref("browser.safebrowsing.downloads.enabled", false);  // Disable safebrow
 user_pref("browser.safebrowsing.malware.enabled", false);  // Disable safebrowsing
 user_pref("browser.safebrowsing.phishing.enabled", false);  // Disable safebrowsing
 user_pref("security.OCSP.enabled", 0);  // Disable OCSP
+user_pref("extensions.langpacks.signatures.required", false);  // Disable extension signing
 user_pref("xpinstall.signatures.required", false);  // Disable extension signing
 user_pref("xpinstall.whitelist.required", false);  // Disable extension whitelist
 
