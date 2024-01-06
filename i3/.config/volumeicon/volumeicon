@@ -1,0 +1,12 @@
+[Notification]
+show_notification=true
+notification_type=1
+
+[StatusIcon]
+stepsize=1
+onclick=pavucontrol
+
+[Hotkeys]
+up_enabled=true
+down_enabled=true
+mute_enabled=true
