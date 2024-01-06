@@ -5,26 +5,26 @@ exec_polybar() { exec polybar example; }
 exec_volumeicon() { exec volumeicon; }
 
 wait_pipewire() {
-    for x in $(seq 400); do  # 4s timeout
+    for x in $(seq 100); do  # 10s timeout
         test -n "$XDG_RUNTIME_DIR" -a -S "$XDG_RUNTIME_DIR/pipewire-0" && return 0
         test -S /run/pipewire/pipewire-0 && return 0
-        sleep .01
+        sleep .1
     done
     return 1
 }
 
 wait_alsa() {
-    for x in $(seq 400); do  # 4s timeout
+    for x in $(seq 100); do  # 10s timeout
         amixer get Master 2>&1 > /dev/null && return 0
-        sleep .01
+        sleep .1
     done
     return 1
 }
 
 wait_polybar() {
-    for x in $(seq 400); do  # 4s timeout
+    for x in $(seq 100); do  # 10s timeout
         xprop -name 'Polybar tray window' 2>&1 > /dev/null && return 0
-        sleep .01
+        sleep .1
     done
     return 1
 }
