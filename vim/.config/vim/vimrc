@@ -250,5 +250,5 @@ function Tabs(stop)
 endfunction
 function Line()
     " Make non-wrapped text documents readable
-    set tw=0 wrap linebreak
+    set tw=0 lbr wrap
 endfunction
