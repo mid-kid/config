@@ -38,6 +38,7 @@ all_rein() {
 all_init() {
     xss-lock --ignore-sleep -l -- ~/.config/i3/locker -n &
     xfconf-query -c xfce4-session -p /general/LockCommand -n -t string -s "$HOME/.config/scripts/i3-power Lock_noblank"
+    xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/show-tray-icon -n -t bool -s true
     xset s off  # Managed by xfce4-power-manager
     xset r rate 300 50
 
