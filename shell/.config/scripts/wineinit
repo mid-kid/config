@@ -1,0 +1,3 @@
+#!/bin/sh
+export WINEDLLOVERRIDES=winemenubuilder.exe=d
+exec wineboot -u "$@"
