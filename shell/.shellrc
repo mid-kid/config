@@ -27,7 +27,7 @@ alias axf='aunpack'
 alias py='python3'
 alias open='xdg-open'
 alias netstat='netstat -putan'
-alias wineinit='WINEDLLOVERRIDES=winemenubuilder.exe=d winecfg'
+alias wineinit='WINEDLLOVERRIDES=winemenubuilder.exe=d wineboot -u'
 alias svi='sudoedit'
 alias 7z='7zz'
 
