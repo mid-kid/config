@@ -116,3 +116,6 @@ _dumount() {
     _values 'mounted devices' "${devices[@]}"
 }
 compdef _dumount dumount
+
+live=${XDG_CONFIG_HOME:-$HOME/.config}/live
+test -x $live && $live zsh
