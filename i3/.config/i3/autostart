@@ -76,6 +76,10 @@ all_init() {
     # Misc applications
     #blueman-applet &
     telegram-desktop -startintray &
+
+    # Live session (not managed)
+    live="${XDG_CONFIG_HOME:-$HOME/.config}/live"
+    test -x "$live" && "$live"
 }
 
 case "$1" in
