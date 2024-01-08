@@ -49,6 +49,10 @@ user_pref("security.ssl.require_safe_negotiation", false);  // Not any worse tha
 // Relly big and leaky browser features
 //user_pref("webgl.disabled", false);  // WebGL
 
+// Unbreak specific sites (really bad, testing setting, I know...)
+user_pref("privacy.resistFingerprinting.exemptedDomains", "*.twitch.tv");
+user_pref("privacy.resistFingerprinting.testGranularityMask", 4);
+
 // Lepton (theme) settings
 user_pref("userChrome.padding.urlView_expanding", true);
 user_pref("userChrome.rounding.square_button", true);
