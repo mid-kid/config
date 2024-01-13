@@ -138,8 +138,9 @@ Logout
 Switch User
 Suspend
 Hibernate
-Reboot
-Reboot to Windows
+Reboot\
+$(command -v grub-reboot-windows 2>&1 > /dev/null && \
+    printf '\nReboot to Windows')
 Shutdown
 EOF
     )"
