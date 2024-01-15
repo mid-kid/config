@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<inkscape
+   version="1"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd">
+  <group
+     id="options">
+    <group
+       id="boot"
+       enabled="0">
+    </group>
+  </group>
+  <group
+     id="theme"
+     defaultGtkTheme="Zukitre"
+     preferDarkTheme="0"
+     symbolicIcons="0"
+     iconTheme="hicolor">
+  </group>
+</inkscape>
