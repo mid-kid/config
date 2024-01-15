@@ -8,6 +8,7 @@ configuration {
     kb-mode-next: "Super+l,Super+Tab";
     kb-mode-previous: "Super+h,Super+Shift+Tab";
     dpi: 0;
+    max-history-size: 1000;
 }
 
 @theme "sidebar"
