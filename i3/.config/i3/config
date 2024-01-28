@@ -26,6 +26,7 @@ bindsym $mod+Shift+space exec --no-startup-id dunstctl close-all
 bindsym $mod+d exec $menu
 bindsym $mod+Shift+d exec i3-sensible-terminal -e ranger
 bindsym $mod+v exec pavucontrol
+bindsym $mod+Ctrl+v exec --no-startup-id firefox --search "site:lyrical-nonsense.com $(playerctl metadata xesam:title)"
 bindsym $mod+Shift+v exec --no-startup-id mpv --force-window=immediate $(xclip -sel clip -o)
 bindsym $mod+p exec rofi-pass
 bindsym $mod+Ctrl+o exec --no-startup-id ~/.config/scripts/i3-screens
@@ -74,6 +75,8 @@ for_window [instance="ida64.exe" title="Please wait..."] floating enable border 
 for_window [instance="ida.exe" title="Please wait..."] floating enable border pixel
 for_window [class="Qalculate-gtk"] floating enable border normal
 for_window [class="ktimetracker"] floating enable border normal
+for_window [class="StepMania"] floating enable border normal
+for_window [class="Etterna"] floating enable border normal
 
 # Window Manager keybinds
 mouse_warping output

@@ -56,7 +56,7 @@ bindkey '\e[2~' quoted-insert
 
 # Additional zsh configuration
 REPORTTIME=10
-autoload -U colors
+autoload -Uz colors
 colors
 autoload -Uz bracketed-paste-magic
 zle -N bracketed-paste bracketed-paste-magic
