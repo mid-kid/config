@@ -57,7 +57,7 @@ Plug 'machakann/vim-highlightedyank'  " Highlight what you've copied
 Plug 'lepture/vim-jinja'
 Plug 'lervag/vimtex'
 Plug 'ARM9/arm-syntax-vim'
-Plug 'jakykong/vim-zim'
+Plug 'jakykong/vim-zim', { 'for': 'zim' }
 
 " Project management
 Plug 'editorconfig/editorconfig-vim'  " Support editorconfig spec
