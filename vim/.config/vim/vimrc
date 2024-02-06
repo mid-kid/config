@@ -233,6 +233,9 @@ highlight HighlightedyankRegion cterm=reverse gui=reverse
 " vim-LanguageTool
 let g:languagetool_jar=$XDG_DATA_HOME."/vim/languagetool/languagetool-commandline.jar"
 
+" vim-zim
+let g:zim_notebooks_dir="/."  " Fix ftdetect when plugin is unloaded
+
 " Utility functions
 function Tabs(stop)
     " Quickly switch to and from tabs
