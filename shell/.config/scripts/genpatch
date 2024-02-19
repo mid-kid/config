@@ -3,7 +3,13 @@ set -e
 
 action_get() {
     pkg="$1"
-    cp -rv "/etc/portage/patches/$pkg/" patches
+    dir="/etc/portage/patches/$pkg"
+    if [ -d "$dir" ]; then
+        rsync -rv "$dir" patches/
+    else
+        echo "Creating new patchset for $pkg" >&2
+        mkdir patches
+    fi
     echo "$pkg" > .genpatch
 }
 
@@ -12,11 +18,12 @@ action_set() {
     test -f .genpatch && pkg="$(cat .genpatch)"
     test -n "$1" && pkg="$1"
     if [ -z "$pkg" ]; then
-        echo "No package set!" 1>&2
+        echo "No package set!" >&2
         exit 1
     fi
-    sudo rm -rf "/etc/portage/patches/$pkg/"
-    sudo cp -rv patches "/etc/portage/patches/$pkg/"
+    dir="/etc/portage/patches/$pkg/"
+    sudo rm -rf "$dir"
+    sudo rsync --mkpath -rv patches/ "$dir"
 }
 
 case "$1" in
