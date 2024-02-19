@@ -63,8 +63,8 @@ Plug 'jakykong/vim-zim', { 'for': 'zim' }
 Plug 'editorconfig/editorconfig-vim'  " Support editorconfig spec
 Plug 'embear/vim-localvimrc'  " Support per-project vimrc files
 Plug 'ludovicchabant/vim-gutentags'  " Auto-update tags file
+Plug 'ctrlpvim/ctrlp.vim'  " Fuzzy finding file and tag browser
 "Plug 'preservim/nerdtree'  " File browser
-"Plug 'ctrlpvim/ctrlp.vim'  " Fuzzy finding file and tag browser
 
 " Editing
 Plug 'scrooloose/nerdcommenter'  " Comment easily (easily my most-used plugin)
@@ -186,10 +186,9 @@ let g:AutoPairsCenterLine=0
 " CtrlP
 let g:ctrlp_map="<C-u>"
 let g:ctrlp_prompt_mappings={
-  \ "AcceptSelection('h')": ["<C-i>"],
-  \ "AcceptSelection('v')": ["<C-x>"],
+  \ 'AcceptSelection("h")': ["<C-i>"],
+  \ 'AcceptSelection("v")': ["<C-x>"],
   \ }
-let g:ctrlp_working_path_mode="a"
 let g:ctrlp_lazy_update=1
 
 " EasyAlign
