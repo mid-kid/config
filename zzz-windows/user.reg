@@ -114,9 +114,18 @@ Windows Registry Editor Version 5.00
 "IsAADCloudSearchEnabled"=dword:0
 "IsDynamicSearchEnabled"=dword:0
 
-; Explorer: (win11) Disable rotating lock screen
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
+; Explorer: Disable rotating lock screen
 "RotatingLockScreenEnabled"=dword:0
+; General: Disable promotional shortcuts
+"ContentDeliveryAllowed"=dword:0
+; General: Disable automatically installing apps
+"OemPreInstalledAppsEnabled"=dword:0
+"PreInstalledAppsEnabled"=dword:0
+"SilentInstalledAppsEnabled"=dword:0
+"SystemPaneSuggestionsEnabled"=dword:0
+; General: Disable windows tips and suggestions
+"SoftLandingEnabled"=dword:0
 
 ; Explorer: (win11) Restore old right-click menu
 [HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32]
