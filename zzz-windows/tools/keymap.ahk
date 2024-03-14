@@ -1,6 +1,8 @@
 ; Map the < and > keys on ANSI keyboard layouts
-^!+z::send("<")
-^!+x::send(">")
-^!+q::send("Ω")
-^!m::send("µ")
 ^!+8::send("™")
+^!+p::send("Π")
+^!+q::send("Ω")
+^!+x::send(">")
+^!+z::send("<")
+^!m::send("µ")
+^!p::send("π")
