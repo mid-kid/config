@@ -22,6 +22,7 @@ export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export W3M_DIR="$XDG_DATA_HOME/w3m"
 export NODE_REPL_HISTORY="$XDG_DATA_HOME/node_repl_history"
 export SQLITE_HISTORY="$XDG_DATA_HOME/sqlite_history"
+export DVDCSS_CACHE="$XDG_CACHE_HOME/dvdcss"
 
 export RXVT_SOCKET="$XDG_RUNTIME_DIR/urxvtd"
 
