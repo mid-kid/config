@@ -9,12 +9,9 @@ fi
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
-export VIMINIT="if !has('nvim') | source $XDG_CONFIG_HOME/vim/vimrc | endif"
-export QUILTRC="$XDG_CONFIG_HOME/quilt/quiltrc"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 export URXVT_PERL_LIB="$XDG_CONFIG_HOME/urxvt/ext"
 export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
-export UNCRUSTIFY_CONFIG="$XDG_CONFIG_HOME/uncrustify/uncrustify.cfg"
 export WINEPREFIX="$XDG_DATA_HOME/wine"
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
 #export XCURSOR_PATH="$XDG_DATA_HOME/icons"
@@ -23,8 +20,13 @@ export W3M_DIR="$XDG_DATA_HOME/w3m"
 export NODE_REPL_HISTORY="$XDG_DATA_HOME/node_repl_history"
 export SQLITE_HISTORY="$XDG_DATA_HOME/sqlite_history"
 export DVDCSS_CACHE="$XDG_CACHE_HOME/dvdcss"
-
 export RXVT_SOCKET="$XDG_RUNTIME_DIR/urxvtd"
+
+# Some XDG config paths relevant to shell applications (see .shellrc)
+export PYTHONSTARTUP="$XDG_CONFIG_HOME/pythonrc"
+export VIMINIT="if !has('nvim') | source $XDG_CONFIG_HOME/vim/vimrc | endif"
+export QUILTRC="$XDG_CONFIG_HOME/quilt/quiltrc"
+export UNCRUSTIFY_CONFIG="$XDG_CONFIG_HOME/uncrustify/uncrustify.cfg"
 
 # Path management
 addpath() {

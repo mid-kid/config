@@ -6,7 +6,6 @@ export LESS='-RXF'
 export MAKEFLAGS="-j$(nproc)"
 export NINJA_STATUS='[%p %f/%t] '
 export CMAKE_GENERATOR='Ninja'
-export PYTHONSTARTUP="${XDG_CONFIG_HOME:-$HOME/.config}/pythonrc"
 export CCACHE_DISABLE=1
 alias vi='vim'
 alias ls='ls --color=auto --quoting-style=shell-escape --file-type --group-directories-first --human-readable'
@@ -29,6 +28,13 @@ alias open='xdg-open'
 alias netstat='netstat -putan'
 alias svi='sudoedit'
 alias 7z='7zz'
+
+# Some XDG config paths relevant to shell applications (see .zprofile)
+XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export PYTHONSTARTUP="$XDG_CONFIG_HOME/pythonrc"
+export VIMINIT="if !has('nvim') | source $XDG_CONFIG_HOME/vim/vimrc | endif"
+export QUILTRC="$XDG_CONFIG_HOME/quilt/quiltrc"
+export UNCRUSTIFY_CONFIG="$XDG_CONFIG_HOME/uncrustify/uncrustify.cfg"
 
 # Set up the directory colors
 eval $(dircolors -b)
