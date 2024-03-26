@@ -30,6 +30,7 @@
 	log-tree = log --all --decorate --oneline --graph
 	log-full = log --pretty=fuller
 	clean-sub = submodule foreach --recursive git clean
+	wdiff = diff --word-diff=color
 [diff "hex"]
 	textconv = xxd
 	binary = true
@@ -37,3 +38,5 @@
 	pushInsteadOf = https://github.com/
 [rerere]
 	enabled = true
+[column]
+	ui = auto
