@@ -33,4 +33,8 @@ else
     fi
 fi
 
-exec $sudo ebuild "$ebuild" "$@"
+if [ "$#" -gt 0 ]; then
+    exec $sudo ebuild "$ebuild" "$@"
+else
+    exec $sudo ebuild "$ebuild" manifest clean merge
+fi
