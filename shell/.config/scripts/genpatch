@@ -5,7 +5,7 @@ action_get() {
     pkg="$1"
     dir="/etc/portage/patches/$pkg"
     if [ -d "$dir" ]; then
-        rsync -rv "$dir" patches/
+        rsync -rv "$dir/" patches/
     else
         echo "Creating new patchset for $pkg" >&2
         mkdir patches
