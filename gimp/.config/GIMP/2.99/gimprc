@@ -1,4 +1,4 @@
 (toolbox-groups no)
 (theme "System")
-(prefer-dark-theme no)
+(theme-color-scheme light)
 (icon-theme "Legacy")
