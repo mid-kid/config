@@ -27,7 +27,7 @@ alias py='python3'
 alias open='xdg-open'
 alias netstat='netstat -putan'
 alias svi='sudoedit'
-alias 7z='7zz'
+command -v 7zz 2>&1 > /dev/null && alias 7z='7zz'
 
 # Some XDG config paths relevant to shell applications (see .zprofile)
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
