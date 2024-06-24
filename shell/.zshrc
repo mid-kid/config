@@ -70,7 +70,7 @@ if command -v git > /dev/null; then
         # Ignore mounted directories which may be slow
         [[ $PWD = /mnt/* || $PWD = /run/media/* ]] && return
 
-        if [ -d .git/objects ]; then
+        if [ -d .git/objects -o -f .git ] && git rev-parse 2>/dev/null; then
             local branch=$(git symbolic-ref HEAD 2> /dev/null | cut -d '/' -f 3-)
             [ ! $branch ] && branch=$(git rev-parse --short HEAD)
             printf '%s' $branch
