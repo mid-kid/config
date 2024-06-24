@@ -1,7 +1,13 @@
 #!/bin/sh
 set -e
 
-conf=$(mktemp)
-printf "user=$USER\nmedia_dir=$1\ndb_dir=$HOME/.minidlna\nlog_dir=$HOME/.minidlna" > $conf
-minidlnad -R -d -f $conf
-rm $conf
+CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/minidlna"
+mkdir -p "$CACHE"
+
+cat > "$CACHE/conf" << EOF
+user=$USER
+media_dir=$1
+db_dir=$CACHE
+log_dir=$CACHE
+EOF
+minidlnad -R -d -f "$CACHE/conf"
