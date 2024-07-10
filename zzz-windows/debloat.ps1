@@ -1,11 +1,13 @@
-#Requires -RunAsAdministrator
-
 # Attempt at removing every single thing possible from the base windows installation.
 # This operation should still allow for reinstalling the removed components at a later date.
 
 $apps_exclude = @(
     # Required to install things...
-    'Microsoft.WindowsStore'
+    'Microsoft.WindowsStore',
+
+    # WSL/WSA
+    'MicrosoftCorporationII.WindowsSubsystemForLinux',
+    'MicrosoftCorporationII.WindowsSubsystemForAndroid'
 )
 $capabilities_exclude = @(
     # Cannot be removed
