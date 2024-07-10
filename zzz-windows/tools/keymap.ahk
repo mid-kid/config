@@ -1,5 +1,7 @@
 ; Map the < and > keys on ANSI keyboard layouts
+^!+0::send("°")
 ^!+8::send("™")
+^!+9::send("±")
 ^!+p::send("Π")
 ^!+q::send("Ω")
 ^!+x::send(">")
