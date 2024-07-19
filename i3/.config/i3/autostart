@@ -62,7 +62,7 @@ all_init() {
     udiskie &
 
     # Some things depend on audio/alsa
-    if wait_alsa; then
+    if wait_pipewire && wait_alsa; then
         exec_polybar &
         exec_volumeicon &
     fi &
