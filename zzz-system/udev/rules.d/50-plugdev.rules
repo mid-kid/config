@@ -56,6 +56,8 @@ SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="3748", MODE="0660", 
 
 # Switch
 ## System
+SUBSYSTEM=="usb", ATTR{idVendor}=="057e", ATTR{idProduct}=="2000", MODE="0660", GROUP="plugdev"
+## DBI
 SUBSYSTEM=="usb", ATTR{idVendor}=="057e", ATTR{idProduct}=="3000", MODE="0660", GROUP="plugdev"
 ## Debugger
 SUBSYSTEM=="usb", ATTR{idVendor}=="1209", ATTR{idProduct}=="8b00", MODE="0660", GROUP="plugdev"
@@ -77,3 +79,9 @@ SUBSYSTEM=="usb", ATTR{idVendor}=="2833", ATTR{idProduct}=="0186", MODE="0660", 
 # RPI Pico
 ## Boot
 SUBSYSTEM=="usb", ATTR{idVendor}=="2e8a", ATTR{idProduct}=="0003", MODE="0660", GROUP="plugdev"
+
+# LED Name Badge
+SUBSYSTEM=="usb", ATTR{idVendor}=="0416", ATTR{idProduct}=="5020", MODE="0660", GROUP="plugdev"
+
+# Bus Pirate 5
+SUBSYSTEM=="usb", ATTR{idVendor}=="1209", ATTR{idProduct}=="7332", MODE="0660", GROUP="plugdev"
