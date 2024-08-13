@@ -30,6 +30,7 @@ wait_polybar() {
 }
 
 all_rein() {
+    xset r rate 300 50
     ( killall -q picom && sleep 1; exec_picom & ) &
     ( killall -q polybar && sleep 2; exec_polybar & ) &
     ( killall -q volumeicon && sleep 2; exec_volumeicon & ) &
