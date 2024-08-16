@@ -16,6 +16,7 @@ zstyle ':completion:*' max-errors 3
 zstyle ':completion:*' menu select=long-list select=1
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle ':completion:*' squeeze-slashes true
+zstyle ':completion:*' use-cache 1
 
 autoload -Uz compinit
 compinit -d $ZSH_CACHE/zcompdump-$ZSH_VERSION
