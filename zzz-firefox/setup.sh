@@ -2,7 +2,7 @@
 set -eu
 
 profile="$1"
-userjs_ver="115.1"
+userjs_ver='128.0'
 
 if [ ! -d "$profile/userjs" ]; then
     git clone -b "$userjs_ver" --depth=1 https://github.com/arkenfox/user.js/ "$profile/userjs"

@@ -54,7 +54,6 @@ user_pref("privacy.resistFingerprinting.exemptedDomains", "*.twitch.tv");
 user_pref("privacy.resistFingerprinting.testGranularityMask", 4);
 
 // Lepton (theme) settings
-user_pref("userChrome.padding.urlView_expanding", true);
 user_pref("userChrome.rounding.square_button", true);
 user_pref("userChrome.rounding.square_dialog", true);
 user_pref("userChrome.rounding.square_panel", true);
@@ -67,7 +66,11 @@ user_pref("userChrome.rounding.square_field", true);
 user_pref("userChrome.rounding.square_urlView_item", true);
 user_pref("userChrome.rounding.square_checklabel", true);
 user_pref("userChrome.tab.box_shadow", true);
-user_pref("userChrome.urlView.full_width_padding", true);
 user_pref("userChrome.hidden.private_indicator", true);
+user_pref("userChrome.hidden.urlbar_iconbox", true);
+user_pref("userChrome.padding.urlView_result", true);
+user_pref("userChrome.padding.urlView_expanding", true);
+user_pref("userChrome.urlView.move_icon_to_left", true);
+user_pref("userChrome.urlView.go_button_when_typing", true);
 
 user_pref("_user.js.parrot", "SUCCESS");
