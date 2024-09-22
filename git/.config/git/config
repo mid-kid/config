@@ -37,6 +37,9 @@
 	binary = true
 [url "git@github.com:"]
 	pushInsteadOf = https://github.com/
+[url "git@gist.github.com:"]
+	pushInsteadOf = https://gist.github.com/mid-kid/
+	pushInsteadOf = https://gist.github.com/
 [rerere]
 	enabled = true
 [column]

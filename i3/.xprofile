@@ -11,5 +11,4 @@ export DESKTOP_APP_I_KNOW_ABOUT_GTK_INCOMPATIBILITY=1  # Avoid telegram whining 
 export DESKTOPINTEGRATION=0  # Avoid telegram making a desktop entry
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
-export SDL_IM_MODULE=fcitx
 export XMODIFIERS='@im=fcitx'

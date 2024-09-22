@@ -6,25 +6,26 @@ exec_volumeicon() { exec volumeicon; }
 
 wait_pipewire() {
     for x in $(seq 100); do  # 10s timeout
+        sleep .1
         test -n "$XDG_RUNTIME_DIR" -a -S "$XDG_RUNTIME_DIR/pipewire-0" && return 0
         test -S /run/pipewire/pipewire-0 && return 0
-        sleep .1
     done
     return 1
 }
 
 wait_alsa() {
     for x in $(seq 100); do  # 10s timeout
-        amixer get Master 2>&1 > /dev/null && return 0
         sleep .1
+        amixer get Master > /dev/null 2>&1 && sleep .1 && \
+            amixer get Master > /dev/null 2>&1 && return 0
     done
     return 1
 }
 
 wait_polybar() {
     for x in $(seq 100); do  # 10s timeout
-        xprop -name 'Polybar tray window' 2>&1 > /dev/null && return 0
         sleep .1
+        xprop -name 'Polybar tray window' > /dev/null 2>&1 && return 0
     done
     return 1
 }
@@ -55,11 +56,11 @@ all_init() {
         feh --bg-scale "${XDG_CONFIG_HOME:-$HOME/.config}/wallpaper.jpg"
     exec_picom &
     #snixembed --fork  # crashing and hanging piece of shit
-    fcitx
-    /usr/lib64/libexec/polkit-kde-authentication-agent-1 &
-    urxvtd &
+    fcitx5 -d
+    /usr/libexec/polkit-kde-authentication-agent-1 &
+    urxvtd -f
     redshift &
-    xfce4-power-manager &
+    xfce4-power-manager --daemon
     udiskie &
 
     # Some things depend on audio/alsa
