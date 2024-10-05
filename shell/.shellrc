@@ -33,9 +33,13 @@ command -v 7zz 2>&1 > /dev/null && alias 7z='7zz'
 # Some XDG config paths relevant to shell applications (see .zprofile)
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/pythonrc"
-export VIMINIT="if !has('nvim') | source $XDG_CONFIG_HOME/vim/vimrc | endif"
 export QUILTRC="$XDG_CONFIG_HOME/quilt/quiltrc"
 export UNCRUSTIFY_CONFIG="$XDG_CONFIG_HOME/uncrustify/uncrustify.cfg"
+
+unset VIMINIT
+if [ -f "$XDG_CONFIG_HOME/vim/vimrc" ]; then
+    export VIMINIT="if !has('nvim') | source $XDG_CONFIG_HOME/vim/vimrc | endif"
+fi
 
 # Set up the directory colors
 eval $(dircolors -b)

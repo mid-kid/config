@@ -95,13 +95,18 @@ if command -v git > /dev/null; then
         fi
     }
 fi
+_prompt_eprefix_fmt="%%{$fg[blue]%%}(%s)%%{$reset_color%%} "
 _prompt_eprefix() { :; }
-if [[ $SHELL != /bin/zsh ]]; then
+if [[ -n $CONTAINER_ID ]]; then
+    _prompt_eprefix() {
+        printf $_prompt_eprefix_fmt $CONTAINER_ID
+    }
+elif [[ $SHELL != zsh && $SHELL != /bin/zsh ]]; then
     _prompt_eprefix() {
         local prefix=${SHELL%/bin/zsh}
         prefix=${prefix##*/}
         prefix=${prefix#.}
-        printf "%%{$fg[blue]%%}(%s)%%{$reset_color%%} " $prefix
+        printf $_prompt_eprefix_fmt $prefix
     }
 fi
 
