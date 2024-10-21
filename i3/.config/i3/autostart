@@ -64,7 +64,7 @@ all_init() {
     udiskie &
 
     # Some things depend on audio/alsa
-    if wait_pipewire && wait_alsa; then
+    if wait_alsa; then
         exec_polybar &
         exec_volumeicon &
     fi &
@@ -72,6 +72,7 @@ all_init() {
     # Some things depend on the presence of a tray
     if wait_polybar; then
         wpa_gui -t &
+        kdeconnectd &
         kdeconnect-indicator &
     fi &
 

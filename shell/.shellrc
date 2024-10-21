@@ -96,6 +96,10 @@ dumount() {
     udisksctl unmount -b "/dev/$d" "$@"
 }
 
+mux() {
+    tmux a || tmux
+}
+
 # Set the default make goal for the current session
 makegoal() {
     export MAKEFLAGS="$MAKEFLAGS .DEFAULT_GOAL=$1"
