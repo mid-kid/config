@@ -42,7 +42,7 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender]
 ; Privacy: Disable Windows Defender
 ;; (gpedit) Computer Configuration -> Administrative Templates -> Windows Components -> Microsoft Defender Antivirus -> Turn off Microsoft Defender Antivirus = Enabled
-;"DisableAntiSpyware"=dword:1
+;"DisableAntiSpyware"=dword:1  ; Doesn't work anymore...
 ; Privacy: Disable Potentially unwanted app blocking
 ;; (settings) Windows Defender -> App & browser control -> Reputation-based protection -> Potentially unwanted app blocking = Disabled
 "PUAProtection"=dword:0
@@ -65,3 +65,8 @@ Windows Registry Editor Version 5.00
 ;; (gpedit) Computer Configuration -> Administrative Templates -> Windows Components -> Windows Security -> Systray -> Hide Windows Security Systray = Enabled
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Systray]
 "HideSystray"=dword:1
+
+; Security: Re-enable UAC prompts if they were disabled by sophia-script
+;; (secpol) Local Policies -> Security Options -> User Account Control: Behavior of the elevation prompt for administrators in Admin Approval Mode = Prompt for consent for non-Windows binaries
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
+"ConsentPromptBehaviorAdmin"="5"
