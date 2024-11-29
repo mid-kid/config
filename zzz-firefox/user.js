@@ -6,12 +6,13 @@ user_pref("browser.download.alwaysOpenPanel", true);  // Show downloads panel wh
 user_pref("browser.download.improvements_to_download_panel", false);  // Don't save all files automatically...
 user_pref("browser.download.start_downloads_in_tmp_dir", true);  // Please don't save things in downloads when I use "open with"
 user_pref("browser.download.useDownloadDir", true);  // Download to the "downloads" folder by default
+user_pref("browser.eme.ui.enabled", false);  // Avoid non-free software
 user_pref("browser.startup.page", 3);  // Keep session across shutdowns
 user_pref("browser.tabs.drawInTitlebar", false);  // Use native title bar, don't have spacer next to tabs
 user_pref("browser.tabs.firefox-view", false);  // Useless feature
 user_pref("browser.tabs.warnOnClose", true);  // Warn when closing multiple tabs
 user_pref("browser.toolbars.bookmarks.visibility", "never");  // Don't show the bookmarks toolbar
-user_pref("browser.translations.enable", false);  // I've never liked this feature
+user_pref("browser.translations.automaticallyPopup", false);  // Great feature copying the worst behavior from chrome
 user_pref("browser.uidensity", 1);  // Compact density is best density
 user_pref("cookiebanners.service.mode", 2);  // Block cookie banners
 user_pref("cookiebanners.service.mode.privateBrowsing", 2);  // ...everywhere
@@ -50,8 +51,8 @@ user_pref("security.ssl.require_safe_negotiation", false);  // Not any worse tha
 //user_pref("webgl.disabled", false);  // WebGL
 
 // Unbreak specific sites (really bad, testing setting, I know...)
-user_pref("privacy.resistFingerprinting.exemptedDomains", "*.twitch.tv");
-user_pref("privacy.resistFingerprinting.testGranularityMask", 4);
+//user_pref("privacy.resistFingerprinting.exemptedDomains", "*.twitch.tv");
+//user_pref("privacy.resistFingerprinting.testGranularityMask", 4);
 
 // Lepton (theme) settings
 user_pref("userChrome.rounding.square_button", true);
