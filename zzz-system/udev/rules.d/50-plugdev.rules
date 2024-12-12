@@ -23,6 +23,8 @@ SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="d00d", MODE="0660", 
 SUBSYSTEM=="usb", ATTR{idVendor}=="2717", ATTR{idProduct}=="ff68", MODE="0660", GROUP="plugdev"
 ## ADB TWRP (REIGNZ)
 SUBSYSTEM=="usb", ATTR{idVendor}=="0b05", ATTR{idProduct}=="d001", MODE="0660", GROUP="plugdev"
+## ADB TWRP (Another one)
+SUBSYSTEM=="usb", ATTR{idVendor}=="0b05", ATTR{idProduct}=="7773", MODE="0660", GROUP="plugdev"
 ## MTP
 SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="4ee1", MODE="0660", GROUP="plugdev"
 
@@ -85,3 +87,6 @@ SUBSYSTEM=="usb", ATTR{idVendor}=="0416", ATTR{idProduct}=="5020", MODE="0660", 
 
 # Bus Pirate 5
 SUBSYSTEM=="usb", ATTR{idVendor}=="1209", ATTR{idProduct}=="7332", MODE="0660", GROUP="plugdev"
+
+# Keychron K3 Pro
+SUBSYSTEM=="usb", ATTR{idVendor}=="3434", ATTR{idProduct}=="0231", MODE="0660", GROUP="plugdev"
