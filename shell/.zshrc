@@ -112,6 +112,18 @@ fi
 
 PROMPT="$(_prompt_eprefix)%{$fg[green]%}%n%{$reset_color%}@%{$fg[yellow]%}%m%{$reset_color%} :%{$fg[magenta]%}\$(_prompt_git)%{$reset_color%}: %{$fg[cyan]%}%c%{$reset_color%} $ "
 
+# Anonymize the zsh prompt and fastfetch output
+anon() {
+    export ANON=anon
+    exec unshare -ru $SHELL
+}
+if [[ $ANON = anon ]]; then
+    clear
+    PROMPT='$ '
+    USER=user
+    hostname pc
+fi
+
 source ~/.shellrc
 
 # Defined in ~/.shellrc:
