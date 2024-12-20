@@ -1,0 +1,5 @@
+// Consider anyone in the wheel group to be an admin
+// Required when root account is locked
+polkit.addAdminRule(function(action, subject) {
+    return ["unix-group:wheel"];
+});
