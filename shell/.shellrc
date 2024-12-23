@@ -1,6 +1,6 @@
 # RC file for all the shells
-export EDITOR='vim'
-export VISUAL="$EDITOR"
+export VISUAL='vim'
+export EDITOR="$VISUAL"
 export PAGER='less'
 export LESS='-R -M -F --shift 4'
 export MAKEFLAGS="-j$(nproc)"

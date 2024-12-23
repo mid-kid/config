@@ -1,4 +1,4 @@
-export TERMINAL=urxvtc
+export TERMINAL=kitty
 export BROWSER=firefox
 export FREETYPE_PROPERTIES='truetype:interpreter-version=38'
 #export GTK_CSD=0  # gtk3-classic disables them fully

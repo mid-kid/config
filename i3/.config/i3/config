@@ -20,11 +20,12 @@ smart_borders on
 
 # External programs
 bindsym $mod+Return exec $term
-bindsym $mod+Shift+Return exec --no-startup-id $term -name floating
+#bindsym $mod+Shift+Return exec --no-startup-id $term -name floating
+bindsym $mod+Shift+Return exec --no-startup-id $term --name floating
 bindsym $mod+space exec --no-startup-id dunstctl close
 bindsym $mod+Shift+space exec --no-startup-id dunstctl close-all
 bindsym $mod+d exec $menu
-bindsym $mod+Shift+d exec i3-sensible-terminal -e ranger
+bindsym $mod+Shift+d exec --no-startup-id $term -e ranger
 bindsym $mod+v exec pavucontrol
 bindsym $mod+Ctrl+v exec --no-startup-id firefox --search "site:lyrical-nonsense.com $(playerctl metadata xesam:title)"
 bindsym $mod+Shift+v exec --no-startup-id mpv --force-window=immediate $(xclip -sel clip -o)
@@ -52,6 +53,8 @@ for_window [window_role="About"] floating enable border normal
 for_window [window_type="notification"] floating enable border none
 for_window [class="URxvt" instance="floating"] move scratchpad scratchpad show
 for_window [class="URxvt" instance="emerge"] border normal
+for_window [class="kitty" instance="floating"] move scratchpad scratchpad show
+for_window [class="kitty" instance="emerge"] border normal
 for_window [class="qutebrowser"] focus child layout tabbed focus
 for_window [class="Qemu-system-.+"] floating enable border normal
 for_window [class="VirtualBox"] floating enable border normal
