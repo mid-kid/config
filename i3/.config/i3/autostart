@@ -31,7 +31,6 @@ wait_polybar() {
 }
 
 all_rein() {
-    xset r rate 300 50
     ( killall -q picom && sleep 1; exec_picom & ) &
     ( killall -q polybar && sleep 2; exec_polybar & ) &
     ( killall -q volumeicon && sleep 2; exec_volumeicon & ) &
@@ -42,7 +41,6 @@ all_init() {
     xfconf-query -c xfce4-session -p /general/LockCommand -n -t string -s "$HOME/.config/scripts/i3-power Lock_noblank"
     xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/show-tray-icon -n -t bool -s true
     xset s off  # Managed by xfce4-power-manager
-    xset r rate 300 50
 
     # Start pipewire in a sane order
     pipewire &
