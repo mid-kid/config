@@ -9,7 +9,7 @@ export CMAKE_GENERATOR='Ninja'
 export CCACHE_DISABLE=1
 export MESON_PACKAGE_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/meson"
 alias vi='vim'
-alias ls='ls --color=auto --quoting-style=shell-escape --file-type --group-directories-first --human-readable'
+alias ls='ls --color=auto --hyperlink=auto --quoting-style=shell-escape --file-type --group-directories-first --human-readable'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
