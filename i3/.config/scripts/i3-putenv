@@ -1,0 +1,7 @@
+#!/bin/sh
+set -eu
+pid="$(printf %s\\n "$I3SOCK" | rev | cut -d. -f1 | rev)"
+sudo gdb --batch -p "$pid" \
+    -ex 'call putenv("'"$1"'")' \
+    -ex 'quit'
+i3-msg restart
