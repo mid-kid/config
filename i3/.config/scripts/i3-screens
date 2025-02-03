@@ -11,18 +11,45 @@ Left
 Right
 Above
 Below
+Set Primary
 EOF
 )"
 input="$(echo "$input" | tr '[:upper:]' '[:lower:]')"
 
-update_feh=false
+update_feh() {
+    for x in "${XDG_CONFIG_HOME:-$HOME/.config}/fehbg" "$HOME/.fehbg"; do
+        if [ -x "$x" ]; then
+            "$x"
+            break
+        fi
+    done
+}
+
+get_current_screen() {
+    local cursor="$(xdotool getmouselocation | \
+        sed 's/^x:\([^ ]*\) y:\([^ ]*\).*$/\1 \2/')"
+    xrandr --current | sed -n 's/^\([^ ]*\) connected \([^ ]*\).*$/\1 \2/p' | \
+        tr '+x' ' ' | while IFS= read -r screen
+    do
+        set -- $screen $cursor
+        local s=$1 sw=$2 sh=$3 sx=$4 sy=$5 cx=$6 cy=$7
+        local smx=$(( $sx + $sw ))
+        local smy=$(( $sy + $sh ))
+        if [ $cx -ge $sx -a $cx -lt $smx -a \
+             $cy -ge $sy -a $cy -lt $smy ]; then
+            echo "$s"
+            break
+        fi
+    done
+}
+
 case "$input" in
     off)
         xrandr --output $screen_main --auto
         for screen in $screen_ext; do
             xrandr --output $screen --$input
         done
-        update_feh=true
+        update_feh
         ;;
 
     external)
@@ -37,7 +64,7 @@ case "$input" in
         for screen in $screen_ext; do
             xrandr --output $screen --auto --$input-as $screen_main
         done
-        update_feh=true
+        update_feh
         ;;
 
     left|right)
@@ -45,7 +72,7 @@ case "$input" in
         for screen in $screen_ext; do
             xrandr --output $screen --auto --$input-of $screen_main
         done
-        update_feh=true
+        update_feh
         ;;
 
     above|below)
@@ -53,15 +80,11 @@ case "$input" in
         for screen in $screen_ext; do
             xrandr --output $screen --auto --$input $screen_main
         done
-        update_feh=true
+        update_feh
+        ;;
+
+    'set primary')
+        screen="$(get_current_screen)"
+        test -z $screen || xrandr --output $screen --primary
         ;;
 esac
-
-if "$update_feh"; then
-    for x in "${XDG_CONFIG_HOME:-$HOME/.config}/fehbg" "$HOME/.fehbg"; do
-        if [ -x "$x" ]; then
-            "$x"
-            break
-        fi
-    done
-fi
