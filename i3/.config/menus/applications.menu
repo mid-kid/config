@@ -1,0 +1,31 @@
+ <!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN"
+  "http://www.freedesktop.org/standards/menu-spec/1.0/menu.dtd">
+
+<!--
+    Dummy applications.menu for standalone window managers.
+    Required for applications like Dolphin, and possibly other KDE apps.
+-->
+
+<Menu>
+	<Name>Applications</Name>
+	<DefaultAppDirs/>
+	<DefaultDirectoryDirs/>
+	<DefaultMergeDirs/>
+    <!-- OnlyUnallocated property is not respected in Dolphin
+         so listing all main categories manually.  -->
+    <Include>
+        <Category>AudioVideo</Category>
+        <Category>Audio</Category>
+        <Category>Video</Category>
+        <Category>Development</Category>
+        <Category>Education</Category>
+        <Category>Game</Category>
+        <Category>Graphics</Category>
+        <Category>Network</Category>
+        <Category>Office</Category>
+        <Category>Science</Category>
+        <Category>Settings</Category>
+        <Category>System</Category>
+        <Category>Utility</Category>
+    </Include>
+</Menu>
