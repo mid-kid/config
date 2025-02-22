@@ -1,68 +1,67 @@
-ZSH_CACHE=${XDG_CACHE_HOME:-$HOME/.cache}/zsh
-test ! -d $ZSH_CACHE && mkdir -p $ZSH_CACHE
-# The following lines were added by compinstall
-
-zstyle ':completion:*' auto-description 'Specify: %d'
-zstyle ':completion:*' completer _expand _complete _ignored _approximate
-zstyle ':completion:*' file-sort name
-zstyle ':completion:*' format 'Completing: %d'
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*' ignore-parents parent
-zstyle ':completion:*' insert-unambiguous true
-zstyle ':completion:*' list-colors ''
-zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
-zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|[._-]=** r:|=**'
-zstyle ':completion:*' max-errors 3
-zstyle ':completion:*' menu select=long-list select=1
-zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-zstyle ':completion:*' squeeze-slashes true
-zstyle ':completion:*' use-cache 1
-
-autoload -Uz compinit
-compinit -d $ZSH_CACHE/zcompdump-$ZSH_VERSION
-# End of lines added by compinstall
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
-setopt extendedglob notify beep prompt_subst
-bindkey -e
+setopt extendedglob notify
 # End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle ':completion:*' auto-description 'specify %d'
+zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
+zstyle ':completion:*' format 'Completing %d'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' ignore-parents parent pwd
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'l:|=* r:|=*'
+zstyle ':completion:*' menu select=0
+zstyle ':completion:*' squeeze-slashes true
+# End of lines added by compinstall
+zstyle ':completion:*:functions' ignored-patterns '_*'  # Ignore completion functions for commands you don’t have
 
-# Keybinds
-# http://www.linuxfromscratch.org/lfs/view/stable/chapter09/inputrc.html
-# https://git.archlinux.org/svntogit/packages.git/tree/trunk/inputrc?h=packages/readline
-bindkey '\eOc' emacs-forward-word  # CTRL+right
-bindkey '\eOd' emacs-backward-word  # CTRL+left
-bindkey '\e[5C' emacs-forward-word  # CTRL+right
-bindkey '\e[5D' emacs-backward-word  # CTRL+left
-bindkey '\e\e[C' emacs-forward-word  # CTRL+right
-bindkey '\e\e[D' emacs-backward-word  # CTRL+left
-bindkey '\e[1;5C' emacs-forward-word  # CTRL+right
-bindkey '\e[1;5D' emacs-backward-word  # CTRL+left
-
-bindkey '\eOH' beginning-of-line  # Home
-bindkey '\eOF' end-of-line  # End
-bindkey '\e[H' beginning-of-line  # Home
-bindkey '\e[F' end-of-line  # End
-bindkey '\e[1~' beginning-of-line  # Home
-bindkey '\e[4~' end-of-line  # End
-bindkey '\e[7~' beginning-of-line  # Home
-bindkey '\e[8~' end-of-line  # End
-
-bindkey '\e[5~' history-search-backward  # PgUp
-bindkey '\e[6~' history-search-forward  # PgDown
-bindkey '\e[3~' delete-char  # Delete
-bindkey '\e[2~' quoted-insert
+# Enable compinit with caching
+ZSH_CACHE=${XDG_CACHE_HOME:-$HOME/.cache}/zsh
+test ! -d $ZSH_CACHE && mkdir -p $ZSH_CACHE
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path $ZSH_CACHE
+autoload -Uz compinit
+compinit -d $ZSH_CACHE/zcompdump-$ZSH_VERSION
 
 # Additional zsh configuration
+setopt prompt_subst share_history
+unsetopt list_beep
 REPORTTIME=10
+autoload -Uz zsh-newuser-install
+autoload -Uz compinstall
 autoload -Uz colors
 colors
 autoload -Uz bracketed-paste-magic
 zle -N bracketed-paste bracketed-paste-magic
 autoload -Uz url-quote-magic
 zle -N self-insert url-quote-magic
+
+# Keybinds (showkey -a)
+# delete-char: Delete
+# backward-kill-word: ALT+Backspace (CTRL+Backspace in linux framebuffer)
+# backward-word: CTRL+Left
+# forward-word: CTRL+Right
+# beginning-of-line: Home
+# end-of-line: End
+# history-search-backward: PgUp
+# history-search-forward: PgDn
+bindkey '\037' backward-kill-word
+bindkey '\eOc' forward-word
+bindkey '\eOd' backward-word
+bindkey '\e[1;5C' forward-word
+bindkey '\e[1;5D' backward-word
+bindkey '\e[1~' beginning-of-line
+bindkey '\e[3~' delete-char
+bindkey '\e[4~' end-of-line
+bindkey '\e[5~' history-search-backward
+bindkey '\e[6~' history-search-forward
+bindkey '\e[7~' beginning-of-line
+bindkey '\e[8~' end-of-line
+bindkey '\e[F' end-of-line
+bindkey '\e[H' beginning-of-line
+bindkey '\e[\b' backward-kill-word
 
 # Prompt
 _prompt_git() { :; }
@@ -123,6 +122,9 @@ if [[ $ANON = anon ]]; then
     USER=user
     hostname pc
 fi
+
+# Run .exe files with wine
+alias -s exe=wine
 
 source ~/.shellrc
 
