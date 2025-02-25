@@ -1,4 +1,6 @@
+(config-version "3.0.0-RC2")
 (toolbox-groups no)
 (theme "System")
 (theme-color-scheme light)
 (icon-theme "Legacy")
+(show-welcome-dialog no)
