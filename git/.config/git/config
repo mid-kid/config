@@ -15,6 +15,7 @@
 [push]
 	default = simple
 	autoSetupRemote = true
+	followTags = true
 [pull]
 	rebase = true
 [merge]
@@ -25,6 +26,8 @@
 	tool = vimdiff
 	renameLimit = 3000
 	algorithm = minimal
+	renames = true
+	colorMoved = plain
 [alias]
 	gud = commit
 	diff-img = difftool -x 'compare \"$LOCAL\" \"$REMOTE\" png:- | montage -mode concatenate \"$LOCAL\" png:- \"$REMOTE\" png:- | display -title \"$BASE: Local | Diff | Remote\" png:-'
@@ -42,7 +45,18 @@
 	pushInsteadOf = https://gist.github.com/
 [rerere]
 	enabled = true
+	autoUpdate = true
 [column]
 	ui = auto
 [advice]
 	skippedCherryPicks = false
+[url "git@gitlab.com:"]
+	pushInsteadOf = https://gitlab.com/
+[fetch]
+	prune = true
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[commit]
+	verbose = true
