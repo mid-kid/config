@@ -4,11 +4,5 @@ program_options:
   automount: false
 
 device_config:
-- device_file: /dev/loop0
-  ignore: true
-- device_file: /dev/loop1
-  ignore: true
-- device_file: /dev/loop2
-  ignore: true
-- device_file: /dev/loop3
+- is_loop: true
   ignore: true
