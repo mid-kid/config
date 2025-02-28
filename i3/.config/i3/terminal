@@ -1,2 +1,2 @@
 #!/bin/sh
-exec kitty -1 "$@"
+exec kitty "${@:--1}"
