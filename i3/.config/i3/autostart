@@ -1,5 +1,9 @@
 #!/bin/sh
 
+XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
+
 exec_picom() { exec picom; }
 exec_polybar() { exec polybar example; }
 exec_volumeicon() { exec volumeicon; }
@@ -50,8 +54,8 @@ all_init() {
     fi &
 
     # Desktop-related daemons
-    "${XDG_CONFIG_HOME:-$HOME/.config}/fehbg" || \
-        feh --bg-scale "${XDG_CONFIG_HOME:-$HOME/.config}/wallpaper.jpg"
+    "$XDG_CONFIG_HOME/fehbg" || \
+        feh --bg-scale "$XDG_CONFIG_HOME/wallpaper.jpg"
     exec_picom &
     #snixembed --fork  # crashing and hanging piece of shit
     fcitx5 -d
@@ -78,10 +82,13 @@ all_init() {
     # Misc applications
     #blueman-applet &
     telegram-desktop -startintray &
-    syncthing serve --no-browser &
+    if [ -d "$XDG_DATA_HOME/syncthing" -o \
+         -d "$XDG_STATE_HOME/syncthing" ]; then
+        syncthing serve --no-browser &
+    fi
 
     # Live session (not managed)
-    live="${XDG_CONFIG_HOME:-$HOME/.config}/live"
+    live="$XDG_CONFIG_HOME/live"
     test -x "$live" && "$live" i3
 }
 
