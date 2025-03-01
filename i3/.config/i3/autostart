@@ -9,7 +9,7 @@ exec_polybar() { exec polybar example; }
 exec_volumeicon() { exec volumeicon; }
 
 wait_pipewire() {
-    for x in $(seq 100); do  # 10s timeout
+    for x in $(seq 600); do  # 60s timeout
         sleep .1
         test -n "$XDG_RUNTIME_DIR" -a -S "$XDG_RUNTIME_DIR/pipewire-0" && return 0
         test -S /run/pipewire/pipewire-0 && return 0
@@ -18,7 +18,7 @@ wait_pipewire() {
 }
 
 wait_alsa() {
-    for x in $(seq 100); do  # 10s timeout
+    for x in $(seq 600); do  # 60s timeout
         sleep .1
         amixer get Master > /dev/null 2>&1 && sleep .1 && \
             amixer get Master > /dev/null 2>&1 && return 0
@@ -27,7 +27,7 @@ wait_alsa() {
 }
 
 wait_polybar() {
-    for x in $(seq 100); do  # 10s timeout
+    for x in $(seq 600); do  # 60s timeout
         sleep .1
         xprop -name 'Polybar tray window' > /dev/null 2>&1 && return 0
     done
