@@ -82,7 +82,7 @@ all_init() {
     # Misc applications
     #blueman-applet &
     ! test -d "$XDG_DATA_HOME/TelegramDesktop" || \
-        telegram-desktop --startintray &
+        telegram-desktop -startintray &
     ! test -d "$XDG_DATA_HOME/syncthing" -o \
            -d "$XDG_STATE_HOME/syncthing" || \
         syncthing serve --no-browser &
