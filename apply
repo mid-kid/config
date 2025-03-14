@@ -1,0 +1,7 @@
+#!/bin/sh
+set -eu
+cd "$(dirname "$0")"
+{ test -z "$*" || printf '%s\n' "$@"; } | cat - .applied 2> /dev/null | sort | uniq > .applied.tmp
+trap 'rv=$?; rm -f .applied.tmp; exit $rv' EXIT
+stow -v -t "$HOME" -R $(cat .applied.tmp)
+mv .applied.tmp .applied
