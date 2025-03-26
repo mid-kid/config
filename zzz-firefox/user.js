@@ -7,6 +7,7 @@ user_pref("browser.download.improvements_to_download_panel", false);  // Don't s
 user_pref("browser.download.start_downloads_in_tmp_dir", true);  // Please don't save things in downloads when I use "open with"
 user_pref("browser.download.useDownloadDir", true);  // Download to the "downloads" folder by default
 user_pref("browser.eme.ui.enabled", false);  // Avoid non-free software
+user_pref("browser.ml.chat.enabled", false);  // Cloud-based AI should not be provided like this
 user_pref("browser.startup.page", 3);  // Keep session across shutdowns
 user_pref("browser.tabs.drawInTitlebar", false);  // Use native title bar, don't have spacer next to tabs
 user_pref("browser.tabs.firefox-view", false);  // Useless feature
