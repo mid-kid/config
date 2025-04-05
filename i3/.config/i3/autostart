@@ -74,7 +74,7 @@ all_init() {
     # Some things depend on the presence of a tray
     if wait_polybar; then
         wpa_gui -t &
-        wpa-cute -tN &
+        wpa-cute -t &
         kdeconnectd &
         kdeconnect-indicator &
     fi &
