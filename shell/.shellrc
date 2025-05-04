@@ -23,6 +23,7 @@ alias streamlink='streamlink --player mpv'
 alias sxiv='nsxiv -a'
 alias xci='xclip -sel clip -i'
 alias xco='xclip -sel clip -o'
+alias xcimg='xclip -sel clip -i -t image/png'
 alias axf='aunpack'
 alias py='python3'
 alias open='xdg-open'
@@ -34,7 +35,6 @@ command -v 7zz 2>&1 > /dev/null && alias 7z='7zz'
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/pythonrc"
 export QUILTRC="$XDG_CONFIG_HOME/quilt/quiltrc"
-export UNCRUSTIFY_CONFIG="$XDG_CONFIG_HOME/uncrustify/uncrustify.cfg"
 
 unset VIMINIT
 if [ -f "$XDG_CONFIG_HOME/vim/vimrc" ]; then
