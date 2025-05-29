@@ -29,7 +29,10 @@ wait_alsa() {
 wait_polybar() {
     for x in $(seq 600); do  # 60s timeout
         sleep .1
-        xprop -name 'Polybar tray window' > /dev/null 2>&1 && return 0
+        xwininfo -tree -root | awk '/("polybar" "Polybar")/{print $1}' | \
+            xargs -I% xprop -id % _NET_WM_WINDOW_TYPE | \
+            grep -qx '_NET_WM_WINDOW_TYPE(ATOM) = _NET_WM_WINDOW_TYPE_DOCK' && \
+            return 0
     done
     return 1
 }
