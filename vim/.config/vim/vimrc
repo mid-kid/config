@@ -156,9 +156,9 @@ nnoremap <leader>l :call Line()<cr>
 inoremap ÑÑ <esc>
 inoremap ññ <esc>
 "" Auto-indent on paste
-nnoremap p p=`]
-nnoremap P P=`]
-nnoremap <c-p> p
+"nnoremap p p=`]
+"nnoremap P P=`]
+"nnoremap <c-p> p
 "nnoremap <c-P> P
 "" Easier split movement
 noremap <C-h> <C-w><C-h>
