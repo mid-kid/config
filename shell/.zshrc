@@ -135,7 +135,9 @@ if [[ -z $KITTY_INSTALLATION_DIR ]]; then
 fi
 # Load kitty integrations if available
 if [[ -n $KITTY_INSTALLATION_DIR ]]; then
-    [[ -z $KITTY_SHELL_INTEGRATION ]] && export KITTY_SHELL_INTEGRATION=enabled
+    if [[ -z $KITTY_SHELL_INTEGRATION ]]; then
+        export KITTY_SHELL_INTEGRATION='enabled no-cursor'
+    fi
     autoload -Uz -- $KITTY_INSTALLATION_DIR/shell-integration/zsh/kitty-integration
     kitty-integration
     unfunction kitty-integration
