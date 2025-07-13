@@ -128,13 +128,16 @@ fi
 alias -s exe=wine
 
 # Try to find kitty integrations when connected over ssh or in a container
-if [[ -z $KITTY_INSTALLATION_DIR ]]; then
+if [[ ! -d $KITTY_INSTALLATION_DIR ]]; then
     for x in /usr/{lib64,lib,share}/kitty; do
-        export KITTY_INSTALLATION_DIR=$x
+        if [[ -d $x ]]; then
+            export KITTY_INSTALLATION_DIR=$x
+            break
+        fi
     done
 fi
 # Load kitty integrations if available
-if [[ -n $KITTY_INSTALLATION_DIR ]]; then
+if [[ -d $KITTY_INSTALLATION_DIR ]]; then
     if [[ -z $KITTY_SHELL_INTEGRATION ]]; then
         export KITTY_SHELL_INTEGRATION='enabled no-cursor'
     fi
