@@ -127,6 +127,21 @@ fi
 # Run .exe files with wine
 alias -s exe=wine
 
+# Try to find kitty integrations when connected over ssh or in a container
+if [[ -z $KITTY_INSTALLATION_DIR ]]; then
+    for x in /usr/{lib64,lib,share}/kitty; do
+        export KITTY_INSTALLATION_DIR=$x
+    done
+fi
+# Load kitty integrations if available
+if [[ -n $KITTY_INSTALLATION_DIR ]]; then
+    [[ -z $KITTY_SHELL_INTEGRATION ]] && export KITTY_SHELL_INTEGRATION=enabled
+    autoload -Uz -- $KITTY_INSTALLATION_DIR/shell-integration/zsh/kitty-integration
+    kitty-integration
+    unfunction kitty-integration
+fi
+
+# My cross-shell defaults
 source ~/.shellrc
 
 # Defined in ~/.shellrc:
