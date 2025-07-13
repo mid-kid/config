@@ -5,7 +5,7 @@ export FREETYPE_PROPERTIES='truetype:interpreter-version=38'
 export GTK_OVERLAY_SCROLLING=0
 export QT_QPA_PLATFORMTHEME=qt5ct
 export _JAVA_OPTIONS="$_JAVA_OPTIONS -Dawt.useSystemAAFontSettings=lcd_hrgb"  # -Dsun.java2d.opengl=true
-export SAL_USE_VCLPLUGIN=kf5
+export SAL_USE_VCLPLUGIN=kf6
 export MOZ_USE_XINPUT2=1
 export DESKTOP_APP_I_KNOW_ABOUT_GTK_INCOMPATIBILITY=1  # Avoid telegram whining about gtk
 export DESKTOPINTEGRATION=0  # Avoid telegram making a desktop entry
