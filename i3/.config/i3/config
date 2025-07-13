@@ -25,7 +25,7 @@ bindsym $mod+Shift+Return exec --no-startup-id $term --name floating
 bindsym $mod+space exec --no-startup-id dunstctl close
 bindsym $mod+Shift+space exec --no-startup-id dunstctl close-all
 bindsym $mod+d exec $menu
-bindsym $mod+Shift+d exec --no-startup-id $term -e ranger
+bindsym $mod+Shift+d exec dolphin
 bindsym $mod+v exec pavucontrol
 bindsym $mod+Ctrl+v exec --no-startup-id firefox --search "site:lyrical-nonsense.com $(playerctl metadata xesam:title)"
 bindsym $mod+Shift+v exec --no-startup-id mpv --force-window=immediate $(xclip -sel clip -o)
