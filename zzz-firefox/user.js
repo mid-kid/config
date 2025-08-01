@@ -7,6 +7,7 @@ user_pref("browser.download.useDownloadDir", true);  // Download to the "downloa
 user_pref("browser.eme.ui.enabled", false);  // Avoid non-free software
 user_pref("browser.ml.chat.enabled", false);  // Cloud-based AI should not be provided like this
 user_pref("browser.startup.page", 3);  // Keep session across shutdowns
+user_pref("browser.tabs.inTitlebar", 0);  // Don't replace the system's title bar
 user_pref("browser.tabs.warnOnClose", true);  // Warn when closing multiple tabs
 user_pref("browser.toolbars.bookmarks.visibility", "never");  // Don't show the bookmarks toolbar
 user_pref("browser.translations.automaticallyPopup", false);  // Great feature copying the worst behavior from chrome
