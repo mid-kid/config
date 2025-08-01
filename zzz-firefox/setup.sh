@@ -2,32 +2,35 @@
 set -eu
 
 profile="$1"
-userjs_ver='128.0'
+#userjs_ver=128.0
+userjs_ver=03c25c4505d73fbdbf40b3f51887a127fbe99863
 
+# Update userjs
 if [ ! -d "$profile/userjs" ]; then
-    git clone -b "$userjs_ver" --depth=1 https://github.com/arkenfox/user.js/ "$profile/userjs"
+    git clone https://github.com/arkenfox/user.js/ "$profile/userjs"
 fi
 git -C "$profile/userjs" checkout "$userjs_ver"
 
+# Update userchrome
 if [ ! -d "$profile/chrome" ]; then
     git clone -b photon-style --depth=1 https://github.com/black7375/Firefox-UI-Fix/ "$profile/chrome"
 fi
 git -C "$profile/chrome" pull --depth=1 || true
 
-newline="$profile/user.js-newline"
-trap 'rm -f "$newline"' EXIT
-echo > "$newline"
+{
+    cat "$profile/userjs/user.js"
+    printf \\n
+    cat "$profile/chrome/user.js"
+    printf \\n
+    cat user.js
+    if [ "$(uname -o)" = Msys ]; then
+        cat user_win.js
+    fi
+} > "$profile/user.js"
 
-cat "$profile/userjs/user.js" "$newline" \
-    "$profile/chrome/user.js" "$newline" \
-    user.js > "$profile/user.js"
-
-if [ "$(uname -o)" = "Msys" ]; then
-    cat user_win.js >> "$profile/user.js"
-fi
+./mozlz4.sh search.json > "$profile/search.json.mozlz4"
 
 ( cd "$profile"
-    rm -vrf prefsjs_backups
     cp userjs/prefsCleaner.sh .
     ./prefsCleaner.sh -s -d
     rm prefsCleaner.sh
