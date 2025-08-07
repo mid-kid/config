@@ -1,0 +1,25 @@
+#!/bin/sh
+
+name="guix-daemon"
+cmd="/var/guix/profiles/per-user/root/current-guix/bin/guix-daemon --build-users-group=guixbuild --discover=no"
+
+start() {
+  echo "Starting $name:  $cmd"
+  daemon -n "$name" -U -- $cmd
+}
+
+stop() {
+  echo "Stopping $name."
+  daemon -n "$name" --stop
+}
+
+case "$1" in
+'start')
+  start
+  ;;
+'stop')
+  stop
+  ;;
+*)
+  echo "usage $0 start|stop"
+esac

@@ -1,0 +1,20 @@
+#!/bin/bash
+#
+# /etc/rc.d/rc.local:  Local system initialization script.
+#
+# Put any local startup commands in here.  Also, if you have
+# anything that needs to be run at shutdown time you can
+# make an /etc/rc.d/rc.local_shutdown script and put those
+# commands in there.
+
+if [ -x /etc/rc.d/rc.tailscale ]; then
+  /etc/rc.d/rc.tailscale start
+fi
+
+if [ -x /etc/rc.d/rc.guix-daemon ]; then
+  /etc/rc.d/rc.guix-daemon start
+fi
+
+if [ -x /etc/rc.d/rc.joycond ]; then
+  /etc/rc.d/rc.joycond start
+fi

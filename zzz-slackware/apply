@@ -1,0 +1,51 @@
+#!/bin/sh
+set -eu
+
+stow -v -t /etc -R etc
+
+sed -e 's/^id:[0-9]:initdefault:$/id:4:initdefault:/' \
+    -i /etc/inittab
+
+sed -e '/^ *[^ "]/s/\<set undofile\>/"&/' \
+    -e '/^ *[^ "]/s/\<set backup\>/"&/' \
+    -i /usr/share/vim/vimrc
+
+sed -e '/^GRUB_TIMEOUT=/cGRUB_TIMEOUT=0' \
+    -i /etc/default/grub
+
+sed -e 's/^#server /server /' \
+    -i /etc/ntp.conf
+
+ln -sf ../../bin/gvim /usr/local/bin/vim
+ln -sf vim /usr/local/bin/vi
+
+rm -vf /etc/avahi/services/ssh.service
+rm -vf /etc/avahi/services/sftp-ssh.service
+
+service_disable() {
+    if [ -x /etc/rc.d/rc.$1 ]; then
+        /etc/rc.d/rc.$1 stop || true
+        chmod -v -x /etc/rc.d/rc.$1
+    fi
+}
+service_enable() {
+    if [ ! -x /etc/rc.d/rc.$1 ]; then
+        chmod -v +x /etc/rc.d/rc.$1
+	/etc/rc.d/rc.$1 start
+    fi
+}
+
+service_disable sshd
+service_disable acpid
+service_enable ntpd
+
+if [ ! -f /etc/xdg/autostart/pipewire.desktop ]; then
+    pipewire-enable.sh
+fi
+
+if getent passwd mid-kid > /dev/null; then
+    passwd -d root
+    passwd -l root
+    usermod -aG wheel,input,plugdev mid-kid
+    usermod -s /bin/zsh mid-kid
+fi

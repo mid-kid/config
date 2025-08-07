@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ -x /etc/rc.d/rc.tailscale ]; then
+  /etc/rc.d/rc.tailscale stop
+fi
+
+if [ -x /etc/rc.d/rc.guix-daemon ]; then
+  /etc/rc.d/rc.guix-daemon stop
+fi
+
+if [ -x /etc/rc.d/rc.joycond ]; then
+  /etc/rc.d/rc.joycond stop
+fi
