@@ -11,7 +11,6 @@
   </group>
   <group
      id="theme"
-     defaultGtkTheme="Zukitre"
      preferDarkTheme="0"
      symbolicIcons="0"
      iconTheme="hicolor">
