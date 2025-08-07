@@ -1,0 +1,9 @@
+#!/bin/sh
+devs='
+"AT Translated Set 2 keyboard"
+"Elan Touchpad"
+"TPPS/2 Elan TrackPoint"
+'
+exec linuxflip \
+    'for x in '"$(printf %s "$devs" | tr '\n' ' ')"'; do xinput disable "$x"; done && notify-send -e -t 1000 -a linuxflip "keyboard disabled"' \
+    'for x in '"$(printf %s "$devs" | tr '\n' ' ')"'; do xinput enable "$x"; done && notify-send -e -t 1000 -a linuxflip "keyboard enabled"'

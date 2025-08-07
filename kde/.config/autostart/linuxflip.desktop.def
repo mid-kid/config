@@ -1,0 +1,6 @@
+[Desktop Entry]
+Exec=~/.config/plasma-workspace/startup/linuxflip
+Icon=dialog-scripts
+Name=linuxflip
+Type=Application
+X-KDE-AutostartScript=true
