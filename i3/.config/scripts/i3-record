@@ -1,0 +1,24 @@
+#!/bin/sh
+set -e
+# TODO: Not sure about this script yet
+
+save_root="${HOME:-/tmp}"  # Directory to use as root for saving videos
+
+file="$(mktemp -t Recording.XXXXXX)"
+trap "rm -f '$file'" EXIT INT
+
+# Select area
+area="$(slop -f '%wx%h %x,%y')"
+
+# Start recording
+#urxvt -name floating -e \
+ffmpeg -f x11grab \
+    -video_size "$(echo "$area" | cut -d ' ' -f 1)" \
+    -i "$DISPLAY+$(echo "$area" | cut -d ' ' -f 2)" \
+    -vf "crop=trunc(iw/2)*2:trunc(ih/2)*2,format=yuv420p" \
+    -c:v libx264 -preset ultrafast \
+    -f mp4 -y "$file"
+
+path="$save_root/Recording-$(date +%F-%T).mp4"
+#urxvt -name floating -e \
+ffmpeg -i "$file" -c:v libx264 -preset veryslow -f mp4 "$path"
