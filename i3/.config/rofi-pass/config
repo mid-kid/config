@@ -2,7 +2,5 @@ default_user=':filename'
 clip=clipboard
 notify='true'
 #default_do='copyPass' # Use Alt+p
-#fix_layout=true
-xdotool_delay=60
-#layout_cmd(){ setxkbmap;}
+type_delay=60
 help_color="#4872FF"

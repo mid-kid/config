@@ -8,31 +8,28 @@ exec_picom() { exec picom -b; }
 exec_polybar() { exec polybar; }
 exec_volumeicon() { exec volumeicon; }
 
-wait_pipewire() {
-    for x in $(seq 600); do  # 60s timeout
-        sleep .1
-        test -n "$XDG_RUNTIME_DIR" -a -S "$XDG_RUNTIME_DIR/pipewire-0" && return 0
-        test -S /run/pipewire/pipewire-0 && return 0
-    done
-    return 1
+check_pipewire() {
+    test -n "$XDG_RUNTIME_DIR" -a -S "$XDG_RUNTIME_DIR/pipewire-0" || \
+    test -S /run/pipewire/pipewire-0
 }
 
-wait_alsa() {
-    for x in $(seq 600); do  # 60s timeout
-        sleep .1
-        amixer get Master > /dev/null 2>&1 && sleep .1 && \
-            amixer get Master > /dev/null 2>&1 && return 0
-    done
-    return 1
+check_alsa() {
+    amixer get Master > /dev/null 2>&1 && \
+    sleep .1 && \
+    amixer get Master > /dev/null 2>&1
 }
 
-wait_polybar() {
-    for x in $(seq 600); do  # 60s timeout
+check_polybar() {
+    xwininfo -tree -root | awk '/("polybar" "Polybar")/{print $1}' | \
+        xargs -I% xprop -id % _NET_WM_WINDOW_TYPE | \
+        grep -qx '_NET_WM_WINDOW_TYPE(ATOM) = _NET_WM_WINDOW_TYPE_DOCK'
+}
+
+timeout() {
+    n="$1"; shift
+    for x in $(seq $(($n * 10))); do
         sleep .1
-        xwininfo -tree -root | awk '/("polybar" "Polybar")/{print $1}' | \
-            xargs -I% xprop -id % _NET_WM_WINDOW_TYPE | \
-            grep -qx '_NET_WM_WINDOW_TYPE(ATOM) = _NET_WM_WINDOW_TYPE_DOCK' && \
-            return 0
+        "$@" && return 0
     done
     return 1
 }
@@ -49,18 +46,22 @@ all_init() {
     xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/show-tray-icon -n -t bool -s true
     xset s off  # Managed by xfce4-power-manager
 
-    # Start pipewire in a sane order
-    pipewire &
-    pipewire-pulse &
-    if wait_pipewire; then
-        wireplumber &
-    fi &
+    # Deal with systemd systems and socket activation
+    if ! check_alsa && ! check_pipewire; then
+        # Start pipewire in a sane order
+        pipewire &
+        pipewire-pulse &
+        if timeout 60 check_pipewire; then
+            wireplumber &
+        fi &
+    fi
 
     # Desktop-related daemons
-    "$XDG_CONFIG_HOME/fehbg" || \
+    "$XDG_CONFIG_HOME/fehbg" || "$HOME/.fehbg" || \
         feh --bg-scale "$XDG_CONFIG_HOME/wallpaper.jpg"
     exec_picom &
     #snixembed --fork  # crashing and hanging piece of shit
+    dunst &
     fcitx5 -d
     /usr/libexec/polkit-kde-authentication-agent-1 &
     urxvtd -f
@@ -69,15 +70,16 @@ all_init() {
     udiskie &
 
     # Some things depend on audio/alsa
-    if wait_alsa; then
+    if timeout 60 check_alsa; then
         exec_polybar &
         exec_volumeicon &
     fi &
 
     # Some things depend on the presence of a tray
-    if wait_polybar; then
+    if timeout 60 check_polybar; then
         wpa_gui -t &
         wpa-cute -t &
+        nm-applet &
         kdeconnectd &
         kdeconnect-indicator &
     fi &

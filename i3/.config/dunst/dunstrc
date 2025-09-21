@@ -22,7 +22,7 @@
     ### Geometry ###
 
     # Offset from the origin
-    offset = 37x25
+    offset = (37, 25)
 
     ### Progress bar ###
 

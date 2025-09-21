@@ -2,8 +2,7 @@
 set -eu
 
 profile="$1"
-#userjs_ver=128.0
-userjs_ver=03c25c4505d73fbdbf40b3f51887a127fbe99863
+userjs_ver=140.0
 
 # Update userjs
 if [ ! -d "$profile/userjs" ]; then
