@@ -63,7 +63,9 @@ all_init() {
     #snixembed --fork  # crashing and hanging piece of shit
     dunst &
     fcitx5 -d
+    touchegg &
     /usr/libexec/polkit-kde-authentication-agent-1 &
+
     urxvtd -f
     redshift &
     xfce4-power-manager --daemon
