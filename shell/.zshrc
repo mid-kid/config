@@ -163,3 +163,6 @@ compdef _dumount dumount
 
 live=${XDG_CONFIG_HOME:-$HOME/.config}/live
 test -x $live && $live zsh
+
+GUIX_PROFILE=$HOME/.guix-profile
+[[ -d $GUIX_PROFILE ]] && . $GUIX_PROFILE/etc/profile
