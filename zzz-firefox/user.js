@@ -1,6 +1,7 @@
 /*** [SECTION XXXX]: MY SETTINGS ***/
 
 user_pref("apz.overscroll.enabled", false);  // While not default on Linux, this behavior is annoying on Windows
+user_pref("browser.backspace_action", 0);  // Navigate back with backspace key, way better than alt+arrow on keyboards that have altgr on the right
 user_pref("browser.download.alwaysOpenPanel", true);  // Show downloads panel when a download starts
 user_pref("browser.download.start_downloads_in_tmp_dir", true);  // Please don't save things in downloads when I use "open with"
 user_pref("browser.download.useDownloadDir", true);  // Download to the "downloads" folder by default
