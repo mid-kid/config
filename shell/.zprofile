@@ -1,5 +1,5 @@
 # Run keychain as part of the session
-if command -v keychain > /dev/null 2> /dev/null; then
+if [ -t 0 ] && command -v keychain > /dev/null 2> /dev/null; then
     if [ -n "$XDG_RUNTIME_DIR" -a -d "$XDG_RUNTIME_DIR" ]; then
         eval $(keychain --quiet --eval --timeout 5 --absolute --dir "$XDG_RUNTIME_DIR/keychain")
     fi
