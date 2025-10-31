@@ -93,6 +93,9 @@ all_init() {
     ! test -d "$XDG_DATA_HOME/syncthing" -o \
            -d "$XDG_STATE_HOME/syncthing" || \
         syncthing serve --no-browser &
+    ! test true = "$(\
+        kreadconfig6 --file Ktailctlrc --group Interface --key startMinimized)" || \
+        ktailctl
 
     # Live session (not managed)
     live="$XDG_CONFIG_HOME/live"
