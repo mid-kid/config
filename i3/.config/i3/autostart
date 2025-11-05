@@ -92,7 +92,8 @@ all_init() {
         telegram-desktop -startintray || Telegram -startintray &
     ! test -d "$XDG_DATA_HOME/syncthing" -o \
            -d "$XDG_STATE_HOME/syncthing" || \
-        syncthing serve --no-browser &
+        { syncthing serve --no-browser &
+          syncthingtray --wait & } &
     ! test true = "$(\
         kreadconfig6 --file Ktailctlrc --group Interface --key startMinimized)" || \
         ktailctl
