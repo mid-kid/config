@@ -1,4 +1,4 @@
-(config-version "3.0.0-RC2")
+(config-version "3.0.6")
 (toolbox-groups no)
 (theme "System")
 (theme-color-scheme light)

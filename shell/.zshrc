@@ -125,7 +125,7 @@ if [[ $ANON = anon ]]; then
 fi
 
 # Run .exe files with wine
-alias -s exe=wine
+#alias -s exe=wine
 
 # Try to find kitty integrations when connected over ssh or in a container
 if [[ ! -d $KITTY_INSTALLATION_DIR ]]; then

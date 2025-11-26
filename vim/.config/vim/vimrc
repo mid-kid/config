@@ -58,6 +58,7 @@ Plug 'lepture/vim-jinja'
 Plug 'lervag/vimtex'
 Plug 'ARM9/arm-syntax-vim'
 Plug 'jakykong/vim-zim', { 'for': 'zim' }
+Plug 'zah/nim.vim'
 
 " Project management
 Plug 'editorconfig/editorconfig-vim'  " Support editorconfig spec
@@ -69,7 +70,7 @@ Plug 'ctrlpvim/ctrlp.vim'  " Fuzzy finding file and tag browser
 " Editing
 Plug 'scrooloose/nerdcommenter'  " Comment easily (easily my most-used plugin)
 Plug 'LunarWatcher/auto-pairs'  " Auto-close quotes, parens, etc...
-Plug 'vim-scripts/AutoComplPop'  " Autocompletion popup
+"Plug 'vim-scripts/AutoComplPop'  " Autocompletion popup
 Plug 'tpope/vim-endwise'  " Auto-end if statements in several languages
 Plug 'tpope/vim-surround'  " Bindings too hard to remember and use tbhon
 Plug 'tpope/vim-repeat'  " Allow pluggins to hook into '.' repeat
@@ -78,6 +79,7 @@ Plug 'junegunn/goyo.vim'  " Distraction-free editing
 Plug 'michaeljsmith/vim-indent-object'  " Select indentation levels
 "Plug 'dpelle/vim-LanguageTool'  " Grammar correction
 "Plug 'ervandew/supertab'  " Alternative for AutoComplPop
+Plug 'lifepillar/vim-mucomplete'
 
 call plug#end()
 
@@ -126,6 +128,8 @@ highlight ExtraWhitespace ctermbg=234
 " Behavior
 set modeline
 set omnifunc=syntaxcomplete#Complete
+set completeopt+=menuone
+set completeopt+=noinsert
 set mouse=a
 set ttyfast
 set clipboard=unnamed
@@ -234,6 +238,9 @@ let g:languagetool_jar=$XDG_DATA_HOME."/vim/languagetool/languagetool-commandlin
 
 " vim-zim
 let g:zim_notebooks_dir="/."  " Fix ftdetect when plugin is unloaded
+
+" MUcomplete
+let g:mucomplete#enable_auto_at_startup=1
 
 " Utility functions
 function Tabs(stop)
