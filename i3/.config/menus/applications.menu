@@ -7,10 +7,10 @@
 -->
 
 <Menu>
-	<Name>Applications</Name>
-	<DefaultAppDirs/>
-	<DefaultDirectoryDirs/>
-	<DefaultMergeDirs/>
+    <Name>Applications</Name>
+    <DefaultAppDirs/>
+    <DefaultDirectoryDirs/>
+    <DefaultMergeDirs/>
     <!-- OnlyUnallocated property is not respected in Dolphin
          so listing all main categories manually.  -->
     <Include>
