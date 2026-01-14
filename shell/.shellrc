@@ -32,6 +32,7 @@ alias svi='sudoedit'
 command -v 7zz 2>&1 > /dev/null && alias 7z='7zz'
 alias kssh='kitten ssh'
 alias icat='kitten icat'
+alias kvi='kitten edit'
 
 # Some XDG config paths relevant to shell applications (see .zprofile)
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
