@@ -81,6 +81,7 @@ for_window [class="ktimetracker"] floating enable border normal
 for_window [class="StepMania"] floating enable border normal
 for_window [class="Etterna"] floating enable border normal
 for_window [class="elisa"] floating enable border normal
+for_window [class="melonDS"] floating enable border normal
 
 # Window Manager keybinds
 mouse_warping output

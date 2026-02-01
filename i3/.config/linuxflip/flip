@@ -1,0 +1,14 @@
+#!/bin/sh
+mode="$1"; shift
+xinput_laptop() {
+    case "$mode" in
+        laptop) xinput enable "$1" ;;
+        tablet) xinput disable "$1" ;;
+    esac
+}
+
+xinput_laptop "AT Translated Set 2 keyboard"
+xinput_laptop "Elan Touchpad"
+xinput_laptop "TPPS/2 Elan TrackPoint"
+
+notify-send -e -t 1000 -a linuxflip "$mode mode"

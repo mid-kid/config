@@ -65,6 +65,8 @@ all_init() {
     fcitx5 -d
     touchegg &
     /usr/libexec/polkit-kde-authentication-agent-1 &
+    kwalletd6 &  # Required to be autostarted by nm-applet
+    "$XDG_CONFIG_HOME/linuxflip/start" &
 
     urxvtd -f
     redshift &
