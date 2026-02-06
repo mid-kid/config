@@ -64,8 +64,10 @@ all_init() {
     dunst &
     fcitx5 -d
     touchegg &
-    /usr/libexec/polkit-kde-authentication-agent-1 &
-    kwalletd6 &  # Required to be autostarted by nm-applet
+    { /usr/libexec/polkit-kde-authentication-agent-1 || \
+        /usr/lib/polkit-kde-authentication-agent-1; } &
+    { /usr/libexec/pam_kwallet_init || \
+        /usr/lib/pam_kwallet_init; } &  # Required to be autostarted by nm-applet
     "$XDG_CONFIG_HOME/linuxflip/start" &
 
     urxvtd -f
@@ -91,7 +93,7 @@ all_init() {
     # Misc applications
     #blueman-applet &
     ! test -d "$XDG_DATA_HOME/TelegramDesktop" || \
-        telegram-desktop -startintray || Telegram -startintray &
+        { telegram-desktop -startintray || Telegram -startintray; } &
     ! test -d "$XDG_DATA_HOME/syncthing" -o \
            -d "$XDG_STATE_HOME/syncthing" || \
         { syncthing serve --no-browser &
