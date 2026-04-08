@@ -6,7 +6,7 @@ XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 
 exec_picom() { exec picom -b; }
 exec_polybar() { exec polybar; }
-exec_volumeicon() { exec volumeicon; }
+exec_volumeicon() { exec true; }
 
 check_pipewire() {
     test -n "$XDG_RUNTIME_DIR" -a -S "$XDG_RUNTIME_DIR/pipewire-0" || \

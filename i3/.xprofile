@@ -1,9 +1,10 @@
+if [ "$XDG_CURRENT_DESKTOP" = i3 ]; then
 export TERMINAL="${XDG_CONFIG_HOME:-$HOME/.config}/i3/terminal"
 export BROWSER=firefox
 export FREETYPE_PROPERTIES='truetype:interpreter-version=38'
 #export GTK_CSD=0  # gtk3-classic disables them fully
 export GTK_OVERLAY_SCROLLING=0
-export QT_QPA_PLATFORMTHEME=qt5ct
+#export QT_QPA_PLATFORMTHEME=qt5ct
 export _JAVA_OPTIONS="$_JAVA_OPTIONS -Dawt.useSystemAAFontSettings=lcd_hrgb"  # -Dsun.java2d.opengl=true
 export SAL_USE_VCLPLUGIN=kf6
 export MOZ_USE_XINPUT2=1
@@ -13,3 +14,4 @@ export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS='@im=fcitx'
 export GLFW_IM_MODULE=ibus  # Required for kitty terminal
+fi

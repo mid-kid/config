@@ -57,3 +57,5 @@ rm -rf "$HOME/.openjfx"
 rm -rf "$HOME/.putty"
 rm -rf "$HOME/.vcpkg"
 rm -rf "$HOME/.npm"
+
+source ~/.xprofile
