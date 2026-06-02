@@ -79,7 +79,7 @@ Plug 'junegunn/goyo.vim'  " Distraction-free editing
 Plug 'michaeljsmith/vim-indent-object'  " Select indentation levels
 "Plug 'dpelle/vim-LanguageTool'  " Grammar correction
 "Plug 'ervandew/supertab'  " Alternative for AutoComplPop
-Plug 'lifepillar/vim-mucomplete'
+Plug 'https://codeberg.org/lifepillar/vim-mucomplete'
 
 call plug#end()
 
@@ -128,6 +128,7 @@ highlight ExtraWhitespace ctermbg=234
 " Behavior
 set modeline
 set omnifunc=syntaxcomplete#Complete
+set completeopt-=preview
 set completeopt+=menuone
 set completeopt+=noinsert
 set mouse=a
