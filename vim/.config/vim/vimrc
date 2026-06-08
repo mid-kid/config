@@ -50,8 +50,6 @@ Plug 'junegunn/seoul256.vim'
 " Faaancy
 Plug 'airblade/vim-gitgutter'  " Show git diffs on the side
 Plug 'machakann/vim-highlightedyank'  " Highlight what you've copied
-"Plug 'Xuyuanp/nerdtree-git-plugin'  " Show git status in nerdtree
-"Plug 'https://heptapod.host/cgtk/taghighlight'
 
 " File types
 Plug 'lepture/vim-jinja'
@@ -65,12 +63,10 @@ Plug 'editorconfig/editorconfig-vim'  " Support editorconfig spec
 Plug 'embear/vim-localvimrc'  " Support per-project vimrc files
 Plug 'ludovicchabant/vim-gutentags'  " Auto-update tags file
 Plug 'ctrlpvim/ctrlp.vim'  " Fuzzy finding file and tag browser
-"Plug 'preservim/nerdtree'  " File browser
 
 " Editing
 Plug 'scrooloose/nerdcommenter'  " Comment easily (easily my most-used plugin)
 Plug 'LunarWatcher/auto-pairs'  " Auto-close quotes, parens, etc...
-"Plug 'vim-scripts/AutoComplPop'  " Autocompletion popup
 Plug 'tpope/vim-endwise'  " Auto-end if statements in several languages
 Plug 'tpope/vim-surround'  " Bindings too hard to remember and use tbhon
 Plug 'tpope/vim-repeat'  " Allow pluggins to hook into '.' repeat
@@ -78,10 +74,14 @@ Plug 'junegunn/vim-easy-align'  " Alignment commands bound to 'ga'
 Plug 'junegunn/goyo.vim'  " Distraction-free editing
 Plug 'michaeljsmith/vim-indent-object'  " Select indentation levels
 "Plug 'dpelle/vim-LanguageTool'  " Grammar correction
-"Plug 'ervandew/supertab'  " Alternative for AutoComplPop
 Plug 'https://codeberg.org/lifepillar/vim-mucomplete'
 
 call plug#end()
+
+" Builtin vim plugins (current list for vim 8.2 or newer)
+packadd! matchit
+packadd! justify
+"packadd! editexisting  " Interesting, but won't enable for now
 
 " Theming (seoul256)
 let g:seoul256_background=233
