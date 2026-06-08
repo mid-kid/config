@@ -8,37 +8,52 @@
 " Must-have...
 set nocompatible
 
-" XDG Base Directory specification
-if empty($XDG_DATA_HOME) | let $XDG_DATA_HOME=$HOME."/.local/share" | endif
-if empty($XDG_CONFIG_HOME) | let $XDG_CONFIG_HOME=$HOME."/.config" | endif
-if empty($XDG_CACHE_HOME) | let $XDG_CACHE_HOME=$HOME."/.cache" | endif
-let $VIM_DATA=$XDG_DATA_HOME."/vim"
-let $VIM_CONFIG=$XDG_CONFIG_HOME."/vim"
+" XDG Base Directory support (https://jorenar.com/blog/vim-xdg)
+if empty($MYVIMRC) | let $MYVIMRC = expand('<sfile>:p') | endif
+
+if empty($XDG_CACHE_HOME) | let $XDG_CACHE_HOME = $HOME."/.cache" | endif
+if empty($XDG_CONFIG_HOME) | let $XDG_CONFIG_HOME = $HOME."/.config" | endif
+if empty($XDG_DATA_HOME) | let $XDG_DATA_HOME = $HOME."/.local/share" | endif
+if empty($XDG_STATE_HOME) | let $XDG_STATE_HOME = $HOME."/.local/state" | endif
 let $VIM_CACHE=$XDG_CACHE_HOME."/vim"
+let $VIM_CONFIG=$XDG_CONFIG_HOME."/vim"
+let $VIM_DATA=$XDG_DATA_HOME."/vim"
+let $VIM_STATE=$VIM_CACHE  " Keep it in cache for now
 
 " Alternative for windows
 if (has("win32") || has("win32unix")) && isdirectory($HOME."/vimfiles")
     let $VIM_DATA=$HOME."/vimfiles"
-    let $VIM_CONFIG=$VIM_DATA
     let $VIM_CACHE=$VIM_DATA
+    let $VIM_CONFIG=$VIM_DATA
+    let $VIM_STATE=$VIM_DATA
 endif
 
-" Set paths to use XDG spec (https://blog.joren.ga/tools/vim-xdg)
-set runtimepath^=$VIM_DATA
-set runtimepath^=$VIM_CONFIG
-set runtimepath+=$VIM_CONFIG/after
-set packpath^=$VIM_CONFIG,$VIM_DATA
-set packpath+=$VIM_CONFIG/after,$VIM_DATA/after
+if !has('nvim')
+    set runtimepath^=$VIM_CONFIG
+    set runtimepath+=$VIM_DATA
+    set runtimepath+=$VIM_CONFIG/after
 
-silent! call mkdir($VIM_DATA."/spell", "p", 0700)
-if !has("nvim") | set viminfofile=$VIM_CACHE/viminfo | endif
-set backupdir=$VIM_CACHE/backup// | silent! call mkdir(&backupdir, "p", 0700)
-set directory=$VIM_CACHE/swp// | silent! call mkdir(&directory, "p", 0700)
-set undodir=$VIM_CACHE/undo | silent! call mkdir(&undodir, "p", 0700)
-set viewdir=$VIM_DATA/view | silent! call mkdir(&viewdir, "p", 0700)
+    set packpath^=$VIM_DATA,$VIM_CONFIG
+    set packpath+=$VIM_CONFIG/after,$VIM_DATA/after
+
+    set backupdir=$VIM_STATE/backup | call mkdir(&backupdir, 'p', 0700)
+    set directory=$VIM_STATE/swap | call mkdir(&directory, 'p', 0700)
+    set viewdir=$VIM_STATE/view | call mkdir(&viewdir, 'p', 0700)
+    set undodir=$VIM_STATE/undo | call mkdir(&undodir, 'p', 0700)
+    set viminfofile=$VIM_STATE/viminfo
+endif
 
 let g:netrw_home=$VIM_DATA
 let g:plug_home=$VIM_DATA."/plugged"
+call mkdir($VIM_DATA."/spell", 'p', 0700)
+call mkdir($VIM_STATE, 'p', 0700)
+
+" Auto-install vim-plug
+let data_dir = has('nvim') ? stdpath('data') . '/site' : $VIM_DATA
+if empty(glob(data_dir . '/autoload/plug.vim'))
+    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
 " Set plugins
 call plug#begin()
@@ -86,7 +101,7 @@ packadd! justify
 " Theming (seoul256)
 let g:seoul256_background=233
 "set termguicolors
-colorscheme seoul256
+silent! colorscheme seoul256
 if has("win32") | set guifont=DejaVu_Sans_Mono:h10:cANSI:qDRAFT | endif
 
 " Theming (everforest)
@@ -139,6 +154,8 @@ set backup
 set undofile
 set fileencodings=ucs-bom,utf-8,sjis,default  " Try SHIFT-JIS
 if has("patch-8.1.0360") | set diffopt+=internal,algorithm:patience | endif  " Use slower but better diff algorithm
+let &backupdir=&backupdir."//"  " Make backups with their full path
+let &directory=&directory."//"  " Make swapfiles with their full path
 
 " Keybinds
 let mapleader="-"
