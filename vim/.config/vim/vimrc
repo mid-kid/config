@@ -183,6 +183,12 @@ augroup Binary
     au BufWritePost * set nomod | endif
 augroup END
 
+augroup vimrcEx
+    au!
+    au FileType text setlocal textwidth=78
+    au FileType markdown setlocal linebreak
+augroup END
+
 " auto-pairs
 let g:AutoPairsMapBS=1
 let g:AutoPairsMultilineBackspace=1
@@ -260,5 +266,5 @@ function Tabs(stop)
 endfunction
 function Line()
     " Make non-wrapped text documents readable
-    set tw=0 lbr wrap
+    set textwidth=0 linebreak wrap
 endfunction
