@@ -2,7 +2,7 @@
 if command -v keychain > /dev/null 2> /dev/null && \
         [ -n "$XDG_RUNTIME_DIR" -a -d "$XDG_RUNTIME_DIR" ]; then
     eval $(keychain --absolute --dir "$XDG_RUNTIME_DIR/keychain" \
-        --quiet --eval --agents gpg,ssh --timeout 5)
+        --quiet --eval --timeout 5)
 fi
 
 # Force some applications to use the XDG spec
