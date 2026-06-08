@@ -1,10 +1,3 @@
-" Install plugins:
-" vim (unix): curl -fLo ${XDG_DATA_HOME:-$HOME/.local/share}/vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && vim +PlugInstall
-" vim (windows): curl -fLo $HOME/vimfiles/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-" Add to .profile (for linux):
-" export VIMINIT="if !has('nvim') | source ${XDG_CONFIG_HOME:-$HOME/.config}/vim/vimrc | endif"
-
 " Must-have...
 set nocompatible
 
@@ -48,50 +41,61 @@ let g:plug_home=$VIM_DATA."/plugged"
 call mkdir($VIM_DATA."/spell", 'p', 0700)
 call mkdir($VIM_STATE, 'p', 0700)
 
-" Auto-install vim-plug
+" Check for plug
 let data_dir = has('nvim') ? stdpath('data') . '/site' : $VIM_DATA
-if empty(glob(data_dir . '/autoload/plug.vim'))
-    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+let has_plug = !empty(glob(data_dir . '/autoload/plug.vim'))
+
+" Convenience setup function
+if !has_plug && !exists('*Vimrc_setupplug')
+    function! Vimrc_setupplug()
+        let data_dir = has('nvim') ? stdpath('data') . '/site' : $VIM_DATA
+        silent execute '!curl -fLo "'.data_dir.'/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+        source $MYVIMRC
+        PlugInstall --sync
+        source $MYVIMRC
+    endfunction
+    command SetupPlug call Vimrc_setupplug()
 endif
 
 " Set plugins
-call plug#begin()
+if has_plug
+    call plug#begin()
 
-" Themes
-Plug 'junegunn/seoul256.vim'
-"Plug 'sainnhe/everforest'
+    " Themes
+    Plug 'junegunn/seoul256.vim'
+    "Plug 'sainnhe/everforest'
 
-" Faaancy
-Plug 'airblade/vim-gitgutter'  " Show git diffs on the side
-Plug 'machakann/vim-highlightedyank'  " Highlight what you've copied
+    " Faaancy
+    Plug 'airblade/vim-gitgutter'  " Show git diffs on the side
+    Plug 'machakann/vim-highlightedyank'  " Highlight what you've copied
 
-" File types
-Plug 'lepture/vim-jinja'
-Plug 'lervag/vimtex'
-Plug 'ARM9/arm-syntax-vim'
-Plug 'jakykong/vim-zim', { 'for': 'zim' }
-Plug 'zah/nim.vim'
+    " File types
+    Plug 'lepture/vim-jinja'
+    Plug 'lervag/vimtex'
+    Plug 'ARM9/arm-syntax-vim'
+    Plug 'jakykong/vim-zim', { 'for': 'zim' }
+    Plug 'zah/nim.vim'
 
-" Project management
-Plug 'editorconfig/editorconfig-vim'  " Support editorconfig spec
-Plug 'embear/vim-localvimrc'  " Support per-project vimrc files
-Plug 'ludovicchabant/vim-gutentags'  " Auto-update tags file
-Plug 'ctrlpvim/ctrlp.vim'  " Fuzzy finding file and tag browser
+    " Project management
+    Plug 'editorconfig/editorconfig-vim'  " Support editorconfig spec
+    Plug 'embear/vim-localvimrc'  " Support per-project vimrc files
+    Plug 'ludovicchabant/vim-gutentags'  " Auto-update tags file
+    Plug 'ctrlpvim/ctrlp.vim'  " Fuzzy finding file and tag browser
 
-" Editing
-Plug 'scrooloose/nerdcommenter'  " Comment easily (easily my most-used plugin)
-Plug 'LunarWatcher/auto-pairs'  " Auto-close quotes, parens, etc...
-Plug 'tpope/vim-endwise'  " Auto-end if statements in several languages
-Plug 'tpope/vim-surround'  " Bindings too hard to remember and use tbhon
-Plug 'tpope/vim-repeat'  " Allow pluggins to hook into '.' repeat
-Plug 'junegunn/vim-easy-align'  " Alignment commands bound to 'ga'
-Plug 'junegunn/goyo.vim'  " Distraction-free editing
-Plug 'michaeljsmith/vim-indent-object'  " Select indentation levels
-"Plug 'dpelle/vim-LanguageTool'  " Grammar correction
-Plug 'https://codeberg.org/lifepillar/vim-mucomplete'
+    " Editing
+    Plug 'scrooloose/nerdcommenter'  " Comment easily (easily my most-used plugin)
+    Plug 'LunarWatcher/auto-pairs'  " Auto-close quotes, parens, etc...
+    Plug 'tpope/vim-endwise'  " Auto-end if statements in several languages
+    Plug 'tpope/vim-surround'  " Bindings too hard to remember and use tbhon
+    Plug 'tpope/vim-repeat'  " Allow pluggins to hook into '.' repeat
+    Plug 'junegunn/vim-easy-align'  " Alignment commands bound to 'ga'
+    Plug 'junegunn/goyo.vim'  " Distraction-free editing
+    Plug 'michaeljsmith/vim-indent-object'  " Select indentation levels
+    "Plug 'dpelle/vim-LanguageTool'  " Grammar correction
+    Plug 'https://codeberg.org/lifepillar/vim-mucomplete'
 
-call plug#end()
+    call plug#end()
+endif
 
 " Builtin vim plugins (current list for vim 8.2 or newer)
 packadd! matchit
@@ -101,7 +105,7 @@ packadd! justify
 " Theming (seoul256)
 let g:seoul256_background=233
 "set termguicolors
-silent! colorscheme seoul256
+if has_plug | silent! colorscheme seoul256 | endif
 if has("win32") | set guifont=DejaVu_Sans_Mono:h10:cANSI:qDRAFT | endif
 
 " Theming (everforest)
@@ -135,7 +139,7 @@ set number
 set hlsearch
 set incsearch
 set statusline=%f
-set colorcolumn=80
+if has_plug | set colorcolumn=80 | endif  " Looks awful without theme
 
 highlight ExtraWhitespace ctermbg=234
 "au BufWinEnter * match ExtraWhitespace /\s\+$/
@@ -244,7 +248,7 @@ let g:ctrlp_root_markers=[".tags"]
 let g:TagHighlightSettings={"TagFileName": ".tags"}
 
 " Gutentags
-set statusline+=\ %{gutentags#statusline()}
+if has_plug | set statusline+=\ %{gutentags#statusline()} | endif
 let g:gutentags_add_default_project_roots=0
 
 " vimtex
