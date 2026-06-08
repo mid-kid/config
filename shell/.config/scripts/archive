@@ -13,7 +13,7 @@ mtime=""
 
 while [ "$#" -gt 0 ]; do
     case "$1" in
-        -t) mtime="--mtime=@0"; shift ;;
+        -t) mtime="--mtime=@0 --pax-option=delete=atime,delete=ctime"; shift ;;
         --) shift; break; ;;
         *) break; ;;
     esac
