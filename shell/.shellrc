@@ -1,5 +1,6 @@
 # RC file for all the shells
 export VISUAL='vim'
+command -v vim > /dev/null || { command -v vi > /dev/null && VISUAL='vi'; }
 export EDITOR="$VISUAL"
 export PAGER='less'
 export LESS='-R -M -F --shift 4'
@@ -8,8 +9,8 @@ export NINJA_STATUS='[%p %f/%t] '
 export CMAKE_GENERATOR='Ninja'
 export CCACHE_DISABLE=1
 export MESON_PACKAGE_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/meson"
-alias vi='vim'
-alias ls='ls --color=auto --hyperlink=auto --quoting-style=shell-escape --file-type --group-directories-first --human-readable'
+alias vi="$VISUAL"
+alias ls='ls --color=auto --group-directories-first --hyperlink=auto --quoting-style=shell-escape --file-type --human-readable'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
@@ -29,23 +30,30 @@ alias py='python3'
 alias open='xdg-open'
 alias netstat='netstat -putan'
 alias svi='sudoedit'
-command -v 7zz 2>&1 > /dev/null && alias 7z='7zz'
+command -v 7zz > /dev/null && alias 7z='7zz'
 alias kssh='kitten ssh'
 alias icat='kitten icat'
 alias kvi='kitten edit'
 
-# Some XDG config paths relevant to shell applications (see .zprofile)
-XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-export PYTHONSTARTUP="$XDG_CONFIG_HOME/pythonrc"
-export QUILTRC="$XDG_CONFIG_HOME/quilt/quiltrc"
-
-unset VIMINIT
-if [ -f "$XDG_CONFIG_HOME/vim/vimrc" ]; then
-    export VIMINIT="if !has('nvim') | source $XDG_CONFIG_HOME/vim/vimrc | endif"
+# Fix ls for busybox
+if \ls --help 2>&1 | head -n1 | grep -q '^BusyBox'; then
+    alias ls='ls --color=auto --group-directories-first'
 fi
 
+# Some XDG config paths relevant to shell applications (see .zprofile)
+__XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export PYTHONSTARTUP="$__XDG_CONFIG_HOME/pythonrc"
+export QUILTRC="$__XDG_CONFIG_HOME/quilt/quiltrc"
+
+unset VIMINIT
+if [ -f "$__XDG_CONFIG_HOME/vim/vimrc" ]; then
+    export VIMINIT="if !has('nvim') | source $__XDG_CONFIG_HOME/vim/vimrc | endif"
+fi
+
+unset __XDG_CONFIG_HOME
+
 # Set up the directory colors
-eval $(dircolors -b)
+command -v dircolors > /dev/null && eval $(dircolors -b)
 
 # Set up 'less' manpage colors
 # Using default gentoo colors (https://github.com/gentoo/gentoo/blob/master/app-text/manpager/files/manpager.c)
