@@ -71,7 +71,7 @@ if has_plug
 
     " File types
     Plug 'lepture/vim-jinja'
-    Plug 'lervag/vimtex'
+    Plug 'lervag/vimtex', { 'tag': 'v2.18' }  " Last Vim 9.1 release
     Plug 'ARM9/arm-syntax-vim'
     Plug 'jakykong/vim-zim', { 'for': 'zim' }
     Plug 'zah/nim.vim'
