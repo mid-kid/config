@@ -1,0 +1,3 @@
+#!/bin/sh
+set -eu
+mimesget $(sed -n '/=/s/.*=//p' "${XDG_CONFIG_HOME:-$HOME/.config}/mimeapps.list" | sort | uniq) | sort | comm -23 - "${XDG_CONFIG_HOME:-$HOME/.config}/mimeapps.list"

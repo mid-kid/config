@@ -1,0 +1,9 @@
+#!/bin/sh
+set -eu
+for x in "$@"; do
+    f="$x"
+    test -f "$f" || f="/usr/share/applications/$f"
+    test -f "$f" || f="$f.desktop"
+    test -f "$f" || continue
+    sed -n '/^MimeType=/{s/^MimeType=//;s/;$//;s/;/\n/g;p}' "$f" | xargs -L1 printf '%2$s=%s\n' "${f##*/}"
+done
