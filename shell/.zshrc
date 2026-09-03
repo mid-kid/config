@@ -27,7 +27,7 @@ autoload -Uz compinit
 compinit -d $ZSH_CACHE/zcompdump-$ZSH_VERSION
 
 # Additional zsh configuration
-setopt prompt_subst share_history
+setopt prompt_subst share_history hist_ignore_space
 unsetopt list_beep
 REPORTTIME=10
 autoload -Uz zsh-newuser-install
@@ -160,6 +160,13 @@ _dumount() {
     _values 'mounted devices' "${devices[@]}"
 }
 compdef _dumount dumount
+
+# fix kvi completion
+unalias kvi
+kvi() {
+    kitten edit "$@"
+}
+compdef _vim kvi
 
 live=${XDG_CONFIG_HOME:-$HOME/.config}/live
 test -x $live && $live zsh
