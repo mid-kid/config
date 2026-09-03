@@ -7,6 +7,7 @@ user_pref("browser.download.start_downloads_in_tmp_dir", true);  // Please don't
 user_pref("browser.download.useDownloadDir", true);  // Download to the "downloads" folder by default
 user_pref("browser.eme.ui.enabled", false);  // Avoid non-free software
 user_pref("browser.ml.chat.enabled", false);  // Cloud-based AI should not be provided like this
+user_pref("browser.ml.chat.menu", false);  // Cloud-based AI should not be provided like this
 user_pref("browser.startup.page", 3);  // Keep session across shutdowns
 user_pref("browser.tabs.inTitlebar", 0);  // Don't replace the system's title bar
 user_pref("browser.tabs.warnOnClose", true);  // Warn when closing multiple tabs
