@@ -33,7 +33,6 @@ user_pref("widget.gtk.overlay-scrollbars.enabled", false);  // GTK3's overlay sc
 user_pref("browser.safebrowsing.downloads.enabled", false);  // Disable safebrowsing
 user_pref("browser.safebrowsing.malware.enabled", false);  // Disable safebrowsing
 user_pref("browser.safebrowsing.phishing.enabled", false);  // Disable safebrowsing
-user_pref("security.OCSP.enabled", 0);  // Disable OCSP
 user_pref("extensions.langpacks.signatures.required", false);  // Disable extension signing
 user_pref("xpinstall.signatures.required", false);  // Disable extension signing
 user_pref("xpinstall.whitelist.required", false);  // Disable extension whitelist
