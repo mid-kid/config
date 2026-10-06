@@ -4,7 +4,7 @@ notification_type=1
 
 [StatusIcon]
 stepsize=1
-onclick=pavucontrol
+onclick=pavucontrol-qt
 
 [Hotkeys]
 up_enabled=true
