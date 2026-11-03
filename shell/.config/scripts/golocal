@@ -1,3 +1,0 @@
-#!/bin/sh
-# Runs go without clobbering user dirs
-GOPATH="$PWD/go" GOCACHE="$PWD/go/.cache" exec go "$@"

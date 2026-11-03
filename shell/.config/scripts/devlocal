@@ -1,0 +1,6 @@
+#!/bin/sh
+# Set environment variables to not clobber the user directory with build caches
+export GOPATH="$PWD/go"
+export GOCACHE="$PWD/go/.cache"
+export CARGO_HOME="$PWD/.cargo"
+exec "$@"
